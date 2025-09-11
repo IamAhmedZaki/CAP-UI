@@ -1,0 +1,1408 @@
+import React, { useState } from 'react';
+import { GraduationCap, User, FileText, Eye, BookOpen, Settings, Star, Globe } from 'lucide-react';
+import img1 from '../assets/menuCapPics/1.png';
+import img2 from '../assets/menuCapPics/2.png';
+import img3 from '../assets/menuCapPics/3.png';
+import img4 from '../assets/menuCapPics/4.png';
+import img5 from '../assets/menuCapPics/5.png';
+import img6 from '../assets/menuCapPics/6.png';
+import img7 from '../assets/menuCapPics/7.png';
+import img8 from '../assets/menuCapPics/8.png';
+import img9 from '../assets/menuCapPics/9.png';
+import img10 from '../assets/logo.jpeg';
+import EducationalTape from '../Components/EducationalTape';
+import Embroidery from '../Components/Embroidery';
+import Cover from '../Components/Cover';
+import Shade from '../Components/Shade';
+import Foer from '../Components/Foer';
+import ExtraCover from '../Components/ExtraCover';
+import Accessories from '../Components/Accessories';
+import Size from '../Components/Size';
+import Bows from '../Components/Bows';
+
+const StudentDashboard = () => {
+  const [activeMenu, setActiveMenu] = useState('Bows');
+
+
+  const menuItems = [
+    { name: 'Bows', icon: img1, },
+    { name: 'Educational tape', icon: img2 },
+    { name: 'Embroidery', icon: img3, },
+    { name: 'Cover', icon: img4, },
+    { name: 'Shade', icon: img5, },
+    { name: 'Foer', icon: img6, },
+    { name: 'Extra cover', icon: img7, },
+    { name: 'Accessories', icon: img8, },
+    { name: 'Size', icon: img9, }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 relative" >
+      {/* Modern Header */}
+      <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-50">
+        <div className="max-w-full mx-auto px-6 py-4">
+          <div className="flex items-center justify-center">
+            <div className="flex items-center space-x-3">
+              <img src={img10} alt={'logo'} className="w-15 h-15 object-contain" />
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div className="flex h-[calc(100vh-80px)]">
+        {/* Modern Sidebar */}
+        <aside className="w-80 bg-white/70 backdrop-blur-sm border-r border-slate-200">
+          <div className="p-6">
+            <h2 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-4">
+              Cap Configuration
+            </h2>
+            <nav className="space-y-2">
+              {menuItems.map((item, index) => (
+                <button
+                  key={index}
+                  onClick={() => setActiveMenu(item.name)}
+                  className={`w-full flex items-center px-4 py-3 rounded-xl transition-all duration-200 group ${activeMenu === item.name
+                    ? 'bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 shadow-sm'
+                    : 'hover:bg-slate-50 hover:shadow-sm'
+                    }`}
+                >
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 transition-transform duration-200 ${activeMenu === item.name ? 'scale-110' : 'group-hover:scale-105'
+                    }`}>
+                    <img src={item.icon} alt={item.name} className="w-10 h-10 object-contain" />
+                  </div>
+                  <span className={`text-sm font-medium ${activeMenu === item.name ? 'text-blue-900' : 'text-slate-700'
+                    }`}>
+                    {item.name.replace(/([A-Z])/g, ' $1').trim()}
+                  </span>
+                  {activeMenu === item.name && (
+                    <div className="ml-auto w-2 h-2 bg-blue-500 rounded-full"></div>
+                  )}
+                </button>
+              ))}
+            </nav>
+          </div>
+        </aside>
+
+        {/* Main Content Area */}
+        <div className="flex-1 flex">
+          {/* Configuration Panel */}
+          <div className="w-[40%] bg-white/50 backdrop-blur-sm border-r border-slate-200">
+            <div className="p-6 space-y-8 h-full overflow-y-auto pb-[133px]">
+              {activeMenu === 'Bows' && <Bows />}
+              {activeMenu === "Educational tape" && <EducationalTape />}
+              {activeMenu === "Embroidery" && <Embroidery />}
+              {activeMenu === "Cover" && <Cover />}
+              {activeMenu === "Shade" && <Shade />}
+              {activeMenu === "Foer" && <Foer />}
+              {activeMenu === "Extra cover" && <ExtraCover />}
+              {activeMenu === "Accessories" && <Accessories />}
+              {activeMenu === "Size" && <Size />}
+
+            </div>
+          
+          </div>
+
+
+          {/* Preview Panel */}
+          <div className="flex-1 p-6">
+            <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl h-full flex flex-col border border-slate-200">
+              {/* Preview Header */}
+              <div className="flex items-center justify-between p-6 border-b border-slate-200">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
+                    <GraduationCap className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-slate-800">Current School</h4>
+                    <p className="text-sm text-slate-600">EUX Program</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <span className="text-xs font-medium text-slate-600">LIVE PREVIEW</span>
+                </div>
+              </div>
+
+              {/* 3D Preview */}
+              <div className="flex-1 rounded-b-2xl overflow-hidden">
+                <iframe
+                  src="https://playcanv.as/e/p/4972566a/"
+                  className="w-full h-full"
+                  frameBorder="0"
+                  title="3D Student Card Preview"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        {/* Modern Footer */}
+      <div className="border-t border-slate-200 p-6 bg-white/80 backdrop-blur-sm w-[50%] absolute bottom-0 left-0">
+        <div className="flex justify-between items-center mb-4">
+          <span className="text-sm font-medium text-slate-600"></span>
+          <div className="text-right">
+            <div className="text-2xl font-bold text-slate-900"></div>
+            <div className="text-xs text-slate-500"></div>
+          </div>
+        </div>
+        <button className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-md hover:shadow-lg">
+          Get Quote
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default StudentDashboard;
+
+import React, { useState } from 'react'
+
+const Bows = () => {
+
+    const [selectedColor, setSelectedColor] = useState('#DC2626');
+    const [selectedPrestige, setSelectedPrestige] = useState('Prestige');
+    const [selectedEmblem, setSelectedEmblem] = useState('gold');
+    const [selectedType, setSelectedType] = useState('Denmark'); // Set initial selected type
+
+    const colors = [
+        { name: 'STX', value: '#7F1D1D' },
+        { name: 'HHX', value: '#1E3A8A' },
+        { name: 'RED', value: '#DC2626' }
+    ];
+
+    const emblemOptions = [
+        { name: 'Gold', value: 'gold', color: '#FCD34D' },
+        { name: 'Silver', value: 'silver', color: '#E5E7EB' }
+    ];
+
+    const typeOptions = [
+        { name: 'Denmark', icon: '🇩🇰' },
+        { name: 'Sweden', icon: '🇸🇪' },
+        { name: 'Norway', icon: '🇳🇴' },
+        { name: 'Germany', icon: '🇩🇪' },
+        { name: 'France', icon: '🇫🇷' },
+        { name: 'Italy', icon: '🇮🇹' }
+    ];
+
+
+    return (
+        <>
+            <div className="space-y-2">
+                <h3 className="text-2xl font-bold text-slate-900">Bows</h3>
+
+            </div>
+
+            {/* Color Selection */}
+            <div className="flex space-x-3">
+                {colors.map((color) => (
+                    <button
+                        key={color.value}
+                        onClick={() => setSelectedColor(color)}
+                        className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 ${selectedColor.value === color.value
+                            ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+                            : 'border-slate-200 hover:border-slate-400'
+                            }`}
+                        style={{ backgroundColor: color.value }}
+                    />
+                ))}
+            </div>
+            <p className="text-sm mt-2 text-slate-700">Selected: {selectedColor.name}</p>
+
+            {/* Prestige Type */}
+            <div className="space-y-4">
+                <div>
+                    <label className="text-sm font-semibold text-slate-700">Bow</label>
+                    <div className="flex items-center gap-2 mt-1">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            {selectedPrestige}
+                        </span>
+                    </div>
+                </div>
+                <div className="flex space-x-3">
+                    {['Signature', 'Prestige'].map((type) => (
+                        <button
+                            key={type}
+                            onClick={() => setSelectedPrestige(type)}
+                            className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${selectedPrestige === type
+                                ? 'bg-blue-600 text-white shadow-md'
+                                : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm'
+                                }`}
+                        >
+                            {type}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            {/* Emblem Selection */}
+            <div className="flex space-x-3">
+                {emblemOptions.map((emblem) => (
+                    <button
+                        key={emblem.value}
+                        onClick={() => setSelectedEmblem(emblem)}
+                        className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 ${selectedEmblem.value === emblem.value
+                            ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+                            : 'border-slate-200 hover:border-slate-400'
+                            }`}
+                        style={{ backgroundColor: emblem.color }}
+                    />
+                ))}
+            </div>
+            <p className="text-sm mt-2 text-slate-700">Selected: {selectedEmblem.name}</p>
+
+
+            {/* Type Selection */}
+            <div className="space-y-4">
+                <div>
+                    <label className="text-sm font-semibold text-slate-700">Type</label>
+
+                </div>
+                <div className="flex flex-wrap gap-3">
+                    {typeOptions.map((type, index) => (
+                        <button
+                            key={index}
+                            onClick={() => setSelectedType(type.name)}
+                            className={`w-12 h-12 border-2 rounded hover:shadow-md transition-all duration-200 flex items-center justify-center bg-gradient-to-br from-red-50 to-red-100 hover:from-red-100 hover:to-red-200 ${selectedType === type.name
+                                ? 'border-blue-500 ring-2 ring-blue-200 ring-offset-2'
+                                : 'border-slate-200 hover:border-blue-300'
+                                }`}
+                        >
+                            <span className="text-base">{type.icon}</span>
+                        </button>
+                    ))}
+                </div>
+                <p className="text-sm mt-2 text-slate-700">Selected: {selectedType}</p>
+            </div>
+        </>
+    )
+}
+
+export default Bows
+
+import React, { useState } from 'react';
+
+const EducationalTape = () => {
+    // State variables with descriptive names
+    const [selectedHatbandColor, setSelectedHatbandColor] = useState('EUX');
+    const [selectedMaterialType, setSelectedMaterialType] = useState('VELOUR');
+    const [selectedChinStrapColor, setSelectedChinStrapColor] = useState('Mat');
+    const [selectedButtonMaterialColor, setSelectedButtonMaterialColor] = useState('FOOD GRADE');
+    const [selectedEmbroideryColor, setSelectedEmbroideryColor] = useState('gold');
+    const [selectedButtonColor, setSelectedButtonColor] = useState('gold');
+    const [embroideryText, setEmbroideryText] = useState('');
+
+    // Color options with descriptive names
+    const hatbandColorOptions = [
+        { name: 'EUX', value: '#000000' },
+        { name: 'SORT', value: '#000001' }, // Consider using different colors or removing duplicate
+    ];
+
+    const chinStrapColorOptions = [
+        { name: 'Mat', value: '#2e2e2e' },
+        { name: 'Blank', value: '#757575' },
+        { name: 'Sort/Sort', value: '#000000' },
+        { name: 'Sort/Gold', value: '#e0cd89' },
+    ];
+
+   
+
+    const embroideryColorOptions = [
+        { name: 'Gold', value: 'gold', color: '#ba9200' },
+        { name: 'Silver', value: 'silver', color: '#757575' },
+        { name: 'EUX', value: 'EUX', color: '#2e2e2e' },
+        { name: 'HVID', value: 'HVID', color: '#E5E7EB' },
+        { name: 'SORT', value: 'SORT', color: '#2e2e2e' },
+    ];
+
+    const buttonColorOptions = [
+        { name: 'Gold', value: 'gold', color: '#ba9200' },
+    ];
+
+    const materialEUXTypes = ['COTTON', 'VELOUR', 'SATIN', 'Glimmer'];
+    const materialSORTTypes = [ 'VELOUR', 'SATIN', 'Glimmer'];
+    
+    const buttonMaterialMATTypes = [ 'FOOD GRADE'];
+    const buttonMaterialBLANKTypes = [ 'BLANK CHAIN ​​STRAP','SHINY LEATHER CHIN STRAP'];
+    const buttonMaterialSortSortTypes = [ 'BLACK CHIN STRAP WITH BLACK KNOTS'];
+    const buttonMaterialSortGoldTypes = [ 'BLACK CHIN STRAP WITH GOLD KNOTS '];
+
+
+
+    // Reusable color selector component
+    const ColorSelector = ({ 
+        label, 
+        currentSelection, 
+        onSelectionChange, 
+        colorOptions 
+    }) => (
+        <div className="space-y-4">
+            <div className="flex items-center justify-between">
+                <div>
+                    <label className="text-sm font-semibold text-slate-700">{label}</label>
+                </div>
+            </div>
+            <div className="flex space-x-3">
+                {colorOptions.map((colorOption) => (
+                    <button
+                        key={colorOption.value}
+                        onClick={() => onSelectionChange(colorOption.name)}
+                        className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 ${
+                            currentSelection === colorOption.name
+                                ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+                                : 'border-slate-200 hover:border-slate-400'
+                        }`}
+                        style={{ backgroundColor: colorOption.color || colorOption.value }}
+                        title={colorOption.name}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+
+    // Reusable type selector component
+    const TypeSelector = ({ 
+        label, 
+        currentSelection, 
+        onSelectionChange, 
+        options 
+    }) => (
+        <div className="space-y-4">
+            <div>
+                <label className="text-sm font-semibold text-slate-700">{label}</label>
+                <div className="flex items-center gap-2 mt-1">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                        {currentSelection}
+                    </span>
+                </div>
+            </div>
+            <div className="flex space-x-3">
+                {options.map((type) => (
+                    <button
+                        key={type}
+                        onClick={() => onSelectionChange(type)}
+                        className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                            currentSelection === type
+                                ? 'bg-blue-600 text-white shadow-md'
+                                : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm'
+                        }`}
+                    >
+                        {type}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+
+    return (
+        <>
+            <div className="space-y-2">
+                <h3 className="text-2xl font-bold text-slate-900">Educational Tape</h3>
+            </div>
+
+            {/* Hatband Color Selection */}
+            <ColorSelector
+                label="Hatband"
+                currentSelection={selectedHatbandColor}
+                onSelectionChange={setSelectedHatbandColor}
+                colorOptions={hatbandColorOptions}
+            />
+
+            {/* Material Type Selection */}
+            <TypeSelector
+                label="Materials"
+                currentSelection={selectedMaterialType}
+                onSelectionChange={setSelectedMaterialType}
+                options={selectedHatbandColor==='EUX'?materialEUXTypes:materialSORTTypes}
+            />
+
+            {/* Chin Strap Color Selection */}
+            <ColorSelector
+                label="Chin strap"
+                currentSelection={selectedChinStrapColor}
+                onSelectionChange={setSelectedChinStrapColor}
+                colorOptions={chinStrapColorOptions}
+            />
+
+            {/* Button Material Color Selection */}
+            <TypeSelector
+                label="Material"
+                currentSelection={selectedButtonMaterialColor}
+                onSelectionChange={setSelectedButtonMaterialColor}
+                options={selectedChinStrapColor==='Mat'?buttonMaterialMATTypes:selectedChinStrapColor==='Blank'?buttonMaterialBLANKTypes:selectedChinStrapColor==='Sort/Sort'?buttonMaterialSortSortTypes:buttonMaterialSortGoldTypes}
+            />
+
+            {/* Embroidery Card */}
+            <div className="bg-white/70 border border-white/50 rounded-2xl ">
+                <div className="flex items-center justify-between mb-4">
+                    <div>
+                        <h4 className="font-semibold text-slate-800">Embroidery on the front</h4>
+                        <div className="flex items-center gap-2 mt-1">
+                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-100 to-yellow-200 text-amber-800">
+                                Included in the package
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div className="space-y-4">
+                    <div className="relative">
+                        <input
+                            type="text"
+                            value={embroideryText}
+                            onChange={(e) => setEmbroideryText(e.target.value)}
+                            placeholder="Free Text"
+                            className="w-full px-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
+                        />
+                        <div className="absolute inset-y-0 right-0 flex items-center pr-4">
+                            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Embroidery Color Selection */}
+            <ColorSelector
+                label="Embroidery color"
+                currentSelection={selectedEmbroideryColor}
+                onSelectionChange={setSelectedEmbroideryColor}
+                colorOptions={embroideryColorOptions}
+            />
+
+            {/* Button Color Selection */}
+            <ColorSelector
+                label="Button color"
+                currentSelection={selectedButtonColor}
+                onSelectionChange={setSelectedButtonColor}
+                colorOptions={buttonColorOptions}
+            />
+        </>
+    );
+}
+
+export default EducationalTape;
+
+import React, { useState } from 'react';
+
+const Embroidery = () => {
+    // State variables with descriptive names
+    const [selectedNameEmbroideryColor, setSelectedNameEmbroideryColor] = useState('#ba9200');
+    const [nameEmbroideryText, setNameEmbroideryText] = useState('');
+    const [selectedSchoolEmbroideryColor, setSelectedSchoolEmbroideryColor] = useState('#f2f5f4');
+    const [schoolEmbroideryText, setSchoolEmbroideryText] = useState('');
+    
+    // Color options with descriptive names
+    
+
+     const nameEmbroideryColorOptions = [
+        { name: 'Gold' , value: '#ba9200' },
+        { name: 'Silver' , value: '#757575' },
+        { name: 'STX'   , value: '#782834' },   
+        { name: 'WHITE'   , value: '#E5E7EB' },
+        { name: 'BLACK' , value: '#2e2e2e' },
+    ];
+    
+    const schoolEmbroideryColorOptions =[
+        { name: 'WHITE'   , value: '#E5E7EB' },
+        { name: 'BLACK' , value: '#2e2e2e' },
+        { name: 'Gold' , value: '#ba9200' },
+        { name: 'Silver' , value: '#757575' },
+    ];
+
+    // Reusable color selector component
+    const ColorSelector = ({ 
+        label, 
+        currentSelection, 
+        onSelectionChange, 
+        colorOptions 
+    }) => (
+        <div className="space-y-4">
+            <div className="flex items-center justify-between">
+                <div>
+                    <label className="text-sm font-semibold text-slate-700">{label}</label>
+                </div>
+            </div>
+            <div className="flex space-x-3">
+                {colorOptions.map((colorOption) => (
+                    <button
+                        key={colorOption.value}
+                        onClick={() => onSelectionChange(colorOption.value)}
+                        className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 ${
+                            currentSelection === colorOption.value
+                                ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+                                : 'border-slate-200 hover:border-slate-400'
+                        }`}
+                        style={{ backgroundColor: colorOption.value }}
+                        title={colorOption.name}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+
+    // Reusable embroidery input component
+    const EmbroideryInput = ({ 
+        title, 
+        textValue, 
+        onTextChange, 
+        placeholder 
+    }) => (
+        <div className="bg-white/70 border border-white/50 rounded-2xl">
+            <div className="flex items-center justify-between mb-4">
+                <div>
+                    <h4 className="font-semibold text-slate-800">{title}</h4>
+                    <div className="flex items-center gap-2 mt-1">
+                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-100 to-yellow-200 text-amber-800">
+                            Included in the package
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div className="space-y-4">
+                <div className="relative">
+                    <input
+                        type="text"
+                        value={textValue}
+                        onChange={(e) => onTextChange(e.target.value)}
+                        placeholder={placeholder}
+                        className="w-full px-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
+                    />
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-4">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+
+    return (
+        <>
+            <div className="space-y-2">
+                <h3 className="text-2xl font-bold text-slate-900">Embroidery</h3>
+            </div>
+
+            {/* Name Embroidery Section */}
+            <EmbroideryInput
+                title="Name embroidery"
+                textValue={nameEmbroideryText}
+                onTextChange={setNameEmbroideryText}
+                placeholder="Free text"
+            />
+            
+            {/* Name Embroidery Color Selection */}
+            <ColorSelector
+                label="Embroidery color"
+                currentSelection={selectedNameEmbroideryColor}
+                onSelectionChange={setSelectedNameEmbroideryColor}
+                colorOptions={nameEmbroideryColorOptions}
+            />
+            
+            {/* School Embroidery Section */}
+            <EmbroideryInput
+                title="School embroidery"
+                textValue={schoolEmbroideryText}
+                onTextChange={setSchoolEmbroideryText}
+                placeholder="Free text"
+            />
+            
+            {/* School Embroidery Color Selection */}
+            <ColorSelector
+                label="Embroidery color"
+                currentSelection={selectedSchoolEmbroideryColor}
+                onSelectionChange={setSelectedSchoolEmbroideryColor}
+                colorOptions={schoolEmbroideryColorOptions}
+            />
+        </>
+    );
+}
+
+export default Embroidery;
+
+import React, { useState } from 'react';
+import img1 from '../assets/stars/star.png';
+import img2 from '../assets/stars/2-star.png';
+import img3 from '../assets/stars/3-star.png';
+import img4 from '../assets/stars/4-star.png';
+import img5 from '../assets/stars/5-star.png';
+import coverColorOptionsimg1 from '../assets/cover images/silverahh.png';
+import coverColorOptionsimg2 from '../assets/cover images/none.png';
+import coverColorOptionsimg3 from '../assets/cover images/darkblueahh.png';
+
+const Cover = () => {
+    const [selectedCoverColor, setSelectedCoverColor] = useState('#ffffff');
+    const [selectedEdgebandColor, setSelectedEdgebandColor] = useState('NONE');
+    const [selectedStarsStyle, setSelectedStarsStyle] = useState('1');
+    
+    const coverColorOptions = [
+        { name: 'WHITE - WATER REPELLENT', value: '#ffffff', color: '#ffffff' },
+        { name: 'BLACK - WATER REPELLENT', value: '#000000', color: '#000000' },
+        { name: 'WHITE GLITTER', value: '#dedede', img: coverColorOptionsimg1 },
+        { name: 'SORT GLIMMER', value: '#292929', color: '#292929'  }
+    ];
+
+    const edgebandColorOptions = [
+        { name: 'NONE', value: 'NONE',img: coverColorOptionsimg2 },
+        { name: 'WHITE', value: 'WHITE', color: '#E5E7EB' },
+        { name: 'BLACK', value: 'BLACK', color: '#3d3d3d' },
+        { name: 'STX', value: 'STX', color: '#782834' },
+        { name: 'HHX', value: 'HHX', color: '#243859' },
+        { name: 'EUD', value: 'EUD', img: coverColorOptionsimg3 },
+        { name: 'GREEN', value: 'GREEN', color: '#E5E7EB' },
+        { name: 'GUL', value: 'GUL', color: '#E5E7EB' },
+        { name: 'EUX', value: 'EUX', color: '#E5E7EB' },
+        { name: 'PINK', value: 'PINK', color: '#E5E7EB' },
+    ];
+    
+    const starsOptions = [
+        { name: 'One Star', value: '1', img: img1 },
+        { name: 'Two Stars', value: '2', img: img2 },
+        { name: 'Three Stars', value: '3', img: img3 },
+        { name: 'Four Stars', value: '4', img: img4 },
+        { name: 'Five Stars', value: '5', img: img5 },
+    ];
+
+    // Reusable selector component for both colors and images
+    const Selector = ({ 
+        label, 
+        currentSelection, 
+        onSelectionChange, 
+        options,
+        type = 'color' // 'color' or 'image'
+    }) => (
+        <div className="space-y-4">
+            <div className="flex items-center justify-between">
+                <div>
+                    <label className="text-sm font-semibold text-slate-700">{label}</label>
+                </div>
+            </div>
+            <div className="flex space-x-3">
+                {options.map((option) => (
+                    <button
+                        key={option.value}
+                        onClick={() => onSelectionChange(option.value)}
+                        className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 flex items-center justify-center ${
+                            currentSelection === option.value
+                                ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+                                : 'border-slate-200 hover:border-slate-400'
+                        }`}
+                        style={option.color ? { backgroundColor: option.color || option.value } : {}}
+                        title={option.name}
+                    >
+                        {option.img && (
+                            <img 
+                                src={option.img} 
+                                alt={option.name}
+                                className="w-8 h-8 object-contain"
+                            />
+                        )}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+
+    return (
+        <>
+            <div className="space-y-2">
+                <h3 className="text-2xl font-bold text-slate-900">Cover</h3>
+            </div>
+
+            {/* Cover Color Selection */}
+            <Selector
+                label="Color"
+                currentSelection={selectedCoverColor}
+                onSelectionChange={setSelectedCoverColor}
+                options={coverColorOptions}
+                type="color"
+            />
+            
+            {/* Edgeband Color Selection */}
+            <Selector
+                label="Edgeband"
+                currentSelection={selectedEdgebandColor}
+                onSelectionChange={setSelectedEdgebandColor}
+                options={edgebandColorOptions}
+                type="color"
+            />
+
+            {/* Stars Style Selection */}
+            <Selector
+                label="Stars"
+                currentSelection={selectedStarsStyle}
+                onSelectionChange={setSelectedStarsStyle}
+                options={starsOptions}
+                type="image"
+            />
+        </>
+    );
+}
+
+export default Cover;
+
+import React, { useState, useEffect } from 'react';
+import img1 from '../assets/shadeimages/glimmer.png';
+import img2 from '../assets/shadeimages/none.png';
+import img3 from '../assets/shadeimages/shade.png';
+
+const Shade = () => {
+   // State variables with descriptive names
+   const [selectedShadeType, setSelectedShadeType] = useState('Blank');
+   const [selectedMaterialType, setSelectedMaterialType] = useState('Uden kant');
+   const [selectedShadowTapeColor, setSelectedShadowTapeColor] = useState('gold');
+   const [engravingLine1, setEngravingLine1] = useState('');
+   const [engravingLine2, setEngravingLine2] = useState('');
+   const [engravingLine3, setEngravingLine3] = useState('');
+   
+   // Shade type options
+   const shadeTypeOptions = [
+       { name: 'Blank', value: 'Blank', img: img3 },
+       { name: 'Mat', value: 'Mat', color: '#2d2d2e' },
+       { name: 'Glimmer', value: 'Glimmer', img: img1 },
+   ];
+   
+   // Shadow tape color options
+   const shadowTapeColorOptions = [
+       { name: 'INGEN', value: 'INGEN', img: img2 },
+       { name: 'Gold', value: 'gold', color: '#bb9300' },
+       { name: 'Glitter', value: 'Glitter', color: '#E5E7EB' }
+   ];
+
+   const materialBlankTypes = ['Uden kant','Med kant'];
+   const materialMATTypes = ['Uden kant'];
+   const materialGlimmerTypes = ['Uden kant'];
+
+   // Get available material options based on selected shade type
+   const getMaterialOptions = () => {
+       switch(selectedShadeType) {
+           case 'Blank': return materialBlankTypes;
+           case 'Mat': return materialMATTypes;
+           case 'Glimmer': return materialGlimmerTypes;
+           default: return materialBlankTypes;
+       }
+   };
+
+   // Effect to automatically select the first material option when shade type changes
+   useEffect(() => {
+       const materialOptions = getMaterialOptions();
+       if (materialOptions.length > 0 && !materialOptions.includes(selectedMaterialType)) {
+           setSelectedMaterialType(materialOptions[0]);
+       }
+   }, [selectedShadeType]);
+
+   // Reusable selector component
+   const Selector = ({ 
+        label, 
+        currentSelection, 
+        onSelectionChange, 
+        options,
+        type = 'color' // 'color' or 'image'
+    }) => (
+        <div className="space-y-4">
+            <div className="flex items-center justify-between">
+                <div>
+                    <label className="text-sm font-semibold text-slate-700">{label}</label>
+                </div>
+            </div>
+            <div className="flex space-x-3">
+                {options.map((option) => (
+                    <button
+                        key={option.value}
+                        onClick={() => onSelectionChange(option.value)}
+                        className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 flex items-center justify-center ${
+                            currentSelection === option.value
+                                ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+                                : 'border-slate-200 hover:border-slate-400'
+                        }`}
+                        style={option.color ? { backgroundColor: option.color || option.value } : {}}
+                        title={option.name}
+                    >
+                        {option.img && (
+                            <img 
+                                src={option.img} 
+                                alt={option.name}
+                                className="w-8 h-8 object-contain"
+                            />
+                        )}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+
+   // Reusable type selector component
+   const TypeSelector = ({ 
+       label, 
+       currentSelection, 
+       onSelectionChange, 
+       options 
+   }) => (
+       <div className="space-y-4">
+           <div>
+               <label className="text-sm font-semibold text-slate-700">{label}</label>
+               <div className="flex items-center gap-2 mt-1">
+                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                       {currentSelection}
+                   </span>
+               </div>
+           </div>
+           <div className="flex space-x-3">
+               {options.map((type) => (
+                   <button
+                       key={type}
+                       onClick={() => onSelectionChange(type)}
+                       className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                           currentSelection === type
+                               ? 'bg-blue-600 text-white shadow-md'
+                               : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm'
+                       }`}
+                   >
+                       {type}
+                   </button>
+               ))}
+           </div>
+       </div>
+   );
+
+   // Engraving input component
+   const EngravingInput = () => (
+       <div className="bg-white/70 border border-white/50 rounded-2xl ">
+           <div className="flex items-center justify-between mb-4">
+               <div>
+                   <h4 className="font-semibold text-slate-800">Shadow engraving</h4>
+                   <div className="flex items-center gap-2 mt-1">
+                       <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-100 to-yellow-200 text-amber-800">
+                           Inkluderet i pakken 0
+                       </span>
+                   </div>
+               </div>
+           </div>
+           <div className="space-y-4">
+               <div className="relative">
+                   <input
+                       type="text"
+                       value={engravingLine1}
+                       onChange={(e) => setEngravingLine1(e.target.value)}
+                       placeholder="Line 1"
+                       className="w-full my-4 px-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
+                   />
+                   <input
+                       type="text"
+                       value={engravingLine2}
+                       onChange={(e) => setEngravingLine2(e.target.value)}
+                       placeholder="Line 2"
+                       className="w-full px-4 my-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
+                   />
+                   <input
+                       type="text"
+                       value={engravingLine3}
+                       onChange={(e) => setEngravingLine3(e.target.value)}
+                       placeholder="Line 3"
+                       className="w-full px-4 my-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
+                   />
+                   <div className="absolute inset-y-0 right-0 flex items-center pr-4">
+                       <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   );
+
+   return (
+       <>
+           <div className="space-y-2">
+               <h3 className="text-2xl font-bold text-slate-900">Shade</h3>
+           </div>
+
+           {/* Shade Type Selection */}
+           <Selector
+               label="Type"
+               currentSelection={selectedShadeType}
+               onSelectionChange={setSelectedShadeType}
+               options={shadeTypeOptions}
+           />
+
+           {/* Material Type Selection */}
+           <TypeSelector
+               label="Material"
+               currentSelection={selectedMaterialType}
+               onSelectionChange={setSelectedMaterialType}
+               options={getMaterialOptions()}
+           />
+
+           {/* Shadow Tape Color Selection */}
+           <Selector
+               label="Shadow tape"
+               currentSelection={selectedShadowTapeColor}
+               onSelectionChange={setSelectedShadowTapeColor}
+               options={shadowTapeColorOptions}
+           />
+
+           {/* Engraving Input Section */}
+           <EngravingInput />
+       </>
+   );
+}
+
+export default Shade;   
+
+import React, { useState, useEffect } from 'react';
+import img1 from '../assets/shadeimages/glimmer.png';
+
+const Foer = () => {
+    // State variables with descriptive names
+  const [selectedKokardeMaterial, setSelectedKokardeMaterial] = useState('Leather');
+    const [selectedKokardeColor, setSelectedKokardeColor] = useState('black');
+    const [selectedBowColor, setSelectedBowColor] = useState('black');
+    const [selectedFoerMaterial, setSelectedFoerMaterial] = useState('Viscose');
+    
+    const [selectedbowMaterialType, setBowMaterialTypes] = useState('HVID');
+    // Color options with descriptive names
+
+
+    const bowColorOptions = [
+        { name: 'HVID', value: 'HVID', color: '#FFFFFF' },
+        { name: 'Sort', value: 'Sort', color: '#000000' },
+        { name: 'Gold', value: 'gold', color: '#ba9200' },
+
+
+    ];
+    const bowMaterialTypes = [
+        { name: 'HVID', value: 'HVID', color: '#000000' },
+        { name: 'BRUN', value: 'BRUN', color: '#a66f5a' },
+        { name: 'STX', value: 'STX', color: '#782834' },
+        { name: 'CHAMPAGNE', value: 'CHAMPAGNE', img: img1 },
+
+
+    ];
+
+
+    const getKokardeColorOptions = (material) => {
+        switch (material) {
+            case 'Leather':
+                return [
+                    { name: 'HVID', value: 'HVID', color: '#ffffff' },
+                    { name: 'Sort', value: 'Sort', color: '#000000' },
+                    
+                ];
+            case 'Artificial Leather':
+                return [
+                     { name: 'Sort', value: 'Sort', color: '#000000' },
+                ];
+            case 'Ruskin':
+                return [
+                    { name: 'Cognac', value: 'Cognac', color: '#a66f5a' },
+                ];
+            case 'Alcantra':
+                return [
+                   { name: 'Sort', value: 'Sort', color: '#000000' },
+                ];
+            default:
+                return [
+                    { name: 'Black', value: 'black', color: '#000000' },
+                ];
+        }
+    };
+
+    const kokardeColorOptions = getKokardeColorOptions(selectedKokardeMaterial);
+
+    useEffect(() => {
+        // Reset Kokarde color to first available option
+        if (kokardeColorOptions.length > 0 && !kokardeColorOptions.some(opt => opt.value === selectedKokardeColor)) {
+            setSelectedKokardeColor(kokardeColorOptions[0].value);
+        }
+
+        // Reset Bow color to first available option
+
+    }, [selectedKokardeMaterial, kokardeColorOptions, , selectedKokardeColor,]);
+
+    const kokardeMaterialTypes = ['Leather', 'Artificial Leather', 'Ruskin', 'Alcantra'];
+    const foerMaterialTypes = ['Viscose', 'Polyester', 'Satin', 'Silk'];
+
+
+
+    // Reusable color selector component
+    const ColorSelector = ({
+        label,
+        currentSelection,
+        onSelectionChange,
+        colorOptions
+    }) => (
+        <div className="space-y-4">
+            <div>
+                <label className="text-sm font-semibold text-slate-700">{label}</label>
+            </div>
+            <div className="flex space-x-3">
+                {colorOptions.map((colorOption) => (
+                    <button
+                        key={colorOption.value}
+                        onClick={() => onSelectionChange(colorOption.value)}
+                        className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 flex items-center justify-center ${currentSelection === colorOption.value
+                                ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+                                : 'border-slate-200 hover:border-slate-400'
+                            }`}
+                        style={colorOption.color ? { backgroundColor: colorOption.color || colorOption.value } : {}}
+                        title={colorOption.name}
+                    >
+                        {colorOption.img && (
+                            <img
+                                src={colorOption.img}
+                                alt={colorOption.name}
+                                className="w-8 h-8 object-contain"
+                            />
+                        )}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+
+    // Reusable type selector component
+    const TypeSelector = ({
+        label,
+        currentSelection,
+        onSelectionChange,
+        options
+    }) => (
+        <div className="space-y-4">
+            <div>
+                <label className="text-sm font-semibold text-slate-700">{label}</label>
+                <div className="flex items-center gap-2 mt-1">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                        {currentSelection}
+                    </span>
+                </div>
+            </div>
+            <div className="flex space-x-3">
+                {options.map((type) => (
+                    <button
+                        key={type}
+                        onClick={() => onSelectionChange(type)}
+                        className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${currentSelection === type
+                                ? 'bg-blue-600 text-white shadow-md'
+                                : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm'
+                            }`}
+                    >
+                        {type}
+                    </button>
+                ))}
+            </div>
+            {currentSelection == 'Satin' &&
+                <ColorSelector
+                    label="Type"
+                    currentSelection={selectedbowMaterialType}
+                    onSelectionChange={setBowMaterialTypes}
+                    colorOptions={bowMaterialTypes}
+                />
+
+            }
+        </div>
+    );
+    return (
+        <>
+            {/* Kokarde Material Selection */}
+            <TypeSelector
+                label="Svederem"
+                currentSelection={selectedKokardeMaterial}
+                onSelectionChange={setSelectedKokardeMaterial}
+                options={kokardeMaterialTypes}
+            />
+
+            {/* Kokarde Color Selection */}
+            <ColorSelector
+                label="Color"
+                currentSelection={selectedKokardeColor}
+                onSelectionChange={setSelectedKokardeColor}
+                colorOptions={kokardeColorOptions}
+            />
+
+            {/* Bow Color Selection */}
+            <ColorSelector
+                label="Bow"
+                currentSelection={selectedBowColor}
+                onSelectionChange={setSelectedBowColor}
+                colorOptions={bowColorOptions}
+            />
+
+            {/* Foer Material Selection */}
+            <TypeSelector
+                label="Foer"
+                currentSelection={selectedFoerMaterial}
+                onSelectionChange={setSelectedFoerMaterial}
+                options={foerMaterialTypes}
+            />
+        </>
+    );
+}
+
+export default Foer;
+
+import React, { useState } from 'react';
+
+const Accessories = () => {
+   const [hatBoxColor, setHatBoxColor] = useState('#DC2626');
+   const [selectedHatBoxType, setSelectedHatBoxType] = useState('Standard');
+   
+   // Individual accessory selections
+   const [ballpointPenSelection, setBallpointPenSelection] = useState('gold');
+   const [silkPillowSelection, setSilkPillowSelection] = useState('gold');
+   const [badgesSelection, setBadgesSelection] = useState('gold');
+   const [glovesSelection, setGlovesSelection] = useState('gold');
+   const [largeBallpointPenSelection, setLargeBallpointPenSelection] = useState('gold');
+   const [smartTagSelection, setSmartTagSelection] = useState('gold');
+   const [lightBallSelection, setLightBallSelection] = useState('gold');
+   const [champagneGlassSelection, setChampagneGlassSelection] = useState('gold');
+   const [whistleSelection, setWhistleSelection] = useState('gold');
+   const [trumpetSelection, setTrumpetSelection] = useState('gold');
+
+   const colorOptions = [
+       { name: 'Burgundy', value: '#7F1D1D' },
+       { name: 'Navy', value: '#1E3A8A' },
+       { name: 'Red', value: '#DC2626' }
+   ];
+
+   const accessoryOptions = [
+        { name: 'Tick', value: 'tick', icon: '✔️' },
+        { name: 'Cross', value: 'cross', icon: '❌' },
+   ];
+
+   const hatBoxTypes = ['Standard', 'Premium Box', 'Luxury Box'];
+
+   // Helper component for accessory selection
+   const AccessorySelector = ({ 
+        label, 
+        currentSelection, 
+        onSelectionChange 
+    }) => (
+        <div className="space-y-4">
+            <div>
+                <label className="text-sm font-semibold text-slate-700">{label}</label>
+            </div>
+            <div className="flex space-x-3">
+                {accessoryOptions.map((option) => (
+                    <button
+                        key={option.value}
+                        onClick={() => onSelectionChange(option.value)}
+                        className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 ${
+                            currentSelection === option.value
+                                ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+                                : 'border-slate-200 hover:border-slate-400'
+                        }`}
+                    >
+                        {option.icon}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+
+   return (
+       <>
+           <div className="space-y-2">
+               <h3 className="text-2xl font-bold text-slate-900">Accessories</h3>
+           </div>
+
+           {/* Hat Box Type Selection */}
+           <div className="space-y-4">
+               <div>
+                   <label className="text-sm font-semibold text-slate-700">Hat box</label>
+                   
+                   <div className="flex items-center gap-2 mt-1">
+                       <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                           {selectedHatBoxType}
+                       </span>
+                       <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-100 to-yellow-200 text-amber-800">
+                           {selectedHatBoxType==='Premium Box'?'Inkluderet i pakken 0':selectedHatBoxType==='Luxury Box'?'+ 249 DKK':''}
+                       </span>
+                   </div>
+               </div>
+               <div className="flex space-x-3">
+                   {hatBoxTypes.map((type) => (
+                       <button
+                           key={type}
+                           onClick={() => setSelectedHatBoxType(type)}
+                           className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                               selectedHatBoxType === type
+                                   ? 'bg-blue-600 text-white shadow-md'
+                                   : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm'
+                           }`}
+                       >
+                           {type}
+                       </button>
+                   ))}
+               </div>
+           </div>
+
+           {/* Individual Accessory Selectors */}
+           <AccessorySelector
+               label="Ballpoint pen"
+               currentSelection={ballpointPenSelection}
+               onSelectionChange={setBallpointPenSelection}
+           />
+
+           <AccessorySelector
+               label="Silk pillow"
+               currentSelection={silkPillowSelection}
+               onSelectionChange={setSilkPillowSelection}
+           />
+
+           <AccessorySelector
+               label="Badges"
+               currentSelection={badgesSelection}
+               onSelectionChange={setBadgesSelection}
+           />
+
+           <AccessorySelector
+               label="Gloves"
+               currentSelection={glovesSelection}
+               onSelectionChange={setGlovesSelection}
+           />
+
+           <AccessorySelector
+               label="Large ballpoint pen"
+               currentSelection={largeBallpointPenSelection}
+               onSelectionChange={setLargeBallpointPenSelection}
+           />
+
+           <AccessorySelector
+               label="Smart Tag"
+               currentSelection={smartTagSelection}
+               onSelectionChange={setSmartTagSelection}
+           />
+
+           <AccessorySelector
+               label="Light ball"
+               currentSelection={lightBallSelection}
+               onSelectionChange={setLightBallSelection}
+           />
+
+           <AccessorySelector
+               label="Luxury champagne glass"
+               currentSelection={champagneGlassSelection}
+               onSelectionChange={setChampagneGlassSelection}
+           />
+
+           <AccessorySelector
+               label="Whistle"
+               currentSelection={whistleSelection}
+               onSelectionChange={setWhistleSelection}
+           />
+
+           <AccessorySelector
+               label="Trumpet"
+               currentSelection={trumpetSelection}
+               onSelectionChange={setTrumpetSelection}
+           />
+       </>
+   );
+}
+
+export default Accessories;
+
+import React, { useState } from 'react';
+
+const Size = () => {
+    const [selectedSize, setSelectedSize] = useState(49.5);
+    const [selectedMillimeterAdjustment, setSelectedMillimeterAdjustment] = useState('tick');
+    
+    const sizeOptions = [
+        49.5, 50, 50.5, 51, 51.5,
+        52, 52.5, 53, 53.5, 54, 54.5,
+        55, 55.5, 56, 56.5, 57, 57.5,
+        58, 58.5, 59, 59.5, 60, 60.5,
+        61, 61.5, 62, 62.5, 63, 63.5,
+        64, 64.5, 65
+    ];
+    
+    const millimeterAdjustmentOptions = [
+        { name: 'Yes', value: 'tick', icon: '✔️' },
+        { name: 'No', value: 'cross', icon: '❌' },
+    ];
+
+    // Reusable size selector component
+    const SizeSelector = ({ 
+        label, 
+        currentSelection, 
+        onSelectionChange, 
+        sizeOptions 
+    }) => (
+        <div className="space-y-4">
+            <div className="flex items-center justify-between">
+                <div>
+                    <label className="text-sm font-semibold text-slate-700">{label}</label>
+                    <p className="text-xs text-slate-500">{currentSelection}</p>
+                </div>
+            </div>
+            <div className="flex space-x-3 flex-wrap">
+                {sizeOptions.map((size) => (
+                    <button
+                        key={size}
+                        onClick={() => onSelectionChange(size)}
+                        className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 my-3 flex items-center justify-center ${
+                            currentSelection === size
+                                ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2 bg-blue-100'
+                                : 'border-slate-200 hover:border-slate-400 bg-white'
+                        }`}
+                    >
+                        {size}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+
+    // Reusable option selector component
+    const OptionSelector = ({ 
+        label, 
+        currentSelection, 
+        onSelectionChange, 
+        options 
+    }) => (
+        <div className="space-y-4">
+            <div>
+                <label className="text-sm font-semibold text-slate-700">{label}</label>
+            </div>
+            <div className="flex space-x-3">
+                {options.map((option) => (
+                    <button
+                        key={option.value}
+                        onClick={() => onSelectionChange(option.value)}
+                        className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 flex items-center justify-center ${
+                            currentSelection === option.value
+                                ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+                                : 'border-slate-200 hover:border-slate-400'
+                        }`}
+                        title={option.name}
+                    >
+                        {option.icon}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+
+    return (
+        <>
+            <div className="space-y-2">
+                <h3 className="text-2xl font-bold text-slate-900">Size</h3>
+            </div>
+
+            {/* Size Selection */}
+            <SizeSelector
+                label="Choose size"
+                currentSelection={selectedSize}
+                onSelectionChange={setSelectedSize}
+                sizeOptions={sizeOptions}
+            />
+
+            {/* Millimeter Adjustment Selection */}
+            <OptionSelector
+                label="Millimeter adjustment set"
+                currentSelection={selectedMillimeterAdjustment}
+                onSelectionChange={setSelectedMillimeterAdjustment}
+                options={millimeterAdjustmentOptions}
+            />
+        </>
+    );
+}
+
+export default Size;
+
