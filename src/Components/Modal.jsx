@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { X, Printer, Download, Mail, CheckCircle, Package, Star, User, CreditCard, ArrowLeft, ArrowRight, Loader2 } from 'lucide-react';
 
-const QuoteModal = ({ isOpen, onClose, selectedOptions }) => {
+const QuoteModal = ({ isOpen, onClose, selectedOptions,price }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [customerDetails, setCustomerDetails] = useState({
@@ -755,7 +755,7 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions }) => {
               </div>
               <div className="text-right">
                 <span className="text-2xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
-                  {calculateTotal()}
+                  {price}
                 </span>
                 <span className="text-base font-semibold text-green-600 ml-1">DKK</span>
               </div>
