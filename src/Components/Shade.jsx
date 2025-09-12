@@ -23,7 +23,8 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
     const shadowTapeColorOptions = [
         { name: 'INGEN', value: 'INGEN', img: img2 },
         { name: 'Gold', value: 'gold', color: '#bb9300' },
-        { name: 'Glitter', value: 'Glitter', color: '#E5E7EB' }
+        { name: 'Glitter', value: 'Glitter', color: '#E5E7EB' },
+        { name: 'Silver', value: 'Silver', color: '#fdfdff80' }
     ];
 
     const materialBlankTypes = ['Uden kant', 'Med kant'];

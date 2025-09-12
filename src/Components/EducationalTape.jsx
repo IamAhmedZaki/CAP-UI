@@ -51,15 +51,15 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange }) => {
    
 
     const embroideryColorOptions = [
-        { name: 'Gold', value: 'gold', color: '#ba9200' },
-        { name: 'Silver', value: 'silver', color: '#757575' },
+        { name: 'Gold', value: 'Gold', color: '#ba9200' },
+        { name: 'Silver', value: 'Silver', color: '#757575' },
         { name: 'EUX', value: 'EUX', color: '#2e2e2e' },
         { name: 'HVID', value: 'HVID', color: '#E5E7EB' },
         { name: 'SORT', value: 'SORT', color: '#2e2e2e' },
     ];
 
     const buttonColorOptions = [
-        { name: 'Gold', value: 'gold', color: '#ba9200' },
+        { name: 'Gold', value: 'Gold', color: '#ba9200' },
     ];
 
     const materialEUXTypes = ['COTTON', 'VELOUR', 'SATIN', 'Glimmer'];
@@ -68,7 +68,7 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange }) => {
     const buttonMaterialMATTypes = [ 'FOOD GRADE'];
     const buttonMaterialBLANKTypes = [ 'BLANK CHAIN ​​STRAP','SHINY LEATHER CHIN STRAP'];
     const buttonMaterialSortSortTypes = [ 'BLACK CHIN STRAP WITH BLACK KNOTS'];
-    const buttonMaterialSortGoldTypes = [ 'BLACK CHIN STRAP WITH GOLD KNOTS '];
+    const buttonMaterialSortGoldTypes = [ 'BLACK CHIN STRAP WITH GOLD KNOTS'];
 
     function getMaterialOptions(){
         switch (selectedHatbandColor) {
@@ -80,7 +80,7 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange }) => {
                 return materialSORTTypes;
         
             default:
-                break;
+                return[];
         }
     }
     useEffect(()=>{
@@ -91,6 +91,35 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange }) => {
             setSelectedMaterialType(materialType[0])
         }
     },[selectedHatbandColor])
+    
+    
+    function getMaterialOptions2(){
+        switch (selectedChinStrapColor) {
+            case 'Mat':
+                
+                return buttonMaterialMATTypes;
+            case 'Blank':
+                
+                return buttonMaterialBLANKTypes;
+            case 'Sort/Sort':
+                
+                return buttonMaterialSortSortTypes;
+            case 'Sort/Gold':
+                
+                return buttonMaterialSortGoldTypes;
+        
+            default:
+                return [];
+        }
+    }
+    useEffect(()=>{
+        let materialType=getMaterialOptions2()
+        if (materialType.length>0) {
+            console.log(materialType);
+            
+            setSelectedButtonMaterialColor(materialType[0])
+        }
+    },[selectedChinStrapColor])
 
     // Reusable color selector component
     const ColorSelector = ({ 
