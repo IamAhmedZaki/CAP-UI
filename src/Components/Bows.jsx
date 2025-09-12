@@ -294,7 +294,10 @@ const Bows = ({ selectedOptions = {}, onOptionChange }) => {
             </div>
 
             {/* Emblem Selection */}
+                    <span className="text-sm pb-5
+                     font-semibold text-slate-700">Emblem</span>
             <div className="flex space-x-3">
+                 
                 {emblemOptions.map((emblem) => (
                     <button
                         key={emblem.value}

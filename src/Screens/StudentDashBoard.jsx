@@ -954,7 +954,7 @@ const StudentDashboard = () => {
               </div>
               <div className="flex-1 rounded-b-2xl overflow-hidden">
                 <iframe
-                  src="https://playcanv.as/e/p/c754fbb9/"
+                  src="https://playcanv.as/e/p/aaaab65d/"
                   className="w-full h-full"
                   frameBorder="0"
                   title="3D Student Card Preview"
