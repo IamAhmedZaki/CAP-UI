@@ -43,15 +43,15 @@ const Cover = ({ selectedOptions = {}, onOptionChange }) => {
 
     // Effect hooks to propagate changes to parent component
     useEffect(() => {
-        onOptionChange('coverColor', selectedCoverColor);
+        onOptionChange('Farve', selectedCoverColor);
     }, [selectedCoverColor]);
 
     useEffect(() => {
-        onOptionChange('edgebandColor', selectedEdgebandColor);
+        onOptionChange('Kantbånd', selectedEdgebandColor);
     }, [selectedEdgebandColor]);
 
     useEffect(() => {
-        onOptionChange('starsStyle', selectedStarsStyle);
+        onOptionChange('Stjerner', selectedStarsStyle);
     }, [selectedStarsStyle]);
 
     // Reusable selector component for both colors and images
@@ -97,12 +97,12 @@ const Cover = ({ selectedOptions = {}, onOptionChange }) => {
     return (
         <>
             <div className="space-y-2">
-                <h3 className="text-2xl font-bold text-slate-900">Cover</h3>
+                <h3 className="text-2xl font-bold text-slate-900">BETRÆK</h3>
             </div>
 
             {/* Cover Color Selection */}
             <Selector
-                label="Color"
+                label="Farve"
                 currentSelection={selectedCoverColor}
                 onSelectionChange={setSelectedCoverColor}
                 options={coverColorOptions}
@@ -111,7 +111,7 @@ const Cover = ({ selectedOptions = {}, onOptionChange }) => {
             
             {/* Edgeband Color Selection */}
             <Selector
-                label="Edgeband"
+                label="Kantbånd"
                 currentSelection={selectedEdgebandColor}
                 onSelectionChange={setSelectedEdgebandColor}
                 options={edgebandColorOptions}
@@ -120,7 +120,7 @@ const Cover = ({ selectedOptions = {}, onOptionChange }) => {
 
             {/* Stars Style Selection */}
             <Selector
-                label="Stars"
+                label="Stjerner"
                 currentSelection={selectedStarsStyle}
                 onSelectionChange={setSelectedStarsStyle}
                 options={starsOptions}

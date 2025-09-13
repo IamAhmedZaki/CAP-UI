@@ -20,730 +20,871 @@ import Accessories from '../Components/Accessories';
 import Size from '../Components/Size';
 import Bows from '../Components/Bows';
 import QuoteModal from '../Components/Modal';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 const StudentDashboard = () => {
-  const [activeMenu, setActiveMenu] = useState('Bows');
+  const [activeMenu, setActiveMenu] = useState('KOKARDE');
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
-  const { packageType } = useParams();
+   const [searchParams] = useSearchParams();
+  const packageName = searchParams.get("package");  // "standard"
+  const program = searchParams.get("program");  
 
 
 
   // Complete state for all components
   const [selectedOptions, setSelectedOptions] = useState({
-    bows: {
-      color: { name: '', value: '' },
-      bowType: '',
-      emblem: { name: '', value: '', color: '' },
-      country: ''
+    KOKARDE: {
+     'Roset farve': { name: '', value: '' },
+      Kokarde: '',
+      'Emblem': { name: '', value: '', color: '' },
+      'Type': ''
     },
-    educationalTape: {
-      hatbandColor: '',
-      materialType: '',
-      chinStrapColor: '',
-      buttonMaterial: '',
-      embroideryColor: '',
-      buttonColor: '',
-      embroideryText: '',
+    UDDANNELSESBÅND: {
+      Huebånd: '',
+      Materiale: '',
+      Hagerem: '',
+      'Hagerem Materiale': '',
+      'Broderi foran': '',
+      'Broderi farve': '',
+      'Knap farve': '',
     },
-    embroidery: {
-      nameEmbroideryColor: '',
-      nameEmbroideryText: '',
-      schoolEmbroideryColor: '',
-      schoolEmbroideryText: ''
+    BRODERI: {
+      'Broderifarve': '',
+      'Navne broderi': '',
+      'Skolebroderi farve': '',
+     Skolebroderi: ''
     },
-    cover: {
-      coverColor: '',
-      edgebandColor: '',
-      starsStyle: ''
+    BETRÆK: {
+      Farve: '',
+      Kantbånd: '',
+      Stjerner: ''
     },
-    shade: {
-      shadeType: '',
-      materialType: ' ',
-      shadowTapeColor: '',
-      engravingLine1: '',
-      engravingLine2: '',
-      engravingLine3: ''
+    SKYGGE: {
+      Type: '',
+      Materiale: ' ',
+      Skyggebånd: '',
+    'Skyggegravering Line 1': '',
+     'Skyggegravering Line 2': '',
+     'Skyggegravering Line 3': ''
     },
-    foer: {
-      kokardeMaterial: '',
-      kokardeColor: '',
-      bowColor: '',
-      foerMaterial: '',
-      bowMaterialType: ''
+    FOER: {
+      Svederem: '',
+      Farve: '',
+      Sløjfe: '',
+      Foer: '',
+      Type: ''
     },
-    extraCover: {
-      extraCoverOption: ''
+    EKSTRABETRÆK: {
+      Tilvælg: '',
+      Favre:'',
+      Type:'',
+      Skolebroderi: ''
+      
     },
-    accessories: {
-      hatBoxColor: '',
-      hatBoxType: '',
-      ballpointPenSelection: '',
-      silkPillowSelection: '',
-      badgesSelection: '',
-      glovesSelection: '',
-      largeBallpointPenSelection: '',
-      smartTagSelection: '',
-      lightBallSelection: '',
-      champagneGlassSelection: '',
-      whistleSelection: '',
-      trumpetSelection: ''
+    TILBEHØR: {
+      
+      Hueæske: '',
+      'Premium æske': '',
+      
+      Huekuglepen: '',
+      Silkepude: '',
+      Emblem:'',
+      Badges: '',
+      Handsker: '',
+      'Store kuglepen': '',
+      'Smart Tag': '',
+      Lyskugle: '',
+      'Luksus champagneglas': '',
+      Fløjte: '',
+      Trrompet: '',
+      Bucketpins: '',
     },
-    size: {
-      selectedSize: 49.5,
-      millimeterAdjustment: ''
+    STØRRELSE: {
+     'Vælg størrelse': 49.5,
+      'Millimeter tilpasningssæt': ''
     }
   });
 
 
 
-  // ---------------- STANDARD ----------------
-  const standardPrices = {
-    bows: {
-      color: {
-        '#7F1D1D': 0,
-        '#1E3A8A': 0,
-        '#DC2626': 39,
-      },
-      bowType: {
-        Signature: 0,
-        Prestige: 0,
-      },
-      emblem: {
-        gold: 0,
-        silver: 0,
-      },
-      country: {
-        Denmark: 0,
-        Sweden: 0,
-        Norway: 0,
-        Germany: 0,
-        France: 0,
-        Italy: 0,
-      },
+ const standardPrices = {
+  KOKARDE: {
+    'Roset farve': {
+      '#7F1D1D': 0,
+      '#1E3A8A': 0,
+      '#DC2626': 39,
     },
-
-    educationalTape: {
-      hatbandColor: {
-        EUX: 0,
-        SORT: 0
-      },
-      materialType: {
-        COTTON: 0,
-        VELOUR: 239,
-        SATIN: 239,
-        Glimmer: 239
-      },
-      chinStrapColor: {
-        Mat: 0,
-        Blank: 0,
-        'Sort/Sort': 69,
-        'Sort/Gold': 69
-      },
-      buttonMaterial: {
-        'FOOD GRADE': 0,
-        'BLANK CHAIN ​​STRAP': 0,
-        'SHINY LEATHER CHIN STRAP': 0,
-        'BLACK CHIN STRAP WITH BLACK KNOTS': 0,
-        'BLACK CHIN STRAP WITH GOLD KNOTS': 0
-      },
-      embroideryColor: {
-        Gold: 0,
-        Silver: 0,
-        EUX: 0,
-        HVID: 0,
-        SORT: 0
-      },
-      buttonColor: {
-        Gold: 0
-      },
-      embroideryText: {
-        base: 99,
-        perChar: 0
-      },
+    Kokarde: {
+      Signature: 69,
+      Prestige: 89,
+      Stjernetegn: 69,
     },
-
-    embroidery: {
-      nameEmbroideryColor: {
-        gold: 0,
-        silver: 0,
-        STX: 0,
-        WHITE: 0,
-        BLACK: 0
-      },
-      nameEmbroideryText: {
-        base: 99,
-        perChar: 0
-      },
-      schoolEmbroideryColor: {
-        WHITE: 0,
-        BLACK: 0,
-        Gold: 0,
-        Silver: 0
-      },
-      schoolEmbroideryText: {
-        base: 99,
-        perChar: 0
-      },
+    'Emblem': {
+      Guld: 89,
+      Sølv: 89,
     },
-
-
-    cover: {
-      coverColor: {
-        '#ffffff': 0,           // WHITE - WATER REPELLENT
-        '#000000': 0,           // BLACK - WATER REPELLENT
-        '#dedede': 79,           // WHITE GLITTER
-        '#292929': 79,           // SORT GLIMMER
-      },
-      edgebandColor: {
-        NONE: 29,
-        WHITE: 29,
-        BLACK: 29,
-        STX: 0,
-        HHX: 0,
-        EUD: 0,
-        GREEN: 0,
-        GUL: 0,
-        EUX: 0,
-        PINK: 0,
-      },
-      starsStyle: {
-        '1': 39,  // One Star
-        '2': 39,  // Two Stars
-        '3': 39,  // Three Stars
-        '4': 39,  // Four Stars
-        '5': 39,  // Five Stars
-      },
+    Type: {
+     Kurdistan: 69,
+  Iraq: 69,
+  Iran: 69,
+  Somalia: 69,
+  Somaliland: 69,
+  Palestine: 69,
+  Lebanon: 69,
+  Afghanistan: 69,
+  Albania: 69,
+  Serbia: 69,
+  Bosnia: 69,
+  Denmark: 69,
+  Morocco: 69,
+  Pakistan: 69,
+  Turkey: 69,
     },
+  },
 
-
-    shade: {
-      shadeType: {
-        Blank: 0,    // default short/Blank shade
-        Mat: 39,      // matte type
-        Glimmer: 39,  // glimmer type
-      },
-      materialType: {
-        'Uden kant': 0, // without edge
-        'Med kant': 0,  // with edge
-      },
-      shadowTapeColor: {
-        INGEN: 0,   // no tape
-        gold: 29,    // gold tape
-        Glitter: 0, // glitter tape
-        Silver: 29, // glitter tape
-      },
-      engravingLine0: {
-        base: 99,    // base cost for line 0
-        perChar: 0, // per character cost for line 0
-      },
-      engravingLine2: {
-        base: 0,    // base cost for line 2
-        perChar: 0, // per character cost for line 2
-      },
-      engravingLine3: {
-        base: 0,    // base cost for line 3
-        perChar: 0, // per character cost for line 3
-      },
-    }
-    ,
-
-    foer: {
-      kokardeMaterial: {
-        Leather: 0,
-        'Artificial Leather': 29,
-        Ruskin: 29,
-        Alcantra: 29,
-      },
-      kokardeColor: {
-        HVID: 0,
-        Sort: 0,
-        Cognac: 0,
-        black: 0,
-      },
-      bowColor: {
-        HVID: 0,
-        Sort: 0,
-        gold: 29,
-      },
-      foerMaterial: {
-        Viscose: 29,
-        Polyester: 0,
-        Satin: 0,
-        Silk: 0,
-      },
-      bowMaterialType: {
-        HVID: 29,
-        BRUN: 29,
-        STX: 0,
-        CHAMPAGNE: 29,
-      },
-    }
-    ,
-
-    extraCover: {
-      extraCoverOption: {
-        Yes: 79,
-        No: 0,
-      },
-    }
-    ,
-
-    accessories: {
-      
-      hatBoxType: { Standard: 0, 'Premium Box': 199,'Luxury Box':299 },
-      ballpointPen: { Yes: 29, No: 0 },
-      silkPillow: { Yes: 39, No: 0  },
-      badges: { Yes: 99, No: 0  },
-      gloves: { Yes: 39, No: 0  },
-      largeBallpointPen: {Yes: 39, No: 0  },
-      smartTag: { Yes: 99, No: 0  },
-      lightBall: { Yes: 25, No: 0  },
-      champagneGlass: { Yes: 99, No: 0  },
-      whistle: { Yes: 29, No: 0  },
-      trumpet: { Yes: 39, No: 0  },
+  UDDANNELSESBÅND: {
+    Huebånd: {
+      EUX: 0,
+      SORT: 0
     },
-
-    size: {
-      selectedSize: { base: 0, perMM: 0 },
-      millimeterAdjustment: { Yes: 39, No: 0  },
-    }
-    ,
-  };
-
-  // ---------------- PREMIUM ----------------
-  const premiumPrices = {
-    bows: {
-      color: {
-        '#7F1D1D': 0,
-        '#1E3A8A': 0,
-        '#DC2626': 0,
-      },
-      bowType: {
-        Signature: 0,
-        Prestige: 0,
-      },
-      emblem: {
-        gold: 0,
-        silver: 0,
-      },
-      country: {
-        Denmark: 0,
-        Sweden: 0,
-        Norway: 0,
-        Germany: 0,
-        France: 0,
-        Italy: 0,
-      },
+    Materiale: {
+      BOMULD: 0,
+      VELOUR: 239,
+      SATIN: 239,
+      GLIMMER: 239,
+      SHIMMER:0,
     },
-
-    educationalTape: {
-      hatbandColor: {
-        EUX: 0,
-        SORT: 0
-      },
-      materialType: {
-        COTTON: 0,
-        VELOUR: 0,
-        SATIN: 0,
-        Glimmer: 0
-      },
-      chinStrapColor: {
-        Mat: 0,
-        Blank: 0,
-        'Sort/Sort': 0,
-        'Sort/Gold': 0
-      },
-      buttonMaterial: {
-        'FOOD GRADE': 0,
-        'BLANK CHAIN ​​STRAP': 0,
-        'SHINY LEATHER CHIN STRAP': 0,
-        'BLACK CHIN STRAP WITH BLACK KNOTS': 0,
-        'BLACK CHIN STRAP WITH GOLD KNOTS': 0
-      },
-      embroideryColor: {
-        Gold: 0,
-        Silver: 0,
-        EUX: 0,
-        HVID: 0,
-        SORT: 0
-      },
-      buttonColor: {
-        Gold: 0
-      },
-      embroideryText: {
-        base: 0,
-        perChar: 0
-      },
+    Hagerem: {
+      Mat: 0,
+      Blank: 0,
+      'Sort/Sort': 0,
+      'Sort/Guld': 0
     },
-
-    embroidery: {
-      nameEmbroideryColor: {
-        gold: 0,
-        silver: 0,
-        STX: 0,
-        WHITE: 0,
-        BLACK: 0
-      },
-      nameEmbroideryText: {
-        base: 0,
-        perChar: 0
-      },
-      schoolEmbroideryColor: {
-        WHITE: 0,
-        BLACK: 0,
-        Gold: 0,
-        Silver: 0
-      },
-      schoolEmbroideryText: {
-        base: 0,
-        perChar: 0
-      },
+    'Hagerem Materiale': {
+      'Mat hagerem': 0,
+      'Blank hagerem': 0,
+      'Blank kunstlæder hagerem': 0,
+      'Sort hagerem med sorte knuder': 0,
+      'Sort hagerem med guld knuder': 69,
+      'Guld hagerem med guld knuder': 69,
+      'Sølv hagerem med Sølv knuder': 69,
+      'Sølv hagerem med sorte knuder': 69,
     },
-
-
-    cover: {
-      coverColor: {
-        '#ffffff': 0,           // WHITE - WATER REPELLENT
-        '#000000': 0,           // BLACK - WATER REPELLENT
-        '#dedede': 0,           // WHITE GLITTER
-        '#292929': 0,           // SORT GLIMMER
-      },
-      edgebandColor: {
-        NONE: 0,
-        WHITE: 0,
-        BLACK: 0,
-        STX: 0,
-        HHX: 0,
-        EUD: 0,
-        GREEN: 0,
-        GUL: 0,
-        EUX: 0,
-        PINK: 0,
-      },
-      starsStyle: {
-        '1': 0,  // One Star
-        '2': 0,  // Two Stars
-        '3': 0,  // Three Stars
-        '4': 0,  // Four Stars
-        '5': 0,  // Five Stars
-      },
+    'Broderi farve': {
+      Guld: 0,
+      Sølv: 0,
+      EUX: 0,
+      HVID: 0,
+      SORT: 0
     },
-
-
-    shade: {
-      shadeType: {
-        Blank: 0,    // default short/Blank shade
-        Mat: 0,      // matte type
-        Glimmer: 0,  // glimmer type
-      },
-      materialType: {
-        'Uden kant': 0, // without edge
-        'Med kant': 0,  // with edge
-      },
-      shadowTapeColor: {
-        INGEN: 0,   // no tape
-        gold: 0,    // gold tape
-        Glitter: 0, // glitter tape
-        Silver: 29, // glitter tape
-      },
-      engravingLine0: {
-        base: 0,    // base cost for line 0
-        perChar: 0, // per character cost for line 0
-      },
-      engravingLine2: {
-        base: 0,    // base cost for line 2
-        perChar: 0,
-         // per character cost for line 2
-      },
-      engravingLine3: {
-        base: 0,    // base cost for line 3
-        perChar: 0, // per character cost for line 3
-      },
-    }
-    ,
-
-    foer: {
-      kokardeMaterial: {
-        Leather: 0,
-        'Artificial Leather': 0,
-        Ruskin: 0,
-        Alcantra: 0,
-      },
-      kokardeColor: {
-        HVID: 0,
-        Sort: 0,
-        Cognac: 0,
-        black: 0,
-      },
-      bowColor: {
-        HVID: 0,
-        Sort: 0,
-        gold: 0,
-      },
-      foerMaterial: {
-        Viscose: 0,
-        Polyester: 0,
-        Satin: 0,
-        Silk: 0,
-      },
-      bowMaterialType: {
-        HVID: 0,
-        BRUN: 0,
-        STX: 0,
-        CHAMPAGNE: 0,
-      },
-    }
-    ,
-
-    extraCover: {
-      extraCoverOption: {
-        Yes: 0,
-        No: 0,
-      },
-    }
-    ,
-
-    accessories: {
-      
-      hatBoxType: { Standard: 0, 'Premium Box': 0,'Luxury Box':0 },
-      ballpointPen: { Yes: 0, No: 0 },
-      silkPillow: { Yes: 0, No: 0  },
-      badges: { Yes: 0, No: 0  },
-      gloves: { Yes: 0, No: 0  },
-      largeBallpointPen: {Yes: 0, No: 0  },
-      smartTag: { Yes: 0, No: 0  },
-      lightBall: { Yes: 0, No: 0  },
-      champagneGlass: { Yes: 0, No: 0  },
-      whistle: { Yes: 0, No: 0  },
-      trumpet: { Yes: 0, No: 0  },
+    'Knap farve': {
+      Guld: 0
     },
-
-    size: {
-      selectedSize: { base: 0, perMM: 0 },
-      millimeterAdjustment: { Yes: 0, No: 0  },
-    }
-    ,
-  };
-
-  // ---------------- LUKSUS ----------------
-  const luksusPrices = {
-    bows: {
-      color: {
-        '#7F1D1D': 0,
-        '#1E3A8A': 0,
-        '#DC2626': 39,
-      },
-      bowType: {
-        Signature: 0,
-        Prestige: 0,
-      },
-      emblem: {
-        gold: 0,
-        silver: 0,
-      },
-      country: {
-        Denmark: 0,
-        Sweden: 0,
-        Norway: 0,
-        Germany: 0,
-        France: 0,
-        Italy: 0,
-      },
+    'Broderi foran': {
+      base: 99,
+      perChar: 0
     },
+  },
 
-    educationalTape: {
-      hatbandColor: {
-        EUX: 0,
-        SORT: 0
-      },
-      materialType: {
-        COTTON: 0,
-        VELOUR: 0,
-        SATIN: 0,
-        Glimmer: 99
-      },
-      chinStrapColor: {
-        Mat: 0,
-        Blank: 0,
-        'Sort/Sort': 0,
-        'Sort/Gold': 0
-      },
-      buttonMaterial: {
-        'FOOD GRADE': 0,
-        'BLANK CHAIN ​​STRAP': 0,
-        'SHINY LEATHER CHIN STRAP': 0,
-        'BLACK CHIN STRAP WITH BLACK KNOTS': 0,
-        'BLACK CHIN STRAP WITH GOLD KNOTS': 0
-      },
-      embroideryColor: {
-        Gold: 0,
-        Silver: 0,
-        EUX: 0,
-        HVID: 0,
-        SORT: 0
-      },
-      buttonColor: {
-        Gold: 0
-      },
-      embroideryText: {
-        base: 0,
-        perChar: 0
-      },
+  BRODERI: {
+    'Broderifarve': {
+      Guld: 0,
+      Sølv: 0,
+      STX: 0,
+      WHITE: 0,
+      BLACK: 0
     },
-
-    embroidery: {
-      nameEmbroideryColor: {
-        gold: 0,
-        silver: 0,
-        STX: 0,
-        WHITE: 0,
-        BLACK: 0
-      },
-      nameEmbroideryText: {
-        base: 0,
-        perChar: 0
-      },
-      schoolEmbroideryColor: {
-        WHITE: 0,
-        BLACK: 0,
-        Gold: 0,
-        Silver: 0
-      },
-      schoolEmbroideryText: {
-        base: 0,
-        perChar: 0
-      },
+    'Navne broderi': {
+      base: 99,
+      perChar: 0
     },
-
-
-    cover: {
-      coverColor: {
-        '#ffffff': 0,           // WHITE - WATER REPELLENT
-        '#000000': 0,           // BLACK - WATER REPELLENT
-        '#dedede': 79,           // WHITE GLITTER
-        '#292929': 79,           // SORT GLIMMER
-      },
-      edgebandColor: {
-        NONE: 0,
-        WHITE: 29,
-        BLACK: 29,
-        STX: 0,
-        HHX: 0,
-        EUD: 0,
-        GREEN: 0,
-        GUL: 0,
-        EUX: 0,
-        PINK: 0,
-      },
-      starsStyle: {
-        '1': 39,  // One Star
-        '2': 39,  // Two Stars
-        '3': 39,  // Three Stars
-        '4': 39,  // Four Stars
-        '5': 39,  // Five Stars
-      },
+    'Skolebroderi farve': {
+      WHITE: 0,
+      BLACK: 0,
+      Guld: 0,
+      Sølv: 0
     },
-
-
-    shade: {
-      shadeType: {
-        Blank: 0,    // default short/Blank shade
-        Mat: 0,      // matte type
-        Glimmer: 0,  // glimmer type
-      },
-      materialType: {
-        'Uden kant': 0, // without edge
-        'Med kant': 0,  // with edge
-      },
-      shadowTapeColor: {
-        INGEN: 0,   // no tape
-        gold: 0,    // gold tape
-        Glitter: 0, // glitter tape
-        Silver: 0, // glitter tape
-      },
-      engravingLine0: {
-        base: 99,    // base cost for line 0
-        perChar: 0, // per character cost for line 0
-      },
-      engravingLine2: {
-        base: 0,    // base cost for line 2
-        perChar: 0, // per character cost for line 2
-      },
-      engravingLine3: {
-        base: 0,    // base cost for line 3
-        perChar: 0, // per character cost for line 3
-      },
-    }
-    ,
-
-    foer: {
-      kokardeMaterial: {
-        Leather: 0,
-        'Artificial Leather': 29,
-        Ruskin: 29,
-        Alcantra: 29,
-      },
-      kokardeColor: {
-        HVID: 0,
-        Sort: 0,
-        Cognac: 0,
-        black: 0,
-      },
-      bowColor: {
-        HVID: 0,
-        Sort: 0,
-        gold: 0,
-      },
-      foerMaterial: {
-        Viscose: 29,
-        Polyester: 0,
-        Satin: 0,
-        Silk: 0,
-      },
-      bowMaterialType: {
-        HVID: 0,
-        BRUN: 0,
-        STX: 0,
-        CHAMPAGNE: 0,
-      },
-    }
-    ,
-
-    extraCover: {
-      extraCoverOption: {
-        Yes: 0,
-        No: 0,
-      },
-    }
-    ,
-
-    accessories: {
-      
-      hatBoxType: { Standard: 0, 'Premium Box': 0,'Luxury Box':100 },
-      ballpointPen: { Yes: 0, No: 0 },
-      silkPillow: { Yes: 0, No: 0  },
-      badges: { Yes: 0, No: 0  },
-      gloves: { Yes: 0, No: 0  },
-      largeBallpointPen: {Yes: 39, No: 0  },
-      smartTag: { Yes: 39, No: 0  },
-      lightBall: { Yes: 25, No: 0  },
-      champagneGlass: { Yes: 0, No: 0  },
-      whistle: { Yes: 0, No: 0  },
-      trumpet: { Yes: 29, No: 0  },
+    Skolebroderi: {
+      base: 99,
+      perChar: 0
     },
+  },
 
-    size: {
-      selectedSize: { base: 0, perMM: 0 },
-      millimeterAdjustment: { Yes: 39, No: 0  },
-    }
-    ,
-  };
+  BETRÆK: {
+    Farve: {
+      '#ffffff': 0,           // WHITE - WATER REPELLENT
+      '#000000': 0,           // BLACK - WATER REPELLENT
+      '#dedede': 79,           // WHITE GLITTER
+      '#292929': 79,           // SORT GLIMMER
+    },
+    Kantbånd: {
+      NONE: 29,
+      WHITE: 29,
+      BLACK: 29,
+      STX: 0,
+      HHX: 0,
+      EUD: 0,
+      GREEN: 0,
+      GUL: 0,
+      EUX: 0,
+      PINK: 0,
+    },
+    Stjerner: {
+      '1': 39,  // One Star
+      '2': 39,  // Two Stars
+      '3': 39,  // Three Stars
+      '4': 39,  // Four Stars
+      '5': 39,  // Five Stars
+    },
+  },
+
+  SKYGGE: {
+    Type: {
+      Blank: 0,    // default short/Blank shade
+      Mat: 39,      // matte type
+      Glimmer: 39,  // glimmer type
+    },
+    Materiale: {
+      'Uden kant': 0, // without edge
+      'Med kant': 0,  // with edge
+    },
+    Skyggebånd: {
+      INGEN: 0,   // no tape
+      Guld: 29,    // Guld tape
+      Glitter: 0, // glitter tape
+      Sølv: 29, // Sølv tape
+    },
+    'Skyggegravering Line 1': {
+      base: 99,    // base cost for line 1
+      perChar: 0, // per character cost for line 1
+    },
+    'Skyggegravering Line 2': {
+      base: 0,    // base cost for line 2
+      perChar: 0, // per character cost for line 2
+    },
+    'Skyggegravering Line 3': {
+      base: 0,    // base cost for line 3
+      perChar: 0, // per character cost for line 3
+    },
+  },
+
+  FOER: {
+    Svederem: {
+      Læder: 0,
+      'Kunstlæder': 29,
+      Ruskin: 29,
+      Alcantra: 29,
+    },
+    Farve: {
+      HVID: 0,
+      Sort: 0,
+      Cognac: 0,
+      black: 0,
+    },
+    Sløjfe: {
+      HVID: 0,
+      Sort: 0,
+      Guld: 29,
+    },
+    Foer: {
+      Viskose: 29,
+      Polyester: 0,
+      Satin: 0,
+      Silke: 0,
+    },
+    Type: {
+      HVID: 29,
+      BRUN: 29,
+      STX: 0,
+      CHAMPAGNE: 29,
+    },
+  },
+
+  EKSTRABETRÆK: {
+    Tilvælg: {
+      Yes: 79,
+      No: 0,
+    },
+     Favre:0,
+      Type:0,
+      Skolebroderi: 0
+  },
+
+  TILBEHØR: {
+    Hueæske: {
+      Standard: 0, 
+      'Premium æske': 199,
+      'Luksus æske': 299 
+    },
+    
+    Huekuglepen: {
+      Yes: 39, 
+      No: 0 
+    },
+    Silkepude: {
+      Yes: 99, 
+      No: 0 
+    },
+    Badges: {
+      Yes: 39, 
+      No: 0 
+    },
+    Handsker: {
+      Yes: 39, 
+      No: 0 
+    },
+    'Store kuglepen': {
+      Yes: 99, 
+      No: 0 
+    },
+    'Smart Tag': {
+      Yes: 25, 
+      No: 0 
+    },
+    Lyskugle: {
+      Yes: 99, 
+      No: 0 
+    },
+    'Luksus champagneglas': {
+      Yes: 29, 
+      No: 0 
+    },
+    Fløjte: {
+      Yes: 39, 
+      No: 0 
+    },
+    Trrompet: {
+      Yes: 39, 
+      No: 0 
+    },
+  },
+
+  STØRRELSE: {
+    'Vælg størrelse': {
+      base: 0, 
+      perMM: 0 
+    },
+    'Millimeter tilpasningssæt': {
+      Yes: 39, 
+      No: 0 
+    },
+  },
+};
+
+// ---------------- PREMIUM ----------------
+const premiumPrices = {
+  KOKARDE: {
+    'Roset farve': {
+      '#7F1D1D': 0,
+      '#1E3A8A': 0,
+      '#DC2626': 0,
+    },
+    Kokarde: {
+      Signature: 0,
+      Prestige: 0,
+      Stjernetegn: 0,
+    },
+    'Emblem': {
+      Guld: 0,
+      Sølv: 0,
+    },
+    Type: {
+      Denmark: 0,
+      Sweden: 0,
+      Norway: 0,
+      Germany: 0,
+      France: 0,
+      Italy: 0,
+    },
+  },
+
+  UDDANNELSESBÅND: {
+    Huebånd: {
+      EUX: 0,
+      SORT: 0
+    },
+    Materiale: {
+      BOMULD: 0,
+      VELOUR: 0,
+      SATIN: 0,
+       GLIMMER: 0,
+      SHIMMER:0,
+    },
+    Hagerem: {
+      Mat: 0,
+      Blank: 0,
+      'Sort/Sort': 0,
+      'Sort/Guld': 0
+    },
+    'Hagerem Materiale':  {
+      'Mat hagerem': 0,
+      'Blank hagerem': 0,
+      'Blank kunstlæder hagerem': 0,
+      'Sort hagerem med sorte knuder': 0,
+      'Sort hagerem med guld knuder': 0,
+      'Guld hagerem med guld knuder': 0,
+      'Sølv hagerem med Sølv knuder': 0,
+      'Sølv hagerem med sorte knuder': 0,
+    },
+    'Broderi farve': {
+      Guld: 0,
+      Sølv: 0,
+      EUX: 0,
+      HVID: 0,
+      SORT: 0
+    },
+    'Knap farve': {
+      Guld: 0
+    },
+    'Broderi foran': {
+      base: 0,
+      perChar: 0
+    },
+  },
+
+  BRODERI: {
+    'Broderifarve': {
+      Guld: 0,
+      Sølv: 0,
+      STX: 0,
+      WHITE: 0,
+      BLACK: 0
+    },
+    'Navne broderi': {
+      base: 0,
+      perChar: 0
+    },
+    'Skolebroderi farve': {
+      WHITE: 0,
+      BLACK: 0,
+      Guld: 0,
+      Sølv: 0
+    },
+    Skolebroderi: {
+      base: 0,
+      perChar: 0
+    },
+  },
+
+  BETRÆK: {
+    Farve: {
+      '#ffffff': 0,           // WHITE - WATER REPELLENT
+      '#000000': 0,           // BLACK - WATER REPELLENT
+      '#dedede': 0,           // WHITE GLITTER
+      '#292929': 0,           // SORT GLIMMER
+    },
+    Kantbånd: {
+      NONE: 0,
+      WHITE: 0,
+      BLACK: 0,
+      STX: 0,
+      HHX: 0,
+      EUD: 0,
+      GREEN: 0,
+      GUL: 0,
+      EUX: 0,
+      PINK: 0,
+    },
+    Stjerner: {
+      '1': 0,  // One Star
+      '2': 0,  // Two Stars
+      '3': 0,  // Three Stars
+      '4': 0,  // Four Stars
+      '5': 0,  // Five Stars
+    },
+  },
+
+  SKYGGE: {
+    Type: {
+      Blank: 0,    // default short/Blank shade
+      Mat: 0,      // matte type
+      Glimmer: 0,  // glimmer type
+    },
+    Materiale: {
+      'Uden kant': 0, // without edge
+      'Med kant': 0,  // with edge
+    },
+    Skyggebånd: {
+      INGEN: 0,   // no tape
+      Guld: 0,    // Guld tape
+      Glitter: 0, // glitter tape
+      Sølv: 29, // Sølv tape
+    },
+    'Skyggegravering Line 1': {
+      base: 0,    // base cost for line 1
+      perChar: 0, // per character cost for line 1
+    },
+    'Skyggegravering Line 2': {
+      base: 0,    // base cost for line 2
+      perChar: 0, // per character cost for line 2
+    },
+    'Skyggegravering Line 3': {
+      base: 0,    // base cost for line 3
+      perChar: 0, // per character cost for line 3
+    },
+  },
+
+  FOER: {
+    Svederem: {
+      Læder: 0,
+      'Kunstlæder': 0,
+      Ruskin: 0,
+      Alcantra: 0,
+    },
+    Farve: {
+      HVID: 0,
+      Sort: 0,
+      Cognac: 0,
+      black: 0,
+    },
+    Sløjfe: {
+      HVID: 0,
+      Sort: 0,
+      Guld: 0,
+    },
+    Foer: {
+      Viskose: 0,
+      Polyester: 0,
+      Satin: 0,
+      Silke: 0,
+    },
+    Type: {
+      HVID: 0,
+      BRUN: 0,
+      STX: 0,
+      CHAMPAGNE: 0,
+    },
+  },
+
+  EKSTRABETRÆK: {
+    Tilvælg: {
+      Yes: 0,
+      No: 0,
+    },
+    Favre:0,
+      Type:0,
+      Skolebroderi: 0
+  },
+
+  TILBEHØR: {
+    Hueæske: {
+      Standard: 0, 
+      'Premium æske': 0,
+      'Luksus æske': 0 
+    },
+    Huekuglepen: {
+      Yes: 0, 
+      No: 0 
+    },
+    Silkepude: {
+      Yes: 0, 
+      No: 0 
+    },
+    Badges: {
+      Yes: 0, 
+      No: 0 
+    },
+    Handsker: {
+      Yes: 0, 
+      No: 0 
+    },
+    'Store kuglepen': {
+      Yes: 0, 
+      No: 0 
+    },
+    'Smart Tag': {
+      Yes: 0, 
+      No: 0 
+    },
+    Lyskugle: {
+      Yes: 0, 
+      No: 0 
+    },
+    'Luksus champagneglas': {
+      Yes: 0, 
+      No: 0 
+    },
+    Fløjte: {
+      Yes: 0, 
+      No: 0 
+    },
+    Trrompet: {
+      Yes: 0, 
+      No: 0 
+    },
+  },
+
+  STØRRELSE: {
+    'Vælg størrelse': {
+      base: 0, 
+      perMM: 0 
+    },
+    'Millimeter tilpasningssæt': {
+      Yes: 0, 
+      No: 0 
+    },
+  },
+};
+
+// ---------------- LUKSUS ----------------
+const luksusPrices = {
+  KOKARDE: {
+    'Roset farve': {
+      '#7F1D1D': 0,
+      '#1E3A8A': 0,
+      '#DC2626': 39,
+    },
+    Kokarde: {
+      Signature: 69,
+      Prestige: 89,
+      Stjernetegn: 69,
+    },
+    'Emblem': {
+      Guld: 89,
+      Sølv: 89,
+    },
+    Type: {
+      Denmark: 69,
+      Sweden: 69,
+      Norway: 69,
+      Germany: 69,
+      France: 69,
+      Italy: 69,
+    },
+  },
+
+  UDDANNELSESBÅND: {
+    Huebånd: {
+      EUX: 0,
+      SORT: 0
+    },
+    Materiale: {
+      BOMULD: 0,
+      VELOUR: 0,
+      SATIN: 0,
+      GLIMMER: 99,
+      SHIMMER:0,
+    },
+    Hagerem: {
+      Mat: 0,
+      Blank: 0,
+      'Sort/Sort': 0,
+      'Sort/Guld': 0
+    },
+    'Hagerem Materiale':  {
+      'Mat hagerem': 0,
+      'Blank hagerem': 0,
+      'Blank kunstlæder hagerem': 0,
+      'Sort hagerem med sorte knuder': 0,
+      'Sort hagerem med guld knuder': 0,
+      'Guld hagerem med guld knuder': 0,
+      'Sølv hagerem med Sølv knuder': 0,
+      'Sølv hagerem med sorte knuder': 0 ,
+    },
+    'Broderi farve': {
+      Guld: 0,
+      Sølv: 0,
+      EUX: 0,
+      HVID: 0,
+      SORT: 0
+    },
+    'Knap farve': {
+      Guld: 0
+    },
+    'Broderi foran': {
+      base: 0,
+      perChar: 0
+    },
+  },
+
+  BRODERI: {
+    'Broderifarve': {
+      Guld: 0,
+      Sølv: 0,
+      STX: 0,
+      WHITE: 0,
+      BLACK: 0
+    },
+    'Navne broderi': {
+      base: 0,
+      perChar: 0
+    },
+    'Skolebroderi farve': {
+      WHITE: 0,
+      BLACK: 0,
+      Guld: 0,
+      Sølv: 0
+    },
+    Skolebroderi: {
+      base: 0,
+      perChar: 0
+    },
+  },
+
+  BETRÆK: {
+    Farve: {
+      '#ffffff': 0,           // WHITE - WATER REPELLENT
+      '#000000': 0,           // BLACK - WATER REPELLENT
+      '#dedede': 79,           // WHITE GLITTER
+      '#292929': 79,           // SORT GLIMMER
+    },
+    Kantbånd: {
+      NONE: 0,
+      WHITE: 29,
+      BLACK: 29,
+      STX: 0,
+      HHX: 0,
+      EUD: 0,
+      GREEN: 0,
+      GUL: 0,
+      EUX: 0,
+      PINK: 0,
+    },
+    Stjerner: {
+      '1': 39,  // One Star
+      '2': 39,  // Two Stars
+      '3': 39,  // Three Stars
+      '4': 39,  // Four Stars
+      '5': 39,  // Five Stars
+    },
+  },
+
+  SKYGGE: {
+    Type: {
+      Blank: 0,    // default short/Blank shade
+      Mat: 0,      // matte type
+      Glimmer: 0,  // glimmer type
+    },
+    Materiale: {
+      'Uden kant': 0, // without edge
+      'Med kant': 0,  // with edge
+    },
+    Skyggebånd: {
+      INGEN: 0,   // no tape
+      Guld: 0,    // Guld tape
+      Glitter: 0, // glitter tape
+      Sølv: 0, // Sølv tape
+    },
+    'Skyggegravering Line 1': {
+      base: 99,    // base cost for line 1
+      perChar: 0, // per character cost for line 1
+    },
+    'Skyggegravering Line 2': {
+      base: 0,    // base cost for line 2
+      perChar: 0, // per character cost for line 2
+    },
+    'Skyggegravering Line 3': {
+      base: 0,    // base cost for line 3
+      perChar: 0, // per character cost for line 3
+    },
+  },
+
+  FOER: {
+    Svederem: {
+      Læder: 0,
+      'Kunstlæder': 29,
+      Ruskin: 29,
+      Alcantra: 29,
+    },
+    Farve: {
+      HVID: 0,
+      Sort: 0,
+      Cognac: 0,
+      black: 0,
+    },
+    Sløjfe: {
+      HVID: 0,
+      Sort: 0,
+      Guld: 0,
+    },
+    Foer: {
+      Viskose: 29,
+      Polyester: 0,
+      Satin: 0,
+      Silke: 0,
+    },
+    Type: {
+      HVID: 0,
+      BRUN: 0,
+      STX: 0,
+      CHAMPAGNE: 0,
+    },
+  },
+
+  EKSTRABETRÆK: {
+    Tilvælg: {
+      Yes: 0,
+      No: 0,
+    },
+    Favre:0,
+      Type:0,
+      Skolebroderi: 0
+  },
+
+  TILBEHØR: {
+    Hueæske: {
+      Standard: 0, 
+      'Premium æske': 0,
+      'Luksus æske': 100 
+    },
+    Huekuglepen: {
+      Yes: 0, 
+      No: 0 
+    },
+    Silkepude: {
+      Yes: 0, 
+      No: 0 
+    },
+    Badges: {
+      Yes: 0, 
+      No: 0 
+    },
+    Handsker: {
+      Yes: 0, 
+      No: 0 
+    },
+    'Store kuglepen': {
+      Yes: 39, 
+      No: 0 
+    },
+    'Smart Tag': {
+      Yes: 39, 
+      No: 0 
+    },
+    Lyskugle: {
+      Yes: 25, 
+      No: 0 
+    },
+    'Luksus champagneglas': {
+      Yes: 0, 
+      No: 0 
+    },
+    Fløjte: {
+      Yes: 0, 
+      No: 0 
+    },
+    Trrompet: {
+      Yes: 29, 
+      No: 0 
+    },
+  },
+
+  STØRRELSE: {
+    'Vælg størrelse': {
+      base: 0, 
+      perMM: 0 
+    },
+    'Millimeter tilpasningssæt': {
+      Yes: 39, 
+      No: 0 
+    },
+  },
+};
 
   let prices;
-  if (packageType === "standard") prices = standardPrices;
-  else if (packageType === "premium") prices = premiumPrices;
-  else if (packageType === "luksus") prices = luksusPrices;
+  if (packageName === "standard") prices = standardPrices;
+  else if (packageName === "premium") prices = premiumPrices;
+  else if (packageName === "luksus") prices = luksusPrices;
 
 
   const calculateTotalPrice = () => {
@@ -797,24 +938,24 @@ const StudentDashboard = () => {
     
     let iniialPrice=0
     
-    if (packageType === "standard") iniialPrice = 449;
+    if (packageName === "standard") iniialPrice = 449;
       // else if (packageType === "premium") iniialPrice = 1395;
-      else if (packageType === "premium") iniialPrice = 2195;
-       else if (packageType === "luksus") iniialPrice = 1395;
+      else if (packageName === "premium") iniialPrice = 2195;
+       else if (packageName === "luksus") iniialPrice = 1395;
     return total+ iniialPrice +59;
   };
 
 
   const menuItems = [
-    { name: 'Bows', icon: img1 },
-    { name: 'Educational tape', icon: img2 },
-    { name: 'Embroidery', icon: img3 },
-    { name: 'Cover', icon: img4 },
-    { name: 'Shade', icon: img5 },
-    { name: 'Foer', icon: img6 },
-    { name: 'Extra cover', icon: img7 },
-    { name: 'Accessories', icon: img8 },
-    { name: 'Size', icon: img9 }
+    { name: 'KOKARDE', icon: img1 },
+    { name: 'UDDANNELSESBÅND', icon: img2 },
+    { name: 'BRODERI', icon: img3 },
+    { name: 'BETRÆK', icon: img4 },
+    { name: 'SKYGGE', icon: img5 },
+    { name: 'FOER', icon: img6 },
+    { name: 'EKSTRA BETRÆK', icon: img7 },
+    { name: 'TILBEHØR', icon: img8 },
+    { name: 'STØRRELSE', icon: img9 }
   ];
 
 
@@ -840,17 +981,17 @@ const StudentDashboard = () => {
 
       <div className="flex h-[calc(100vh-80px)] ">
         {/* Sidebar remains the same */}
-        <aside className="w-80 bg-white/70 backdrop-blur-sm border-r border-slate-200 overflow-y-auto pb-[133px]">
+        <aside className=" bg-white/70 backdrop-blur-sm border-r border-slate-200 overflow-y-auto pb-[133px]">
           <div className="p-6">
-            <h2 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-4">
-              Cap Configuration
+            <h2 className="text-sm font-semibold text-center text-slate-600 uppercase tracking-wider mb-4">
+              Caps
             </h2>
-            <nav className="space-y-2">
+            <nav className="">
               {menuItems.map((item, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveMenu(item.name)}
-                  className={`w-full flex items-center px-4 py-3 rounded-xl transition-all duration-200 group ${activeMenu === item.name
+                  className={` flex items-center px-2 py-3 rounded-xl transition-all duration-200 group ${activeMenu === item.name
                     ? 'bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 shadow-sm'
                     : 'hover:bg-slate-50 hover:shadow-sm'
                     }`}
@@ -859,10 +1000,7 @@ const StudentDashboard = () => {
                     }`}>
                     <img src={item.icon} alt={item.name} className="w-10 h-10 object-contain" />
                   </div>
-                  <span className={`text-sm font-medium ${activeMenu === item.name ? 'text-blue-900' : 'text-slate-700'
-                    }`}>
-                    {item.name.replace(/([A-Z])/g, ' $1').trim()}
-                  </span>
+                  
                   {activeMenu === item.name && (
                     <div className="ml-auto w-2 h-2 bg-blue-500 rounded-full"></div>
                   )}
@@ -877,58 +1015,58 @@ const StudentDashboard = () => {
           {/* Configuration Panel */}
           <div className="w-[40%] bg-white/50 backdrop-blur-sm border-r border-slate-200">
             <div className="p-6 space-y-8 h-full overflow-y-auto pb-[133px]">
-              {activeMenu === 'Bows' && (
+              {activeMenu === 'KOKARDE' && (
                 <Bows
-                  selectedOptions={selectedOptions.bows}
-                  onOptionChange={(key, value) => handleOptionChange('bows', key, value)}
+                  selectedOptions={selectedOptions.KOKARDE}
+                  onOptionChange={(key, value) => handleOptionChange('KOKARDE', key, value)}
                 />
               )}
-              {activeMenu === "Educational tape" && (
+              {activeMenu === "UDDANNELSESBÅND" && (
                 <EducationalTape
-                  selectedOptions={selectedOptions.educationalTape}
-                  onOptionChange={(key, value) => handleOptionChange('educationalTape', key, value)}
+                  selectedOptions={selectedOptions.UDDANNELSESBÅND}
+                  onOptionChange={(key, value) => handleOptionChange('UDDANNELSESBÅND', key, value)}
                 />
               )}
-              {activeMenu === "Embroidery" && (
+              {activeMenu === "BRODERI" && (
                 <Embroidery
-                  selectedOptions={selectedOptions.embroidery}
-                  onOptionChange={(key, value) => handleOptionChange('embroidery', key, value)}
+                  selectedOptions={selectedOptions.BRODERI}
+                  onOptionChange={(key, value) => handleOptionChange('BRODERI', key, value)}
                 />
               )}
-              {activeMenu === "Cover" && (
+              {activeMenu === "BETRÆK" && (
                 <Cover
-                  selectedOptions={selectedOptions.cover}
-                  onOptionChange={(key, value) => handleOptionChange('cover', key, value)}
+                  selectedOptions={selectedOptions.BETRÆK}
+                  onOptionChange={(key, value) => handleOptionChange('BETRÆK', key, value)}
                 />
               )}
-              {activeMenu === "Shade" && (
+              {activeMenu === "SKYGGE" && (
                 <Shade
-                  selectedOptions={selectedOptions.shade}
-                  onOptionChange={(key, value) => handleOptionChange('shade', key, value)}
+                  selectedOptions={selectedOptions.SKYGGE}
+                  onOptionChange={(key, value) => handleOptionChange('SKYGGE', key, value)}
                 />
               )}
-              {activeMenu === "Foer" && (
+              {activeMenu === "FOER" && (
                 <Foer
-                  selectedOptions={selectedOptions.foer}
-                  onOptionChange={(key, value) => handleOptionChange('foer', key, value)}
+                  selectedOptions={selectedOptions.FOER}
+                  onOptionChange={(key, value) => handleOptionChange('FOER', key, value)}
                 />
               )}
-              {activeMenu === "Extra cover" && (
+              {activeMenu === "EKSTRA BETRÆK" && (
                 <ExtraCover
-                  selectedOptions={selectedOptions.extraCover}
-                  onOptionChange={(key, value) => handleOptionChange('extraCover', key, value)}
+                  selectedOptions={selectedOptions.EKSTRABETRÆK}
+                  onOptionChange={(key, value) => handleOptionChange('EKSTRABETRÆK', key, value)}
                 />
               )}
-              {activeMenu === "Accessories" && (
+              {activeMenu === "TILBEHØR" && (
                 <Accessories
-                  selectedOptions={selectedOptions.accessories}
-                  onOptionChange={(key, value) => handleOptionChange('accessories', key, value)}
+                  selectedOptions={selectedOptions.TILBEHØR}
+                  onOptionChange={(key, value) => handleOptionChange('TILBEHØR', key, value)}
                 />
               )}
-              {activeMenu === "Size" && (
+              {activeMenu === "STØRRELSE" && (
                 <Size
-                  selectedOptions={selectedOptions.size}
-                  onOptionChange={(key, value) => handleOptionChange('size', key, value)}
+                  selectedOptions={selectedOptions.STØRRELSE}
+                  onOptionChange={(key, value) => handleOptionChange('STØRRELSE', key, value)}
                 />
               )}
             </div>
@@ -943,8 +1081,8 @@ const StudentDashboard = () => {
                     <GraduationCap className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-slate-800">Current School</h4>
-                    <p className="text-sm text-slate-600">EUX Program</p>
+                    <h4 className="font-semibold text-slate-800">Current Program</h4>
+                    <p className="text-sm text-slate-600">{program}</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -966,7 +1104,7 @@ const StudentDashboard = () => {
       </div>
 
       {/* Footer remains the same */}
-      <div className="border-t border-slate-200 p-6 bg-white/80 backdrop-blur-sm w-[50%] absolute bottom-0 left-0">
+      <div className="border-t border-slate-200 p-6 bg-white/80 backdrop-blur-sm w-[43.5%] absolute bottom-0 left-0">
         <div className="flex justify-between items-center mb-4">
           <span className="text-sm font-medium text-slate-600">Total Price</span>
           <div className="text-right">

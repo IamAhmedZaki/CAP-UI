@@ -1,38 +1,40 @@
 import React, { useState ,useEffect} from 'react';
 
+import coverColorOptionsimg2 from '../assets/cover images/none.png';
+
 const EducationalTape = ({ selectedOptions = {}, onOptionChange }) => {
     // State variables with descriptive names
     const [selectedHatbandColor, setSelectedHatbandColor] = useState('EUX');
     const [selectedMaterialType, setSelectedMaterialType] = useState('VELOUR');
     const [selectedChinStrapColor, setSelectedChinStrapColor] = useState('Mat');
     const [selectedButtonMaterialColor, setSelectedButtonMaterialColor] = useState('FOOD GRADE');
-    const [selectedEmbroideryColor, setSelectedEmbroideryColor] = useState('gold');
-    const [selectedButtonColor, setSelectedButtonColor] = useState('gold');
+    const [selectedEmbroideryColor, setSelectedEmbroideryColor] = useState('Guld');
+    const [selectedButtonColor, setSelectedButtonColor] = useState('Guld');
     const [embroideryText, setEmbroideryText] = useState('');
 
 
 
 
     useEffect(()=>{
-        onOptionChange('hatbandColor',selectedHatbandColor)
+        onOptionChange('Huebånd',selectedHatbandColor)
     },[selectedHatbandColor])
     useEffect(()=>{
-        onOptionChange('materialType',selectedMaterialType)
+        onOptionChange('Materiale',selectedMaterialType)
     },[selectedMaterialType])
     useEffect(()=>{
-        onOptionChange('chinStrapColor',selectedChinStrapColor)
+        onOptionChange('Hagerem',selectedChinStrapColor)
     },[selectedChinStrapColor])
     useEffect(()=>{
-        onOptionChange('buttonMaterial',selectedButtonMaterialColor)
+        onOptionChange('Hagerem Materiale',selectedButtonMaterialColor)
     },[selectedButtonMaterialColor])
     useEffect(()=>{
-        onOptionChange('embroideryColor',selectedEmbroideryColor)
+        onOptionChange('Broderi farve',selectedEmbroideryColor)
     },[selectedEmbroideryColor])
     useEffect(()=>{
-        onOptionChange('buttonColor',selectedButtonColor)
+        onOptionChange('Knap farve',selectedButtonColor)
     },[selectedButtonColor])
     useEffect(()=>{
-        onOptionChange('embroideryText',embroideryText)
+        onOptionChange('Broderi foran',embroideryText)
     },[embroideryText])
     
     // Color options with descriptive names
@@ -45,30 +47,37 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange }) => {
         { name: 'Mat', value: '#2e2e2e' },
         { name: 'Blank', value: '#757575' },
         { name: 'Sort/Sort', value: '#000000' },
-        { name: 'Sort/Gold', value: '#e0cd89' },
+        { name: 'Sort/Guld', value: '#695406ff' },
+        { name: 'Guld', value: '#f0bd06ff' },
+        { name: 'Sølv', value: '#C0C0C0' },
+        { name: 'Sølv/Sort', value: '#71706C' },
     ];
 
    
 
     const embroideryColorOptions = [
-        { name: 'Gold', value: 'Gold', color: '#ba9200' },
-        { name: 'Silver', value: 'Silver', color: '#757575' },
+        { name: 'Guld', value: 'Guld', color: '#ba9200' },
+        { name: 'Sølv', value: 'Sølv', color: '#757575' },
         { name: 'EUX', value: 'EUX', color: '#2e2e2e' },
         { name: 'HVID', value: 'HVID', color: '#E5E7EB' },
         { name: 'SORT', value: 'SORT', color: '#2e2e2e' },
     ];
 
     const buttonColorOptions = [
-        { name: 'Gold', value: 'Gold', color: '#ba9200' },
+        { name: 'BLANK', value: 'BLANK', img: coverColorOptionsimg2 },
+        { name: 'Guld', value: 'Guld', color: '#ba9200' },
     ];
 
-    const materialEUXTypes = ['COTTON', 'VELOUR', 'SATIN', 'Glimmer'];
-    const materialSORTTypes = [ 'VELOUR', 'SATIN', 'Glimmer'];
+    const materialEUXTypes = ['BOMULD', 'VELOUR', 'SATIN', 'GLIMMER','SHIMMER',];
+    const materialSORTTypes = [ 'VELOUR', 'SATIN','GLIMMER','SHIMMER'];
     
-    const buttonMaterialMATTypes = [ 'FOOD GRADE'];
-    const buttonMaterialBLANKTypes = [ 'BLANK CHAIN ​​STRAP','SHINY LEATHER CHIN STRAP'];
-    const buttonMaterialSortSortTypes = [ 'BLACK CHIN STRAP WITH BLACK KNOTS'];
-    const buttonMaterialSortGoldTypes = [ 'BLACK CHIN STRAP WITH GOLD KNOTS'];
+    const buttonMaterialMATTypes = [ 'Mat hagerem'];
+    const buttonMaterialBLANKTypes = [ 'Blank hagerem','Blank kunstlæder hagerem'];
+    const buttonMaterialSortSortTypes = [ 'Sort hagerem med sorte knuder'];
+    const buttonMaterialSortGuldTypes = [ 'Sort hagerem med guld knuder'];
+    const buttonMaterialSolvTypes = [ 'Sølv hagerem med Sølv knuder'];
+    const buttonMaterialSolveSortTypes = [ 'Sølv hagerem med sorte knuder'];
+    const buttonMaterialGuldTypes = [ 'Guld hagerem med guld knuder'];
 
     function getMaterialOptions(){
         switch (selectedHatbandColor) {
@@ -104,9 +113,18 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange }) => {
             case 'Sort/Sort':
                 
                 return buttonMaterialSortSortTypes;
-            case 'Sort/Gold':
+            case 'Sort/Guld':
                 
-                return buttonMaterialSortGoldTypes;
+                return buttonMaterialSortGuldTypes;
+            case 'Sølv':
+                
+                return buttonMaterialSolvTypes;
+            case 'Sølv/Sort':
+                
+                return buttonMaterialSolveSortTypes;
+            case 'Guld':
+                
+                return buttonMaterialGuldTypes;
         
             default:
                 return [];
@@ -139,14 +157,22 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange }) => {
                     <button
                         key={colorOption.value}
                         onClick={() => onSelectionChange(colorOption.name)}
-                        className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 ${
+                        className={`w-12 h-12 flex justify-center items-center rounded-xl border-2 transition-all duration-200 hover:scale-110 ${
                             currentSelection === colorOption.name
                                 ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
                                 : 'border-slate-200 hover:border-slate-400'
                         }`}
                         style={{ backgroundColor: colorOption.color || colorOption.value }}
                         title={colorOption.name}
-                    />
+                    >
+                        {colorOption.img && (
+                            <img 
+                                src={colorOption.img} 
+                                alt={colorOption.name}
+                                className="w-8 h-8 flex flex-justify object-contain"
+                            />
+                        )}
+                    </button>
                 ))}
             </div>
         </div>
@@ -188,13 +214,13 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange }) => {
 
     return (
         <>
-            <div className="space-y-2">
-                <h3 className="text-2xl font-bold text-slate-900">Educational Tape</h3>
+            <div className="">
+                <h3 className="text-2xl font-bold text-slate-900">UDDANNELSESBÅND</h3>
             </div>
 
             {/* Hatband Color Selection */}
             <ColorSelector
-                label="Hatband"
+                label="Huebånd"
                 currentSelection={selectedHatbandColor}
                 onSelectionChange={setSelectedHatbandColor}
                 colorOptions={hatbandColorOptions}
@@ -202,7 +228,7 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange }) => {
 
             {/* Material Type Selection */}
             <TypeSelector
-                label="Materials"
+                label="Materiale"
                 currentSelection={selectedMaterialType}
                 onSelectionChange={setSelectedMaterialType}
                 options={selectedHatbandColor==='EUX'?materialEUXTypes:materialSORTTypes}
@@ -210,7 +236,7 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange }) => {
 
             {/* Chin Strap Color Selection */}
             <ColorSelector
-                label="Chin strap"
+                label="Hagerem"
                 currentSelection={selectedChinStrapColor}
                 onSelectionChange={setSelectedChinStrapColor}
                 colorOptions={chinStrapColorOptions}
@@ -218,20 +244,20 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange }) => {
 
             {/* Button Material Color Selection */}
             <TypeSelector
-                label="Material"
+                label="Materiale"
                 currentSelection={selectedButtonMaterialColor}
                 onSelectionChange={setSelectedButtonMaterialColor}
-                options={selectedChinStrapColor==='Mat'?buttonMaterialMATTypes:selectedChinStrapColor==='Blank'?buttonMaterialBLANKTypes:selectedChinStrapColor==='Sort/Sort'?buttonMaterialSortSortTypes:buttonMaterialSortGoldTypes}
+                options={selectedChinStrapColor==='Mat'?buttonMaterialMATTypes:selectedChinStrapColor==='Blank'?buttonMaterialBLANKTypes:selectedChinStrapColor==='Sort/Sort'?buttonMaterialSortSortTypes:selectedChinStrapColor==='Sort/Guld'?buttonMaterialSortGuldTypes:selectedChinStrapColor==='Sølv'?buttonMaterialSolvTypes:selectedChinStrapColor==='Guld'?buttonMaterialGuldTypes:selectedChinStrapColor==='Sølv/Sort'?buttonMaterialSolveSortTypes:buttonMaterialSortGuldTypes}
             />
 
             {/* Embroidery Card */}
             <div className="bg-white/70 border border-white/50 rounded-2xl ">
                 <div className="flex items-center justify-between mb-4">
                     <div>
-                        <h4 className="font-semibold text-slate-800">Embroidery on the front</h4>
+                        <h4 className="font-semibold text-slate-800">Broderi foran</h4>
                         <div className="flex items-center gap-2 mt-1">
                             <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-100 to-yellow-200 text-amber-800">
-                                Included in the package
+                                Inkluderet i pakken
                             </span>
                         </div>
                     </div>
@@ -242,7 +268,7 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange }) => {
                             type="text"
                             value={embroideryText}
                             onChange={(e) => setEmbroideryText(e.target.value)}
-                            placeholder="Free Text"
+                            placeholder="Fri tekst"
                             className="w-full px-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-4">
@@ -254,7 +280,7 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange }) => {
 
             {/* Embroidery Color Selection */}
             <ColorSelector
-                label="Embroidery color"
+                label="Broderi farve"
                 currentSelection={selectedEmbroideryColor}
                 onSelectionChange={setSelectedEmbroideryColor}
                 colorOptions={embroideryColorOptions}
@@ -262,7 +288,7 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange }) => {
 
             {/* Button Color Selection */}
             <ColorSelector
-                label="Button color"
+                label="Knap farve"
                 currentSelection={selectedButtonColor}
                 onSelectionChange={setSelectedButtonColor}
                 colorOptions={buttonColorOptions}

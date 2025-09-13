@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 
 const Embroidery = ({ selectedOptions = {}, onOptionChange }) => {
     // State variables with descriptive names
-    const [selectedNameEmbroideryColor, setSelectedNameEmbroideryColor] = useState('Gold');
+    const [selectedNameEmbroideryColor, setSelectedNameEmbroideryColor] = useState('Guld');
     const [nameEmbroideryText, setNameEmbroideryText] = useState('');
     const [selectedSchoolEmbroideryColor, setSelectedSchoolEmbroideryColor] = useState('WHITE');
     const [schoolEmbroideryText, setSchoolEmbroideryText] = useState('');
     
     // Color options with descriptive names
     const nameEmbroideryColorOptions = [
-        { name: 'Gold', value: '#ba9200' },
-        { name: 'Silver', value: '#757575' },
+        { name: 'Guld', value: '#ba9200' },
+        { name: 'Sølv', value: '#757575' },
         { name: 'STX', value: '#782834' },   
         { name: 'WHITE', value: '#E5E7EB' },
         { name: 'BLACK', value: '#2e2e2e' },
@@ -19,25 +19,25 @@ const Embroidery = ({ selectedOptions = {}, onOptionChange }) => {
     const schoolEmbroideryColorOptions = [
         { name: 'WHITE', value: '#E5E7EB' },
         { name: 'BLACK', value: '#2e2e2e' },
-        { name: 'Gold', value: '#ba9200' },
-        { name: 'Silver', value: '#757575' },
+        { name: 'Guld', value: '#ba9200' },
+        { name: 'Sølv', value: '#757575' },
     ];
 
     // Effect hooks to propagate changes to parent component
     useEffect(() => {
-        onOptionChange('nameEmbroideryColor', selectedNameEmbroideryColor);
+        onOptionChange('Broderi farve', selectedNameEmbroideryColor);
     }, [selectedNameEmbroideryColor]);
 
     useEffect(() => {
-        onOptionChange('nameEmbroideryText', nameEmbroideryText);
+        onOptionChange('Navne broder', nameEmbroideryText);
     }, [nameEmbroideryText]);
 
     useEffect(() => {
-        onOptionChange('schoolEmbroideryColor', selectedSchoolEmbroideryColor);
+        onOptionChange('Skolebroderi farve', selectedSchoolEmbroideryColor);
     }, [selectedSchoolEmbroideryColor]);
 
     useEffect(() => {
-        onOptionChange('schoolEmbroideryText', schoolEmbroideryText);
+        onOptionChange('Skolebroderi', schoolEmbroideryText);
     }, [schoolEmbroideryText]);
 
     // Reusable color selector component
@@ -85,7 +85,7 @@ const EmbroideryInput = ({
                 <h4 className="font-semibold text-slate-800">{title}</h4>
                 <div className="flex items-center gap-2 mt-1">
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-100 to-yellow-200 text-amber-800">
-                        Included in the package
+                        Inkluderet i pakken
                     </span>
                 </div>
             </div>
@@ -108,8 +108,8 @@ const EmbroideryInput = ({
 );
     return (
         <>
-            <div className="space-y-2">
-                <h3 className="text-2xl font-bold text-slate-900">Embroidery</h3>
+            <div className="">
+                <h3 className="text-2xl font-bold text-slate-900">BRODERI</h3>
             </div>
 
             {/* Name Embroidery Section */}
@@ -117,10 +117,10 @@ const EmbroideryInput = ({
             <div className="bg-white/70 border border-white/50 rounded-2xl ">
                 <div className="flex items-center justify-between mb-4">
                     <div>
-                        <h4 className="font-semibold text-slate-800">Embroidery on the front</h4>
+                        <h4 className="font-semibold text-slate-800">Navne broder</h4>
                         <div className="flex items-center gap-2 mt-1">
                             <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-100 to-yellow-200 text-amber-800">
-                                Included in the package
+                                Inkluderet i pakken
                             </span>
                         </div>
                     </div>
@@ -131,7 +131,7 @@ const EmbroideryInput = ({
                             type="text"
                             value={nameEmbroideryText}
                             onChange={(e) => setNameEmbroideryText(e.target.value)}
-                            placeholder="Free Text"
+                            placeholder="Fri tekst"
                             className="w-full px-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-4">
@@ -143,7 +143,7 @@ const EmbroideryInput = ({
             
             {/* Name Embroidery Color Selection */}
             <ColorSelector
-                label="Embroidery color"
+                label="Broderifarve"
                 currentSelection={selectedNameEmbroideryColor}
                 onSelectionChange={setSelectedNameEmbroideryColor}
                 colorOptions={nameEmbroideryColorOptions}
@@ -154,10 +154,10 @@ const EmbroideryInput = ({
             <div className="bg-white/70 border border-white/50 rounded-2xl ">
                 <div className="flex items-center justify-between mb-4">
                     <div>
-                        <h4 className="font-semibold text-slate-800">Embroidery on the front</h4>
+                        <h4 className="font-semibold text-slate-800">Skolebroderi</h4>
                         <div className="flex items-center gap-2 mt-1">
                             <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-100 to-yellow-200 text-amber-800">
-                                Included in the package
+                                Inkluderet i pakken
                             </span>
                         </div>
                     </div>
@@ -168,7 +168,7 @@ const EmbroideryInput = ({
                             type="text"
                             value={schoolEmbroideryText}
                             onChange={(e) => setSchoolEmbroideryText(e.target.value)}
-                            placeholder="Free Text"
+                            placeholder="Fri tekst"
                             className="w-full px-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-4">
@@ -180,7 +180,7 @@ const EmbroideryInput = ({
             
             {/* School Embroidery Color Selection */}
             <ColorSelector
-                label="Embroidery color"
+                label="Skolebroderi farve"
                 currentSelection={selectedSchoolEmbroideryColor}
                 onSelectionChange={setSelectedSchoolEmbroideryColor}
                 colorOptions={schoolEmbroideryColorOptions}

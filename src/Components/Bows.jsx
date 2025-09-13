@@ -1,205 +1,304 @@
 import React, { useState, useEffect } from 'react'
-import img1 from '../assets/images/wetransfer_eud_2025-09-09_1455/EUD/eud gold.jpg';
-import img2 from '../assets/images/wetransfer_eud_2025-09-09_1455/EUD/Eud silver.jpg';
-import img3 from '../assets/images/wetransfer_eud_2025-09-09_1455/EUX/Eux gold.jpg';
-import img4 from '../assets/images/wetransfer_eud_2025-09-09_1455/EUX/eux silver diamant.jpg';
-import img5 from '../assets/images/wetransfer_eud_2025-09-09_1455/EUX/EUX gold diamant.jpg';
-import img6 from '../assets/images/wetransfer_eud_2025-09-09_1455/EUX/EUX silver.jpg';
-import img8 from '../assets/images/wetransfer_eud_2025-09-09_1455/HF/hf gold diamant.jpg';
-import img7 from '../assets/images/wetransfer_eud_2025-09-09_1455/HF/hf gold.jpg';
-import img9 from '../assets/images/wetransfer_eud_2025-09-09_1455/HF/hf silver.jpg';
-// import img10 from '../assets/images/wetransfer_eud_2025-09-09_1455/HF/hf silver.jpg';
-import img11 from '../assets/images/wetransfer_eud_2025-09-09_1455/HHX/hhx gold diamant.jpg';
-import img12 from '../assets/images/wetransfer_eud_2025-09-09_1455/HHX/hhx gold.jpg';
-import img13 from '../assets/images/wetransfer_eud_2025-09-09_1455/HHX/hhx silver diamant.jpg';
-import img14 from '../assets/images/wetransfer_eud_2025-09-09_1455/HHX/hhx silver.jpg';
-import img15 from '../assets/images/wetransfer_eud_2025-09-09_1455/HTX/Atom htx gold.jpg';
-import img16 from '../assets/images/wetransfer_eud_2025-09-09_1455/HTX/atom htx silver.jpg';
-import img17 from '../assets/images/wetransfer_eud_2025-09-09_1455/HTX/Htx gold diam.jpg';
-import img18 from '../assets/images/wetransfer_eud_2025-09-09_1455/HTX/Htx gold.jpg';
-import kunst1 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/ahornblad gold.jpg';
-import kunst2 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/ahornblad silver.jpg';
-import kunst3 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/anker gold.jpg';
-import kunst4 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/anker silver.jpg';
-import kunst5 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/atom gold.jpg';
-import kunst6 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/atom silver.jpg';
-import kunst7 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/dna gold.jpg';
-import kunst8 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/dna silver.jpg';
-import kunst9 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/f key gold.jpg';
-import kunst10 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/f key silver.jpg';
-import kunst11 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/globus gold.jpg';
-// import kunst12 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/globus silver.jpg';
-// import kunst13 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/hjerte guld.jpg';
-// import kunst14 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/hjerte sølv.jpg';
-// import kunst15 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/lb guld.jpg';
-// import kunst16 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/lb silver.jpg';
-// import kunst17 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/lt guld.jpg';
-// import kunst18 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/lt silver.jpg';
-// import kunst19 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/lotus guld.jpg';
-// import kunst20 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/lotus silver.jpg';
-// import kunst21 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/node gold.jpg';
-// import kunst22 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/node silver.jpg';
-// import kunst23 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/pi gold.jpg';
-// import kunst24 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/pi silver.jpg';
-// import kunst25 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/sport gold.jpg';
-// import kunst26 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/sport silver.jpg';
-// import kunst27 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/teater gold.jpg';
-// import kunst28 from '../assets/images/wetransfer_eud_2025-09-09_1455/Kunst/teater silver.jpg';
-// import royal1 from '../assets/images/wetransfer_eud_2025-09-09_1455/Royal kokarde/jupiter gold.png';
-// import royal2 from '../assets/images/wetransfer_eud_2025-09-09_1455/Royal kokarde/jupiter silv.png';
-// import royal3 from '../assets/images/wetransfer_eud_2025-09-09_1455/Royal kokarde/merkur gold.png';
-// import royal4 from '../assets/images/wetransfer_eud_2025-09-09_1455/Royal kokarde/merkur silv.png';
-// import royal5 from '../assets/images/wetransfer_eud_2025-09-09_1455/Royal kokarde/neptun gold.png';
-// import royal6 from '../assets/images/wetransfer_eud_2025-09-09_1455/Royal kokarde/neptun silv.png';
-// import royal7 from '../assets/images/wetransfer_eud_2025-09-09_1455/Royal kokarde/pluto gold.png';
-// import royal8 from '../assets/images/wetransfer_eud_2025-09-09_1455/Royal kokarde/pluto silv.png';
-// import royal9 from '../assets/images/wetransfer_eud_2025-09-09_1455/Royal kokarde/saturn gold.png';
-// import royal10 from '../assets/images/wetransfer_eud_2025-09-09_1455/Royal kokarde/saturn silv.png';
-// import royal11 from '../assets/images/wetransfer_eud_2025-09-09_1455/Royal kokarde/venus gold.png';
-// import royal12 from '../assets/images/wetransfer_eud_2025-09-09_1455/Royal kokarde/venus silv.png';
-// import religios1 from '../assets/images/wetransfer_eud_2025-09-09_1455/Religios/halvmåne gold simli.png';
-// import religios2 from '../assets/images/wetransfer_eud_2025-09-09_1455/Religios/halvmåne gold.jpg';
-// import religios3 from '../assets/images/wetransfer_eud_2025-09-09_1455/Religios/halvmåne silver simli.png';
-// import religios4 from '../assets/images/wetransfer_eud_2025-09-09_1455/Religios/halvmåne silver.jpg';
-// import religios5 from '../assets/images/wetransfer_eud_2025-09-09_1455/Religios/merkurtav gold.jpg';
-// import religios6 from '../assets/images/wetransfer_eud_2025-09-09_1455/Religios/merkurtav gold simli.png';
-// import religios7 from '../assets/images/wetransfer_eud_2025-09-09_1455/Religios/merkurtav sølv diamant.jpg';
-// import religios8 from '../assets/images/wetransfer_eud_2025-09-09_1455/Religios/merkurtav silver.jpg';
-// import stx1 from '../assets/images/wetransfer_eud_2025-09-09_1455/STX/1.png';
-// import stx2 from '../assets/images/wetransfer_eud_2025-09-09_1455/STX/2.png';
-// import stx3 from '../assets/images/wetransfer_eud_2025-09-09_1455/STX/3.png';
-// import stx4 from '../assets/images/wetransfer_eud_2025-09-09_1455/STX/4.png';
-// import stx5 from '../assets/images/wetransfer_eud_2025-09-09_1455/STX/5.png';
-// import stj1 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/bull gold.jpg';
-// import stj2 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/bull siver.jpg';
-// import stj3 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/fisken gold.jpg';
-// import stj4 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj5 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj6 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj7 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj8 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj9 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj10 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj11 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj12 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj13 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj14 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj15 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj16 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj17 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj18 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj19 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj21 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj22 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj23 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj24 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj2 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj2 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj2 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj2 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj2 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj2 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj2 from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
-// import stj from '../assets/images/wetransfer_eud_2025-09-09_1455/Stjernetegn/.jpg';
+import Kurdistan from '../assets/Countries/kurdistan.png';
+import Iraq from '../assets/Countries/iraq.png';
+import Iran from '../assets/Countries/iran.png';
+import Somalia from '../assets/Countries/somalia.png';
+import Somaliland from '../assets/Countries/somaliland.png';
+import Palestine from '../assets/Countries/palestine.png';
+import Lebanon from '../assets/Countries/lebanon.png';
+import Afghanistan from '../assets/Countries/afghanistan.png';
+import Albania from '../assets/Countries/albania.png';
+import Serbia from '../assets/Countries/serbia.png';
+import Bosnia from '../assets/Countries/bosnia.png';
+import Denmark from '../assets/Countries/denmark.png';
+import Morocco from '../assets/Countries/morocco.png';
+import Pakistan from '../assets/Countries/pakistan.png';
+import Turkey from '../assets/Countries/turkey.png';
+import AhornbladGold from '../assets/images/Ahornblad gold.jpg';
+import AnkerGold from '../assets/images/anker gold.jpg';
+import AtomGold from '../assets/images/atom gold.jpg';
+import AtomHtxGold from '../assets/images/Atom htx gold.jpg';
+import BullGold from '../assets/images/bull gold.jpg';
+import DnaGold from '../assets/images/dna gold.jpg';
+import EudGold from '../assets/images/eud gold.jpg';
+import EuxGoldDiamant from '../assets/images/Eux gold diamant.jpg';
+import EuxGold from '../assets/images/EUX gold.jpg';
+import FKeyGold from '../assets/images/f key gold.jpg';
+import FiskenGold from '../assets/images/fisken gold.jpg';
+import GlobusGold from '../assets/images/globus gold.jpg';
+// import HalvmoneGoldSimli from '../assets/images/Halvm†ne gold simli.png';
+// import HalvmoneGold from '../assets/images/Halvm†ne gold.jpg';
+import HfGoldDiamant from '../assets/images/hf gold diamant.jpg';
+import HfGold from '../assets/images/hf gold.jpg';
+import HhxGoldDiamant from '../assets/images/hhx gold diamant.jpg';
+import HhxGold from '../assets/images/hhx gold.jpg';
+import HjerteGuld from '../assets/images/hjerte guld.jpg';
+import HtxGoldDiam from '../assets/images/Htx gold diam.jpg';
+import HtxGold from '../assets/images/Htx gold.jpg';
+import IbGold from '../assets/images/Ib gold.jpg';
+import ItGold from '../assets/images/It gold.jpg';
+import JomfruenGold from '../assets/images/jomfruen gold.jpg';
+import JupiterGold from '../assets/images/Jupiter gold.png';
+import KrebsenGuld from '../assets/images/krebsen guld.jpg';
+import LionGold from '../assets/images/lion gold.jpg';
+import LotusGold from '../assets/images/lotus gold.jpg';
+import MerkurGold from '../assets/images/merkur gold.png';
+import MerkurstavGoldDiamant from '../assets/images/merkurstav gold diamant.jpg';
+import MerkurstavGold from '../assets/images/merkurstav gold.jpg';
+import NeptunGold from '../assets/images/neptun gold.png';
+import NodeGold from '../assets/images/Node gold.jpg';
+import PilGold from '../assets/images/pil gold.jpg';
+import SaturnGold from '../assets/images/Saturn gold.png';
+import ScorpioGold from '../assets/images/scorpio gold.jpg';
+import SkyttenGold from '../assets/images/skytten gold.jpg';
+import SportGold from '../assets/images/sport gold.jpg';
+import StenbukGold from '../assets/images/stenbuk gold.jpg';
+import StxGoldDiamant from '../assets/images/Stx gold diamant.jpg';
+import StxGold from '../assets/images/stx gold.jpg';
+import TeaterGold from '../assets/images/Teater gold.jpg';
+import TwinGold from '../assets/images/twin gold.jpg';
+import VandmandGold from '../assets/images/vandmand gold.jpg';
+import VenusGold from '../assets/images/venus gold.png';
+// import VadderenGold from '../assets/images/v‘dderen gold.jpg';
+// import VagtenGold from '../assets/images/v‘gten gold.jpg';
+
+// Silver images
+import AhornbladSilver from '../assets/images/ahornblad silver.jpg';
+import AnkerSilver from '../assets/images/anker silver.jpg';
+import AtomSilver from '../assets/images/atom silver.jpg';
+import AtomHtxSilver from '../assets/images/atom htx silver.jpg';
+import BullSilver from '../assets/images/bull silver.jpg';
+import DnaSilver from '../assets/images/dna silver.jpg';
+import EudSilver from '../assets/images/Eud silver.jpg';
+import EuxSilverDiamant from '../assets/images/Eux silver diamant.jpg';
+import EuxSilver from '../assets/images/EUX silver.jpg';
+import FKeySilver from '../assets/images/f key silver.jpg';
+import FiskenSilver from '../assets/images/fisken silver.jpg';
+import GlobusSilver from '../assets/images/globus silver.jpg';
+// import HalvmoneSilver from '../assets/images/halvm†ne silv.jpg';
+// import HalvmoneSilverSimli from '../assets/images/halvm†ne silver simli.png';
+import HfSilverDiamant from '../assets/images/hf silver diamant.jpg';
+import HfSilver from '../assets/images/hf silver.jpg';
+import HhxSilverDiamant from '../assets/images/hhx silver diamant.jpg';
+import HhxSilver from '../assets/images/hhx silver.jpg';
+import HjerteSilv from '../assets/images/hjerte silv.jpg';
+import HtxSilverDiamant from '../assets/images/Htx silver diament.jpg';
+import HtxSilver from '../assets/images/htx silver.jpg';
+import IbSilver from '../assets/images/ib silver.jpg';
+import ItSilver from '../assets/images/It silver.jpg';
+import JomfruenSilver from '../assets/images/jomfruen silver.jpg';
+import JupiterSilver from '../assets/images/Jupiter silv.png';
+import KrebsenSilver from '../assets/images/krebsen silver.jpg';
+import LionSilver from '../assets/images/lion silver.jpg';
+import LotusSilver from '../assets/images/lotus silver.jpg';
+import MerkurSilver from '../assets/images/merkur silv.png';
+import MerkurstavSilverDiamant from '../assets/images/merkurstav silv diamant.jpg';
+import MerkurstavSilver from '../assets/images/merkurstav silver.jpg';
+import NeptunSilver from '../assets/images/neptun silv.png';
+import NodeSilver from '../assets/images/Node silv.jpg';
+import PiSilver from '../assets/images/pi silver.jpg';
+// import SaturnSilver from '../assets/images/saturn solv.png';
+import ScorpioSilver from '../assets/images/scorpio silver.jpg';
+import SkyttenSilver from '../assets/images/skytten silver.jpg';
+import SportSilver from '../assets/images/sport silver.jpg';
+import StenbukSilver from '../assets/images/stenbuk silver.jpg';
+import StxSilver from '../assets/images/stx silv.jpg';
+import StxSilverDiamant from '../assets/images/stx silver diamant.jpg';
+import TeaterSilver from '../assets/images/teater silver.jpg';
+import TwinSilver from '../assets/images/twin silver.jpg';
+import VandmandSilv from '../assets/images/vandmand silv.jpg';
+import VenusSilver from '../assets/images/venus silv.png';
+// import VadderenSilv from '../assets/images/v‘dderen silv.jpg';
+// import VagtenSilver from '../assets/images/v‘gten silver.jpg';
+
+import blackGold from '../assets/rosent/black gold.jpg';
+import blueGold from '../assets/rosent/gold blue.jpg';
+import redGold from '../assets/rosent/red gold.jpg';
+import blackSilv from '../assets/rosent/black silv.jpg';
+import blueSilv from '../assets/rosent/blue silv.jpg';
+import redSilve from '../assets/rosent/red silv.jpg';
 
 
 const Bows = ({ selectedOptions = {}, onOptionChange }) => {
     // Initialize state from props or use defaults
     const [selectedColor, setSelectedColor] = useState(selectedOptions.color || { name: 'STX', value: '#7F1D1D' });
     const [selectedPrestige, setSelectedPrestige] = useState(selectedOptions.bowType || 'Prestige');
-    const [selectedEmblem, setSelectedEmblem] = useState(selectedOptions.emblem || { name: 'Gold', value: 'gold', color: '#FCD34D' });
-    const [selectedType, setSelectedType] = useState(selectedOptions.country || 'Denmark');
+    const [selectedEmblem, setSelectedEmblem] = useState(selectedOptions.emblem || { name: 'Guld', value: 'Guld', color: '#FCD34D' });
+    const [selectedType, setSelectedType] = useState(selectedOptions.country || 'Kurdistan');
 
-    const colors = [
-        { name: 'STX', value: '#7F1D1D' },
-        { name: 'HHX', value: '#1E3A8A' },
-        { name: 'RED', value: '#DC2626' }
-    ];
+ let guldcolors = [
+        { name: 'STX', value: '#7F1D1D',img:redGold },
+        { name: 'HHX', value: '#1E3A8A',img: blackGold},
+        { name: 'HTX', value: '#DC2626' ,img:blueGold}
+    ];   
+ let sulvcolors = [
+        { name: 'STX', value: '#7F1D1D',img:redSilve },
+        { name: 'HHX', value: '#1E3A8A',img: blackSilv},
+        { name: 'HTX', value: '#DC2626' ,img:blueSilv}
+    ];   
+
+ 
+
+    
+
 
     const emblemOptions = [
-        { name: 'Gold', value: 'gold', color: '#FCD34D' },
-        { name: 'Silver', value: 'silver', color: '#E5E7EB' }
+        { name: 'Guld', value: 'Guld', color: '#FCD34D' },
+        { name: 'Sølv', value: 'Sølv', color: '#E5E7EB' }
     ];
 
-    const typeOptions = [
-        { name: 'eud gold', icon: img1 },
-        // { name: 'Sweden', icon: '🇸🇪' },
-        // { name: 'Norway', icon: '🇳🇴' },
-        // { name: 'Germany', icon: '🇩🇪' },
-        // { name: 'France', icon: '🇫🇷' },
-        { name: 'Eud silver', icon: img2 },
-        { name: 'EUX gold', icon: img3 },
-        { name: 'EUX silver', icon: img4 },
-        { name: 'hf gold diamant', icon: img5 },
-        { name: 'hf gold', icon: img6 },
-        { name: 'hf silver', icon: img7 },
-        { name: 'hhx gold diamant', icon: img8 },
-        { name: 'hhx gold', icon: img9 },
-        // { name: 'Italy9', icon: img10 },
-        { name: 'hhx silver diamant', icon: img11 },
-        { name: 'hhx silver', icon: img12 },
-        { name: 'Atom htx gold', icon: img13 },
-        { name: 'atom htx silver', icon: img14 },
-        { name: 'Htx gold diam', icon: img15 },
-        { name: 'Htx gold', icon: img16 },
-        { name: 'ahornblad gold', icon: img17 },
-        { name: 'ahornblad silver', icon: img18 },
-        { name: 'anker gold', icon: kunst1 },
-        { name: 'anker silver', icon: kunst2 },
-        { name: 'atom gold', icon: kunst3 },
-        { name: 'atom silver', icon: kunst4 },
-        { name: 'dna gold', icon: kunst5 },
-        { name: 'dna silver', icon: kunst6 },
-        { name: 'f key gold', icon: kunst7 },
-        { name: 'f key silver', icon: kunst8 },
-        { name: 'globus gold', icon: kunst9 },
-        { name: 'globus silver', icon: kunst10 },
-        { name: 'hjerte guld', icon: kunst11 },
-        // { name: 'Italy16', icon: kunst },
-        // { name: 'Italy16', icon: kunst },
-        // { name: 'Italy16', icon: kunst },
-        // { name: 'Italy16', icon: kunst },
-        // { name: 'Italy16', icon: kunst },
-        // { name: 'Italy16', icon: kunst },
-        // { name: 'Italy16', icon: kunst },
-        // { name: 'Italy16', icon: kunst },
-        // { name: 'Italy16', icon: kunst },
-        // { name: 'Italy16', icon: kunst },
-        // { name: 'Italy16', icon: kunst },
-        // { name: 'Italy16', icon: kunst },
-        // { name: 'Italy16', icon: kunst },
-        // { name: 'Italy16', icon: kunst },
-        // { name: 'Italy16', icon: kunst },
-        // { name: 'Italy16', icon: kunst },
+    const silvetypeOptions = [
+        { name: 'Kurdistan', icon: Kurdistan },
+    { name: 'Iraq', icon: Iraq },
+    { name: 'Iran', icon: Iran },
+    { name: 'Somalia', icon: Somalia },
+    { name: 'Somaliland', icon: Somaliland },
+    { name: 'Palestine', icon: Palestine },
+    { name: 'Lebanon', icon: Lebanon },
+    { name: 'Afghanistan', icon: Afghanistan },
+    { name: 'Albania', icon: Albania },
+    { name: 'Serbia', icon: Serbia },
+    { name: 'Bosnia', icon: Bosnia },
+    { name: 'Denmark', icon: Denmark },
+    { name: 'Morocco', icon: Morocco },
+    { name: 'Pakistan', icon: Pakistan },
+    { name: 'Turkey', icon: Turkey },
+    
+    
+    // Silver items
+    { name: 'Ahornblad Silver', icon: AhornbladSilver },
+    { name: 'Anker Silver', icon: AnkerSilver },
+    { name: 'Atom Silver', icon: AtomSilver },
+    { name: 'Atom HTX Silver', icon: AtomHtxSilver },
+    { name: 'Bull Silver', icon: BullSilver },
+    { name: 'DNA Silver', icon: DnaSilver },
+    { name: 'EUD Silver', icon: EudSilver },
+    { name: 'EUX Silver Diamant', icon: EuxSilverDiamant },
+    { name: 'EUX Silver', icon: EuxSilver },
+    { name: 'F Key Silver', icon: FKeySilver },
+    { name: 'Fisken Silver', icon: FiskenSilver },
+    { name: 'Globus Silver', icon: GlobusSilver },
+    { name: 'HF Silver Diamant', icon: HfSilverDiamant },
+    { name: 'HF Silver', icon: HfSilver },
+    { name: 'HHX Silver Diamant', icon: HhxSilverDiamant },
+    { name: 'HHX Silver', icon: HhxSilver },
+    { name: 'Hjerte Silv', icon: HjerteSilv },
+    { name: 'HTX Silver Diamant', icon: HtxSilverDiamant },
+    { name: 'HTX Silver', icon: HtxSilver },
+    { name: 'IB Silver', icon: IbSilver },
+    { name: 'IT Silver', icon: ItSilver },
+    { name: 'Jomfruen Silver', icon: JomfruenSilver },
+    { name: 'Jupiter Silver', icon: JupiterSilver },
+    { name: 'Krebsen Silver', icon: KrebsenSilver },
+    { name: 'Lion Silver', icon: LionSilver },
+    { name: 'Lotus Silver', icon: LotusSilver },
+    { name: 'Merkur Silver', icon: MerkurSilver },
+    { name: 'Merkurstav Silver Diamant', icon: MerkurstavSilverDiamant },
+    { name: 'Merkurstav Silver', icon: MerkurstavSilver },
+    { name: 'Neptun Silver', icon: NeptunSilver },
+    { name: 'Node Silver', icon: NodeSilver },
+    { name: 'Pi Silver', icon: PiSilver },
+    { name: 'Scorpio Silver', icon: ScorpioSilver },
+    { name: 'Skytten Silver', icon: SkyttenSilver },
+    { name: 'Sport Silver', icon: SportSilver },
+    { name: 'Stenbuk Silver', icon: StenbukSilver },
+    { name: 'STX Silver', icon: StxSilver },
+    { name: 'STX Silver Diamant', icon: StxSilverDiamant },
+    { name: 'Teater Silver', icon: TeaterSilver },
+    { name: 'Twin Silver', icon: TwinSilver },
+    { name: 'Vandmand Silv', icon: VandmandSilv },
+    { name: 'Venus Silver', icon: VenusSilver }
+        
+        
+    ];
+    const goldtypeOptions = [
+        { name: 'Kurdistan', icon: Kurdistan },
+    { name: 'Iraq', icon: Iraq },
+    { name: 'Iran', icon: Iran },
+    { name: 'Somalia', icon: Somalia },
+    { name: 'Somaliland', icon: Somaliland },
+    { name: 'Palestine', icon: Palestine },
+    { name: 'Lebanon', icon: Lebanon },
+    { name: 'Afghanistan', icon: Afghanistan },
+    { name: 'Albania', icon: Albania },
+    { name: 'Serbia', icon: Serbia },
+    { name: 'Bosnia', icon: Bosnia },
+    { name: 'Denmark', icon: Denmark },
+    { name: 'Morocco', icon: Morocco },
+    { name: 'Pakistan', icon: Pakistan },
+    { name: 'Turkey', icon: Turkey },
+    
+    // Gold items
+    { name: 'Ahornblad Gold', icon: AhornbladGold },
+    { name: 'Anker Gold', icon: AnkerGold },
+    { name: 'Atom Gold', icon: AtomGold },
+    { name: 'Atom HTX Gold', icon: AtomHtxGold },
+    { name: 'Bull Gold', icon: BullGold },
+    { name: 'DNA Gold', icon: DnaGold },
+    { name: 'EUD Gold', icon: EudGold },
+    { name: 'EUX Gold Diamant', icon: EuxGoldDiamant },
+    { name: 'EUX Gold', icon: EuxGold },
+    { name: 'F Key Gold', icon: FKeyGold },
+    { name: 'Fisken Gold', icon: FiskenGold },
+    { name: 'Globus Gold', icon: GlobusGold },
+    { name: 'HF Gold Diamant', icon: HfGoldDiamant },
+    { name: 'HF Gold', icon: HfGold },
+    { name: 'HHX Gold Diamant', icon: HhxGoldDiamant },
+    { name: 'HHX Gold', icon: HhxGold },
+    { name: 'Hjerte Guld', icon: HjerteGuld },
+    { name: 'HTX Gold Diam', icon: HtxGoldDiam },
+    { name: 'HTX Gold', icon: HtxGold },
+    { name: 'IB Gold', icon: IbGold },
+    { name: 'IT Gold', icon: ItGold },
+    { name: 'Jomfruen Gold', icon: JomfruenGold },
+    { name: 'Jupiter Gold', icon: JupiterGold },
+    { name: 'Krebsen Guld', icon: KrebsenGuld },
+    { name: 'Lion Gold', icon: LionGold },
+    { name: 'Lotus Gold', icon: LotusGold },
+    { name: 'Merkur Gold', icon: MerkurGold },
+    { name: 'Merkurstav Gold Diamant', icon: MerkurstavGoldDiamant },
+    { name: 'Merkurstav Gold', icon: MerkurstavGold },
+    { name: 'Neptun Gold', icon: NeptunGold },
+    { name: 'Node Gold', icon: NodeGold },
+    { name: 'Pil Gold', icon: PilGold },
+    { name: 'Saturn Gold', icon: SaturnGold },
+    { name: 'Scorpio Gold', icon: ScorpioGold },
+    { name: 'Skytten Gold', icon: SkyttenGold },
+    { name: 'Sport Gold', icon: SportGold },
+    { name: 'Stenbuk Gold', icon: StenbukGold },
+    { name: 'STX Gold Diamant', icon: StxGoldDiamant },
+    { name: 'STX Gold', icon: StxGold },
+    { name: 'Teater Gold', icon: TeaterGold },
+    { name: 'Twin Gold', icon: TwinGold },
+    { name: 'Vandmand Gold', icon: VandmandGold },
+    { name: 'Venus Gold', icon: VenusGold },
+    
+    
         
     ];
 
     // Update parent when local state changes
     useEffect(() => {
         if (onOptionChange) {
-            onOptionChange('color', selectedColor);
+            onOptionChange('Roset farve', selectedColor);
         }
     }, [selectedColor, onOptionChange]);
 
     useEffect(() => {
         if (onOptionChange) {
-            onOptionChange('bowType', selectedPrestige);
+            onOptionChange('Kokarde', selectedPrestige);
         }
     }, [selectedPrestige, onOptionChange]);
 
     useEffect(() => {
         if (onOptionChange) {
-            onOptionChange('emblem', selectedEmblem);
+            onOptionChange('Emblem', selectedEmblem);
         }
     }, [selectedEmblem, onOptionChange]);
 
     useEffect(() => {
         if (onOptionChange) {
-            onOptionChange('country', selectedType);
+            onOptionChange('Type', selectedType);
         }
     }, [selectedType, onOptionChange]);
 
@@ -247,30 +346,70 @@ const Bows = ({ selectedOptions = {}, onOptionChange }) => {
 
     return (
         <>
-            <div className="space-y-2">
-                <h3 className="text-2xl font-bold text-slate-900">Bows</h3>
+            <div className="">
+                <h3 className="text-2xl font-bold text-slate-900">KOKARDE</h3>
             </div>
-
+            <div className='text-sm font-semibold text-slate-700' >Roset farve</div>
             {/* Color Selection */}
-            <div className="flex space-x-3">
-                {colors.map((color) => (
-                    <button
-                        key={color.value}
-                        onClick={() => handleColorChange(color)}
-                        className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 ${selectedColor.value === color.value
-                            ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
-                            : 'border-slate-200 hover:border-slate-400'
-                            }`}
-                        style={{ backgroundColor: color.value }}
-                    />
-                ))}
-            </div>
-            <p className="text-sm mt-2 text-slate-700">Selected: {selectedColor.name}</p>
+
+           {selectedEmblem.name === 'Guld' ? (
+  <>
+    <div className="flex space-x-3">
+      {guldcolors.map((color) => (
+        <button
+          key={color.value}
+          onClick={() => handleColorChange(color)}
+          className={`w-12 h-12 rounded-xl border-2 flex justify-center items-center transition-all duration-200 hover:scale-110 ${
+            selectedColor.value === color.value
+              ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+              : 'border-slate-200 hover:border-slate-400'
+          }`}
+        >
+          {color.img && (
+            <img
+              src={color.img}
+              alt={color.name}
+              className="w-8 h-8 flex flex-justify object-contain"
+            />
+          )}
+        </button>
+      ))}
+    </div>
+    <p className="text-sm mt-2 text-slate-700">Selected: {selectedColor.name}</p>
+  </>
+) : (
+  <>
+    <div className="flex space-x-3">
+      {sulvcolors.map((color) => (
+        <button
+          key={color.value}
+          onClick={() => handleColorChange(color)}
+          className={`w-12 h-12 rounded-xl border-2 flex justify-center items-center transition-all duration-200 hover:scale-110 ${
+            selectedColor.value === color.value
+              ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+              : 'border-slate-200 hover:border-slate-400'
+          }`}
+        >
+          {color.img && (
+            <img
+              src={color.img}
+              alt={color.name}
+              className="w-8 h-8 flex flex-justify object-contain"
+            />
+          )}
+        </button>
+      ))}
+    </div>
+    <p className="text-sm mt-2 text-slate-700">Selected: {selectedColor.name}</p>
+  </>
+)}
+
+
 
             {/* Prestige Type */}
             <div className="space-y-4">
                 <div>
-                    <label className="text-sm font-semibold text-slate-700">Bow</label>
+                    <label className="text-sm font-semibold text-slate-700">kokarde</label>
                     <div className="flex items-center gap-2 mt-1">
                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                             {selectedPrestige}
@@ -278,7 +417,7 @@ const Bows = ({ selectedOptions = {}, onOptionChange }) => {
                     </div>
                 </div>
                 <div className="flex space-x-3">
-                    {['Signature', 'Prestige'].map((type) => (
+                    {['Signature', 'Prestige','Stjernetegn'].map((type) => (
                         <button
                             key={type}
                             onClick={() => handlePrestigeChange(type)}
@@ -317,12 +456,14 @@ const Bows = ({ selectedOptions = {}, onOptionChange }) => {
                 <div>
                     <label className="text-sm font-semibold text-slate-700">Type</label>
                 </div>
-                <div className="flex flex-wrap gap-3">
-                    {typeOptions.map((type, index) => (
+
+                {selectedEmblem.name=='Guld'?<>
+                 <div className="flex flex-wrap gap-3">
+                    {goldtypeOptions.map((type, index) => (
                         <button
                             key={index}
                             onClick={() => handleTypeChange(type.name)}
-                            className={`w-12 h-12 border-2 rounded hover:shadow-md 
+                            className={`w-12 h-12 border-2 rounded overflow-hidden hover:shadow-md 
                                 transition-all duration-200 flex items-center justify-center
                                    hover:from-red-100 hover:to-red-200 ${selectedType === type.name
                                 ? 'border-blue-500 ring-2 ring-blue-200 ring-offset-2'
@@ -330,11 +471,34 @@ const Bows = ({ selectedOptions = {}, onOptionChange }) => {
                                 }`}
                         >
                             
-                            <img src={type.icon} className='h-10' alt="" />
+                            <img src={type.icon} className='h-20 w-40'  alt="" />
                         </button>
                     ))}
                 </div>
                 <p className="text-sm mt-2 text-slate-700">Selected: {selectedType}</p>
+                
+                </>:<>
+                 <div className="flex flex-wrap gap-3">
+                    {silvetypeOptions.map((type, index) => (
+                        <button
+                            key={index}
+                            onClick={() => handleTypeChange(type.name)}
+                            className={`w-12 h-12 border-2 rounded overflow-hidden hover:shadow-md 
+                                transition-all duration-200 flex items-center justify-center
+                                   hover:from-red-100 hover:to-red-200 ${selectedType === type.name
+                                ? 'border-blue-500 ring-2 ring-blue-200 ring-offset-2'
+                                : 'border-slate-200 hover:border-blue-300'
+                                }`}
+                        >
+                            
+                            <img src={type.icon} className='h-20 w-40'  alt="" />
+                        </button>
+                    ))}
+                </div>
+                <p className="text-sm mt-2 text-slate-700">Selected: {selectedType}</p>
+                
+                </>}
+               
             </div>
         </>
     )

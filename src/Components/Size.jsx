@@ -20,11 +20,11 @@ const Size = ({ selectedOptions = {}, onOptionChange }) => {
 
     // Effect hooks to propagate changes to parent component
     useEffect(() => {
-        onOptionChange('size', selectedSize);
+        onOptionChange('Vælg størrelse', selectedSize);
     }, [selectedSize]);
 
     useEffect(() => {
-        onOptionChange('millimeterAdjustment', selectedMillimeterAdjustment);
+        onOptionChange('Millimeter tilpasningssæt', selectedMillimeterAdjustment);
     }, [selectedMillimeterAdjustment]);
 
     // Reusable size selector component
@@ -92,12 +92,12 @@ const Size = ({ selectedOptions = {}, onOptionChange }) => {
     return (
         <>
             <div className="space-y-2">
-                <h3 className="text-2xl font-bold text-slate-900">Size</h3>
+                <h3 className="text-2xl font-bold text-slate-900">STØRRELSE</h3>
             </div>
 
             {/* Size Selection */}
             <SizeSelector
-                label="Choose size"
+                label="Vælg størrelse"
                 currentSelection={selectedSize}
                 onSelectionChange={setSelectedSize}
                 sizeOptions={sizeOptions}
@@ -105,7 +105,7 @@ const Size = ({ selectedOptions = {}, onOptionChange }) => {
 
             {/* Millimeter Adjustment Selection */}
             <OptionSelector
-                label="Millimeter adjustment set"
+                label="Millimeter tilpasningssæt"
                 currentSelection={selectedMillimeterAdjustment}
                 onSelectionChange={setSelectedMillimeterAdjustment}
                 options={millimeterAdjustmentOptions}

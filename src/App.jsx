@@ -10,8 +10,8 @@ function App() {
     <>
     
      <Routes>
-      <Route path="/Cap_App/:packageType" element={<StudentDashboard/>} />
       <Route path="/Cap_App/" element={<StudentDashboard/>} />
+      
     </Routes>
       
     </>

@@ -3,17 +3,17 @@ import img1 from '../assets/shadeimages/glimmer.png';
 
 const Foer = ({ selectedOptions = {}, onOptionChange }) => {
     // State variables with descriptive names
-    const [selectedKokardeMaterial, setSelectedKokardeMaterial] = useState('Leather');
+    const [selectedKokardeMaterial, setSelectedKokardeMaterial] = useState('læder');
     const [selectedKokardeColor, setSelectedKokardeColor] = useState('black');
     const [selectedBowColor, setSelectedBowColor] = useState('HVID');
-    const [selectedFoerMaterial, setSelectedFoerMaterial] = useState('Viscose');
+    const [selectedFoerMaterial, setSelectedFoerMaterial] = useState('Viskose');
     const [selectedbowMaterialType, setBowMaterialTypes] = useState('');
     
     // Color options with descriptive names
     const bowColorOptions = [
         { name: 'HVID', value: 'HVID', color: '#FFFFFF' },
         { name: 'Sort', value: 'Sort', color: '#000000' },
-        { name: 'Gold', value: 'gold', color: '#ba9200' },
+        { name: 'Guld', value: 'Guld', color: '#ba9200' },
     ];
 
     const bowMaterialTypes = [
@@ -25,19 +25,19 @@ const Foer = ({ selectedOptions = {}, onOptionChange }) => {
 
     // Effect hooks to propagate changes to parent component
     useEffect(() => {
-        onOptionChange('kokardeMaterial', selectedKokardeMaterial);
+        onOptionChange('Svederem', selectedKokardeMaterial);
     }, [selectedKokardeMaterial]);
 
     useEffect(() => {
-        onOptionChange('kokardeColor', selectedKokardeColor);
+        onOptionChange('Farve', selectedKokardeColor);
     }, [selectedKokardeColor]);
 
     useEffect(() => {
-        onOptionChange('bowColor', selectedBowColor);
+        onOptionChange('Sløjfe', selectedBowColor);
     }, [selectedBowColor]);
 
     useEffect(() => {
-        onOptionChange('foerMaterial', selectedFoerMaterial);
+        onOptionChange('Foer', selectedFoerMaterial);
     }, [selectedFoerMaterial]);
     
     useEffect(() => {
@@ -50,17 +50,17 @@ const Foer = ({ selectedOptions = {}, onOptionChange }) => {
     }, [selectedFoerMaterial]);
 
     useEffect(() => {
-        onOptionChange('bowMaterialType', selectedbowMaterialType);
+        onOptionChange('Type', selectedbowMaterialType);
     }, [selectedbowMaterialType]);
 
     const getKokardeColorOptions = (material) => {
         switch (material) {
-            case 'Leather':
+            case 'læder':
                 return [
                     { name: 'HVID', value: 'HVID', color: '#ffffff' },
                     { name: 'Sort', value: 'Sort', color: '#000000' },
                 ];
-            case 'Artificial Leather':
+            case 'Kunstlæder':
                 return [
                     { name: 'Sort', value: 'Sort', color: '#000000' },
                 ];
@@ -81,6 +81,12 @@ const Foer = ({ selectedOptions = {}, onOptionChange }) => {
 
     const kokardeColorOptions = getKokardeColorOptions(selectedKokardeMaterial);
 
+     useEffect(() => {
+        setBowMaterialTypes('')
+
+                
+     },[selectedFoerMaterial])
+
     useEffect(() => {
         // Reset Kokarde color to first available option
         if (kokardeColorOptions.length > 0 && !kokardeColorOptions.some(opt => opt.value === selectedKokardeColor)) {
@@ -88,8 +94,8 @@ const Foer = ({ selectedOptions = {}, onOptionChange }) => {
         }
     }, [selectedKokardeMaterial, kokardeColorOptions, selectedKokardeColor]);
 
-    const kokardeMaterialTypes = ['Leather', 'Artificial Leather', 'Ruskin', 'Alcantra'];
-    const foerMaterialTypes = ['Viscose', 'Polyester', 'Satin', 'Silk'];
+    const kokardeMaterialTypes = ['læder', 'Kunstlæder', 'Ruskin', 'Alcantra'];
+    const foerMaterialTypes = ['Viskose', 'Polyester', 'Satin', 'Silke'];
 
     // Reusable color selector component
     const ColorSelector = ({
@@ -167,12 +173,16 @@ const Foer = ({ selectedOptions = {}, onOptionChange }) => {
                     onSelectionChange={setBowMaterialTypes}
                     colorOptions={bowMaterialTypes}
                 />
+
             }
         </div>
     );
 
     return (
         <>
+        <div className="space-y-2">
+                <h3 className="text-2xl font-bold text-slate-900">FOER</h3>
+            </div>
             {/* Kokarde Material Selection */}
             <TypeSelector
                 label="Svederem"
@@ -183,7 +193,7 @@ const Foer = ({ selectedOptions = {}, onOptionChange }) => {
 
             {/* Kokarde Color Selection */}
             <ColorSelector
-                label="Color"
+                label="Favre"
                 currentSelection={selectedKokardeColor}
                 onSelectionChange={setSelectedKokardeColor}
                 colorOptions={kokardeColorOptions}
@@ -191,7 +201,7 @@ const Foer = ({ selectedOptions = {}, onOptionChange }) => {
 
             {/* Bow Color Selection */}
             <ColorSelector
-                label="Bow"
+                label="Sløjfe"
                 currentSelection={selectedBowColor}
                 onSelectionChange={setSelectedBowColor}
                 colorOptions={bowColorOptions}
@@ -199,7 +209,7 @@ const Foer = ({ selectedOptions = {}, onOptionChange }) => {
 
             {/* Foer Material Selection */}
             <TypeSelector
-                label="Foer"
+                label="Foring"
                 currentSelection={selectedFoerMaterial}
                 onSelectionChange={setSelectedFoerMaterial}
                 options={foerMaterialTypes}

@@ -7,7 +7,7 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
     // State variables with descriptive names
     const [selectedShadeType, setSelectedShadeType] = useState('Blank');
     const [selectedMaterialType, setSelectedMaterialType] = useState('Uden kant');
-    const [selectedShadowTapeColor, setSelectedShadowTapeColor] = useState('gold');
+    const [selectedShadowTapeColor, setSelectedShadowTapeColor] = useState('Guld');
     const [engravingLine1, setEngravingLine1] = useState('');
     const [engravingLine2, setEngravingLine2] = useState('');
     const [engravingLine3, setEngravingLine3] = useState('');
@@ -22,9 +22,9 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
     // Shadow tape color options
     const shadowTapeColorOptions = [
         { name: 'INGEN', value: 'INGEN', img: img2 },
-        { name: 'Gold', value: 'gold', color: '#bb9300' },
+        { name: 'Guld', value: 'Guld', color: '#bb9300' },
         { name: 'Glitter', value: 'Glitter', color: '#E5E7EB' },
-        { name: 'Silver', value: 'Silver', color: '#fdfdff80' }
+        { name: 'Sølv', value: 'Sølv', color: '#fdfdff80' }
     ];
 
     const materialBlankTypes = ['Uden kant', 'Med kant'];
@@ -33,27 +33,27 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
 
     // Effect hooks to propagate changes to parent component
     useEffect(() => {
-        onOptionChange('shadeType', selectedShadeType);
+        onOptionChange('Type', selectedShadeType);
     }, [selectedShadeType]);
 
     useEffect(() => {
-        onOptionChange('materialType', selectedMaterialType);
+        onOptionChange('Materiale', selectedMaterialType);
     }, [selectedMaterialType]);
 
     useEffect(() => {
-        onOptionChange('shadowTapeColor', selectedShadowTapeColor);
+        onOptionChange('Skyggebånd', selectedShadowTapeColor);
     }, [selectedShadowTapeColor]);
 
     useEffect(() => {
-        onOptionChange('engravingLine1', engravingLine1);
+        onOptionChange('Skyggegravering Line 1', engravingLine1);
     }, [engravingLine1]);
 
     useEffect(() => {
-        onOptionChange('engravingLine2', engravingLine2);
+        onOptionChange('Skyggegravering Line 2', engravingLine2);
     }, [engravingLine2]);
 
     useEffect(() => {
-        onOptionChange('engravingLine3', engravingLine3);
+        onOptionChange('Skyggegravering Line 3', engravingLine3);
     }, [engravingLine3]);
 
     // Get available material options based on selected shade type
@@ -149,7 +149,7 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
     return (
         <>
             <div className="space-y-2">
-                <h3 className="text-2xl font-bold text-slate-900">Shade</h3>
+                <h3 className="text-2xl font-bold text-slate-900">SKYGGE</h3>
             </div>
 
             {/* Shade Type Selection */}
@@ -162,7 +162,7 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
 
             {/* Material Type Selection */}
             <TypeSelector
-                label="Material"
+                label="Materiale"
                 currentSelection={selectedMaterialType}
                 onSelectionChange={setSelectedMaterialType}
                 options={getMaterialOptions()}
@@ -170,7 +170,7 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
 
             {/* Shadow Tape Color Selection */}
             <Selector
-                label="Shadow tape"
+                label="Skyggebånd"
                 currentSelection={selectedShadowTapeColor}
                 onSelectionChange={setSelectedShadowTapeColor}
                 options={shadowTapeColorOptions}
@@ -179,7 +179,7 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
             <div className="bg-white/70 border border-white/50 rounded-2xl ">
                 <div className="flex items-center justify-between mb-4">
                     <div>
-                        <h4 className="font-semibold text-slate-800">Shadow engraving</h4>
+                        <h4 className="font-semibold text-slate-800">Skyggegravering</h4>
                         <div className="flex items-center gap-2 mt-1">
                             <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-100 to-yellow-200 text-amber-800">
                                 Inkluderet i pakken 0
@@ -193,21 +193,21 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
                             type="text"
                             value={engravingLine1}
                             onChange={(e) => setEngravingLine1(e.target.value)}
-                            placeholder="Line 1"
+                            placeholder="Linje 1"
                             className="w-full my-4 px-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
                         />
                         <input
                             type="text"
                             value={engravingLine2}
                             onChange={(e) => setEngravingLine2(e.target.value)}
-                            placeholder="Line 2"
+                            placeholder="Linje 2"
                             className="w-full px-4 my-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
                         />
                         <input
                             type="text"
                             value={engravingLine3}
                             onChange={(e) => setEngravingLine3(e.target.value)}
-                            placeholder="Line 3"
+                            placeholder="Linje 3"
                             className="w-full px-4 my-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-4">
