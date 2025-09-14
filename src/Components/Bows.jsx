@@ -120,7 +120,7 @@ import VagtenSilver from '../assets/images/vagten silver.jpg';
 
 
 
-
+// rosent
 import blackGold from '../assets/rosent/black gold.png';
 import blueGold from '../assets/rosent/gold blue.png';
 import redGold from '../assets/rosent/red gold.png';
@@ -132,21 +132,25 @@ import laalgold from '../assets/rosent/laalgold.png';
 import kaalasilver from '../assets/rosent/kaalasilver.png';
 import laalsilver from '../assets/rosent/laalsilver.png';
 
+
+
+
+
 const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
     const getInitialColor = (program) => {
-    switch (program?.toLowerCase()) {
-        case 'hhx':
-            return { name: 'Royal blue', value: '#7F1D1D' };
-        case 'htx':
-            return { name: 'Navy blue', value: '#7F1D1D' };
-        case 'stx':
-        default:
-            return { name: 'Bordeaux', value: '#7F1D1D' };
-    }
-};
-    
+        switch (program?.toLowerCase()) {
+            case 'hhx':
+                return { name: 'Royal blue', value: '#7F1D1D' };
+            case 'htx':
+                return { name: 'Navy blue', value: '#7F1D1D' };
+            case 'stx':
+            default:
+                return { name: 'Bordeaux', value: '#7F1D1D' };
+        }
+    };
+
     const [selectedColor, setSelectedColor] = useState(selectedOptions.color || getInitialColor(program));
-    const [selectedPrestige, setSelectedPrestige] = useState(selectedOptions.bowType || 'Prestige');
+    const [selectedPrestige, setSelectedPrestige] = useState(selectedOptions.bowType || 'signature');
     const [selectedEmblem, setSelectedEmblem] = useState(selectedOptions.emblem || { name: 'Guld', value: 'Guld', color: '#FCD34D' });
     const [selectedType, setSelectedType] = useState(selectedOptions.country || 'Kurdistan');
 
@@ -188,148 +192,195 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
         { name: 'SORT', value: '#1E3A8A', img: kaalasilver },
     ];
 
-//  Bordeaux is the basic color for  STX cap, and then Red and black
-// Navy blue is the basic color for HTX cap, and then red and black
-// Royal blue is the basic color for HHX cap, and then red and black
-// Light blue is the basic color for HF cap, and then red and black.
-
-    
-
-
     const emblemOptions = [
         { name: 'Guld', value: 'Guld', color: '#FCD34D' },
         { name: 'Sølv', value: 'Sølv', color: '#E5E7EB' }
     ];
 
-    const silvetypeOptions = [
-        { name: 'Kurdistan', icon: Kurdistan },
-    { name: 'Iraq', icon: Iraq },
-    { name: 'Iran', icon: Iran },
-    { name: 'Somalia', icon: Somalia },
-    { name: 'Somaliland', icon: Somaliland },
-    { name: 'Palestine', icon: Palestine },
-    { name: 'Lebanon', icon: Lebanon },
-    { name: 'Afghanistan', icon: Afghanistan },
-    { name: 'Albania', icon: Albania },
-    { name: 'Serbia', icon: Serbia },
-    { name: 'Bosnia', icon: Bosnia },
-    { name: 'Denmark', icon: Denmark },
-    { name: 'Morocco', icon: Morocco },
-    { name: 'Pakistan', icon: Pakistan },
-    { name: 'Turkey', icon: Turkey },
-    
-    
-    // Silver items
-    { name: 'Ahornblad Silver', icon: AhornbladSilver },
-    { name: 'Anker Silver', icon: AnkerSilver },
-    { name: 'Atom Silver', icon: AtomSilver },
-    { name: 'Atom HTX Silver', icon: AtomHtxSilver },
-    { name: 'Bull Silver', icon: BullSilver },
-    { name: 'DNA Silver', icon: DnaSilver },
-    { name: 'EUD Silver', icon: EudSilver },
-    { name: 'EUX Silver Diamant', icon: EuxSilverDiamant },
-    { name: 'EUX Silver', icon: EuxSilver },
-    { name: 'F Key Silver', icon: FKeySilver },
-    { name: 'Fisken Silver', icon: FiskenSilver },
-    { name: 'Globus Silver', icon: GlobusSilver },
-    { name: 'HF Silver Diamant', icon: HfSilverDiamant },
-    { name: 'HF Silver', icon: HfSilver },
-    { name: 'HHX Silver Diamant', icon: HhxSilverDiamant },
-    { name: 'HHX Silver', icon: HhxSilver },
-    { name: 'Hjerte Silv', icon: HjerteSilv },
-    { name: 'HTX Silver Diamant', icon: HtxSilverDiamant },
-    { name: 'HTX Silver', icon: HtxSilver },
-    { name: 'IB Silver', icon: IbSilver },
-    { name: 'IT Silver', icon: ItSilver },
-    { name: 'Jomfruen Silver', icon: JomfruenSilver },
-    { name: 'Jupiter Silver', icon: JupiterSilver },
-    { name: 'Krebsen Silver', icon: KrebsenSilver },
-    { name: 'Lion Silver', icon: LionSilver },
-    { name: 'Lotus Silver', icon: LotusSilver },
-    { name: 'Merkur Silver', icon: MerkurSilver },
-    { name: 'Merkurstav Silver Diamant', icon: MerkurstavSilverDiamant },
-    { name: 'Merkurstav Silver', icon: MerkurstavSilver },
-    { name: 'Neptun Silver', icon: NeptunSilver },
-    { name: 'Node Silver', icon: NodeSilver },
-    { name: 'Pi Silver', icon: PiSilver },
-    { name: 'Scorpio Silver', icon: ScorpioSilver },
-    { name: 'Skytten Silver', icon: SkyttenSilver },
-    { name: 'Sport Silver', icon: SportSilver },
-    { name: 'Stenbuk Silver', icon: StenbukSilver },
-    { name: 'STX Silver', icon: StxSilver },
-    { name: 'STX Silver Diamant', icon: StxSilverDiamant },
-    { name: 'Teater Silver', icon: TeaterSilver },
-    { name: 'Twin Silver', icon: TwinSilver },
-    { name: 'Vandmand Silv', icon: VandmandSilv },
-    { name: 'Venus Silver', icon: VenusSilver }
-        
-        
-    ];
-    const goldtypeOptions = [
-        { name: 'Kurdistan', icon: Kurdistan },
-    { name: 'Iraq', icon: Iraq },
-    { name: 'Iran', icon: Iran },
-    { name: 'Somalia', icon: Somalia },
-    { name: 'Somaliland', icon: Somaliland },
-    { name: 'Palestine', icon: Palestine },
-    { name: 'Lebanon', icon: Lebanon },
-    { name: 'Afghanistan', icon: Afghanistan },
-    { name: 'Albania', icon: Albania },
-    { name: 'Serbia', icon: Serbia },
-    { name: 'Bosnia', icon: Bosnia },
-    { name: 'Denmark', icon: Denmark },
-    { name: 'Morocco', icon: Morocco },
-    { name: 'Pakistan', icon: Pakistan },
-    { name: 'Turkey', icon: Turkey },
-    
-    // Gold items
-    { name: 'Ahornblad Gold', icon: AhornbladGold },
-    { name: 'Anker Gold', icon: AnkerGold },
-    { name: 'Atom Gold', icon: AtomGold },
-    { name: 'Atom HTX Gold', icon: AtomHtxGold },
-    { name: 'Bull Gold', icon: BullGold },
-    { name: 'DNA Gold', icon: DnaGold },
-    { name: 'EUD Gold', icon: EudGold },
-    { name: 'EUX Gold Diamant', icon: EuxGoldDiamant },
-    { name: 'EUX Gold', icon: EuxGold },
-    { name: 'F Key Gold', icon: FKeyGold },
-    { name: 'Fisken Gold', icon: FiskenGold },
-    { name: 'Globus Gold', icon: GlobusGold },
-    { name: 'HF Gold Diamant', icon: HfGoldDiamant },
-    { name: 'HF Gold', icon: HfGold },
-    { name: 'HHX Gold Diamant', icon: HhxGoldDiamant },
-    { name: 'HHX Gold', icon: HhxGold },
-    { name: 'Hjerte Guld', icon: HjerteGuld },
-    { name: 'HTX Gold Diam', icon: HtxGoldDiam },
-    { name: 'HTX Gold', icon: HtxGold },
-    { name: 'IB Gold', icon: IbGold },
-    { name: 'IT Gold', icon: ItGold },
-    { name: 'Jomfruen Gold', icon: JomfruenGold },
-    { name: 'Jupiter Gold', icon: JupiterGold },
-    { name: 'Krebsen Guld', icon: KrebsenGuld },
-    { name: 'Lion Gold', icon: LionGold },
-    { name: 'Lotus Gold', icon: LotusGold },
-    { name: 'Merkur Gold', icon: MerkurGold },
-    { name: 'Merkurstav Gold Diamant', icon: MerkurstavGoldDiamant },
-    { name: 'Merkurstav Gold', icon: MerkurstavGold },
-    { name: 'Neptun Gold', icon: NeptunGold },
-    { name: 'Node Gold', icon: NodeGold },
-    { name: 'Pil Gold', icon: PilGold },
-    { name: 'Saturn Gold', icon: SaturnGold },
-    { name: 'Scorpio Gold', icon: ScorpioGold },
-    { name: 'Skytten Gold', icon: SkyttenGold },
-    { name: 'Sport Gold', icon: SportGold },
-    { name: 'Stenbuk Gold', icon: StenbukGold },
-    { name: 'STX Gold Diamant', icon: StxGoldDiamant },
-    { name: 'STX Gold', icon: StxGold },
-    { name: 'Teater Gold', icon: TeaterGold },
-    { name: 'Twin Gold', icon: TwinGold },
-    { name: 'Vandmand Gold', icon: VandmandGold },
-    { name: 'Venus Gold', icon: VenusGold },
-    
-    
-        
-    ];
+    // Define all options categorized by type and emblem
+    const allTypeOptions = {
+        Signature: {
+            Guld: [
+                { name: 'Kurdistan', icon: Kurdistan },
+                { name: 'Iraq', icon: Iraq },
+                { name: 'Iran', icon: Iran },
+                { name: 'Somalia', icon: Somalia },
+                { name: 'Somaliland', icon: Somaliland },
+                { name: 'Palestine', icon: Palestine },
+                { name: 'Lebanon', icon: Lebanon },
+                { name: 'Afghanistan', icon: Afghanistan },
+                { name: 'Albania', icon: Albania },
+                { name: 'Serbia', icon: Serbia },
+                { name: 'Bosnia', icon: Bosnia },
+                { name: 'Denmark', icon: Denmark },
+                { name: 'Morocco', icon: Morocco },
+                { name: 'Pakistan', icon: Pakistan },
+                { name: 'Turkey', icon: Turkey },
+                { name: 'Ahornblad Gold', icon: AhornbladGold },
+                { name: 'Anker Gold', icon: AnkerGold },
+                { name: 'Atom Gold', icon: AtomGold },
+                { name: 'Atom HTX Gold', icon: AtomHtxGold },
+                { name: 'Bull Gold', icon: BullGold },
+                { name: 'DNA Gold', icon: DnaGold },
+                { name: 'EUD Gold', icon: EudGold },
+                { name: 'EUX Gold Diamant', icon: EuxGoldDiamant },
+                { name: 'EUX Gold', icon: EuxGold },
+                { name: 'F Key Gold', icon: FKeyGold },
+                { name: 'Fisken Gold', icon: FiskenGold },
+                { name: 'Globus Gold', icon: GlobusGold },
+                { name: 'HF Gold Diamant', icon: HfGoldDiamant },
+                { name: 'HF Gold', icon: HfGold },
+                { name: 'HHX Gold Diamant', icon: HhxGoldDiamant },
+                { name: 'HHX Gold', icon: HhxGold },
+                { name: 'Hjerte Guld', icon: HjerteGuld },
+                { name: 'HTX Gold Diam', icon: HtxGoldDiam },
+                { name: 'HTX Gold', icon: HtxGold },
+                { name: 'Vagten Gold', icon: VagtenGold },
+                { name: 'Vadderen Gold', icon: VadderenGold },
+                { name: 'Halvmone Gold Simli', icon: HalvmoneGoldSimli },
+                { name: 'Halvmone Gold', icon: HalvmoneGold },
+                { name: 'IB Gold', icon: IbGold },
+                { name: 'IT Gold', icon: ItGold },
+                { name: 'Jomfruen Gold', icon: JomfruenGold },
+                { name: 'Jupiter Gold', icon: JupiterGold },
+                { name: 'Krebsen Guld', icon: KrebsenGuld },
+                { name: 'Lion Gold', icon: LionGold },
+                { name: 'Lotus Gold', icon: LotusGold },
+                { name: 'Merkur Gold', icon: MerkurGold },
+                { name: 'Merkurstav Gold Diamant', icon: MerkurstavGoldDiamant },
+                { name: 'Merkurstav Gold', icon: MerkurstavGold },
+                { name: 'Neptun Gold', icon: NeptunGold },
+                { name: 'Node Gold', icon: NodeGold },
+                { name: 'Pil Gold', icon: PilGold },
+                { name: 'Saturn Gold', icon: SaturnGold },
+                { name: 'Scorpio Gold', icon: ScorpioGold },
+                { name: 'Skytten Gold', icon: SkyttenGold },
+                { name: 'Sport Gold', icon: SportGold },
+                { name: 'Stenbuk Gold', icon: StenbukGold },
+                { name: 'STX Gold Diamant', icon: StxGoldDiamant },
+                { name: 'STX Gold', icon: StxGold },
+                { name: 'Teater Gold', icon: TeaterGold },
+                { name: 'Twin Gold', icon: TwinGold },
+                { name: 'Vandmand Gold', icon: VandmandGold },
+                { name: 'Venus Gold', icon: VenusGold },
+            ],
+            Sølv: [
+                { name: 'Kurdistan', icon: Kurdistan },
+                { name: 'Iraq', icon: Iraq },
+                { name: 'Iran', icon: Iran },
+                { name: 'Somalia', icon: Somalia },
+                { name: 'Somaliland', icon: Somaliland },
+                { name: 'Palestine', icon: Palestine },
+                { name: 'Lebanon', icon: Lebanon },
+                { name: 'Afghanistan', icon: Afghanistan },
+                { name: 'Albania', icon: Albania },
+                { name: 'Serbia', icon: Serbia },
+                { name: 'Bosnia', icon: Bosnia },
+                { name: 'Denmark', icon: Denmark },
+                { name: 'Morocco', icon: Morocco },
+                { name: 'Pakistan', icon: Pakistan },
+                { name: 'Turkey', icon: Turkey },
+                { name: 'Ahornblad Silver', icon: AhornbladSilver },
+                { name: 'Anker Silver', icon: AnkerSilver },
+                { name: 'Atom Silver', icon: AtomSilver },
+                { name: 'Atom HTX Silver', icon: AtomHtxSilver },
+                { name: 'Bull Silver', icon: BullSilver },
+                { name: 'DNA Silver', icon: DnaSilver },
+                { name: 'EUD Silver', icon: EudSilver },
+                { name: 'EUX Silver Diamant', icon: EuxSilverDiamant },
+                { name: 'EUX Silver', icon: EuxSilver },
+                { name: 'F Key Silver', icon: FKeySilver },
+                { name: 'Fisken Silver', icon: FiskenSilver },
+                { name: 'Globus Silver', icon: GlobusSilver },
+                { name: 'HF Silver Diamant', icon: HfSilverDiamant },
+                { name: 'HF Silver', icon: HfSilver },
+                { name: 'HHX Silver Diamant', icon: HhxSilverDiamant },
+                { name: 'HHX Silver', icon: HhxSilver },
+                { name: 'Hjerte Silv', icon: HjerteSilv },
+                { name: 'HTX Silver Diamant', icon: HtxSilverDiamant },
+                { name: 'HTX Silver', icon: HtxSilver },
+                { name: 'IB Silver', icon: IbSilver },
+                { name: 'IT Silver', icon: ItSilver },
+                { name: 'Jomfruen Silver', icon: JomfruenSilver },
+                { name: 'Jupiter Silver', icon: JupiterSilver },
+                { name: 'Krebsen Silver', icon: KrebsenSilver },
+                { name: 'Lion Silver', icon: LionSilver },
+                { name: 'Lotus Silver', icon: LotusSilver },
+                { name: 'Merkur Silver', icon: MerkurSilver },
+                { name: 'Merkurstav Silver Diamant', icon: MerkurstavSilverDiamant },
+                { name: 'Merkurstav Silver', icon: MerkurstavSilver },
+                { name: 'Neptun Silver', icon: NeptunSilver },
+                { name: 'Node Silver', icon: NodeSilver },
+                { name: 'Saturn Silver', icon: SaturnSilver },
+                { name: 'Vagten Silver', icon: VagtenSilver },
+                { name: 'Vadderen Silver', icon: VadderenSilv },
+                { name: 'Pi Silver', icon: PiSilver },
+                { name: 'Scorpio Silver', icon: ScorpioSilver },
+                { name: 'Skytten Silver', icon: SkyttenSilver },
+                { name: 'Sport Silver', icon: SportSilver },
+                { name: 'Stenbuk Silver', icon: StenbukSilver },
+                { name: 'STX Silver', icon: StxSilver },
+                { name: 'STX Silver Diamant', icon: StxSilverDiamant },
+                { name: 'Teater Silver', icon: TeaterSilver },
+                { name: 'Twin Silver', icon: TwinSilver },
+                { name: 'Vandmand Silv', icon: VandmandSilv },
+                { name: 'Venus Silver', icon: VenusSilver },
+                { name: 'Halvmon Silver', icon: HalvmoneSilver },
+                { name: 'Halvmone Silver Simli', icon: HalvmoneSilverSimli },
+            ]
+        },
+        Prestige: {
+            Guld: [
+                { name: 'Jupiter Gold', icon: JupiterGold },
+                { name: 'Saturn Gold', icon: SaturnGold },
+                { name: 'Venus Gold', icon: VenusGold },
+                { name: 'Merkur Gold', icon: MerkurGold },
+                { name: 'Neptun Gold', icon: NeptunGold },
+            ],
+            Sølv: [
+                { name: 'Jupiter Silver', icon: JupiterSilver },
+                { name: 'Saturn Silver', icon: SaturnSilver },
+                { name: 'Venus Silver', icon: VenusSilver },
+                { name: 'Merkur Silver', icon: MerkurSilver },
+                { name: 'Neptun Silver', icon: NeptunSilver },
+            ]
+        },
+        Stjernetegn: {
+            Guld: [
+                { name: 'Bull Gold', icon: BullGold },
+                { name: 'IB Gold', icon: IbGold },
+                { name: 'F Key Gold', icon: FKeyGold },
+                { name: 'Fisken Gold', icon: FiskenGold },
+                { name: 'Jomfruen Gold', icon: JomfruenGold },
+                { name: 'Krebsen Guld', icon: KrebsenGuld },
+                { name: 'Lion Gold', icon: LionGold },
+                { name: 'Scorpio Gold', icon: ScorpioGold },
+                { name: 'Skytten Gold', icon: SkyttenGold },
+                { name: 'Vandmand Gold', icon: VandmandGold },
+                { name: 'Vadderen Gold', icon: VadderenGold },
+                { name: 'Vagten Gold', icon: VagtenGold },
+                { name: 'Stenbuk Gold', icon: StenbukGold },
+            ],
+            Sølv: [
+                { name: 'Bull Silver', icon: BullSilver },
+                { name: 'IB Silver', icon: IbSilver },
+                { name: 'F Key Silver', icon: FKeySilver },
+                { name: 'Fisken Silver', icon: FiskenSilver },
+                { name: 'Jomfruen Silver', icon: JomfruenSilver },
+                { name: 'Krebsen Silver', icon: KrebsenSilver },
+                { name: 'Lion Silver', icon: LionSilver },
+                { name: 'Scorpio Silver', icon: ScorpioSilver },
+                { name: 'Skytten Silver', icon: SkyttenSilver },
+                { name: 'Vandmand Silv', icon: VandmandSilv },
+                { name: 'Vadderen Silver', icon: VadderenSilv },
+                { name: 'Vagten Silver', icon: VagtenSilver },
+                { name: 'Stenbuk Silver', icon: StenbukSilver },
+            ]
+        }
+    };
+
+    // Get the current options based on selected prestige and emblem
+    const currentTypeOptions = allTypeOptions[selectedPrestige]?.[selectedEmblem.name] || [];
 
     // Update parent when local state changes
     useEffect(() => {
@@ -360,7 +411,6 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
     useEffect(() => {
         if (selectedOptions.color) {
             setSelectedColor(selectedOptions.color);
-            console.log('selected option wala use effect')
         }
     }, [selectedOptions.color]);
 
@@ -388,10 +438,18 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
 
     const handlePrestigeChange = (type) => {
         setSelectedPrestige(type);
+        const newOptions = allTypeOptions[type]?.[selectedEmblem.name] || [];
+        if (newOptions.length > 0) {
+            setSelectedType(newOptions[0].name);
+        }
     };
 
     const handleEmblemChange = (emblem) => {
         setSelectedEmblem(emblem);
+        const newOptions = allTypeOptions[selectedPrestige]?.[emblem.name] || [];
+        if (newOptions.length > 0) {
+            setSelectedType(newOptions[0].name);
+        }
     };
 
     const handleTypeChange = (typeName) => {
@@ -404,66 +462,62 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
                 <h3 className="text-2xl font-bold text-slate-900">KOKARDE</h3>
             </div>
             <div className='text-sm font-semibold text-slate-700' >Roset farve</div>
+
             {/* Color Selection */}
-
-           {selectedEmblem.name === 'Guld' ? (
-  <>
-    <div className="flex space-x-3">
-      {guldcolors.map((color) => (
-        <button
-          key={color.value}
-          onClick={() => handleColorChange(color)}
-          className={`w-12 h-12 rounded-xl border-2 flex justify-center items-center transition-all duration-200 hover:scale-110 ${
-            selectedColor.value === color.value
-              ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
-              : 'border-slate-200 hover:border-slate-400'
-          }`}
-        >
-          {color.img && (
-            <img
-              src={color.img}
-              alt={color.name}
-              className="w-8 h-8 flex flex-justify object-contain"
-            />
-          )}
-        </button>
-      ))}
-    </div>
-    <p className="text-sm mt-2 text-slate-700">Selected: {selectedColor.name}</p>
-  </>
-) : (
-  <>
-    <div className="flex space-x-3">
-      {sulvcolors.map((color) => (
-        <button
-          key={color.value}
-          onClick={() => handleColorChange(color)}
-          className={`w-12 h-12 rounded-xl border-2 flex justify-center items-center transition-all duration-200 hover:scale-110 ${
-            selectedColor.value === color.value
-              ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
-              : 'border-slate-200 hover:border-slate-400'
-          }`}
-        >
-          {color.img && (
-            <img
-              src={color.img}
-              alt={color.name}
-              className="w-8 h-8 flex flex-justify object-contain"
-            />
-          )}
-        </button>
-      ))}
-    </div>
-    <p className="text-sm mt-2 text-slate-700">Selected: {selectedColor.name}</p>
-  </>
-)}
-
-
+            {selectedEmblem.name === 'Guld' ? (
+                <>
+                    <div className="flex space-x-3">
+                        {guldcolors.map((color) => (
+                            <button
+                                key={color.value}
+                                onClick={() => handleColorChange(color)}
+                                className={`w-12 h-12 rounded-xl border-2 flex justify-center items-center transition-all duration-200 hover:scale-110 ${selectedColor.value === color.value
+                                        ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+                                        : 'border-slate-200 hover:border-slate-400'
+                                    }`}
+                            >
+                                {color.img && (
+                                    <img
+                                        src={color.img}
+                                        alt={color.name}
+                                        className="w-8 h-8 flex flex-justify object-contain"
+                                    />
+                                )}
+                            </button>
+                        ))}
+                    </div>
+                    <p className="text-sm mt-2 text-slate-700">Selected: {selectedColor.name}</p>
+                </>
+            ) : (
+                <>
+                    <div className="flex space-x-3">
+                        {sulvcolors.map((color) => (
+                            <button
+                                key={color.value}
+                                onClick={() => handleColorChange(color)}
+                                className={`w-12 h-12 rounded-xl border-2 flex justify-center items-center transition-all duration-200 hover:scale-110 ${selectedColor.value === color.value
+                                        ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+                                        : 'border-slate-200 hover:border-slate-400'
+                                    }`}
+                            >
+                                {color.img && (
+                                    <img
+                                        src={color.img}
+                                        alt={color.name}
+                                        className="w-8 h-8 flex flex-justify object-contain"
+                                    />
+                                )}
+                            </button>
+                        ))}
+                    </div>
+                    <p className="text-sm mt-2 text-slate-700">Selected: {selectedColor.name}</p>
+                </>
+            )}
 
             {/* Prestige Type */}
-            <div className="space-y-4">
+            <div className="space-y-4 mt-4">
                 <div>
-                    <label className="text-sm font-semibold text-slate-700">kokarde</label>
+                    <label className="text-sm font-semibold text-slate-700">Kokarde Type</label>
                     <div className="flex items-center gap-2 mt-1">
                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                             {selectedPrestige}
@@ -471,7 +525,7 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
                     </div>
                 </div>
                 <div className="flex space-x-3">
-                    {['Signature', 'Prestige','Stjernetegn'].map((type) => (
+                    {['Signature', 'Prestige', 'Stjernetegn'].map((type) => (
                         <button
                             key={type}
                             onClick={() => handlePrestigeChange(type)}
@@ -487,72 +541,47 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
             </div>
 
             {/* Emblem Selection */}
-                    <span className="text-sm pb-5
-                     font-semibold text-slate-700">Emblem</span>
-            <div className="flex space-x-3">
-                 
-                {emblemOptions.map((emblem) => (
-                    <button
-                        key={emblem.value}
-                        onClick={() => handleEmblemChange(emblem)}
-                        className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 ${selectedEmblem.value === emblem.value
-                            ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
-                            : 'border-slate-200 hover:border-slate-400'
-                            }`}
-                        style={{ backgroundColor: emblem.color }}
-                    />
-                ))}
+            <div className="mt-4">
+                <span className="text-sm font-semibold text-slate-700">Emblem</span>
+                <div className="flex space-x-3 mt-1">
+                    {emblemOptions.map((emblem) => (
+                        <button
+                            key={emblem.value}
+                            onClick={() => handleEmblemChange(emblem)}
+                            className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 ${selectedEmblem.value === emblem.value
+                                ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+                                : 'border-slate-200 hover:border-slate-400'
+                                }`}
+                            style={{ backgroundColor: emblem.color }}
+                        />
+                    ))}
+                </div>
+                <p className="text-sm mt-2 text-slate-700">Selected: {selectedEmblem.name}</p>
             </div>
-            <p className="text-sm mt-2 text-slate-700">Selected: {selectedEmblem.name}</p>
 
             {/* Type Selection */}
-            <div className="space-y-4">
+            <div className="space-y-4 mt-4">
                 <div>
                     <label className="text-sm font-semibold text-slate-700">Type</label>
+                    <p className="text-sm mt-1 text-slate-700">Selected: {selectedType}</p>
                 </div>
 
-                {selectedEmblem.name=='Guld'?<>
-                 <div className="flex flex-wrap gap-3">
-                    {goldtypeOptions.map((type, index) => (
+                <div className="flex flex-wrap gap-3">
+                    {currentTypeOptions.map((type, index) => (
                         <button
                             key={index}
                             onClick={() => handleTypeChange(type.name)}
-                            className={`w-12 h-12 border-2 rounded overflow-hidden hover:shadow-md 
+                            className={`w-15 h-15 border-2 rounded overflow-hidden hover:shadow-md 
                                 transition-all duration-200 flex items-center justify-center
-                                   hover:from-red-100 hover:to-red-200 ${selectedType === type.name
-                                ? 'border-blue-500 ring-2 ring-blue-200 ring-offset-2'
-                                : 'border-slate-200 hover:border-blue-300'
+                                hover:from-red-100 hover:to-red-200 ${selectedType === type.name
+                                    ? 'border-blue-500 ring-2 ring-blue-200 ring-offset-2'
+                                    : 'border-slate-200 hover:border-blue-300'
                                 }`}
                         >
-                            
-                            <img src={type.icon} className='h-20 w-40'  alt="" />
+                            <img src={type.icon} className='h-13 w-20 ' alt={type.name} />
                         </button>
                     ))}
                 </div>
-                <p className="text-sm mt-2 text-slate-700">Selected: {selectedType}</p>
-                
-                </>:<>
-                 <div className="flex flex-wrap gap-3">
-                    {silvetypeOptions.map((type, index) => (
-                        <button
-                            key={index}
-                            onClick={() => handleTypeChange(type.name)}
-                            className={`w-12 h-12 border-2 rounded overflow-hidden hover:shadow-md 
-                                transition-all duration-200 flex items-center justify-center
-                                   hover:from-red-100 hover:to-red-200 ${selectedType === type.name
-                                ? 'border-blue-500 ring-2 ring-blue-200 ring-offset-2'
-                                : 'border-slate-200 hover:border-blue-300'
-                                }`}
-                        >
-                            
-                            <img src={type.icon} className='h-20 w-40'  alt="" />
-                        </button>
-                    ))}
-                </div>
-                <p className="text-sm mt-2 text-slate-700">Selected: {selectedType}</p>
-                
-                </>}
-               
             </div>
         </>
     )
