@@ -1019,6 +1019,7 @@ const luksusPrices = {
                 <Bows
                   selectedOptions={selectedOptions.KOKARDE}
                   onOptionChange={(key, value) => handleOptionChange('KOKARDE', key, value)}
+                  program={program}
                 />
               )}
               {activeMenu === "UDDANNELSESBÅND" && (

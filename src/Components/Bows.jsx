@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+
+// signature
 import Kurdistan from '../assets/Countries/kurdistan.png';
 import Iraq from '../assets/Countries/iraq.png';
 import Iran from '../assets/Countries/iran.png';
@@ -14,130 +16,182 @@ import Denmark from '../assets/Countries/denmark.png';
 import Morocco from '../assets/Countries/morocco.png';
 import Pakistan from '../assets/Countries/pakistan.png';
 import Turkey from '../assets/Countries/turkey.png';
-import AhornbladGold from '../assets/images/Ahornblad gold.jpg';
-import AnkerGold from '../assets/images/anker gold.jpg';
-import AtomGold from '../assets/images/atom gold.jpg';
+import StxSilver from '../assets/images/stx silv.jpg';
+import StxSilverDiamant from '../assets/images/stx silver diamant.jpg';
+import StxGoldDiamant from '../assets/images/Stx gold diamant.jpg';
+import StxGold from '../assets/images/stx gold.jpg';
 import AtomHtxGold from '../assets/images/Atom htx gold.jpg';
-import BullGold from '../assets/images/bull gold.jpg';
-import DnaGold from '../assets/images/dna gold.jpg';
-import EudGold from '../assets/images/eud gold.jpg';
-import EuxGoldDiamant from '../assets/images/Eux gold diamant.jpg';
-import EuxGold from '../assets/images/EUX gold.jpg';
-import FKeyGold from '../assets/images/f key gold.jpg';
-import FiskenGold from '../assets/images/fisken gold.jpg';
-import GlobusGold from '../assets/images/globus gold.jpg';
-// import HalvmoneGoldSimli from '../assets/images/Halvm†ne gold simli.png';
-// import HalvmoneGold from '../assets/images/Halvm†ne gold.jpg';
+import HtxGoldDiam from '../assets/images/Htx gold diam.jpg';
+import HtxGold from '../assets/images/Htx gold.jpg';
+import AtomHtxSilver from '../assets/images/atom htx silver.jpg';
+import HtxSilverDiamant from '../assets/images/Htx silver diament.jpg';
+import HtxSilver from '../assets/images/htx silver.jpg';
 import HfGoldDiamant from '../assets/images/hf gold diamant.jpg';
 import HfGold from '../assets/images/hf gold.jpg';
 import HhxGoldDiamant from '../assets/images/hhx gold diamant.jpg';
 import HhxGold from '../assets/images/hhx gold.jpg';
-import HjerteGuld from '../assets/images/hjerte guld.jpg';
-import HtxGoldDiam from '../assets/images/Htx gold diam.jpg';
-import HtxGold from '../assets/images/Htx gold.jpg';
-import IbGold from '../assets/images/Ib gold.jpg';
-import ItGold from '../assets/images/It gold.jpg';
-import JomfruenGold from '../assets/images/jomfruen gold.jpg';
-import JupiterGold from '../assets/images/Jupiter gold.png';
-import KrebsenGuld from '../assets/images/krebsen guld.jpg';
-import LionGold from '../assets/images/lion gold.jpg';
-import LotusGold from '../assets/images/lotus gold.jpg';
-import MerkurGold from '../assets/images/merkur gold.png';
-import MerkurstavGoldDiamant from '../assets/images/merkurstav gold diamant.jpg';
-import MerkurstavGold from '../assets/images/merkurstav gold.jpg';
-import NeptunGold from '../assets/images/neptun gold.png';
-import NodeGold from '../assets/images/Node gold.jpg';
-import PilGold from '../assets/images/pil gold.jpg';
-import SaturnGold from '../assets/images/Saturn gold.png';
-import ScorpioGold from '../assets/images/scorpio gold.jpg';
-import SkyttenGold from '../assets/images/skytten gold.jpg';
-import SportGold from '../assets/images/sport gold.jpg';
-import StenbukGold from '../assets/images/stenbuk gold.jpg';
-import StxGoldDiamant from '../assets/images/Stx gold diamant.jpg';
-import StxGold from '../assets/images/stx gold.jpg';
-import TeaterGold from '../assets/images/Teater gold.jpg';
-import TwinGold from '../assets/images/twin gold.jpg';
-import VandmandGold from '../assets/images/vandmand gold.jpg';
-import VenusGold from '../assets/images/venus gold.png';
-// import VadderenGold from '../assets/images/v‘dderen gold.jpg';
-// import VagtenGold from '../assets/images/v‘gten gold.jpg';
-
-// Silver images
-import AhornbladSilver from '../assets/images/ahornblad silver.jpg';
-import AnkerSilver from '../assets/images/anker silver.jpg';
-import AtomSilver from '../assets/images/atom silver.jpg';
-import AtomHtxSilver from '../assets/images/atom htx silver.jpg';
-import BullSilver from '../assets/images/bull silver.jpg';
-import DnaSilver from '../assets/images/dna silver.jpg';
-import EudSilver from '../assets/images/Eud silver.jpg';
-import EuxSilverDiamant from '../assets/images/Eux silver diamant.jpg';
-import EuxSilver from '../assets/images/EUX silver.jpg';
-import FKeySilver from '../assets/images/f key silver.jpg';
-import FiskenSilver from '../assets/images/fisken silver.jpg';
-import GlobusSilver from '../assets/images/globus silver.jpg';
-// import HalvmoneSilver from '../assets/images/halvm†ne silv.jpg';
-// import HalvmoneSilverSimli from '../assets/images/halvm†ne silver simli.png';
-import HfSilverDiamant from '../assets/images/hf silver diamant.jpg';
-import HfSilver from '../assets/images/hf silver.jpg';
 import HhxSilverDiamant from '../assets/images/hhx silver diamant.jpg';
 import HhxSilver from '../assets/images/hhx silver.jpg';
-import HjerteSilv from '../assets/images/hjerte silv.jpg';
-import HtxSilverDiamant from '../assets/images/Htx silver diament.jpg';
-import HtxSilver from '../assets/images/htx silver.jpg';
-import IbSilver from '../assets/images/ib silver.jpg';
-import ItSilver from '../assets/images/It silver.jpg';
-import JomfruenSilver from '../assets/images/jomfruen silver.jpg';
-import JupiterSilver from '../assets/images/Jupiter silv.png';
-import KrebsenSilver from '../assets/images/krebsen silver.jpg';
-import LionSilver from '../assets/images/lion silver.jpg';
-import LotusSilver from '../assets/images/lotus silver.jpg';
-import MerkurSilver from '../assets/images/merkur silv.png';
+import HfSilverDiamant from '../assets/images/hf silver diamant.jpg';
+import HfSilver from '../assets/images/hf silver.jpg';
+import EuxSilverDiamant from '../assets/images/Eux silver diamant.jpg';
+import EuxSilver from '../assets/images/EUX silver.jpg';
+import EuxGoldDiamant from '../assets/images/Eux gold diamant.jpg';
+import EuxGold from '../assets/images/EUX gold.jpg';
+import EudSilver from '../assets/images/Eud silver.jpg';
+import EudGold from '../assets/images/eud gold.jpg';
+import HalvmoneSilver from '../assets/images/halvmane silv.jpg';
+import HalvmoneSilverSimli from '../assets/images/halvmane silver simli.png';
+import HalvmoneGoldSimli from '../assets/images/Halvmane gold simli.png';
+import HalvmoneGold from '../assets/images/Halvmane gold.jpg';
 import MerkurstavSilverDiamant from '../assets/images/merkurstav silv diamant.jpg';
 import MerkurstavSilver from '../assets/images/merkurstav silver.jpg';
-import NeptunSilver from '../assets/images/neptun silv.png';
+import MerkurstavGoldDiamant from '../assets/images/merkurstav gold diamant.jpg';
+import MerkurstavGold from '../assets/images/merkurstav gold.jpg';
+import HjerteGuld from '../assets/images/hjerte guld.jpg';
+import HjerteSilv from '../assets/images/hjerte silv.jpg';
+import AhornbladGold from '../assets/images/Ahornblad gold.jpg';
+import AhornbladSilver from '../assets/images/ahornblad silver.jpg';
+import AnkerGold from '../assets/images/anker gold.jpg';
+import AnkerSilver from '../assets/images/anker silver.jpg';
+import AtomGold from '../assets/images/atom gold.jpg';
+import AtomSilver from '../assets/images/atom silver.jpg';
+import DnaGold from '../assets/images/dna gold.jpg';
+import DnaSilver from '../assets/images/dna silver.jpg';
+import ItSilver from '../assets/images/It silver.jpg';
+import ItGold from '../assets/images/It gold.jpg';
+import TeaterSilver from '../assets/images/teater silver.jpg';
+import TeaterGold from '../assets/images/Teater gold.jpg';
+import TwinSilver from '../assets/images/twin silver.jpg';
+import TwinGold from '../assets/images/twin gold.jpg';
 import NodeSilver from '../assets/images/Node silv.jpg';
+import NodeGold from '../assets/images/Node gold.jpg';
+import SportGold from '../assets/images/sport gold.jpg';
+import SportSilver from '../assets/images/sport silver.jpg';
 import PiSilver from '../assets/images/pi silver.jpg';
-// import SaturnSilver from '../assets/images/saturn solv.png';
+import PilGold from '../assets/images/pil gold.jpg';
+import GlobusGold from '../assets/images/globus gold.jpg';
+import GlobusSilver from '../assets/images/globus silver.jpg';
+import LotusGold from '../assets/images/lotus gold.jpg';
+import LotusSilver from '../assets/images/lotus silver.jpg';
+
+// prestige
+
+import JupiterGold from '../assets/images/Jupiter gold.png';
+import JupiterSilver from '../assets/images/Jupiter silv.png';
+import SaturnGold from '../assets/images/Saturn gold.png';
+import SaturnSilver from '../assets/images/saturn solv.png';
+import VenusGold from '../assets/images/venus gold.png';
+import VenusSilver from '../assets/images/venus silv.png';
+import MerkurGold from '../assets/images/merkur gold.png';
+import MerkurSilver from '../assets/images/merkur silv.png';
+import NeptunGold from '../assets/images/neptun gold.png';
+import NeptunSilver from '../assets/images/neptun silv.png';
+// no mars
+
+
+// Stjernetegn
+import BullGold from '../assets/images/bull gold.jpg';
+import BullSilver from '../assets/images/bull silver.jpg';
+import IbSilver from '../assets/images/ib silver.jpg';
+import IbGold from '../assets/images/Ib gold.jpg';
+import FKeyGold from '../assets/images/f key gold.jpg';
+import FKeySilver from '../assets/images/f key silver.jpg';
+import FiskenGold from '../assets/images/fisken gold.jpg';
+import FiskenSilver from '../assets/images/fisken silver.jpg';
+import JomfruenGold from '../assets/images/jomfruen gold.jpg';
+import JomfruenSilver from '../assets/images/jomfruen silver.jpg';
+import KrebsenGuld from '../assets/images/krebsen guld.jpg';
+import KrebsenSilver from '../assets/images/krebsen silver.jpg';
+import LionSilver from '../assets/images/lion silver.jpg';
+import LionGold from '../assets/images/lion gold.jpg';
+import ScorpioGold from '../assets/images/scorpio gold.jpg';
 import ScorpioSilver from '../assets/images/scorpio silver.jpg';
 import SkyttenSilver from '../assets/images/skytten silver.jpg';
-import SportSilver from '../assets/images/sport silver.jpg';
-import StenbukSilver from '../assets/images/stenbuk silver.jpg';
-import StxSilver from '../assets/images/stx silv.jpg';
-import StxSilverDiamant from '../assets/images/stx silver diamant.jpg';
-import TeaterSilver from '../assets/images/teater silver.jpg';
-import TwinSilver from '../assets/images/twin silver.jpg';
+import SkyttenGold from '../assets/images/skytten gold.jpg';
+import VandmandGold from '../assets/images/vandmand gold.jpg';
 import VandmandSilv from '../assets/images/vandmand silv.jpg';
-import VenusSilver from '../assets/images/venus silv.png';
-// import VadderenSilv from '../assets/images/v‘dderen silv.jpg';
-// import VagtenSilver from '../assets/images/v‘gten silver.jpg';
-
-import blackGold from '../assets/rosent/black gold.jpg';
-import blueGold from '../assets/rosent/gold blue.jpg';
-import redGold from '../assets/rosent/red gold.jpg';
-import blackSilv from '../assets/rosent/black silv.jpg';
-import blueSilv from '../assets/rosent/blue silv.jpg';
-import redSilve from '../assets/rosent/red silv.jpg';
+import VadderenGold from '../assets/images/vadderen gold.jpg';
+import VagtenGold from '../assets/images/vagten gold.jpg';
+import StenbukGold from '../assets/images/stenbuk gold.jpg';
+import StenbukSilver from '../assets/images/stenbuk silver.jpg';
+import VadderenSilv from '../assets/images/vadderen silv.jpg';
+import VagtenSilver from '../assets/images/vagten silver.jpg';
 
 
-const Bows = ({ selectedOptions = {}, onOptionChange }) => {
-    // Initialize state from props or use defaults
-    const [selectedColor, setSelectedColor] = useState(selectedOptions.color || { name: 'STX', value: '#7F1D1D' });
+
+
+import blackGold from '../assets/rosent/black gold.png';
+import blueGold from '../assets/rosent/gold blue.png';
+import redGold from '../assets/rosent/red gold.png';
+import blackSilv from '../assets/rosent/black silv.png';
+import blueSilv from '../assets/rosent/blue silv.png';
+import redSilve from '../assets/rosent/red silv.png';
+import kaalagold from '../assets/rosent/kaalagold.png';
+import laalgold from '../assets/rosent/laalgold.png';
+import kaalasilver from '../assets/rosent/kaalasilver.png';
+import laalsilver from '../assets/rosent/laalsilver.png';
+
+const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
+    const getInitialColor = (program) => {
+    switch (program?.toLowerCase()) {
+        case 'hhx':
+            return { name: 'Royal blue', value: '#7F1D1D' };
+        case 'htx':
+            return { name: 'Navy blue', value: '#7F1D1D' };
+        case 'stx':
+        default:
+            return { name: 'Bordeaux', value: '#7F1D1D' };
+    }
+};
+    
+    const [selectedColor, setSelectedColor] = useState(selectedOptions.color || getInitialColor(program));
     const [selectedPrestige, setSelectedPrestige] = useState(selectedOptions.bowType || 'Prestige');
     const [selectedEmblem, setSelectedEmblem] = useState(selectedOptions.emblem || { name: 'Guld', value: 'Guld', color: '#FCD34D' });
     const [selectedType, setSelectedType] = useState(selectedOptions.country || 'Kurdistan');
 
- let guldcolors = [
-        { name: 'STX', value: '#7F1D1D',img:redGold },
-        { name: 'HHX', value: '#1E3A8A',img: blackGold},
-        { name: 'HTX', value: '#DC2626' ,img:blueGold}
-    ];   
- let sulvcolors = [
-        { name: 'STX', value: '#7F1D1D',img:redSilve },
-        { name: 'HHX', value: '#1E3A8A',img: blackSilv},
-        { name: 'HTX', value: '#DC2626' ,img:blueSilv}
-    ];   
+    // Define dynamic first options based on program
+    const getFirstGoldColor = () => {
+        switch (program?.toLowerCase()) {
+            case 'hhx':
+                return { name: 'Royal blue', value: '#7F1D1D', img: blueGold };
+            case 'htx':
+                return { name: 'Navy blue', value: '#7F1D1D', img: blackGold };
+            case 'stx':
+            default:
+                return { name: 'Bordeaux', value: '#7F1D1D', img: redGold };
+        }
+    };
 
- 
+    const getFirstSilverColor = () => {
+        switch (program?.toLowerCase()) {
+            case 'hhx':
+                return { name: 'Royal blue', value: '#7F1D1D', img: blueSilv };
+            case 'htx':
+                return { name: 'Navy blue', value: '#7F1D1D', img: blackSilv };
+            case 'stx':
+            default:
+                return { name: 'Bordeaux', value: '#7F1D1D', img: redSilve };
+        }
+    };
+
+    // Build full arrays with dynamic first option
+    const guldcolors = [
+        getFirstGoldColor(),
+        { name: 'RED', value: '#DC2626', img: laalgold },
+        { name: 'SORT', value: '#1E3A8A', img: kaalagold },
+    ];
+
+    const sulvcolors = [
+        getFirstSilverColor(),
+        { name: 'RED', value: '#DC2626', img: laalsilver },
+        { name: 'SORT', value: '#1E3A8A', img: kaalasilver },
+    ];
+
+//  Bordeaux is the basic color for  STX cap, and then Red and black
+// Navy blue is the basic color for HTX cap, and then red and black
+// Royal blue is the basic color for HHX cap, and then red and black
+// Light blue is the basic color for HF cap, and then red and black.
 
     
 
