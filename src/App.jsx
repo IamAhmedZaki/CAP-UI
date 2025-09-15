@@ -10,7 +10,7 @@ function App() {
     <>
     
      <Routes>
-      <Route path="/Cap_App/" element={<StudentDashboard/>} />
+      <Route path="/test_cap/" element={<StudentDashboard/>} />
       
     </Routes>
       
