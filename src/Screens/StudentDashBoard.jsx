@@ -110,9 +110,9 @@ const StudentDashboard = () => {
  const standardPrices = {
   KOKARDE: {
     'Roset farve': {
-      '#7F1D1D': 0,
+      '#7F1D1D': 39,
       '#1E3A8A': 0,
-      '#DC2626': 39,
+      '#DC2626': 0,
     },
     Kokarde: {
       Signature: 69,
@@ -630,9 +630,9 @@ const premiumPrices = {
 const luksusPrices = {
   KOKARDE: {
     'Roset farve': {
-      '#7F1D1D': 0,
+      '#7F1D1D': 39,
       '#1E3A8A': 0,
-      '#DC2626': 39,
+      '#DC2626': 0,
     },
     Kokarde: {
       Signature: 69,
