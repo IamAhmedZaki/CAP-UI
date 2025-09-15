@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from 'react';
-import { GraduationCap } from 'lucide-react';
 import img1 from '../assets/menuCapPics/1.png';
 import img2 from '../assets/menuCapPics/2.png';
 import img3 from '../assets/menuCapPics/3.png';
@@ -21,13 +20,15 @@ import Size from '../Components/Size';
 import Bows from '../Components/Bows';
 import QuoteModal from '../Components/Modal';
 import { useParams, useSearchParams } from 'react-router-dom';
+import { GraduationCap, ChevronUp, ChevronDown } from 'lucide-react';
 
 const StudentDashboard = () => {
   const [activeMenu, setActiveMenu] = useState('KOKARDE');
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
    const [searchParams] = useSearchParams();
   const packageName = searchParams.get("package");  // "standard"
-  const program = searchParams.get("program");  
+  const program = searchParams.get("program");
+  const [isConfigOpen, setIsConfigOpen] = useState(false);  
 
 
 
@@ -976,12 +977,12 @@ const luksusPrices = {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 relative">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
 
-
-      <div className="flex h-[calc(100vh-80px)] ">
-        {/* Sidebar remains the same */}
-        <aside className=" bg-white/70 backdrop-blur-sm border-r border-slate-200 overflow-y-auto pb-[133px]">
+      {/* Desktop Layout (md and up) */}
+      <div className="hidden md:flex h-[calc(100vh-80px)]">
+        {/* Sidebar */}
+        <aside className="bg-white/70 backdrop-blur-sm border-r border-slate-200 overflow-y-auto pb-[133px]">
           <div className="p-6">
             <h2 className="text-sm font-semibold text-center text-slate-600 uppercase tracking-wider mb-4">
               Caps
@@ -991,7 +992,7 @@ const luksusPrices = {
                 <button
                   key={index}
                   onClick={() => setActiveMenu(item.name)}
-                  className={` flex items-center px-2 py-3 rounded-xl transition-all duration-200 group ${activeMenu === item.name
+                  className={`flex items-center px-2 py-3 rounded-xl transition-all duration-200 group ${activeMenu === item.name
                     ? 'bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 shadow-sm'
                     : 'hover:bg-slate-50 hover:shadow-sm'
                     }`}
@@ -1073,7 +1074,7 @@ const luksusPrices = {
             </div>
           </div>
 
-          {/* Preview Panel remains the same */}
+          {/* Preview Panel */}
           <div className="flex-1 p-6">
             <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl h-full flex flex-col border border-slate-200">
               <div className="flex items-center justify-between p-6 border-b border-slate-200">
@@ -1102,29 +1103,212 @@ const luksusPrices = {
             </div>
           </div>
         </div>
+
+        {/* Desktop Footer */}
+        <div className="border-t border-slate-200 p-6 bg-white/80 backdrop-blur-sm w-[43.5%] absolute bottom-0 left-0">
+          <div className="flex justify-between items-center mb-4">
+            <span className="text-sm font-medium text-slate-600">Total Price</span>
+            <div className="text-right">
+              <div className="text-2xl font-bold text-slate-900">
+                {calculateTotalPrice().toFixed(2)} DKK
+              </div>
+              <div className="text-xs text-slate-500">incl. taxes</div>
+            </div>
+          </div>
+          <button
+            onClick={collectSelectedOptions}
+            className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-md hover:shadow-lg"
+          >
+            Get Quote
+          </button>
+        </div>
       </div>
 
-      {/* Footer remains the same */}
-      <div className="border-t border-slate-200 p-6 bg-white/80 backdrop-blur-sm w-[43.5%] absolute bottom-0 left-0">
-        <div className="flex justify-between items-center mb-4">
-          <span className="text-sm font-medium text-slate-600">Total Price</span>
-          <div className="text-right">
-            <div className="text-2xl font-bold text-slate-900">
-              {calculateTotalPrice().toFixed(2)} DKK
-            </div>
+      <div className="md:hidden flex flex-col ">
 
-            <div className="text-xs text-slate-500">incl. taxes</div>
+  {/* Mobile Preview Panel - Top */}
+  <div
+    className={`transition-all duration-300 ${
+      isConfigOpen ? 'h-[30vh]' : 'h-[65vh]'
+    }`}
+  >
+    <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-200 h-full">
+      <div className="flex items-center justify-between p-4 border-b border-slate-200">
+        <div className="flex items-center space-x-3">
+          <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
+            <GraduationCap className="w-4 h-4 text-white" />
+          </div>
+          <div>
+            <h4 className="font-semibold text-slate-800 text-sm">Current Program</h4>
+            <p className="text-xs text-slate-600">{program}</p>
           </div>
         </div>
-        <button
-          onClick={collectSelectedOptions}
-          className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-md hover:shadow-lg"
-        >
-          Get Quote
-        </button>
+        <div className="flex items-center space-x-2">
+          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+          <span className="text-xs font-medium text-slate-600">LIVE</span>
+        </div>
       </div>
+      <div className="h-[calc(100%-60px)] rounded-b-2xl overflow-hidden">
+        <iframe
+          src="https://playcanv.as/e/p/aaaab65d/"
+          className="w-full h-full"
+          frameBorder="0"
+          title="3D Student Card Preview"
+        />
+      </div>
+    </div>
+  </div>
 
+  {/* Config Toggle Button */}
+  <div className="px-4 py-2 bg-white/80 border-t border-slate-200 flex justify-center">
+    <button
+      onClick={() => setIsConfigOpen(!isConfigOpen)}
+      className="flex items-center justify-center w-full py-2 bg-slate-100 rounded-lg text-slate-700 font-medium"
+    >
+      {isConfigOpen ? (
+        <>
+          <ChevronDown className="w-4 h-4 mr-1" />
+          Hide Configuration
+        </>
+      ) : (
+        <>
+          <ChevronUp className="w-4 h-4 mr-1" />
+          Show Configuration
+        </>
+      )}
+    </button>
+  </div>
 
+  {/* Config Panel (collapsible + scrollable) */}
+  <div
+    className={`transition-all duration-300 overflow-y-auto flex-1 ${
+      isConfigOpen ? 'max-h-[35vh] opacity-100' : 'max-h-0 opacity-0'
+    }`}
+  >
+    {isConfigOpen && (
+      <div className="p-4 space-y-6">
+        {activeMenu === 'KOKARDE' && (
+          <Bows
+            selectedOptions={selectedOptions.KOKARDE}
+            onOptionChange={(key, value) =>
+              handleOptionChange('KOKARDE', key, value)
+            }
+            program={program}
+          />
+        )}
+        {activeMenu === "UDDANNELSESBÅND" && (
+                <EducationalTape
+                  selectedOptions={selectedOptions.UDDANNELSESBÅND}
+                  onOptionChange={(key, value) => handleOptionChange('UDDANNELSESBÅND', key, value)}
+                />
+              )}
+              {activeMenu === "BRODERI" && (
+                <Embroidery
+                  selectedOptions={selectedOptions.BRODERI}
+                  onOptionChange={(key, value) => handleOptionChange('BRODERI', key, value)}
+                />
+              )}
+              {activeMenu === "BETRÆK" && (
+                <Cover
+                  selectedOptions={selectedOptions.BETRÆK}
+                  onOptionChange={(key, value) => handleOptionChange('BETRÆK', key, value)}
+                />
+              )}
+              {activeMenu === "SKYGGE" && (
+                <Shade
+                  selectedOptions={selectedOptions.SKYGGE}
+                  onOptionChange={(key, value) => handleOptionChange('SKYGGE', key, value)}
+                />
+              )}
+              {activeMenu === "FOER" && (
+                <Foer
+                  selectedOptions={selectedOptions.FOER}
+                  onOptionChange={(key, value) => handleOptionChange('FOER', key, value)}
+                />
+              )}
+              {activeMenu === "EKSTRA BETRÆK" && (
+                <ExtraCover
+                  selectedOptions={selectedOptions.EKSTRABETRÆK}
+                  onOptionChange={(key, value) => handleOptionChange('EKSTRABETRÆK', key, value)}
+                />
+              )}
+              {activeMenu === "TILBEHØR" && (
+                <Accessories
+                  selectedOptions={selectedOptions.TILBEHØR}
+                  onOptionChange={(key, value) => handleOptionChange('TILBEHØR', key, value)}
+                />
+              )}
+              {activeMenu === "STØRRELSE" && (
+                <Size
+                  selectedOptions={selectedOptions.STØRRELSE}
+                  onOptionChange={(key, value) => handleOptionChange('STØRRELSE', key, value)}
+                />
+              )}
+        {/* ... other configuration components */}
+      </div>
+    )}
+  </div>
+
+  {/* Bottom fixed area: Sidebar + Footer */}
+  <div className="bg-white/70 backdrop-blur-sm border-t border-slate-200">
+    {/* Sidebar */}
+    <div className="px-4 pt-2">
+      <h3 className="text-xs font-semibold text-center text-slate-600 uppercase tracking-wider mb-3">
+        Caps
+      </h3>
+      <div className="flex overflow-x-auto space-x-3 pb-2">
+        {menuItems.map((item, index) => (
+          <button
+            key={index}
+            onClick={() => setActiveMenu(item.name)}
+            className={`flex-shrink-0 flex flex-col items-center px-3 rounded-xl transition-all duration-200 min-w-[80px] ${
+              activeMenu === item.name
+                ? 'bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 shadow-sm'
+                : 'hover:bg-slate-50 hover:shadow-sm'
+            }`}
+          >
+            <div
+              className={`w-8 rounded-lg flex items-center justify-center mb-2 transition-transform duration-200 ${
+                activeMenu === item.name ? 'scale-110' : 'hover:scale-105'
+              }`}
+            >
+              <img
+                src={item.icon}
+                alt={item.name}
+                className="w-6 h-6 object-contain"
+              />
+            </div>
+            <span className="text-xs font-medium text-slate-600 text-center leading-tight">
+              {item.name.replace(' ', '\n')}
+            </span>
+            {activeMenu === item.name && (
+              <div className="mt-1 w-2 h-2 bg-blue-500 rounded-full"></div>
+            )}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    {/* Footer */}
+    <div className="border-t border-slate-200 p-4 bg-white/80 backdrop-blur-sm">
+      <div className="flex justify-between items-center mb-3">
+        <span className="text-sm font-medium text-slate-600">Total Price</span>
+        <div className="text-right">
+          <div className="text-xl font-bold text-slate-900">
+            {calculateTotalPrice().toFixed(2)} DKK
+          </div>
+          <div className="text-xs text-slate-500">incl. taxes</div>
+        </div>
+      </div>
+      <button
+        onClick={collectSelectedOptions}
+        className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-3 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-md hover:shadow-lg"
+      >
+        Get Quote
+      </button>
+    </div>
+  </div>
+</div>
       {/* Quote Modal */}
       <QuoteModal
         isOpen={isQuoteModalOpen}

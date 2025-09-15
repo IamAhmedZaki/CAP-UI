@@ -50,7 +50,7 @@ const ExtraCover = ({ selectedOptions = {}, onOptionChange }) => {
                     
                 </div>
             </div>
-            <div className="flex space-x-3">
+            <div className="flex space-x-3 flex-wrap">
                 {options.map((option) => (
                     <button
                         key={option.value}
@@ -123,12 +123,12 @@ const ExtraCover = ({ selectedOptions = {}, onOptionChange }) => {
                     </span>
                 </div>
             </div>
-            <div className="flex space-x-3">
+            <div className="flex space-x-3 flex-wrap">
                 {options.map((type) => (
                     <button
                         key={type}
                         onClick={() => onSelectionChange(type)}
-                        className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                        className={`px-6 py-3 rounded-xl text-sm font-medium m-1 transition-all duration-200 ${
                             currentSelection === type
                                 ? 'bg-blue-600 text-white shadow-md'
                                 : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm'

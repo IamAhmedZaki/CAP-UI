@@ -152,12 +152,12 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange }) => {
                     <label className="text-sm font-semibold text-slate-700">{label}</label>
                 </div>
             </div>
-            <div className="flex space-x-3">
+            <div className="flex space-x-3 flex-wrap">
                 {colorOptions.map((colorOption) => (
                     <button
                         key={colorOption.value}
                         onClick={() => onSelectionChange(colorOption.name)}
-                        className={`w-12 h-12 flex justify-center items-center rounded-xl border-2 transition-all duration-200 hover:scale-110 ${
+                        className={`w-12 h-12 flex m-1 justify-center items-center rounded-xl border-2 transition-all duration-200 hover:scale-110 ${
                             currentSelection === colorOption.name
                                 ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
                                 : 'border-slate-200 hover:border-slate-400'
@@ -194,12 +194,12 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange }) => {
                     </span>
                 </div>
             </div>
-            <div className="flex space-x-3">
+            <div className="flex space-x-3 flex-wrap">
                 {options.map((type) => (
                     <button
                         key={type}
                         onClick={() => onSelectionChange(type)}
-                        className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                        className={`px-6 py-3 rounded-xl m-3 text-sm font-medium transition-all duration-200 ${
                             currentSelection === type
                                 ? 'bg-blue-600 text-white shadow-md'
                                 : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm'

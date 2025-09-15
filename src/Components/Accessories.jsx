@@ -145,12 +145,12 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
                        </span>
                    </div>
                </div>
-               <div className="flex space-x-3">
+               <div className="flex space-x-3 flex-wrap ">
                    {hatBoxTypes.map((type) => (
                        <button
                            key={type}
                            onClick={() => setSelectedHatBoxType(type)}
-                           className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                           className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 m-1 ${
                                selectedHatBoxType === type
                                    ? 'bg-blue-600 text-white shadow-md'
                                    : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm'
@@ -176,12 +176,12 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
                        
                    </div>
                </div>
-               <div className="flex space-x-3">
+               <div className="flex space-x-3 flex-wrap">
                    {premiumaske.map((type) => (
                        <button
                            key={type}
                            onClick={() => setSelectedPremiumæske(type)}
-                           className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                           className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 m-1 ${
                                selectedPremiumæske === type
                                    ? 'bg-blue-600 text-white shadow-md'
                                    : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm'

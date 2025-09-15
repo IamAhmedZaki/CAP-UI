@@ -140,7 +140,7 @@ const Foer = ({ selectedOptions = {}, onOptionChange }) => {
         onSelectionChange,
         options
     }) => (
-        <div className="space-y-4">
+        <div className="space-y-4 ">
             <div>
                 <label className="text-sm font-semibold text-slate-700">{label}</label>
                 <div className="flex items-center gap-2 mt-1">
@@ -149,7 +149,7 @@ const Foer = ({ selectedOptions = {}, onOptionChange }) => {
                     </span>
                 </div>
             </div>
-            <div className="flex space-x-3">
+            <div className="flex space-x-3 flex-wrap">
                 {options.map((type) => (
                     <button
                         key={type}
@@ -157,7 +157,7 @@ const Foer = ({ selectedOptions = {}, onOptionChange }) => {
                            
                            
                         }}
-                        className={`px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${currentSelection === type
+                        className={`px-6 py-3 rounded-xl text-sm m-4 font-medium transition-all duration-200 ${currentSelection === type
                                 ? 'bg-blue-600 text-white shadow-md'
                                 : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm'
                             }`}

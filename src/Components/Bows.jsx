@@ -491,7 +491,7 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
                         </span>
                     </div>
                 </div>
-                <div className="flex space-x-3">
+                <div className="flex space-x-3 flex-wrap">
                     {['Signature', 'Prestige', 'Stjernetegn'].map((type) => (
                         <button
                             key={type}
@@ -533,7 +533,7 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
                     <p className="text-sm mt-1 text-slate-700">Selected: {selectedType}</p>
                 </div>
 
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-3 ">
                     {currentTypeOptions.map((type, index) => (
                         <button
                             key={index}
