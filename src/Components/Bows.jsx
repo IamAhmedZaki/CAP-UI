@@ -131,12 +131,14 @@ import kaalagold from '../assets/rosent/kaalagold.png';
 import laalgold from '../assets/rosent/laalgold.png';
 import kaalasilver from '../assets/rosent/kaalasilver.png';
 import laalsilver from '../assets/rosent/laalsilver.png';
+import lightbluesilver from '../assets/rosent/lightbluesilver.png';
+import lightbluegold from '../assets/rosent/lightbluegold.png';
 
 
 
 
 
-const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
+const Bows = ({ selectedOptions = {}, onOptionChange, program,changeCurrentEmblem }) => {
     const getInitialColor = (program) => {
         switch (program?.toLowerCase()) {
             case 'hhx':
@@ -144,8 +146,11 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
             case 'htx':
                 return { name: 'Navy blue', value: '#7F1D1D' };
             case 'stx':
+            return { name: 'Bordeaux', value: '#7F1D1D' };
+            case 'hf':
+                return { name: 'Light Blue', value: '#7F1D1D' };
             default:
-                return { name: 'Bordeaux', value: '#7F1D1D' };
+                return { name: 'Bordeaux', value: '#7F1D1D'}
         }
     };
 
@@ -162,8 +167,11 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
             case 'htx':
                 return { name: 'Navy blue', value: '#7F1D1D', img: blackGold };
             case 'stx':
+           return { name: 'Bordeaux', value: '#7F1D1D', img: redSilve };
+            case 'hf':
+                return { name: 'Light Blue', value: '#7F1D1D', img: lightbluegold };
             default:
-                return { name: 'Bordeaux', value: '#7F1D1D', img: redGold };
+                return { name: 'Bordeaux', value: '#7F1D1D', img: redSilve }
         }
     };
 
@@ -174,8 +182,47 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
             case 'htx':
                 return { name: 'Navy blue', value: '#7F1D1D', img: blackSilv };
             case 'stx':
-            default:
                 return { name: 'Bordeaux', value: '#7F1D1D', img: redSilve };
+            case 'hf':
+                return { name: 'Light Blue', value: '#7F1D1D', img: lightbluesilver };
+            default:
+                return { name: 'Bordeaux', value: '#7F1D1D', img: redSilve }
+                
+        }
+    };
+    const getGoldEmblem = () => {
+        switch (program?.toLowerCase()) {
+            case 'hhx':
+                return [ { name: 'HHX Gold Diamant', icon: HhxGoldDiamant },
+                        { name: 'HHX Gold', icon: HhxGold }];
+            case 'htx':
+                return [ { name: 'Atom HTX Gold', icon: AtomHtxGold },
+                        { name: 'HTX Gold Diam', icon: HtxGoldDiam },
+                        { name: 'HTX Gold', icon: HtxGold }];
+            case 'stx':
+                return [{ name: 'STX Gold Diamant', icon: StxGoldDiamant },
+                        { name: 'STX Gold', icon: StxGold }];
+                default:
+                return [ { name: 'HF Gold Diamant', icon: HfGoldDiamant },
+                        { name: 'HF Gold', icon: HfGold }];
+        }
+    };
+
+    const getSilverEmblem = () => {
+         switch (program?.toLowerCase()) {
+            case 'hhx':
+                return   [{ name: 'HHX Silver Diamant', icon: HhxSilverDiamant },
+    { name: 'HHX Silver', icon: HhxSilver }];
+            case 'htx':
+                return  [{ name: 'Atom HTX Silver', icon: AtomHtxSilver },
+    { name: 'HTX Silver Diamant', icon: HtxSilverDiamant },
+    { name: 'HTX Silver', icon: HtxSilver }];
+            case 'stx':
+                return  [{ name: 'STX Silver', icon: StxSilver },
+    { name: 'STX Silver Diamant', icon: StxSilverDiamant }];
+                default:
+                return [ { name: 'HF Gold Diamant', icon: HfGoldDiamant },
+                        { name: 'HF Gold', icon: HfGold }];
         }
     };
 
@@ -219,19 +266,12 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
     { name: 'Ahornblad Gold', icon: AhornbladGold },
     { name: 'Anker Gold', icon: AnkerGold },
     { name: 'Atom Gold', icon: AtomGold },
-    { name: 'Atom HTX Gold', icon: AtomHtxGold },
     { name: 'DNA Gold', icon: DnaGold },
     { name: 'EUD Gold', icon: EudGold },
     { name: 'EUX Gold Diamant', icon: EuxGoldDiamant },
     { name: 'EUX Gold', icon: EuxGold },
     { name: 'Globus Gold', icon: GlobusGold },
-    { name: 'HF Gold Diamant', icon: HfGoldDiamant },
-    { name: 'HF Gold', icon: HfGold },
-    { name: 'HHX Gold Diamant', icon: HhxGoldDiamant },
-    { name: 'HHX Gold', icon: HhxGold },
     { name: 'Hjerte Guld', icon: HjerteGuld },
-    { name: 'HTX Gold Diam', icon: HtxGoldDiam },
-    { name: 'HTX Gold', icon: HtxGold },
     { name: 'Halvmone Gold Simli', icon: HalvmoneGoldSimli },
     { name: 'Halvmone Gold', icon: HalvmoneGold },
     { name: 'IT Gold', icon: ItGold },
@@ -241,10 +281,9 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
     { name: 'Node Gold', icon: NodeGold },
     { name: 'Pil Gold', icon: PilGold },
     { name: 'Sport Gold', icon: SportGold },
-    { name: 'STX Gold Diamant', icon: StxGoldDiamant },
-    { name: 'STX Gold', icon: StxGold },
     { name: 'Teater Gold', icon: TeaterGold },
     { name: 'Twin Gold', icon: TwinGold },
+    ...getGoldEmblem()
 ],
 
  Sølv :[
@@ -266,21 +305,14 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
     { name: 'Ahornblad Silver', icon: AhornbladSilver },
     { name: 'Anker Silver', icon: AnkerSilver },
     { name: 'Atom Silver', icon: AtomSilver },
-    { name: 'Atom HTX Silver', icon: AtomHtxSilver },
     { name: 'DNA Silver', icon: DnaSilver },
     { name: 'EUD Silver', icon: EudSilver },
     { name: 'EUX Silver Diamant', icon: EuxSilverDiamant },
     { name: 'EUX Silver', icon: EuxSilver },
     { name: 'Globus Silver', icon: GlobusSilver },
-    { name: 'HF Silver Diamant', icon: HfSilverDiamant },
-    { name: 'HF Silver', icon: HfSilver },
-    { name: 'HHX Silver Diamant', icon: HhxSilverDiamant },
-    { name: 'HHX Silver', icon: HhxSilver },
     { name: 'Hjerte Silv', icon: HjerteSilv },
-    { name: 'HTX Silver Diamant', icon: HtxSilverDiamant },
-    { name: 'HTX Silver', icon: HtxSilver },
-    { name: 'Halvmon Silver', icon: HalvmoneSilver },
     { name: 'Halvmone Silver Simli', icon: HalvmoneSilverSimli },
+    { name: 'Halvmone Silver', icon: HalvmoneSilver },
     { name: 'IT Silver', icon: ItSilver },
     { name: 'Lotus Silver', icon: LotusSilver },
     { name: 'Merkurstav Silver Diamant', icon: MerkurstavSilverDiamant },
@@ -288,10 +320,9 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
     { name: 'Node Silver', icon: NodeSilver },
     { name: 'Pi Silver', icon: PiSilver },
     { name: 'Sport Silver', icon: SportSilver },
-    { name: 'STX Silver', icon: StxSilver },
-    { name: 'STX Silver Diamant', icon: StxSilverDiamant },
     { name: 'Teater Silver', icon: TeaterSilver },
     { name: 'Twin Silver', icon: TwinSilver },
+    ...getSilverEmblem()
     
 ]
 
@@ -390,6 +421,8 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
     useEffect(() => {
         if (selectedOptions.emblem) {
             setSelectedEmblem(selectedOptions.emblem);
+            changeCurrentEmblem(selectedOptions.emblem)
+            
         }
     }, [selectedOptions.emblem]);
 
@@ -413,6 +446,7 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
 
     const handleEmblemChange = (emblem) => {
         setSelectedEmblem(emblem);
+        changeCurrentEmblem(emblem)
         const newOptions = allTypeOptions[selectedPrestige]?.[emblem.name] || [];
         if (newOptions.length > 0) {
             setSelectedType(newOptions[0].name);
@@ -484,7 +518,7 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
             {/* Prestige Type */}
             <div className="space-y-4 mt-4">
                 <div>
-                    <label className="text-sm font-semibold text-slate-700">Kokarde Type</label>
+                    <label className="text-sm font-semibold text-slate-700">Emblem</label>
                     <div className="flex items-center gap-2 mt-1">
                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                             {selectedPrestige}
@@ -509,7 +543,7 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program }) => {
 
             {/* Emblem Selection */}
             <div className="mt-4">
-                <span className="text-sm font-semibold text-slate-700">Emblem</span>
+                <span className="text-sm font-semibold text-slate-700">Kokarde Type</span>
                 <div className="flex space-x-3 mt-1">
                     {emblemOptions.map((emblem) => (
                         <button

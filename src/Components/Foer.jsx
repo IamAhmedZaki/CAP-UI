@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import img1 from '../assets/shadeimages/glimmer.png';
 
-const Foer = ({ selectedOptions = {}, onOptionChange }) => {
+const Foer = ({ selectedOptions = {}, onOptionChange,currentEmblem }) => {
     // State variables with descriptive names
     const [selectedKokardeMaterial, setSelectedKokardeMaterial] = useState('læder');
     const [selectedKokardeColor, setSelectedKokardeColor] = useState('black');
@@ -9,19 +9,30 @@ const Foer = ({ selectedOptions = {}, onOptionChange }) => {
     const [selectedFoerMaterial, setSelectedFoerMaterial] = useState('Viskose');
     const [selectedbowMaterialType, setBowMaterialTypes] = useState('');
     
+    const getCurrentEmblem = () => {
+        switch (currentEmblem.name) {
+            case 'Guld':
+
+                return { name: 'Guld', value: 'Guld', color:'#FFD700' };
+                    
+            default:
+                return { name: 'Sølv', value: 'Sølv', color:'#C0C0C0' };
+                    
+        }
+    }
     // Color options with descriptive names
     const bowColorOptions = [
         { name: 'HVID', value: 'HVID', color: '#FFFFFF' },
-        { name: 'Sort', value: 'Sort', color: '#000000' },
-        { name: 'Guld', value: 'Guld', color: '#ba9200' },
+        getCurrentEmblem()
     ];
 
     const bowMaterialTypes = [
         { name: 'HVID', value: 'HVID', color: '#000000' },
         { name: 'BRUN', value: 'BRUN', color: '#a66f5a' },
-        { name: 'STX', value: 'STX', color: '#782834' },
+        { name: 'BRUNBORDEAUX', value: 'BORDEAUX', color: '#800020' },
         { name: 'CHAMPAGNE', value: 'CHAMPAGNE', img: img1 },
     ];
+    
 
     // Effect hooks to propagate changes to parent component
     useEffect(() => {
@@ -62,7 +73,7 @@ const Foer = ({ selectedOptions = {}, onOptionChange }) => {
                 ];
             case 'Kunstlæder':
                 return [
-                    { name: 'Sort', value: 'Sort', color: '#000000' },
+                    { name: 'Vegansk', value: 'Vegansk', color: '#006644' },
                 ];
             case 'Ruskin':
                 return [
@@ -130,6 +141,7 @@ const Foer = ({ selectedOptions = {}, onOptionChange }) => {
                     </button>
                 ))}
             </div>
+             <p className="text-sm mt-2 text-slate-700">Selected: {currentSelection}</p>
         </div>
     );
 
@@ -166,6 +178,7 @@ const Foer = ({ selectedOptions = {}, onOptionChange }) => {
                     </button>
                 ))}
             </div>
+            
             {currentSelection == 'Satin' &&
                 <ColorSelector
                     label="Type"

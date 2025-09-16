@@ -28,7 +28,8 @@ const StudentDashboard = () => {
    const [searchParams] = useSearchParams();
   const packageName = searchParams.get("package");  // "standard"
   const program = searchParams.get("program");
-  const [isConfigOpen, setIsConfigOpen] = useState(false);  
+  const [isConfigOpen, setIsConfigOpen] = useState(false); 
+  const [globalEmblem, setGlobalEmblem] = useState({ name: 'Guld', value: 'Guld', color: '#FCD34D' }); 
 
 
 
@@ -991,7 +992,10 @@ const luksusPrices = {
               {menuItems.map((item, index) => (
                 <button
                   key={index}
-                  onClick={() => setActiveMenu(item.name)}
+                  onClick={() => {setActiveMenu(item.name)
+                    
+                    
+                  }}
                   className={`flex items-center px-2 py-3 rounded-xl transition-all duration-200 group ${activeMenu === item.name
                     ? 'bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 shadow-sm'
                     : 'hover:bg-slate-50 hover:shadow-sm'
@@ -1021,24 +1025,31 @@ const luksusPrices = {
                   selectedOptions={selectedOptions.KOKARDE}
                   onOptionChange={(key, value) => handleOptionChange('KOKARDE', key, value)}
                   program={program}
+                  changeCurrentEmblem={setGlobalEmblem}
                 />
               )}
               {activeMenu === "UDDANNELSESBÅND" && (
                 <EducationalTape
                   selectedOptions={selectedOptions.UDDANNELSESBÅND}
                   onOptionChange={(key, value) => handleOptionChange('UDDANNELSESBÅND', key, value)}
+                  program={program}
+                  currentEmblem={globalEmblem}
                 />
               )}
               {activeMenu === "BRODERI" && (
                 <Embroidery
                   selectedOptions={selectedOptions.BRODERI}
                   onOptionChange={(key, value) => handleOptionChange('BRODERI', key, value)}
+                  program={program}
                 />
               )}
               {activeMenu === "BETRÆK" && (
                 <Cover
                   selectedOptions={selectedOptions.BETRÆK}
                   onOptionChange={(key, value) => handleOptionChange('BETRÆK', key, value)}
+                  program={program}
+                  currentEmblem={globalEmblem}
+
                 />
               )}
               {activeMenu === "SKYGGE" && (
@@ -1051,12 +1062,15 @@ const luksusPrices = {
                 <Foer
                   selectedOptions={selectedOptions.FOER}
                   onOptionChange={(key, value) => handleOptionChange('FOER', key, value)}
+                  currentEmblem={globalEmblem}
+                  program={program}
+
                 />
               )}
               {activeMenu === "EKSTRA BETRÆK" && (
                 <ExtraCover
                   selectedOptions={selectedOptions.EKSTRABETRÆK}
-                  onOptionChange={(key, value) => handleOptionChange('EKSTRABETRÆK', key, value)}
+                  onOptionChange={(key, value) => handleOptionChange('EKSTRABETRÆK', key, value)}currentEmblem={globalEmblem}
                 />
               )}
               {activeMenu === "TILBEHØR" && (
@@ -1200,6 +1214,7 @@ const luksusPrices = {
                 <EducationalTape
                   selectedOptions={selectedOptions.UDDANNELSESBÅND}
                   onOptionChange={(key, value) => handleOptionChange('UDDANNELSESBÅND', key, value)}
+                   program={program}
                 />
               )}
               {activeMenu === "BRODERI" && (

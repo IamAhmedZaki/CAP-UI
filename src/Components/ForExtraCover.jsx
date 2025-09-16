@@ -9,7 +9,7 @@ import coverColorOptionsimg1 from '../assets/cover images/silverahh.png';
 import coverColorOptionsimg2 from '../assets/cover images/none.png';
 import coverColorOptionsimg3 from '../assets/cover images/darkblueahh.png';
 
-const Cover = ({ selectedOptions = {}, onOptionChange,program,currentEmblem }) => {
+const ForExtraCover = ({ programNew,current }) => {
     const [selectedCoverColor, setSelectedCoverColor] = useState('Hvid');
     const [selectedEdgebandColor, setSelectedEdgebandColor] = useState('NONE');
     const [selectedKantbandColor, setSelectedKantbandColor] = useState('NONE');
@@ -23,7 +23,7 @@ const Cover = ({ selectedOptions = {}, onOptionChange,program,currentEmblem }) =
     ];
 
     const getCoverColor = () => {
-        switch (program?.toLowerCase()) {
+        switch (programNew?.toLowerCase()) {
             case 'hhx':
                 return { name: 'HHX', value:'HHX', color: '#4169e1' };
             case 'htx':
@@ -36,7 +36,7 @@ const Cover = ({ selectedOptions = {}, onOptionChange,program,currentEmblem }) =
         }
     };
     const getCurrentEmblem = () => {
-        switch (currentEmblem.name) {
+        switch (current.name) {
             case 'Guld':
 
                 return { name: 'Guld', value: 'Guld', color:'#FFD700' };
@@ -49,13 +49,13 @@ const Cover = ({ selectedOptions = {}, onOptionChange,program,currentEmblem }) =
     const edgebandColorOptions = [
         { name: 'NONE', value: 'NONE', img: coverColorOptionsimg2 },
         { name: 'SORT', value: 'SORT', color: '#3d3d3d' },
-        getCoverColor()
+        // getCoverColor()
 
     ];
     
     const topKantColorOptions = [
         { name: 'NONE', value: 'NONE', img: coverColorOptionsimg2 },
-       getCurrentEmblem(),
+    //    getCurrentEmblem(),
         
         
 
@@ -72,17 +72,17 @@ const Cover = ({ selectedOptions = {}, onOptionChange,program,currentEmblem }) =
     ];
 
     // Effect hooks to propagate changes to parent component
-    useEffect(() => {
-        onOptionChange('Farve', selectedCoverColor);
-    }, [selectedCoverColor]);
+    // useEffect(() => {
+    //     onOptionChange('Farve', selectedCoverColor);
+    // }, [selectedCoverColor]);
 
-    useEffect(() => {
-        onOptionChange('Kantbånd', selectedEdgebandColor);
-    }, [selectedEdgebandColor]);
+    // useEffect(() => {
+    //     onOptionChange('Kantbånd', selectedEdgebandColor);
+    // }, [selectedEdgebandColor]);
 
-    useEffect(() => {
-        onOptionChange('Stjerner', selectedStarsStyle);
-    }, [selectedStarsStyle]);
+    // useEffect(() => {
+    //     onOptionChange('Stjerner', selectedStarsStyle);
+    // }, [selectedStarsStyle]);
 
     // Reusable selector component for both colors and images
     const Selector = ({ 
@@ -128,7 +128,7 @@ const Cover = ({ selectedOptions = {}, onOptionChange,program,currentEmblem }) =
     return (
         <>
             <div className="space-y-2">
-                <h3 className="text-2xl font-bold text-slate-900">BETRÆK</h3>
+                {/* <h3 className="text-2xl font-bold text-slate-900">BETRÆK</h3> */}
             </div>
 
             {/* Cover Color Selection */}
@@ -169,4 +169,4 @@ const Cover = ({ selectedOptions = {}, onOptionChange,program,currentEmblem }) =
     );
 }
 
-export default Cover;
+export default ForExtraCover;

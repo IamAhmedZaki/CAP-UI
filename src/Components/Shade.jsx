@@ -15,7 +15,7 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
     // Shade type options
     const shadeTypeOptions = [
         { name: 'Blank', value: 'Blank', img: img3 },
-        { name: 'Mat', value: 'Mat', color: '#2d2d2e' },
+        { name: 'Shiny', value: 'Shiny', color: '#2d2d2e' },
         { name: 'Glimmer', value: 'Glimmer', img: img1 },
     ];
 
@@ -23,13 +23,12 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
     const shadowTapeColorOptions = [
         { name: 'INGEN', value: 'INGEN', img: img2 },
         { name: 'Guld', value: 'Guld', color: '#bb9300' },
-        { name: 'Glitter', value: 'Glitter', color: '#E5E7EB' },
-        { name: 'Sølv', value: 'Sølv', color: '#fdfdff80' }
+        { name: 'Sølv', value: 'Sølv', color: '#C0C0C0' }
     ];
 
     const materialBlankTypes = ['Uden kant', 'Med kant'];
-    const materialMATTypes = ['Uden kant'];
-    const materialGlimmerTypes = ['Uden kant'];
+    const materialMATTypes = [''];
+    const materialGlimmerTypes = ['Uden kant', 'Med kant'];
 
     // Effect hooks to propagate changes to parent component
     useEffect(() => {
@@ -110,6 +109,7 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
                     </button>
                 ))}
             </div>
+            <p className="text-sm mt-2 text-slate-700">Selected: {currentSelection}</p>
         </div>
     );
 
@@ -161,12 +161,16 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
             />
 
             {/* Material Type Selection */}
+            {selectedShadeType!='Shiny'&&(
+
             <TypeSelector
                 label="Materiale"
                 currentSelection={selectedMaterialType}
                 onSelectionChange={setSelectedMaterialType}
                 options={getMaterialOptions()}
             />
+            )}
+            
 
             {/* Shadow Tape Color Selection */}
             <Selector
@@ -194,6 +198,7 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
                             value={engravingLine1}
                             onChange={(e) => setEngravingLine1(e.target.value)}
                             placeholder="Linje 1"
+                            maxLength={30}
                             className="w-full my-4 px-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
                         />
                         <input
@@ -201,6 +206,7 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
                             value={engravingLine2}
                             onChange={(e) => setEngravingLine2(e.target.value)}
                             placeholder="Linje 2"
+                            maxLength={30}
                             className="w-full px-4 my-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
                         />
                         <input
@@ -208,6 +214,7 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
                             value={engravingLine3}
                             onChange={(e) => setEngravingLine3(e.target.value)}
                             placeholder="Linje 3"
+                            maxLength={30}
                             className="w-full px-4 my-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-4">

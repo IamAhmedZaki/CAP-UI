@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import ForExtraCover from './ForExtraCover';
 
-const ExtraCover = ({ selectedOptions = {}, onOptionChange }) => {
+const ExtraCover = ({ selectedOptions = {}, onOptionChange,currentEmblem,program }) => {
     const [selectedExtraCoverOption, setSelectedExtraCoverOption] = useState('Yes');
     const [selectedMaterialType, setSelectedMaterialType] = useState('Standard');
     const [selectedButtonMaterialColor, setSelectedButtonMaterialColor] = useState('Ingen');
@@ -155,7 +156,14 @@ const ExtraCover = ({ selectedOptions = {}, onOptionChange }) => {
                 options={extraCoverOptions}
             />
 
-             <ColorSelector
+            {selectedExtraCoverOption=='Yes'&&(
+                
+            <ForExtraCover
+            current={currentEmblem}
+            programNew={program}/>
+            )}
+
+              {/* <ColorSelector
                 label="Favre"
                 currentSelection={selectedHatbandColor}
                 onSelectionChange={setSelectedHatbandColor}
@@ -175,7 +183,7 @@ const ExtraCover = ({ selectedOptions = {}, onOptionChange }) => {
                 currentSelection={selectedButtonMaterialColor}
                 onSelectionChange={setSelectedButtonMaterialColor}
                 options={buttonMaterialBLANKTypes}
-            />
+            />  */}
             
         </>
     );
