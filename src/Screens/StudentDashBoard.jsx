@@ -1164,7 +1164,7 @@ const luksusPrices = {
       </div>
       <div className="h-[calc(100%-60px)] rounded-b-2xl overflow-hidden">
         <iframe
-          src="https://playcanv.as/e/p/aaaab65d/"
+          src="https://playcanv.as/e/p/3b2251ad/"
           className="w-full h-full"
           frameBorder="0"
           title="3D Student Card Preview"
@@ -1202,31 +1202,35 @@ const luksusPrices = {
     {isConfigOpen && (
       <div className="p-4 space-y-6">
         {activeMenu === 'KOKARDE' && (
-          <Bows
-            selectedOptions={selectedOptions.KOKARDE}
-            onOptionChange={(key, value) =>
-              handleOptionChange('KOKARDE', key, value)
-            }
-            program={program}
-          />
-        )}
-        {activeMenu === "UDDANNELSESBÅND" && (
+                <Bows
+                  selectedOptions={selectedOptions.KOKARDE}
+                  onOptionChange={(key, value) => handleOptionChange('KOKARDE', key, value)}
+                  program={program}
+                  changeCurrentEmblem={setGlobalEmblem}
+                />
+              )}
+              {activeMenu === "UDDANNELSESBÅND" && (
                 <EducationalTape
                   selectedOptions={selectedOptions.UDDANNELSESBÅND}
                   onOptionChange={(key, value) => handleOptionChange('UDDANNELSESBÅND', key, value)}
-                   program={program}
+                  program={program}
+                  currentEmblem={globalEmblem}
                 />
               )}
               {activeMenu === "BRODERI" && (
                 <Embroidery
                   selectedOptions={selectedOptions.BRODERI}
                   onOptionChange={(key, value) => handleOptionChange('BRODERI', key, value)}
+                  program={program}
                 />
               )}
               {activeMenu === "BETRÆK" && (
                 <Cover
                   selectedOptions={selectedOptions.BETRÆK}
                   onOptionChange={(key, value) => handleOptionChange('BETRÆK', key, value)}
+                  program={program}
+                  currentEmblem={globalEmblem}
+
                 />
               )}
               {activeMenu === "SKYGGE" && (
@@ -1239,12 +1243,15 @@ const luksusPrices = {
                 <Foer
                   selectedOptions={selectedOptions.FOER}
                   onOptionChange={(key, value) => handleOptionChange('FOER', key, value)}
+                  currentEmblem={globalEmblem}
+                  program={program}
+
                 />
               )}
               {activeMenu === "EKSTRA BETRÆK" && (
                 <ExtraCover
                   selectedOptions={selectedOptions.EKSTRABETRÆK}
-                  onOptionChange={(key, value) => handleOptionChange('EKSTRABETRÆK', key, value)}
+                  onOptionChange={(key, value) => handleOptionChange('EKSTRABETRÆK', key, value)}currentEmblem={globalEmblem}
                 />
               )}
               {activeMenu === "TILBEHØR" && (
@@ -1254,7 +1261,7 @@ const luksusPrices = {
                 />
               )}
               {activeMenu === "STØRRELSE" && (
-                <Size
+                <Size 
                   selectedOptions={selectedOptions.STØRRELSE}
                   onOptionChange={(key, value) => handleOptionChange('STØRRELSE', key, value)}
                 />

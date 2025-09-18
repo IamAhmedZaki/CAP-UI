@@ -9,7 +9,7 @@ import coverColorOptionsimg1 from '../assets/cover images/silverahh.png';
 import coverColorOptionsimg2 from '../assets/cover images/none.png';
 import coverColorOptionsimg3 from '../assets/cover images/darkblueahh.png';
 
-const ForExtraCover = ({ programNew,current }) => {
+const ForExtraCover = ({ programNew,current,forOptionChange }) => {
     const [selectedCoverColor, setSelectedCoverColor] = useState('Hvid');
     const [selectedEdgebandColor, setSelectedEdgebandColor] = useState('NONE');
     const [selectedKantbandColor, setSelectedKantbandColor] = useState('NONE');
@@ -55,7 +55,7 @@ const ForExtraCover = ({ programNew,current }) => {
     
     const topKantColorOptions = [
         { name: 'NONE', value: 'NONE', img: coverColorOptionsimg2 },
-    //    getCurrentEmblem(),
+       getCurrentEmblem(),
         
         
 
@@ -72,17 +72,21 @@ const ForExtraCover = ({ programNew,current }) => {
     ];
 
     // Effect hooks to propagate changes to parent component
-    // useEffect(() => {
-    //     onOptionChange('Farve', selectedCoverColor);
-    // }, [selectedCoverColor]);
+    useEffect(() => {
+        forOptionChange('Farve', selectedCoverColor);
+    }, [selectedCoverColor]);
 
-    // useEffect(() => {
-    //     onOptionChange('Kantbånd', selectedEdgebandColor);
-    // }, [selectedEdgebandColor]);
+    useEffect(() => {
+        forOptionChange('Topkant', selectedKantbandColor);
+    }, [selectedKantbandColor]);
 
-    // useEffect(() => {
-    //     onOptionChange('Stjerner', selectedStarsStyle);
-    // }, [selectedStarsStyle]);
+    useEffect(() => {
+        forOptionChange('Kantbånd', selectedEdgebandColor);
+    }, [selectedEdgebandColor]);
+
+    useEffect(() => {
+        forOptionChange('Stjerner', selectedStarsStyle);
+    }, [selectedStarsStyle]);
 
     // Reusable selector component for both colors and images
     const Selector = ({ 

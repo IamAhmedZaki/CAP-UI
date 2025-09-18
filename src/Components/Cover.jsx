@@ -77,6 +77,10 @@ const Cover = ({ selectedOptions = {}, onOptionChange,program,currentEmblem }) =
     }, [selectedCoverColor]);
 
     useEffect(() => {
+        onOptionChange('Topkant', selectedKantbandColor);
+    }, [selectedKantbandColor]);
+    
+    useEffect(() => {
         onOptionChange('Kantbånd', selectedEdgebandColor);
     }, [selectedEdgebandColor]);
 

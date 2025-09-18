@@ -161,7 +161,7 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
             />
 
             {/* Material Type Selection */}
-            {selectedShadeType!='Shiny'&&(
+            {selectedShadeType!='Glimmer'&&(
 
             <TypeSelector
                 label="Materiale"

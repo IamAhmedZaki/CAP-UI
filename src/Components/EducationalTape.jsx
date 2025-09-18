@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 import coverColorOptionsimg2 from '../assets/cover images/none.png';
+import matteleather from '../assets/button images/matteleather.png';
+import shinyblack from '../assets/button images/shinyblack.png';
+import goldblack from '../assets/button images/goldblack.png';
+import silverblack from '../assets/button images/silverblack.png';
+import silver from '../assets/button images/silver.png';
+import gold from '../assets/button images/gold.png';
 
 const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, currentEmblem }) => {
     // State variables with descriptive names
@@ -43,11 +49,12 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, curren
         switch (currentEmblem.name) {
             case 'Guld':
 
-                return [{ name: 'Sort/Guld', value: '#695406ff' },
-                    { name: 'Guld', value: '#f0bd06ff' }];
+                return [
+                    { name: 'Guld hagerem med guld knuder', value: '#f0bd06ff',img:gold },
+                    { name: 'Sort hagerem med guld knuder', value: '#695406ff',img:goldblack },];
             default:
-                return [{ name: 'Sølv', value: '#C0C0C0' },
-                    { name: 'Sølv/Sort', value: '#71706C' }];
+                return [{ name: 'Sølv hagerem med sølvknuder', value: '#C0C0C0',img:silver },
+                    { name: 'Sølv hagerem med sort knuder', value: '#71706C',img:silverblack }];
         }
     }
 
@@ -71,9 +78,9 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, curren
     ];
 
     const chinStrapColorOptions = [
-        { name: 'Mat', value: '#2e2e2e' },
+        { name: 'Mat', value: '#2e2e2e',img:matteleather },
         { name: 'Blank', value: '#757575' },
-        { name: 'Sort/Sort', value: '#000000' },
+        { name: 'Sort med sorteknuder', value: '#000000' ,img:shinyblack},
         ...getCurrentEmblem()
     ];
 
@@ -106,7 +113,7 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, curren
     ];
 
     const materialEUXTypes = ['BOMULD', 'VELOUR', 'SATIN', 'GLIMMER', 'SHIMMER',];
-    const materialSORTTypes = ['VELOUR', 'SATIN', 'GLIMMER', 'SHIMMER'];
+    const materialSORTTypes = ['VELOUR', 'SATIN', 'GLIMMER'];
 
     const buttonMaterialMATTypes = ['Mat hagerem'];
     const buttonMaterialBLANKTypes = ['Blank hagerem', 'Blank kunstlæder hagerem'];
@@ -205,7 +212,7 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, curren
                         <button
                             key={colorOption.value}
                             onClick={() => onSelectionChange(colorOption.name)}
-                            className={`w-12 h-12 flex m-1 justify-center items-center rounded-xl border-2 transition-all duration-200 hover:scale-110 ${currentSelection === colorOption.name
+                            className={`w-12 h-12 flex m-1 justify-center items-center rounded-xl border-2 transition-all overflow-hidden duration-200 hover:scale-110 ${currentSelection === colorOption.name
                                     ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
                                     : 'border-slate-200 hover:border-slate-400'
                                 }`}
@@ -216,7 +223,7 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, curren
                                 <img
                                     src={colorOption.img}
                                     alt={colorOption.name}
-                                    className="w-8 h-8 flex flex-justify object-contain"
+                                    className="w-12 h-12 flex flex-justify object-contain"
                                 />
                             )}
                         </button>
@@ -294,12 +301,12 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, curren
             />
 
             {/* Button Material Color Selection */}
-            <TypeSelector
+            {/* <TypeSelector
                 label="Materiale"
                 currentSelection={selectedButtonMaterialColor}
                 onSelectionChange={setSelectedButtonMaterialColor}
                 options={selectedChinStrapColor === 'Mat' ? buttonMaterialMATTypes : selectedChinStrapColor === 'Blank' ? buttonMaterialBLANKTypes : selectedChinStrapColor === 'Sort/Sort' ? buttonMaterialSortSortTypes : selectedChinStrapColor === 'Sort/Guld' ? buttonMaterialSortGuldTypes : selectedChinStrapColor === 'Sølv' ? buttonMaterialSolvTypes : selectedChinStrapColor === 'Guld' ? buttonMaterialGuldTypes : selectedChinStrapColor === 'Sølv/Sort' ? buttonMaterialSolveSortTypes : buttonMaterialSortGuldTypes}
-            />
+            /> */}
 
             {/* Embroidery Card */}
             <div className="bg-white/70 border border-white/50 rounded-2xl ">

@@ -212,6 +212,14 @@ const Foer = ({ selectedOptions = {}, onOptionChange,currentEmblem }) => {
                 colorOptions={kokardeColorOptions}
             />
 
+            {/* Foer Material Selection */}
+            <TypeSelector
+                label="Foring"
+                currentSelection={selectedFoerMaterial}
+                onSelectionChange={setSelectedFoerMaterial}
+                options={foerMaterialTypes}
+            />
+            
             {/* Bow Color Selection */}
             <ColorSelector
                 label="Sløjfe"
@@ -220,13 +228,6 @@ const Foer = ({ selectedOptions = {}, onOptionChange,currentEmblem }) => {
                 colorOptions={bowColorOptions}
             />
 
-            {/* Foer Material Selection */}
-            <TypeSelector
-                label="Foring"
-                currentSelection={selectedFoerMaterial}
-                onSelectionChange={setSelectedFoerMaterial}
-                options={foerMaterialTypes}
-            />
         </>
     );
 }

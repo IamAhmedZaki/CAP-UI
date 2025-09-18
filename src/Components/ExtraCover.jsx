@@ -3,8 +3,8 @@ import ForExtraCover from './ForExtraCover';
 
 const ExtraCover = ({ selectedOptions = {}, onOptionChange,currentEmblem,program }) => {
     const [selectedExtraCoverOption, setSelectedExtraCoverOption] = useState('Yes');
-    const [selectedMaterialType, setSelectedMaterialType] = useState('Standard');
-    const [selectedButtonMaterialColor, setSelectedButtonMaterialColor] = useState('Ingen');
+    // const [selectedMaterialType, setSelectedMaterialType] = useState('Standard');
+    // const [selectedButtonMaterialColor, setSelectedButtonMaterialColor] = useState('Ingen');
 
     
 
@@ -18,7 +18,7 @@ const ExtraCover = ({ selectedOptions = {}, onOptionChange,currentEmblem,program
         { name: 'SORT', value: '#000001' }, // Consider using different colors or removing duplicate
     ];
 
-     const [selectedHatbandColor, setSelectedHatbandColor] = useState('EUX');
+    //  const [selectedHatbandColor, setSelectedHatbandColor] = useState('EUX');
 
 
     const buttonMaterialMATTypes = [ 'Standard','Kantbånd','Flagbånd'];
@@ -27,15 +27,15 @@ const ExtraCover = ({ selectedOptions = {}, onOptionChange,currentEmblem,program
     useEffect(() => {
         onOptionChange('Tilvælg', selectedExtraCoverOption);
     }, [selectedExtraCoverOption]);
-    useEffect(() => {
-        onOptionChange('Favre', selectedHatbandColor);
-    }, [selectedHatbandColor]);
-    useEffect(() => {
-        onOptionChange('Type', selectedMaterialType);
-    }, [selectedMaterialType]);
-    useEffect(() => {
-        onOptionChange('Skolebroderi', selectedButtonMaterialColor);
-    }, [selectedButtonMaterialColor]);
+    // useEffect(() => {
+    //     onOptionChange('Favre', selectedHatbandColor);
+    // }, [selectedHatbandColor]);
+    // useEffect(() => {
+    //     onOptionChange('Type', selectedMaterialType);
+    // }, [selectedMaterialType]);
+    // useEffect(() => {
+    //     onOptionChange('Skolebroderi', selectedButtonMaterialColor);
+    // }, [selectedButtonMaterialColor]);
     
     // Reusable option selector component
     const OptionSelector = ({ 
@@ -160,7 +160,10 @@ const ExtraCover = ({ selectedOptions = {}, onOptionChange,currentEmblem,program
                 
             <ForExtraCover
             current={currentEmblem}
-            programNew={program}/>
+            programNew={program}
+            forOptionChange={onOptionChange}
+            />
+            
             )}
 
               {/* <ColorSelector

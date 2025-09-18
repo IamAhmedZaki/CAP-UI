@@ -515,6 +515,25 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program,changeCurrentEmble
                 </>
             )}
 
+            {/* Emblem Selection */}
+            <div className="mt-4">
+                <span className="text-sm font-semibold text-slate-700">Kokarde Type</span>
+                <div className="flex space-x-3 mt-1">
+                    {emblemOptions.map((emblem) => (
+                        <button
+                            key={emblem.value}
+                            onClick={() => handleEmblemChange(emblem)}
+                            className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 ${selectedEmblem.value === emblem.value
+                                ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+                                : 'border-slate-200 hover:border-slate-400'
+                                }`}
+                            style={{ backgroundColor: emblem.color }}
+                        />
+                    ))}
+                </div>
+                <p className="text-sm mt-2 text-slate-700">Selected: {selectedEmblem.name}</p>
+            </div>
+
             {/* Prestige Type */}
             <div className="space-y-4 mt-4">
                 <div>
@@ -539,25 +558,6 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program,changeCurrentEmble
                         </button>
                     ))}
                 </div>
-            </div>
-
-            {/* Emblem Selection */}
-            <div className="mt-4">
-                <span className="text-sm font-semibold text-slate-700">Kokarde Type</span>
-                <div className="flex space-x-3 mt-1">
-                    {emblemOptions.map((emblem) => (
-                        <button
-                            key={emblem.value}
-                            onClick={() => handleEmblemChange(emblem)}
-                            className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 ${selectedEmblem.value === emblem.value
-                                ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
-                                : 'border-slate-200 hover:border-slate-400'
-                                }`}
-                            style={{ backgroundColor: emblem.color }}
-                        />
-                    ))}
-                </div>
-                <p className="text-sm mt-2 text-slate-700">Selected: {selectedEmblem.name}</p>
             </div>
 
             {/* Type Selection */}
