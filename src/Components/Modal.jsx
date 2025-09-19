@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { X, Printer, Download, Mail, CheckCircle, Package, Star, User, CreditCard, ArrowLeft, ArrowRight, Loader2 } from 'lucide-react';
+import { X, Printer, Download, Mail, CheckCircle, Package, Star, User, CreditCard, ArrowLeft, ArrowRight, Loader2, ShoppingCart, Settings } from 'lucide-react';
 
-const QuoteModal = ({ isOpen, onClose, selectedOptions,price }) => {
+const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfiguring }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [orderComplete, setOrderComplete] = useState(false);
   const [customerDetails, setCustomerDetails] = useState({
     firstName: '',
     lastName: '',
@@ -16,10 +17,20 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions,price }) => {
     country: 'Denmark',
     notes: ''
   });
+  const [orderDate, setOrderDate] = useState(`CAP-${Date.now().toString()}`);
+  // const orderNumber = `CAP-${Date.now().toString()}`;
+  // setOrderDate(orderNumber); 
 
+// In your handleConfirmOrder function:
+
+  
+  // Generate the date once when order is confirmed
+  // Store just the date part
+
+ 
   if (!isOpen) return null;
 
-  const steps = ['Quote Review', 'Customer Details', 'Order Confirmation'];
+  const steps = orderComplete ? ['Thank You'] : ['Quote Review', 'Customer Details', 'Order Confirmation'];
 
   // Price definitions for each option
   const priceConfig = {
@@ -280,38 +291,7 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions,price }) => {
   };
 
   // Function to calculate total price
-  const calculateTotal = () => {
-    let total = priceConfig.basePrice;
-    
-    // Calculate price for each section
-    Object.entries(selectedOptions).forEach(([section, options]) => {
-      if (priceConfig[section]) {
-        Object.entries(options).forEach(([option, value]) => {
-          if (priceConfig[section][option]) {
-            // Handle different value types (string, object, etc.)
-            if (typeof value === 'object' && value.name) {
-              // For objects like {name: '', value: '', price: 0}
-              if (value.name && priceConfig[section][option][value.name] !== undefined) {
-                total += priceConfig[section][option][value.name];
-              }
-            } else if (typeof value === 'string') {
-              // For simple string values
-              if (priceConfig[section][option][value] !== undefined) {
-                total += priceConfig[section][option][value];
-              }
-            } else if (typeof value === 'number') {
-              // For number values like size
-              if (priceConfig[section][option][value.toString()] !== undefined) {
-                total += priceConfig[section][option][value.toString()];
-              }
-            }
-          }
-        });
-      }
-    });
-    
-    return total.toFixed(2);
-  };
+  
 
   // Function to format values for display
   const formatValue = (value, section, key) => {
@@ -372,7 +352,7 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions,price }) => {
   };
 
   // Handle order submission
-  const handleConfirmOrder = async () => {
+   const handleConfirmOrder = async () => {
     setIsLoading(true);
     
     const orderData = {
@@ -381,11 +361,9 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions,price }) => {
       totalPrice: price,
       currency: 'DKK',
       orderDate: new Date().toISOString(),
-      orderNumber: `CAP-${Date.now()}`,
+      orderNumber: `CAP-${orderDate}`,
       email: customerDetails.email
     };
-
-    console.log(orderData)
 
     try {
       // Placeholder API call - replace with your actual endpoint
@@ -398,13 +376,11 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions,price }) => {
       });
       
       if (response.ok) {
-        // Success - you can add success handling here
-        console.log('Order submitted successfully:', orderData);
+        // Success - show thank you page
         setTimeout(() => {
           setIsLoading(false);
-          onClose();
-          // You can add a success message or redirect here
-        }, 2000);
+          setOrderComplete(true);
+        }, 1000);
       } else {
         throw new Error('Failed to submit order');
       }
@@ -413,6 +389,25 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions,price }) => {
       setIsLoading(false);
       // You can add error handling here
     }
+  };
+
+  // Reset modal to initial state
+  const handleResetModal = () => {
+    setCurrentStep(0);
+    setIsLoading(false);
+    setOrderComplete(false);
+    setCustomerDetails({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      company: '',
+      address: '',
+      city: '',
+      postalCode: '',
+      country: 'Denmark',
+      notes: ''
+    });
   };
 
   // Step 1: Quote Review (Original content)
@@ -649,9 +644,63 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions,price }) => {
       </div>
     </div>
   );
+const renderThankYouPage = () => (
+    <div className="overflow-y-auto px-6 py-8">
+      <div className="max-w-2xl mx-auto text-center">
+        <div className="flex justify-center mb-6">
+          <div className="p-4 bg-green-100 rounded-full">
+            <CheckCircle className="w-12 h-12 text-green-600" />
+          </div>
+        </div>
+        
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">Thank You for Your Order!</h2>
+        <p className="text-gray-600 mb-6">
+          Your custom cap configuration has been received successfully. We'll send a confirmation email to{' '}
+          <span className="font-medium text-green-600">{customerDetails.email}</span> shortly.
+        </p>
+        
+        <div className="bg-gray-50 rounded-lg p-4 mb-6">
+          <p className="text-sm text-gray-600 mb-1">Order Reference</p>
+          <p className="font-bold text-gray-900">{orderDate}</p>
+        </div>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <button
+            onClick={() => {
+              handleResetModal();
+              window.location.href="https://shop.studentlife.dk/homepage-duplicate-95/";
+              onClose()
 
+            }}
+            className="flex items-center justify-center px-6 py-3 bg-white border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-all duration-200"
+          >
+            <ShoppingCart className="w-5 h-5 mr-2" />
+            Continue Shopping
+          </button>
+          
+          <button
+            onClick={() => {
+              handleResetModal();
+              if (onContinueConfiguring) {
+                onContinueConfiguring();
+              }
+            }}
+            className="flex items-center justify-center px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg font-medium hover:from-green-700 hover:to-green-800 transition-all duration-200"
+          >
+            <Settings className="w-5 h-5 mr-2" />
+            Keep Configuring
+          </button>
+        </div>
+      </div>
+    </div>
+  );
   // Get step content
+ // Get step content
   const getStepContent = () => {
+    if (orderComplete) {
+      return renderThankYouPage();
+    }
+    
     switch (currentStep) {
       case 0:
         return renderQuoteReview();
@@ -666,6 +715,8 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions,price }) => {
 
   // Get step icon
   const getStepIcon = (step) => {
+    if (orderComplete) return CheckCircle;
+    
     switch (step) {
       case 0:
         return Package;
@@ -678,7 +729,7 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions,price }) => {
     }
   };
 
-  return (
+    return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-300">
       <div className="bg-white rounded-xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl border border-gray-100 animate-in slide-in-from-bottom duration-500">
         {/* Modal Header with Step Indicator */}
@@ -692,145 +743,150 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions,price }) => {
                 </div>
                 <div>
                   <h2 className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                    {steps[currentStep]}
+                    {orderComplete ? 'Order Complete' : steps[currentStep]}
                   </h2>
-                  <p className="text-gray-600 text-sm mt-1 flex items-center">
-                    <CheckCircle className="w-3 h-3 mr-1 text-green-600" />
-                    Step {currentStep + 1} of {steps.length}
-                  </p>
-                </div>
-              </div>
-              <button 
-                onClick={onClose}
-                className="p-2 hover:bg-gray-100 rounded-full transition-all duration-200 hover:scale-110 group"
-              >
-                <X className="w-4 h-4 text-gray-500 group-hover:text-gray-700" />
-              </button>
-            </div>
-
-            {/* Step Progress Indicator */}
-            <div className="flex items-center space-x-3">
-              {steps.map((step, index) => (
-                <div key={step} className="flex items-center">
-                  <div className={`flex items-center justify-center w-6 h-6 rounded-full border-2 transition-all duration-200 ${
-                    index <= currentStep 
-                      ? 'bg-green-600 border-green-600 text-white' 
-                      : 'border-gray-300 text-gray-400'
-                  }`}>
-                    {index < currentStep ? (
-                      <CheckCircle className="w-4 h-4" />
-                    ) : (
-                      <span className="text-xs font-bold">{index + 1}</span>
-                    )}
-                  </div>
-                  <span className={`ml-1 text-xs font-medium ${
-                    index <= currentStep ? 'text-green-700' : 'text-gray-400'
-                  }`}>
-                    {step}
-                  </span>
-                  {index < steps.length - 1 && (
-                    <div className={`w-6 h-0.5 mx-2 ${
-                      index < currentStep ? 'bg-green-600' : 'bg-gray-300'
-                    }`} />
+                  {!orderComplete && (
+                    <p className="text-gray-600 text-sm mt-1 flex items-center">
+                      <CheckCircle className="w-3 h-3 mr-1 text-green-600" />
+                      Step {currentStep + 1} of {steps.length}
+                    </p>
                   )}
                 </div>
-              ))}
+              </div>
+              {!orderComplete && (
+                <button 
+                  onClick={onClose}
+                  className="p-2 hover:bg-gray-100 rounded-full transition-all duration-200 hover:scale-110 group"
+                >
+                  <X className="w-4 h-4 text-gray-500 group-hover:text-gray-700" />
+                </button>
+              )}
             </div>
+
+            {/* Step Progress Indicator - Only show if not on thank you page */}
+            {!orderComplete && (
+              <div className="flex items-center space-x-3">
+                {steps.map((step, index) => (
+                  <div key={step} className="flex items-center">
+                    <div className={`flex items-center justify-center w-6 h-6 rounded-full border-2 transition-all duration-200 ${
+                      index <= currentStep 
+                        ? 'bg-green-600 border-green-600 text-white' 
+                        : 'border-gray-300 text-gray-400'
+                    }`}>
+                      {index < currentStep ? (
+                        <CheckCircle className="w-4 h-4" />
+                      ) : (
+                        <span className="text-xs font-bold">{index + 1}</span>
+                      )}
+                    </div>
+                    <span className={`ml-1 text-xs font-medium ${
+                      index <= currentStep ? 'text-green-700' : 'text-gray-400'
+                    }`}>
+                      {step}
+                    </span>
+                    {index < steps.length - 1 && (
+                      <div className={`w-6 h-0.5 mx-2 ${
+                        index < currentStep ? 'bg-green-600' : 'bg-gray-300'
+                      }`} />
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Modal Content - Now with flexible height */}
+        {/* Modal Content */}
         <div className="flex-1 overflow-auto">
           {getStepContent()}
         </div>
 
-        {/* Enhanced Footer with Step Navigation */}
-        <div className="bg-gradient-to-r from-gray-50 via-white to-gray-50 border-t border-gray-100 p-6">
-          {/* Price Section - Show on all steps */}
-          <div className="bg-gradient-to-r from-green-50 to-green-100/50 rounded-xl p-4 mb-4 border border-green-200">
-            <div className="flex justify-between items-center">
-              <div>
-                <span className="text-base font-bold text-gray-900">Total Price</span>
-                <p className="text-gray-600 text-xs mt-1">Including VAT and shipping</p>
-              </div>
-              <div className="text-right">
-                <span className="text-2xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
-                  {price}
-                </span>
-                <span className="text-base font-semibold text-green-600 ml-1">DKK</span>
+        {/* Enhanced Footer with Step Navigation - Only show if not on thank you page */}
+        {!orderComplete && (
+          <div className="bg-gradient-to-r from-gray-50 via-white to-gray-50 border-t border-gray-100 p-6">
+            {/* Price Section - Show on all steps */}
+            <div className="bg-gradient-to-r from-green-50 to-green-100/50 rounded-xl p-4 mb-4 border border-green-200">
+              <div className="flex justify-between items-center">
+                <div>
+                  <span className="text-base font-bold text-gray-900">Total Price</span>
+                  <p className="text-gray-600 text-xs mt-1">Including VAT and shipping</p>
+                </div>
+                <div className="text-right">
+                  <span className="text-2xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
+                    {price}
+                  </span>
+                  <span className="text-base font-semibold text-green-600 ml-1">DKK</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Navigation Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3">
-            <div className="flex gap-3 flex-1">
-              {currentStep > 0 && (
-                <button 
-                  onClick={() => setCurrentStep(prev => prev - 1)}
-                  className="flex items-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium text-sm hover:border-gray-400 hover:bg-gray-50 transition-all duration-200"
-                >
-                  <ArrowLeft className="w-4 h-4 mr-1" />
-                  Back
-                </button>
-              )}
-              
-              {currentStep === 0 && (
-                <button 
-                  onClick={onClose}
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium text-sm hover:border-gray-400 hover:bg-gray-50 transition-all duration-200"
-                >
-                  Continue Editing
-                </button>
-              )}
-            </div>
-
-            {currentStep < steps.length - 1 ? (
-              <button 
-                onClick={() => {
-                  if (currentStep === 1 && !validateCustomerDetails()) {
-                    alert('Please fill in all required fields.');
-                    return;
-                  }
-                  setCurrentStep(prev => prev + 1);
-                }}
-                className="flex-1 bg-gradient-to-r from-green-600 via-green-600 to-green-700 text-white py-2 px-4 rounded-lg font-medium text-sm hover:from-green-700 hover:to-green-800 transition-all duration-300 shadow-md hover:shadow-lg relative overflow-hidden group"
-              >
-                <span className="relative z-10 flex items-center justify-center">
-                  Continue
-                  <ArrowRight className="w-4 h-4 ml-1" />
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-green-700 to-green-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </button>
-            ) : (
-              <button 
-                onClick={handleConfirmOrder}
-                disabled={isLoading}
-                className="flex-1 bg-gradient-to-r from-green-600 via-green-600 to-green-700 text-white py-2 px-4 rounded-lg font-medium text-sm hover:from-green-700 hover:to-green-800 transition-all duration-300 shadow-md hover:shadow-lg relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <span className="relative z-10 flex items-center justify-center">
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-1 animate-spin" />
-                      Processing...
-                    </>
-                  ) : (
-                    <>
-                      <CheckCircle className="w-4 h-4 mr-1" />
-                      Confirm Order
-                    </>
-                  )}
-                </span>
-                {!isLoading && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-green-700 to-green-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            {/* Navigation Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex gap-3 flex-1">
+                {currentStep > 0 && (
+                  <button 
+                    onClick={() => setCurrentStep(prev => prev - 1)}
+                    className="flex items-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium text-sm hover:border-gray-400 hover:bg-gray-50 transition-all duration-200"
+                  >
+                    <ArrowLeft className="w-4 h-4 mr-1" />
+                    Back
+                  </button>
                 )}
-              </button>
-            )}
-          </div>
+                
+                {currentStep === 0 && (
+                  <button 
+                    onClick={onClose}
+                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium text-sm hover:border-gray-400 hover:bg-gray-50 transition-all duration-200"
+                  >
+                    Continue Editing
+                  </button>
+                )}
+              </div>
 
-          {/* Trust Indicators */}
-         
-        </div>
+              {currentStep < steps.length - 1 ? (
+                <button 
+                  onClick={() => {
+                    if (currentStep === 1 && !validateCustomerDetails()) {
+                      alert('Please fill in all required fields.');
+                      return;
+                    }
+                    setCurrentStep(prev => prev + 1);
+                  }}
+                  className="flex-1 bg-gradient-to-r from-green-600 via-green-600 to-green-700 text-white py-2 px-4 rounded-lg font-medium text-sm hover:from-green-700 hover:to-green-800 transition-all duration-300 shadow-md hover:shadow-lg relative overflow-hidden group"
+                >
+                  <span className="relative z-10 flex items-center justify-center">
+                    Continue
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-green-700 to-green-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+              ) : (
+                <button 
+                  onClick={handleConfirmOrder}
+                  disabled={isLoading}
+                  className="flex-1 bg-gradient-to-r from-green-600 via-green-600 to-green-700 text-white py-2 px-4 rounded-lg font-medium text-sm hover:from-green-700 hover:to-green-800 transition-all duration-300 shadow-md hover:shadow-lg relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <span className="relative z-10 flex items-center justify-center">
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                        Processing...
+                      </>
+                    ) : (
+                      <>
+                        <CheckCircle className="w-4 h-4 mr-1" />
+                        Confirm Order
+                      </>
+                    )}
+                  </span>
+                  {!isLoading && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-green-700 to-green-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  )}
+                </button>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

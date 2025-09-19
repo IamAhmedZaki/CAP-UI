@@ -9,41 +9,58 @@ import coverColorOptionsimg1 from '../assets/cover images/silverahh.png';
 import coverColorOptionsimg2 from '../assets/cover images/none.png';
 import coverColorOptionsimg3 from '../assets/cover images/darkblueahh.png';
 
-const Cover = ({ selectedOptions = {}, onOptionChange,program,currentEmblem }) => {
+const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem }) => {
     const [selectedCoverColor, setSelectedCoverColor] = useState('Hvid');
     const [selectedEdgebandColor, setSelectedEdgebandColor] = useState('NONE');
     const [selectedKantbandColor, setSelectedKantbandColor] = useState('NONE');
     const [selectedStarsStyle, setSelectedStarsStyle] = useState('1');
-    
+
+    const hideSelectorsPrograms = [
+    'sosuassistent',
+    'sosuhjælper',
+    'frisør',
+    'kosmetolog',
+    'pædagog',
+    'pau',
+    'ernæringsassisten'
+];
+
+const shouldHideSelectors = hideSelectorsPrograms.includes(program?.toLowerCase());
+
     const coverColorOptions = [
         { name: 'Hvid', value: 'Hvid', color: '#ffffff' },
         { name: 'Sort', value: 'Sort', color: '#000000' },
         { name: 'Hvid med glimmer', value: 'Hvid med glimmer', img: coverColorOptionsimg1 },
-        { name: 'Sort med glimmer', value: 'Sort med glimmer', color: '#292929'  }
+        { name: 'Sort med glimmer', value: 'Sort med glimmer', color: '#292929' }
     ];
 
     const getCoverColor = () => {
         switch (program?.toLowerCase()) {
             case 'hhx':
-                return { name: 'HHX', value:'HHX', color: '#4169e1' };
+                return { name: 'HHX', value: 'HHX', color: '#4169e1' };
             case 'htx':
-                return { name: 'HTX', value:'HTX', color: '#000080' };
+                return { name: 'HTX', value: 'HTX', color: '#000080' };
             case 'stx':
-                return { name: 'STX', value:'STX', color: '#7F1D1D' };
+                return { name: 'STX', value: 'STX', color: '#7F1D1D' };
             case 'hf':
-                return { name: 'HF', value:'HF', color: '#ADD8E6' };
+                return { name: 'HF', value: 'HF', color: '#ADD8E6' };
+            case 'eux':
+                return { name: 'EUX', value: 'EUX', color: '#7c7f82' };
+            case 'eud':
+                return { name: 'EUD', value: 'EUD', color: '#522854' };
             default:
+                return null; // nothing if no match
         }
     };
     const getCurrentEmblem = () => {
         switch (currentEmblem.name) {
             case 'Guld':
 
-                return { name: 'Guld', value: 'Guld', color:'#FFD700' };
-                    
+                return { name: 'Guld', value: 'Guld', color: '#FFD700' };
+
             default:
-                return { name: 'Sølv', value: 'Sølv', color:'#C0C0C0' };
-                    
+                return { name: 'Sølv', value: 'Sølv', color: '#C0C0C0' };
+
         }
     }
     const edgebandColorOptions = [
@@ -51,18 +68,18 @@ const Cover = ({ selectedOptions = {}, onOptionChange,program,currentEmblem }) =
         { name: 'SORT', value: 'SORT', color: '#3d3d3d' },
         getCoverColor()
 
-    ];
-    
+    ].filter(Boolean);
+
     const topKantColorOptions = [
         { name: 'NONE', value: 'NONE', img: coverColorOptionsimg2 },
-       getCurrentEmblem(),
-        
-        
+        getCurrentEmblem(),
+
+
 
     ];
-    
+
     const starsOptions = [
-         { name: 'NONE', value: 'NONE', img: coverColorOptionsimg2 },
+        { name: 'NONE', value: 'NONE', img: coverColorOptionsimg2 },
         { name: 'One Star', value: '1', img: img1 },
         { name: 'Two Stars', value: '2', img: img2 },
         { name: 'Three Stars', value: '3', img: img3 },
@@ -79,7 +96,7 @@ const Cover = ({ selectedOptions = {}, onOptionChange,program,currentEmblem }) =
     useEffect(() => {
         onOptionChange('Topkant', selectedKantbandColor);
     }, [selectedKantbandColor]);
-    
+
     useEffect(() => {
         onOptionChange('Kantbånd', selectedEdgebandColor);
     }, [selectedEdgebandColor]);
@@ -89,10 +106,10 @@ const Cover = ({ selectedOptions = {}, onOptionChange,program,currentEmblem }) =
     }, [selectedStarsStyle]);
 
     // Reusable selector component for both colors and images
-    const Selector = ({ 
-        label, 
-        currentSelection, 
-        onSelectionChange, 
+    const Selector = ({
+        label,
+        currentSelection,
+        onSelectionChange,
         options,
         type = 'color' // 'color' or 'image'
     }) => (
@@ -107,17 +124,16 @@ const Cover = ({ selectedOptions = {}, onOptionChange,program,currentEmblem }) =
                     <button
                         key={option.value}
                         onClick={() => onSelectionChange(option.value)}
-                        className={`w-12 h-12 rounded-xl border-2 mb-2 transition-all duration-200 hover:scale-110 flex items-center justify-center ${
-                            currentSelection === option.value
+                        className={`w-12 h-12 rounded-xl border-2 mb-2 transition-all duration-200 hover:scale-110 flex items-center justify-center ${currentSelection === option.value
                                 ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
                                 : 'border-slate-200 hover:border-slate-400'
-                        }`}
+                            }`}
                         style={option.color ? { backgroundColor: option.color || option.value } : {}}
                         title={option.name}
                     >
                         {option.img && (
-                            <img 
-                                src={option.img} 
+                            <img
+                                src={option.img}
                                 alt={option.name}
                                 className="w-8 h-8 object-contain"
                             />
@@ -125,7 +141,7 @@ const Cover = ({ selectedOptions = {}, onOptionChange,program,currentEmblem }) =
                     </button>
                 ))}
             </div>
-             <p className="text-sm mt-2 text-slate-700">Selected: {currentSelection}</p>
+            <p className="text-sm mt-2 text-slate-700">Selected: {currentSelection}</p>
         </div>
     );
 
@@ -143,7 +159,7 @@ const Cover = ({ selectedOptions = {}, onOptionChange,program,currentEmblem }) =
                 options={coverColorOptions}
                 type="color"
             />
-            
+
             {/* Edgeband Color Selection */}
             <Selector
                 label="Topkant"
@@ -152,23 +168,26 @@ const Cover = ({ selectedOptions = {}, onOptionChange,program,currentEmblem }) =
                 options={topKantColorOptions}
                 type="color"
             />
-            
-            <Selector
-                label="Kantbånd"
-                currentSelection={selectedEdgebandColor}
-                onSelectionChange={setSelectedEdgebandColor}
-                options={edgebandColorOptions}
-                type="color"
-            />
 
-            {/* Stars Style Selection */}
-            <Selector
-                label="Stjerner"
-                currentSelection={selectedStarsStyle}
-                onSelectionChange={setSelectedStarsStyle}
-                options={starsOptions}
-                type="image"
-            />
+           {!shouldHideSelectors && (
+    <>
+        <Selector
+            label="Kantbånd"
+            currentSelection={selectedEdgebandColor}
+            onSelectionChange={setSelectedEdgebandColor}
+            options={edgebandColorOptions}
+            type="color"
+        />
+
+        <Selector
+            label="Stjerner"
+            currentSelection={selectedStarsStyle}
+            onSelectionChange={setSelectedStarsStyle}
+            options={starsOptions}
+            type="image"
+        />
+    </>
+)}
         </>
     );
 }

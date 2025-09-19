@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef,useEffect } from 'react';
 import img1 from '../assets/menuCapPics/1.png';
 import img2 from '../assets/menuCapPics/2.png';
 import img3 from '../assets/menuCapPics/3.png';
@@ -30,82 +30,86 @@ const StudentDashboard = () => {
   const program = searchParams.get("program");
   const [isConfigOpen, setIsConfigOpen] = useState(false); 
   const [globalEmblem, setGlobalEmblem] = useState({ name: 'Guld', value: 'Guld', color: '#FCD34D' }); 
+   const [isAppReady, setIsAppReady] = useState(false);
+  const [isIframeLoaded, setIsIframeLoaded] = useState(false);
 
 
 
   // Complete state for all components
   const [selectedOptions, setSelectedOptions] = useState({
-    KOKARDE: {
-     'Roset farve': { name: '', value: '' },
-      Kokarde: '',
-      'Emblem': { name: '', value: '', color: '' },
-      'Type': ''
-    },
-    UDDANNELSESBÅND: {
-      Huebånd: '',
-      Materiale: '',
-      Hagerem: '',
-      'Hagerem Materiale': '',
-      'Broderi foran': '',
-      'Broderi farve': '',
-      'Knap farve': '',
-    },
-    BRODERI: {
-      'Broderifarve': '',
-      'Navne broderi': '',
-      'Skolebroderi farve': '',
-     Skolebroderi: ''
-    },
-    BETRÆK: {
-      Farve: '',
-      Kantbånd: '',
-      Stjerner: ''
-    },
-    SKYGGE: {
-      Type: '',
-      Materiale: ' ',
-      Skyggebånd: '',
+  KOKARDE: {
+    'Roset farve': { name: 'RED', value: 'RED' },
+    Kokarde: 'Signature',
+    Emblem: { name: 'Guld', value: 'Guld', color: 'Guld' },
+    'Type': 'Kurdistan'
+  },
+  UDDANNELSESBÅND: {
+    Huebånd: 'EUD',
+    Materiale: 'VELOUR',
+    Hagerem: 'Mat',
+    'Hagerem Materiale': 'Mat hagerem',
+    'Broderi foran': '',
+    'Broderi farve': 'Guld',
+    'Knap farve': 'Guld',
+  },
+  BRODERI: {
+    'Broderifarve': 'Guld',
+    'Navne broderi': '',
+    'Skolebroderi farve': 'HVID',
+    Skolebroderi: ''
+  },
+  BETRÆK: {
+    Farve: 'Hvid',
+    Kantbånd: 'NONE',
+    Stjerner: '1',
+    Topkant: 'NONE'
+  },
+  SKYGGE: {
+    Type: 'Blank',
+    Materiale: 'Uden kant',
+    Skyggebånd: 'Guld',
     'Skyggegravering Line 1': '',
-     'Skyggegravering Line 2': '',
-     'Skyggegravering Line 3': ''
-    },
-    FOER: {
-      Svederem: '',
-      Farve: '',
-      Sløjfe: '',
-      Foer: '',
-      Type: ''
-    },
-    EKSTRABETRÆK: {
-      Tilvælg: '',
-      Favre:'',
-      Type:'',
-      Skolebroderi: ''
-      
-    },
-    TILBEHØR: {
-      
-      Hueæske: '',
-      'Premium æske': '',
-      
-      Huekuglepen: '',
-      Silkepude: '',
-      Emblem:'',
-      Badges: '',
-      Handsker: '',
-      'Store kuglepen': '',
-      'Smart Tag': '',
-      Lyskugle: '',
-      'Luksus champagneglas': '',
-      Fløjte: '',
-      Trrompet: '',
-      Bucketpins: '',
-    },
-    STØRRELSE: {
-     'Vælg størrelse': 49.5,
-      'Millimeter tilpasningssæt': ''
-    }
-  });
+    'Skyggegravering Line 2': '',
+    'Skyggegravering Line 3': ''
+  },
+  FOER: {
+    Svederem: 'læder',
+    Farve: 'HVID',
+    Sløjfe: 'HVID',
+    Foer: 'Viskose',
+    Type: ''
+  },
+  EKSTRABETRÆK: {
+    Tilvælg: 'Yes',
+    Farve: 'Hvid',
+    Type: '',
+    Skolebroderi: '',
+    Topkant: 'NONE',
+    Kantbånd: 'NONE',
+    Stjerner: '1'
+  },
+  TILBEHØR: {
+    Hueæske: 'Standard',
+    'Premium æske': '',
+    Huekuglepen: 'No',
+    Silkepude: 'No',
+    Emblem: '',
+    Badges: 'No',
+    Handsker: 'No',
+    'Store kuglepen': 'No',
+    'Smart Tag': 'No',
+    Lyskugle: 'No',
+    'Luksus champagneglas': 'No',
+    Fløjte: 'No',
+    Trrompet: 'No',
+    Bucketpins: 'No',
+  },
+  STØRRELSE: {
+    'Vælg størrelse': 49.5,
+    'Millimeter tilpasningssæt': 'No'
+  }
+});
+
 
 
 
@@ -977,6 +981,74 @@ const luksusPrices = {
     setIsQuoteModalOpen(true);
   }, []);
 
+ useEffect(() => {
+    if (isIframeLoaded && isAppReady && program) {
+      sendProgramToIframe();
+    }
+  }, [program, isIframeLoaded, isAppReady]);
+
+  const sendProgramToIframe = () => {
+    // Get iframe by ID
+    const iframe = document.getElementById('preview-iframe');
+    
+    if (iframe && iframe.contentWindow) {
+      const message = "program:" + program.toLowerCase();
+      console.log("Sending message to iframe:", message);
+      iframe.contentWindow.postMessage(message, "*");
+    } else {
+      console.log("Iframe not ready or program not available");
+    }
+  };
+
+  const handleIframeLoad = () => {
+    console.log("Iframe loaded");
+    setIsIframeLoaded(true);
+  };
+
+  // Listen for messages from the iframe
+  useEffect(() => {
+    const handleMessage = (event) => {
+      // For security, you might want to check event.origin
+      if (event.data === "app:ready") {
+        console.log("Received app:ready message from iframe");
+        setIsAppReady(true);
+        
+        // Send program if we have one
+        if (program) {
+          sendProgramToIframe();
+        }
+      }
+      
+      // Handle other messages if needed
+      if (typeof event.data === 'object') {
+        console.log("Received object from iframe:", event.data);
+      } else if (typeof event.data === 'string' && event.data.startsWith('{')) {
+        try {
+          const parsedData = JSON.parse(event.data);
+          console.log("Received JSON from iframe:", parsedData);
+        } catch (e) {
+          console.log("Received string from iframe:", event.data);
+        }
+      } else {
+        console.log("Received from iframe:", event.data);
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    
+    // Clean up the event listener
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, [program]);
+
+  // Add this useEffect to debug
+  useEffect(() => {
+    console.log("Program changed:", program);
+    console.log("Iframe loaded status:", isIframeLoaded);
+    console.log("App ready status:", isAppReady);
+  }, [program, isIframeLoaded, isAppReady]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
 
@@ -1071,6 +1143,7 @@ const luksusPrices = {
                 <ExtraCover
                   selectedOptions={selectedOptions.EKSTRABETRÆK}
                   onOptionChange={(key, value) => handleOptionChange('EKSTRABETRÆK', key, value)}currentEmblem={globalEmblem}
+                  program={program}
                 />
               )}
               {activeMenu === "TILBEHØR" && (
@@ -1107,12 +1180,14 @@ const luksusPrices = {
                 </div>
               </div>
               <div className="flex-1 rounded-b-2xl overflow-hidden">
-                <iframe
-                  src="https://playcanv.as/e/p/aaaab65d/"
-                  className="w-full h-full"
-                  frameBorder="0"
-                  title="3D Student Card Preview"
-                />
+                 <iframe
+              id="preview-iframe" // Add ID here
+              src="https://playcanv.as/e/p/3b2251ad/"
+              className="w-full h-full"
+              frameBorder="0"
+              title="3D Student Card Preview"
+              onLoad={handleIframeLoad}
+            />
               </div>
             </div>
           </div>
@@ -1252,6 +1327,7 @@ const luksusPrices = {
                 <ExtraCover
                   selectedOptions={selectedOptions.EKSTRABETRÆK}
                   onOptionChange={(key, value) => handleOptionChange('EKSTRABETRÆK', key, value)}currentEmblem={globalEmblem}
+                  program={program}
                 />
               )}
               {activeMenu === "TILBEHØR" && (

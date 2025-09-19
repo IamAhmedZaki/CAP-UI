@@ -8,30 +8,38 @@ const Embroidery = ({ selectedOptions = {}, onOptionChange, program }) => {
     const [schoolEmbroideryText, setSchoolEmbroideryText] = useState('');
     const [ingenButton, setIngenButton] = useState(false);
 
-    const getEmbroideryColor = () => {
-        switch (program?.toLowerCase()) {
-            case 'hhx':
-                return { name: 'HHX', value: '#4169e1' };
-            case 'htx':
-                return { name: 'HTX', value: '#000080' };
-            case 'stx':
-                return { name: 'STX', value: '#7F1D1D' };
-            case 'hf':
-                return { name: 'HF', value: '#ADD8E6' };
-            default:
-        }
-    };
+   const getEmbroideryColor = () => {
+    switch (program?.toLowerCase()) {
+        case 'hhx':
+            return { name: 'HHX', value: '#4169e1' };
+        case 'htx':
+            return { name: 'HTX', value: '#000080' };
+        case 'stx':
+            return { name: 'STX', value: '#7F1D1D' };
+        case 'hf':
+            return { name: 'HF', value: '#ADD8E6' };
+        case 'eux':
+            return { name: 'EUX', value: '#7c7f82' };
+        case 'eud':
+            return { name: 'EUD', value: '#522854' };
+        default:
+            return null; // nothing if no match
+    }
+};
 
-    // Color options with descriptive names
-    const nameEmbroideryColorOptions = [
-        { name: 'Guld', value: '#ba9200' },
-        { name: 'Sølv', value: '#757575' },
-        getEmbroideryColor(),
-        { name: 'HVID', value: '#E5E7EB' },
-        { name: 'SORT', value: '#2e2e2e' },
-    ];
 
-    const schoolEmbroideryColorOptions = [
+// Embroidery options (always gold/silver/white/black + program color if matched)
+const nameEmbroideryColorOptions = [
+    { name: 'Guld', value: '#ba9200' },
+    { name: 'Sølv', value: '#757575' },
+    getEmbroideryColor(),
+    { name: 'HVID', value: '#E5E7EB' },
+    { name: 'SORT', value: '#000000' },
+].filter(Boolean);
+
+    
+
+const schoolEmbroideryColorOptions = [
         { name: 'HVID', value: '#E5E7EB' },
         
         { name: 'Guld', value: '#ba9200' },

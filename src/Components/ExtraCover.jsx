@@ -6,7 +6,7 @@ const ExtraCover = ({ selectedOptions = {}, onOptionChange,currentEmblem,program
     // const [selectedMaterialType, setSelectedMaterialType] = useState('Standard');
     // const [selectedButtonMaterialColor, setSelectedButtonMaterialColor] = useState('Ingen');
 
-    
+    const theProgram=program
 
     const extraCoverOptions = [
         { name: 'Yes', value: 'Yes', icon: '✔️' },
@@ -160,7 +160,7 @@ const ExtraCover = ({ selectedOptions = {}, onOptionChange,currentEmblem,program
                 
             <ForExtraCover
             current={currentEmblem}
-            programNew={program}
+            programNew={`${theProgram}`}
             forOptionChange={onOptionChange}
             />
             

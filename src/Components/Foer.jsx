@@ -1,14 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import img1 from '../assets/shadeimages/glimmer.png';
 
-const Foer = ({ selectedOptions = {}, onOptionChange,currentEmblem }) => {
+const Foer = ({ selectedOptions = {}, onOptionChange,currentEmblem,program }) => {
     // State variables with descriptive names
-    const [selectedKokardeMaterial, setSelectedKokardeMaterial] = useState('læder');
+     const [selectedKokardeMaterial, setSelectedKokardeMaterial] = useState('læder');
     const [selectedKokardeColor, setSelectedKokardeColor] = useState('black');
     const [selectedBowColor, setSelectedBowColor] = useState('HVID');
     const [selectedFoerMaterial, setSelectedFoerMaterial] = useState('Viskose');
     const [selectedbowMaterialType, setBowMaterialTypes] = useState('');
     
+    
+    const restrictedPrograms = [
+        'Sosuassistent',
+        'Sosuhjælper',
+        'Frisør',
+        'Kosmetolog',
+        'Pædagog',
+        'PAU',
+        'Ernæringsassisten'
+    ];
+
+     const isRestricted = restrictedPrograms.some(
+        p => p.toLowerCase() === program?.toLowerCase()
+    );
+
+     const kokardeMaterialTypes = isRestricted 
+        ? ['læder'] 
+        : ['læder', 'Kunstlæder', 'Ruskin', 'Alcantra'];
+
+
     const getCurrentEmblem = () => {
         switch (currentEmblem.name) {
             case 'Guld':
@@ -35,6 +55,8 @@ const Foer = ({ selectedOptions = {}, onOptionChange,currentEmblem }) => {
     
 
     // Effect hooks to propagate changes to parent component
+
+
     useEffect(() => {
         onOptionChange('Svederem', selectedKokardeMaterial);
     }, [selectedKokardeMaterial]);
@@ -105,7 +127,7 @@ const Foer = ({ selectedOptions = {}, onOptionChange,currentEmblem }) => {
         }
     }, [selectedKokardeMaterial, kokardeColorOptions, selectedKokardeColor]);
 
-    const kokardeMaterialTypes = ['læder', 'Kunstlæder', 'Ruskin', 'Alcantra'];
+    // const kokardeMaterialTypes = ['læder', 'Kunstlæder', 'Ruskin', 'Alcantra'];
     const foerMaterialTypes = ['Viskose', 'Polyester', 'Satin', 'Silke'];
 
     // Reusable color selector component

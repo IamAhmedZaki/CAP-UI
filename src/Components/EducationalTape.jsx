@@ -59,23 +59,85 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, curren
     }
 
     const getHuebandColor = () => {
-        switch (program?.toLowerCase()) {
-            case 'hhx':
-                return { name: 'HHX', value: '#4169e1' };
-            case 'htx':
-                return { name: 'HTX', value: '#000080' };
-            case 'stx':
-                return { name: 'STX', value: '#7F1D1D' };
-            case 'hf':
-                return { name: 'HF', value: '#ADD8E6' };
-            default:
-        }
-    };
+    switch (program?.toLowerCase()) {
+        case 'hhx':
+            return [
+                { name: 'HHX', value: '#4169e1' },
+                { name: 'SORT', value: '#000001' }
+            ];
+        case 'htx':
+            return [
+                { name: 'HTX', value: '#000080' },
+                { name: 'SORT', value: '#000001' }
+            ];
+        case 'stx':
+            return [
+                { name: 'STX', value: '#7F1D1D' },
+                { name: 'SORT', value: '#000001' }
+            ];
+        case 'hf':
+            return [
+                { name: 'HF', value: '#ADD8E6' },
+                { name: 'SORT', value: '#000001' }
+            ];
+        case 'eux':
+            return [
+                { name: 'EUX', value: '#522854' },
+                { name: 'SORT', value: '#000001' }
+            ];
+        case 'eud':
+            return [
+                { name: 'EUD', value: '#7c7f82' },
+                { name: 'SORT', value: '#000001' }
+            ];
+        case 'sosuassistent':
+            return [
+                { name: 'Sosuassistent', value: '#7c7f82' },
+                
+            ];
+        case 'sosuhjælper':
+            return [
+                { name: 'Sosuhjælper', value: '#8f478a' },
+                
+            ];
+        case 'frisør':
+            return [
+                { name: 'Frisør', value: '#FFB6C1' },
+               
+            ];
+        case 'kosmetolog':
+            return [
+                { name: 'Kosmetolog', value: '#FFC0CB' },
+                
+            ];
+        case 'pædagog':
+            return [
+                { name: 'Pædagog', value: '#341539' },
+                
+            ];
+        case 'pau':
+            return [
+                { name: 'PAU', value: '#FFA500' },
+                
+            ];
+        case 'ernæringsassisten':
+            return [
+                { name: 'Ernæringsassisten', value: '#FFFF00' },
+                
+            ];
+        default:
+            return [
+                { name: '', value: '' },
+                { name: 'SORT', value: '#000001' }
+            ];
+    }
+};
 
-    const hatbandColorOptions = [
-        getHuebandColor(),
-        { name: 'SORT', value: '#000001' }, // Consider using different colors or removing duplicate
-    ];
+
+    const hatbandColorOptions = 
+        getHuebandColor()
+        // Consider using different colors or removing duplicate
+    ;
 
     const chinStrapColorOptions = [
         { name: 'Mat', value: '#2e2e2e',img:matteleather },
@@ -85,26 +147,32 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, curren
     ];
 
  const getEmbroideryColor = () => {
-        switch (program?.toLowerCase()) {
-            case 'hhx':
-                return { name: 'HHX', value: 'HHX', color: '#4169e1' };
-            case 'htx':
-                return { name: 'HTX', value: 'HTX', color: '#000080' };
-            case 'stx':
-                return { name: 'STX', value: 'STX', color: '#7F1D1D' };
-            case 'hf':
-                return { name: 'HF', value: 'HF', color: '#ADD8E6' };
-            default:
-        }
-    };
+    switch (program?.toLowerCase()) {
+        case 'hhx':
+            return { name: 'HHX', value: 'HHX', color: '#4169e1' };
+        case 'htx':
+            return { name: 'HTX', value: 'HTX', color: '#000080' };
+        case 'stx':
+            return { name: 'STX', value: 'STX', color: '#7F1D1D' };
+        case 'hf':
+            return { name: 'HF', value: 'HF', color: '#ADD8E6' };
+        case 'eux':
+            return { name: 'EUX', value: 'EUX', color: '#522854' };
+        case 'eud':
+            return { name: 'EUD', value: 'EUD', color: '#7c7f82' };
+        default:
+            return null; // nothing if no match
+    }
+};
 
-    const embroideryColorOptions = [
-        { name: 'Guld', value: 'Guld', color: '#ba9200' },
-        { name: 'Sølv', value: 'Sølv', color: '#757575' },
-        getEmbroideryColor(),
-        { name: 'HVID', value: 'HVID', color: '#E5E7EB' },
-        { name: 'SORT', value: 'SORT', color: '#000000' },
-    ];
+const embroideryColorOptions = [
+    { name: 'Guld', value: 'Guld', color: '#ba9200' },
+    { name: 'Sølv', value: 'Sølv', color: '#757575' },
+    getEmbroideryColor(),
+    { name: 'HVID', value: 'HVID', color: '#E5E7EB' },
+    { name: 'SORT', value: 'SORT', color: '#000000' },
+].filter(Boolean); // removes null
+
 
     const buttonColorOptions = [
         // { name: 'BLANK', value: 'BLANK', img: coverColorOptionsimg2 },
@@ -114,6 +182,7 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, curren
 
     const materialEUXTypes = ['BOMULD', 'VELOUR', 'SATIN', 'GLIMMER', 'SHIMMER',];
     const materialSORTTypes = ['VELOUR', 'SATIN', 'GLIMMER'];
+    const materialColorTypes=['BOMULD','SATIN']
 
     const buttonMaterialMATTypes = ['Mat hagerem'];
     const buttonMaterialBLANKTypes = ['Blank hagerem', 'Blank kunstlæder hagerem'];
@@ -125,27 +194,31 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, curren
     const year = ['Ingen', ...Array.from({ length: 2 }, (_, i) => (currentYear + i).toString())];
 
     function getMaterialOptions() {
-        switch (selectedHatbandColor) {
-            case 'HHX':
+    switch (selectedHatbandColor) {
+        case 'HHX':
+        case 'HTX':
+        case 'STX':
+        case 'HF':
+        case 'EUD':
+        case 'EUX':
+            return materialEUXTypes
+        case 'Sosuassistent':
+        case 'Sosuhjælper':
+        case 'Frisør':
+        case 'Kosmetolog':
+        case 'Pædagog':
+        case 'PAU':
+        case 'Ernæringsassisten':
+            return materialColorTypes;
 
-                return materialEUXTypes;
-            case 'HTX':
+        case 'SORT':
+            return materialSORTTypes;
 
-                return materialEUXTypes;
-            case 'STX':
-
-                return materialEUXTypes;
-            case 'HF':
-
-                return materialEUXTypes;
-            case 'SORT':
-
-                return materialSORTTypes;
-
-            default:
-                return [];
-        }
+        default:
+            return [];
     }
+}
+
     useEffect(() => {
         let materialType = getMaterialOptions()
         if (materialType.length > 0 && !materialType.includes(selectedMaterialType)) {
@@ -287,9 +360,9 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, curren
                 label="Materiale"
                 currentSelection={selectedMaterialType}
                 onSelectionChange={setSelectedMaterialType}
-                options={['HTX', 'HHX', 'STX', 'HF'].includes(selectedHatbandColor)
-                    ? materialEUXTypes
-                    : materialSORTTypes}
+                options={['HTX', 'HHX', 'STX', 'HF','EUX','EUD'].includes(selectedHatbandColor)
+                    ? materialEUXTypes:[ 'Sosuassistent', 'Sosuhjælper', 'Frisør', 
+   'Kosmetolog', 'Pædagog', 'PAU', 'Ernæringsassisten'].includes(selectedHatbandColor)? materialColorTypes: materialSORTTypes}
             />
 
             {/* Chin Strap Color Selection */}
