@@ -37,77 +37,77 @@ const StudentDashboard = () => {
 
   // Complete state for all components
   const [selectedOptions, setSelectedOptions] = useState({
-  KOKARDE: {
-    'Roset farve': { name: 'RED', value: 'RED' },
-    Kokarde: 'Signature',
-    Emblem: { name: 'Guld', value: 'Guld', color: 'Guld' },
-    'Type': 'Kurdistan'
-  },
-  UDDANNELSESBÅND: {
-    Huebånd: 'EUD',
-    Materiale: 'VELOUR',
-    Hagerem: 'Mat',
-    'Hagerem Materiale': 'Mat hagerem',
-    'Broderi foran': '',
-    'Broderi farve': 'Guld',
-    'Knap farve': 'Guld',
-  },
-  BRODERI: {
-    'Broderifarve': 'Guld',
-    'Navne broderi': '',
-    'Skolebroderi farve': 'HVID',
-    Skolebroderi: ''
-  },
-  BETRÆK: {
-    Farve: 'Hvid',
-    Kantbånd: 'NONE',
-    Stjerner: '1',
-    Topkant: 'NONE'
-  },
-  SKYGGE: {
-    Type: 'Blank',
-    Materiale: 'Uden kant',
-    Skyggebånd: 'Guld',
-    'Skyggegravering Line 1': '',
-    'Skyggegravering Line 2': '',
-    'Skyggegravering Line 3': ''
-  },
-  FOER: {
-    Svederem: 'læder',
-    Farve: 'HVID',
-    Sløjfe: 'HVID',
-    Foer: 'Viskose',
-    Type: ''
-  },
-  EKSTRABETRÆK: {
-    Tilvælg: 'Yes',
-    Farve: 'Hvid',
-    Type: '',
-    Skolebroderi: '',
-    Topkant: 'NONE',
-    Kantbånd: 'NONE',
-    Stjerner: '1'
-  },
-  TILBEHØR: {
-    Hueæske: 'Standard',
-    'Premium æske': '',
-    Huekuglepen: 'No',
-    Silkepude: 'No',
-    Emblem: '',
-    Badges: 'No',
-    Handsker: 'No',
-    'Store kuglepen': 'No',
-    'Smart Tag': 'No',
-    Lyskugle: 'No',
-    'Luksus champagneglas': 'No',
-    Fløjte: 'No',
-    Trrompet: 'No',
-    Bucketpins: 'No',
-  },
-  STØRRELSE: {
-    'Vælg størrelse': 49.5,
-    'Millimeter tilpasningssæt': 'No'
-  }
+  // KOKARDE: {
+  //   'Roset farve': { name: 'RED', value: 'RED' },
+  //   Kokarde: 'Signature',
+  //   Emblem: { name: 'Guld', value: 'Guld', color: 'Guld' },
+  //   'Type': 'Kurdistan'
+  // },
+  // UDDANNELSESBÅND: {
+  //   Huebånd: 'EUD',
+  //   Materiale: 'VELOUR',
+  //   Hagerem: 'Mat',
+  //   'Hagerem Materiale': 'Mat hagerem',
+  //   'Broderi foran': '',
+  //   'Broderi farve': 'Guld',
+  //   'Knap farve': 'Guld',
+  // },
+  // BRODERI: {
+  //   'Broderifarve': 'Guld',
+  //   'Navne broderi': '',
+  //   'Skolebroderi farve': 'HVID',
+  //   Skolebroderi: ''
+  // },
+  // BETRÆK: {
+  //   Farve: 'Hvid',
+  //   Kantbånd: 'NONE',
+  //   Stjerner: '1',
+  //   Topkant: 'NONE'
+  // },
+  // SKYGGE: {
+  //   Type: 'Blank',
+  //   Materiale: 'Uden kant',
+  //   Skyggebånd: 'Guld',
+  //   'Skyggegravering Line 1': '',
+  //   'Skyggegravering Line 2': '',
+  //   'Skyggegravering Line 3': ''
+  // },
+  // FOER: {
+  //   Svederem: 'læder',
+  //   Farve: 'HVID',
+  //   Sløjfe: 'HVID',
+  //   Foer: 'Viskose',
+  //   Type: ''
+  // },
+  // EKSTRABETRÆK: {
+  //   Tilvælg: 'Yes',
+  //   Farve: 'Hvid',
+  //   Type: '',
+  //   Skolebroderi: '',
+  //   Topkant: 'NONE',
+  //   Kantbånd: 'NONE',
+  //   Stjerner: '1'
+  // },
+  // TILBEHØR: {
+  //   Hueæske: 'Standard',
+  //   'Premium æske': '',
+  //   Huekuglepen: 'No',
+  //   Silkepude: 'No',
+  //   Emblem: '',
+  //   Badges: 'No',
+  //   Handsker: 'No',
+  //   'Store kuglepen': 'No',
+  //   'Smart Tag': 'No',
+  //   Lyskugle: 'No',
+  //   'Luksus champagneglas': 'No',
+  //   Fløjte: 'No',
+  //   Trrompet: 'No',
+  //   Bucketpins: 'No',
+  // },
+  // STØRRELSE: {
+  //   'Vælg størrelse': 49.5,
+  //   'Millimeter tilpasningssæt': 'No'
+  // }
 });
 
 
@@ -116,9 +116,9 @@ const StudentDashboard = () => {
  const standardPrices = {
   KOKARDE: {
     'Roset farve': {
-      '#7F1D1D': 39,
-      '#1E3A8A': 0,
-      '#DC2626': 0,
+      '#7F1D1D': 0,
+      '#1E3A8A': 39,
+      '#DC2626': 39,
     },
     Kokarde: {
       Signature: 69,
@@ -163,19 +163,13 @@ const StudentDashboard = () => {
     Hagerem: {
       Mat: 0,
       Blank: 0,
-      'Sort/Sort': 0,
-      'Sort/Guld': 0
-    },
-    'Hagerem Materiale': {
-      'Mat hagerem': 0,
-      'Blank hagerem': 0,
-      'Blank kunstlæder hagerem': 0,
-      'Sort hagerem med sorte knuder': 0,
-      'Sort hagerem med guld knuder': 69,
+      'Sort med sorteknuder': 0,
       'Guld hagerem med guld knuder': 69,
-      'Sølv hagerem med Sølv knuder': 69,
-      'Sølv hagerem med sorte knuder': 69,
+      'Sort hagerem med guld knuder': 69,
+      'Sølv hagerem med sølvknuder': 69,
+      'Sølv hagerem med sort knuder': 69,
     },
+    
     'Broderi farve': {
       Guld: 0,
       Sølv: 0,
@@ -1201,7 +1195,7 @@ const luksusPrices = {
               <div className="text-2xl font-bold text-slate-900">
                 {calculateTotalPrice().toFixed(2)} DKK
               </div>
-              <div className="text-xs text-slate-500">incl. taxes</div>
+              <div className="text-xs text-slate-500">+59.00 DKK Service Fee incl.</div>
             </div>
           </div>
           <button
@@ -1218,7 +1212,7 @@ const luksusPrices = {
   {/* Mobile Preview Panel - Top */}
   <div
     className={`transition-all duration-300 ${
-      isConfigOpen ? 'h-[30vh]' : 'h-[65vh]'
+      isConfigOpen ? 'h-[35vh]' : 'h-[70vh]'
     }`}
   >
     <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-200 h-full">
@@ -1229,7 +1223,7 @@ const luksusPrices = {
           </div>
           <div>
             <h4 className="font-semibold text-slate-800 text-sm">Current Program</h4>
-            <p className="text-xs text-slate-600">{program}</p>
+            <p className="text-xs text-slate-600 capitalize" >{program}</p>
           </div>
         </div>
         <div className="flex items-center space-x-2">
@@ -1395,7 +1389,7 @@ const luksusPrices = {
           <div className="text-xl font-bold text-slate-900">
             {calculateTotalPrice().toFixed(2)} DKK
           </div>
-          <div className="text-xs text-slate-500">incl. taxes</div>
+          <div className="text-xs text-slate-500">+59.00 DKK Service Fee incl. </div>
         </div>
       </div>
       <button

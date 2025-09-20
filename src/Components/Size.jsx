@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 const Size = ({ selectedOptions = {}, onOptionChange }) => {
-    const [selectedSize, setSelectedSize] = useState(49.5);
-    const [selectedMillimeterAdjustment, setSelectedMillimeterAdjustment] = useState('No');
+    const [selectedSize, setSelectedSize] = useState();
+    const [selectedMillimeterAdjustment, setSelectedMillimeterAdjustment] = useState('');
     
     const sizeOptions = [
         49.5, 50, 50.5, 51, 51.5,

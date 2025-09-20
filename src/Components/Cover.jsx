@@ -10,10 +10,10 @@ import coverColorOptionsimg2 from '../assets/cover images/none.png';
 import coverColorOptionsimg3 from '../assets/cover images/darkblueahh.png';
 
 const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem }) => {
-    const [selectedCoverColor, setSelectedCoverColor] = useState('Hvid');
-    const [selectedEdgebandColor, setSelectedEdgebandColor] = useState('NONE');
-    const [selectedKantbandColor, setSelectedKantbandColor] = useState('NONE');
-    const [selectedStarsStyle, setSelectedStarsStyle] = useState('1');
+    const [selectedCoverColor, setSelectedCoverColor] = useState('');
+    const [selectedEdgebandColor, setSelectedEdgebandColor] = useState('');
+    const [selectedKantbandColor, setSelectedKantbandColor] = useState('');
+    const [selectedStarsStyle, setSelectedStarsStyle] = useState('');
 
     const hideSelectorsPrograms = [
     'sosuassistent',

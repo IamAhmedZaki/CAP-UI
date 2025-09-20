@@ -5,9 +5,9 @@ import img3 from '../assets/shadeimages/shade.png';
 
 const Shade = ({ selectedOptions = {}, onOptionChange }) => {
     // State variables with descriptive names
-    const [selectedShadeType, setSelectedShadeType] = useState('Blank');
-    const [selectedMaterialType, setSelectedMaterialType] = useState('Uden kant');
-    const [selectedShadowTapeColor, setSelectedShadowTapeColor] = useState('Guld');
+    const [selectedShadeType, setSelectedShadeType] = useState('');
+    const [selectedMaterialType, setSelectedMaterialType] = useState('');
+    const [selectedShadowTapeColor, setSelectedShadowTapeColor] = useState('');
     const [engravingLine1, setEngravingLine1] = useState('');
     const [engravingLine2, setEngravingLine2] = useState('');
     const [engravingLine3, setEngravingLine3] = useState('');

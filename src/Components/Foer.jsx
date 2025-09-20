@@ -3,10 +3,10 @@ import img1 from '../assets/shadeimages/glimmer.png';
 
 const Foer = ({ selectedOptions = {}, onOptionChange,currentEmblem,program }) => {
     // State variables with descriptive names
-     const [selectedKokardeMaterial, setSelectedKokardeMaterial] = useState('læder');
-    const [selectedKokardeColor, setSelectedKokardeColor] = useState('black');
-    const [selectedBowColor, setSelectedBowColor] = useState('HVID');
-    const [selectedFoerMaterial, setSelectedFoerMaterial] = useState('Viskose');
+     const [selectedKokardeMaterial, setSelectedKokardeMaterial] = useState('');
+    const [selectedKokardeColor, setSelectedKokardeColor] = useState('');
+    const [selectedBowColor, setSelectedBowColor] = useState('');
+    const [selectedFoerMaterial, setSelectedFoerMaterial] = useState('');
     const [selectedbowMaterialType, setBowMaterialTypes] = useState('');
     
     

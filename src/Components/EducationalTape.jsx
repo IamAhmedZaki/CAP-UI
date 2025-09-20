@@ -11,12 +11,12 @@ import gold from '../assets/button images/gold.png';
 const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, currentEmblem }) => {
     // State variables with descriptive names
     const currentYear = new Date().getFullYear();
-    const [selectedHatbandColor, setSelectedHatbandColor] = useState(`${program.toUpperCase()}`);
-    const [selectedMaterialType, setSelectedMaterialType] = useState('VELOUR');
-    const [selectedChinStrapColor, setSelectedChinStrapColor] = useState('Mat');
-    const [selectedButtonMaterialColor, setSelectedButtonMaterialColor] = useState('FOOD GRADE');
-    const [selectedEmbroideryColor, setSelectedEmbroideryColor] = useState('Guld');
-    const [selectedButtonColor, setSelectedButtonColor] = useState('Guld');
+    const [selectedHatbandColor, setSelectedHatbandColor] = useState(``);
+    const [selectedMaterialType, setSelectedMaterialType] = useState('');
+    const [selectedChinStrapColor, setSelectedChinStrapColor] = useState('');
+    const [selectedButtonMaterialColor, setSelectedButtonMaterialColor] = useState('');
+    const [selectedEmbroideryColor, setSelectedEmbroideryColor] = useState('');
+    const [selectedButtonColor, setSelectedButtonColor] = useState('');
     const [embroideryText, setEmbroideryText] = useState('');
     const [selectedYear, setSelectedYear] = useState(currentYear.toString());
 
@@ -44,6 +44,9 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, curren
     useEffect(() => {
         onOptionChange('Broderi foran', embroideryText)
     }, [embroideryText])
+    useEffect(() => {
+        onOptionChange('år', selectedYear)
+    }, [selectedYear])
 
     const getCurrentEmblem = () => {
         switch (currentEmblem.name) {

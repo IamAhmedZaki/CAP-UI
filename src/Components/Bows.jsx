@@ -156,10 +156,10 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
         }
     };
 
-    const [selectedColor, setSelectedColor] = useState(selectedOptions.color || getInitialColor(program));
-    const [selectedPrestige, setSelectedPrestige] = useState(selectedOptions.bowType || 'Signature');
-    const [selectedEmblem, setSelectedEmblem] = useState(selectedOptions.emblem || { name: 'Guld', value: 'Guld', color: '#FCD34D' });
-    const [selectedType, setSelectedType] = useState(selectedOptions.country || 'Kurdistan');
+    const [selectedColor, setSelectedColor] = useState('');
+    const [selectedPrestige, setSelectedPrestige] = useState('');
+    const [selectedEmblem, setSelectedEmblem] = useState({  });
+    const [selectedType, setSelectedType] = useState('');
 
     // Define dynamic first options based on program
     const getFirstGoldColor = () => {

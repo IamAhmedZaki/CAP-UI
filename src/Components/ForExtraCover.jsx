@@ -10,10 +10,10 @@
     import coverColorOptionsimg3 from '../assets/cover images/darkblueahh.png';
 
     const ForExtraCover = ({ programNew,current,forOptionChange }) => {
-        const [selectedCoverColor, setSelectedCoverColor] = useState('Hvid');
-        const [selectedEdgebandColor, setSelectedEdgebandColor] = useState('NONE');
-        const [selectedKantbandColor, setSelectedKantbandColor] = useState('NONE');
-        const [selectedStarsStyle, setSelectedStarsStyle] = useState('1');
+        const [selectedCoverColor, setSelectedCoverColor] = useState('');
+        const [selectedEdgebandColor, setSelectedEdgebandColor] = useState('');
+        const [selectedKantbandColor, setSelectedKantbandColor] = useState('');
+        const [selectedStarsStyle, setSelectedStarsStyle] = useState('');
         
         const coverColorOptions = [
             { name: 'Hvid', value: 'Hvid', color: '#ffffff' },

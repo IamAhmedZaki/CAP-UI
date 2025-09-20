@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ForExtraCover from './ForExtraCover';
 
 const ExtraCover = ({ selectedOptions = {}, onOptionChange,currentEmblem,program }) => {
-    const [selectedExtraCoverOption, setSelectedExtraCoverOption] = useState('Yes');
+    const [selectedExtraCoverOption, setSelectedExtraCoverOption] = useState('');
     // const [selectedMaterialType, setSelectedMaterialType] = useState('Standard');
     // const [selectedButtonMaterialColor, setSelectedButtonMaterialColor] = useState('Ingen');
 

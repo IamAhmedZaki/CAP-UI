@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 const Embroidery = ({ selectedOptions = {}, onOptionChange, program }) => {
     // State variables with descriptive names
-    const [selectedNameEmbroideryColor, setSelectedNameEmbroideryColor] = useState('Guld');
+    const [selectedNameEmbroideryColor, setSelectedNameEmbroideryColor] = useState('');
     const [nameEmbroideryText, setNameEmbroideryText] = useState('');
-    const [selectedSchoolEmbroideryColor, setSelectedSchoolEmbroideryColor] = useState('HVID');
+    const [selectedSchoolEmbroideryColor, setSelectedSchoolEmbroideryColor] = useState('');
     const [schoolEmbroideryText, setSchoolEmbroideryText] = useState('');
     const [ingenButton, setIngenButton] = useState(false);
 
