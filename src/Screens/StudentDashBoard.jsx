@@ -130,22 +130,120 @@ const StudentDashboard = () => {
       Sølv: 89,
     },
     Type: {
-     Kurdistan: 69,
-  Iraq: 69,
-  Iran: 69,
-  Somalia: 69,
-  Somaliland: 69,
-  Palestine: 69,
-  Lebanon: 69,
-  Afghanistan: 69,
-  Albania: 69,
-  Serbia: 69,
-  Bosnia: 69,
-  Denmark: 69,
-  Morocco: 69,
-  Pakistan: 69,
-  Turkey: 69,
-    },
+  Kurdistan: 0,
+  Iraq: 0,
+  Iran: 0,
+  Somalia: 0,
+  Somaliland: 0,
+  Palestine: 0,
+  Lebanon: 0,
+  Afghanistan: 0,
+  Albania: 0,
+  Serbia: 0,
+  Bosnia: 0,
+  Denmark: 0,
+  Morocco: 0,
+  Pakistan: 0,
+  Turkey: 0,
+  // Gold Signature emblems
+  'Ahornblad Gold': 0,
+  'Anker Gold': 0,
+  'Atom Gold': 0,
+  'DNA Gold': 0,
+  'Globus Gold': 0,
+  'Hjerte Guld': 0,
+  'Halvmone Gold Simli': 69,
+  'Halvmone Gold': 0,
+  'IT Gold': 0,
+  'Lotus Gold': 0,
+  'Merkurstav Gold Diamant': 69,
+  'Merkurstav Gold': 0,
+  'Node Gold': 0,
+  'Pil Gold': 0,
+  'Sport Gold': 0,
+  'Teater Gold': 0,
+  'Twin Gold': 0,
+  // Gold program-specific emblems
+  'HHX Gold Diamant': 69,
+  'HHX Gold': 0,
+  'Atom HTX Gold': 0,
+  'HTX Gold Diam': 69,
+  'HTX Gold': 0,
+  'STX Gold Diamant': 69,
+  'STX Gold': 0,
+  'EUD Gold': 0,
+  'EUX Gold Diamant': 69,
+  'EUX Gold': 0,
+  // Silver Signature emblems
+  'Ahornblad Silver': 0,
+  'Anker Silver': 0,
+  'Atom Silver': 0,
+  'DNA Silver': 0,
+  'Globus Silver': 0,
+  'Hjerte Silv': 0,
+  'Halvmone Silver Simli': 69,
+  'Halvmone Silver': 0,
+  'IT Silver': 0,
+  'Lotus Silver': 0,
+  'Merkurstav Silver Diamant': 69,
+  'Merkurstav Silver': 0,
+  'Node Silver': 0,
+  'Pi Silver': 0,
+  'Sport Silver': 0,
+  'Teater Silver': 0,
+  'Twin Silver': 0,
+  // Silver program-specific emblems
+  'HHX Silver Diamant': 69,
+  'HHX Silver': 0,
+  'Atom HTX Silver': 0,
+  'HTX Silver Diamant': 69,
+  'HTX Silver': 0,
+  'STX Silver': 0,
+  'STX Silver Diamant': 69,
+  'EUD Silver': 0,
+  'EUX Silver Diamant': 69,
+  'EUX Silver': 0,
+  // Prestige Gold - set to 89
+  'Jupiter Gold': 89,
+  'Saturn Gold': 89,
+  'Venus Gold': 89,
+  'Merkur Gold': 89,
+  'Neptun Gold': 89,
+  // Prestige Silver - set to 89
+  'Jupiter Silver': 89,
+  'Saturn Silver': 89,
+  'Venus Silver': 89,
+  'Merkur Silver': 89,
+  'Neptun Silver': 89,
+  // Stjernetegn Gold - set to 89
+  'Bull Gold': 89,
+  'IB Gold': 89,
+  'F Key Gold': 89,
+  'Fisken Gold': 89,
+  'Jomfruen Gold': 89,
+  'Krebsen Guld': 89,
+  'Lion Gold': 89,
+  'Scorpio Gold': 89,
+  'Skytten Gold': 89,
+  'Vandmand Gold': 89,
+  'Vadderen Gold': 89,
+  'Vagten Gold': 89,
+  'Stenbuk Gold': 89,
+  // Stjernetegn Silver - set to 89
+  'Bull Silver': 89,
+  'IB Silver': 89,
+  'F Key Silver': 89,
+  'Fisken Silver': 89,
+  'Jomfruen Silver': 89,
+  'Krebsen Silver': 89,
+  'Lion Silver': 89,
+  'Scorpio Silver': 89,
+  'Skytten Silver': 89,
+  'Vandmand Silv': 89,
+  'Vadderen Silver': 89,
+  'Vagten Silver': 89,
+  'Stenbuk Silver': 89,
+},
   },
 
   UDDANNELSESBÅND: {
@@ -178,7 +276,8 @@ const StudentDashboard = () => {
       SORT: 0
     },
     'Knap farve': {
-      Guld: 0
+      Guld: 0,
+      Sølv: 0,
     },
     'Broderi foran': {
       base: 99,
@@ -212,36 +311,43 @@ const StudentDashboard = () => {
 
   BETRÆK: {
     Farve: {
-      '#ffffff': 0,           // WHITE - WATER REPELLENT
-      '#000000': 0,           // BLACK - WATER REPELLENT
-      '#dedede': 79,           // WHITE GLITTER
-      '#292929': 79,           // SORT GLIMMER
+      'Hvid': 0,           // WHITE - WATER REPELLENT
+      'Sort': 0,           // BLACK - WATER REPELLENT
+      'Hvid med glimmer': 79,           // WHITE GLITTER
+      'Sort med glimmer': 79,           // SORT GLIMMER
     },
     Kantbånd: {
-      NONE: 29,
-      WHITE: 29,
-      BLACK: 29,
-      STX: 0,
-      HHX: 0,
-      EUD: 0,
-      GREEN: 0,
-      GUL: 0,
-      EUX: 0,
-      PINK: 0,
+      NONE: 0,
+      HTX: 29,
+      STX: 29,
+      HHX: 29,
+      HF: 29,
+      EUD: 29,
+      EUX: 29,
+      SORT: 29,
+      
+    },
+    Topkant: {
+      NONE: 0,
+      Guld: 29,
+      Sølv: 29,
+      
     },
     Stjerner: {
+      NONE: 0,
       '1': 39,  // One Star
       '2': 39,  // Two Stars
       '3': 39,  // Three Stars
       '4': 39,  // Four Stars
       '5': 39,  // Five Stars
+      '6': 39,  // Five Stars
     },
   },
 
   SKYGGE: {
     Type: {
       Blank: 0,    // default short/Blank shade
-      Mat: 39,      // matte type
+      Shiny: 39,      // matte type
       Glimmer: 39,  // glimmer type
     },
     Materiale: {
@@ -285,6 +391,7 @@ const StudentDashboard = () => {
       HVID: 0,
       Sort: 0,
       Guld: 29,
+      Sølv: 29,
     },
     Foer: {
       Viskose: 29,
@@ -302,12 +409,41 @@ const StudentDashboard = () => {
 
   EKSTRABETRÆK: {
     Tilvælg: {
-      Yes: 79,
+      Yes: 0,
       No: 0,
     },
-     Favre:0,
-      Type:0,
-      Skolebroderi: 0
+     Farve: {
+      'Hvid': 69,           // WHITE - WATER REPELLENT
+      'Sort': 69,           // BLACK - WATER REPELLENT
+      'Hvid med glimmer': 79,           // WHITE GLITTER
+      'Sort med glimmer': 79,           // SORT GLIMMER
+    },
+    Kantbånd: {
+      NONE: 0,
+      HTX: 29,
+      STX: 29,
+      HHX: 29,
+      HF: 29,
+      EUD: 29,
+      EUX: 29,
+      SORT: 29,
+      
+    },
+    Topkant: {
+      NONE: 0,
+      Guld: 29,
+      Sølv: 29,
+      
+    },
+    Stjerner: {
+      NONE: 0,
+      '1': 39,  // One Star
+      '2': 39,  // Two Stars
+      '3': 39,  // Three Stars
+      '4': 39,  // Four Stars
+      '5': 39,  // Five Stars
+      '6': 39,  // Five Stars
+    },
   },
 
   TILBEHØR: {
@@ -318,298 +454,43 @@ const StudentDashboard = () => {
     },
     
     Huekuglepen: {
-      Yes: 39, 
-      No: 0 
-    },
-    Silkepude: {
-      Yes: 99, 
-      No: 0 
-    },
-    Badges: {
-      Yes: 39, 
-      No: 0 
-    },
-    Handsker: {
-      Yes: 39, 
-      No: 0 
-    },
-    'Store kuglepen': {
-      Yes: 99, 
-      No: 0 
-    },
-    'Smart Tag': {
-      Yes: 25, 
-      No: 0 
-    },
-    Lyskugle: {
-      Yes: 99, 
-      No: 0 
-    },
-    'Luksus champagneglas': {
       Yes: 29, 
       No: 0 
     },
-    Fløjte: {
-      Yes: 39, 
-      No: 0 
-    },
-    Trrompet: {
-      Yes: 39, 
-      No: 0 
-    },
-  },
-
-  STØRRELSE: {
-    'Vælg størrelse': {
-      base: 0, 
-      perMM: 0 
-    },
-    'Millimeter tilpasningssæt': {
-      Yes: 39, 
-      No: 0 
-    },
-  },
-};
-
-// ---------------- PREMIUM ----------------
-const premiumPrices = {
-  KOKARDE: {
-    'Roset farve': {
-      '#7F1D1D': 0,
-      '#1E3A8A': 0,
-      '#DC2626': 0,
-    },
-    Kokarde: {
-      Signature: 0,
-      Prestige: 0,
-      Stjernetegn: 0,
-    },
-    'Emblem': {
-      Guld: 0,
-      Sølv: 0,
-    },
-    Type: {
-      Denmark: 0,
-      Sweden: 0,
-      Norway: 0,
-      Germany: 0,
-      France: 0,
-      Italy: 0,
-    },
-  },
-
-  UDDANNELSESBÅND: {
-    Huebånd: {
-      EUX: 0,
-      SORT: 0
-    },
-    Materiale: {
-      BOMULD: 0,
-      VELOUR: 0,
-      SATIN: 0,
-       GLIMMER: 0,
-      SHIMMER:0,
-    },
-    Hagerem: {
-      Mat: 0,
-      Blank: 0,
-      'Sort/Sort': 0,
-      'Sort/Guld': 0
-    },
-    'Hagerem Materiale':  {
-      'Mat hagerem': 0,
-      'Blank hagerem': 0,
-      'Blank kunstlæder hagerem': 0,
-      'Sort hagerem med sorte knuder': 0,
-      'Sort hagerem med guld knuder': 0,
-      'Guld hagerem med guld knuder': 0,
-      'Sølv hagerem med Sølv knuder': 0,
-      'Sølv hagerem med sorte knuder': 0,
-    },
-    'Broderi farve': {
-      Guld: 0,
-      Sølv: 0,
-      EUX: 0,
-      HVID: 0,
-      SORT: 0
-    },
-    'Knap farve': {
-      Guld: 0
-    },
-    'Broderi foran': {
-      base: 0,
-      perChar: 0
-    },
-  },
-
-  BRODERI: {
-    'Broderifarve': {
-      Guld: 0,
-      Sølv: 0,
-      STX: 0,
-      WHITE: 0,
-      BLACK: 0
-    },
-    'Navne broderi': {
-      base: 0,
-      perChar: 0
-    },
-    'Skolebroderi farve': {
-      WHITE: 0,
-      BLACK: 0,
-      Guld: 0,
-      Sølv: 0
-    },
-    Skolebroderi: {
-      base: 0,
-      perChar: 0
-    },
-  },
-
-  BETRÆK: {
-    Farve: {
-      '#ffffff': 0,           // WHITE - WATER REPELLENT
-      '#000000': 0,           // BLACK - WATER REPELLENT
-      '#dedede': 0,           // WHITE GLITTER
-      '#292929': 0,           // SORT GLIMMER
-    },
-    Kantbånd: {
-      NONE: 0,
-      WHITE: 0,
-      BLACK: 0,
-      STX: 0,
-      HHX: 0,
-      EUD: 0,
-      GREEN: 0,
-      GUL: 0,
-      EUX: 0,
-      PINK: 0,
-    },
-    Stjerner: {
-      '1': 0,  // One Star
-      '2': 0,  // Two Stars
-      '3': 0,  // Three Stars
-      '4': 0,  // Four Stars
-      '5': 0,  // Five Stars
-    },
-  },
-
-  SKYGGE: {
-    Type: {
-      Blank: 0,    // default short/Blank shade
-      Mat: 0,      // matte type
-      Glimmer: 0,  // glimmer type
-    },
-    Materiale: {
-      'Uden kant': 0, // without edge
-      'Med kant': 0,  // with edge
-    },
-    Skyggebånd: {
-      INGEN: 0,   // no tape
-      Guld: 0,    // Guld tape
-      Glitter: 0, // glitter tape
-      Sølv: 29, // Sølv tape
-    },
-    'Skyggegravering Line 1': {
-      base: 0,    // base cost for line 1
-      perChar: 0, // per character cost for line 1
-    },
-    'Skyggegravering Line 2': {
-      base: 0,    // base cost for line 2
-      perChar: 0, // per character cost for line 2
-    },
-    'Skyggegravering Line 3': {
-      base: 0,    // base cost for line 3
-      perChar: 0, // per character cost for line 3
-    },
-  },
-
-  FOER: {
-    Svederem: {
-      Læder: 0,
-      'Kunstlæder': 0,
-      Ruskin: 0,
-      Alcantra: 0,
-    },
-    Farve: {
-      HVID: 0,
-      Sort: 0,
-      Cognac: 0,
-      black: 0,
-    },
-    Sløjfe: {
-      HVID: 0,
-      Sort: 0,
-      Guld: 0,
-    },
-    Foer: {
-      Viskose: 0,
-      Polyester: 0,
-      Satin: 0,
-      Silke: 0,
-    },
-    Type: {
-      HVID: 0,
-      BRUN: 0,
-      STX: 0,
-      CHAMPAGNE: 0,
-    },
-  },
-
-  EKSTRABETRÆK: {
-    Tilvælg: {
-      Yes: 0,
-      No: 0,
-    },
-    Favre:0,
-      Type:0,
-      Skolebroderi: 0
-  },
-
-  TILBEHØR: {
-    Hueæske: {
-      Standard: 0, 
-      'Premium æske': 0,
-      'Luksus æske': 0 
-    },
-    Huekuglepen: {
-      Yes: 0, 
-      No: 0 
-    },
     Silkepude: {
-      Yes: 0, 
+      Yes: 39, 
       No: 0 
     },
     Badges: {
-      Yes: 0, 
+      Yes: 99, 
       No: 0 
     },
     Handsker: {
-      Yes: 0, 
+      Yes: 39, 
       No: 0 
     },
     'Store kuglepen': {
-      Yes: 0, 
+      Yes: 39, 
       No: 0 
     },
     'Smart Tag': {
-      Yes: 0, 
+      Yes: 99, 
       No: 0 
     },
     Lyskugle: {
-      Yes: 0, 
+      Yes: 25, 
       No: 0 
     },
     'Luksus champagneglas': {
-      Yes: 0, 
+      Yes: 99, 
       No: 0 
     },
     Fløjte: {
-      Yes: 0, 
+      Yes: 29, 
       No: 0 
     },
     Trrompet: {
-      Yes: 0, 
+      Yes: 29, 
       No: 0 
     },
   },
@@ -620,19 +501,20 @@ const premiumPrices = {
       perMM: 0 
     },
     'Millimeter tilpasningssæt': {
-      Yes: 0, 
+      Yes: 39, 
       No: 0 
     },
   },
 };
 
+
 // ---------------- LUKSUS ----------------
 const luksusPrices = {
-  KOKARDE: {
+ KOKARDE: {
     'Roset farve': {
-      '#7F1D1D': 39,
-      '#1E3A8A': 0,
-      '#DC2626': 0,
+      '#7F1D1D': 0,
+      '#1E3A8A': 39,
+      '#DC2626': 39,
     },
     Kokarde: {
       Signature: 69,
@@ -643,14 +525,121 @@ const luksusPrices = {
       Guld: 89,
       Sølv: 89,
     },
-    Type: {
-      Denmark: 69,
-      Sweden: 69,
-      Norway: 69,
-      Germany: 69,
-      France: 69,
-      Italy: 69,
-    },
+     Type: {
+  Kurdistan: 0,
+  Iraq: 0,
+  Iran: 0,
+  Somalia: 0,
+  Somaliland: 0,
+  Palestine: 0,
+  Lebanon: 0,
+  Afghanistan: 0,
+  Albania: 0,
+  Serbia: 0,
+  Bosnia: 0,
+  Denmark: 0,
+  Morocco: 0,
+  Pakistan: 0,
+  Turkey: 0,
+  // Gold Signature emblems
+  'Ahornblad Gold': 0,
+  'Anker Gold': 0,
+  'Atom Gold': 0,
+  'DNA Gold': 0,
+  'Globus Gold': 0,
+  'Hjerte Guld': 0,
+  'Halvmone Gold Simli': 69,
+  'Halvmone Gold': 0,
+  'IT Gold': 0,
+  'Lotus Gold': 0,
+  'Merkurstav Gold Diamant': 69,
+  'Merkurstav Gold': 0,
+  'Node Gold': 0,
+  'Pil Gold': 0,
+  'Sport Gold': 0,
+  'Teater Gold': 0,
+  'Twin Gold': 0,
+  // Gold program-specific emblems
+  'HHX Gold Diamant': 69,
+  'HHX Gold': 0,
+  'Atom HTX Gold': 0,
+  'HTX Gold Diam': 69,
+  'HTX Gold': 0,
+  'STX Gold Diamant': 69,
+  'STX Gold': 0,
+  'EUD Gold': 0,
+  'EUX Gold Diamant': 69,
+  'EUX Gold': 0,
+  // Silver Signature emblems
+  'Ahornblad Silver': 0,
+  'Anker Silver': 0,
+  'Atom Silver': 0,
+  'DNA Silver': 0,
+  'Globus Silver': 0,
+  'Hjerte Silv': 0,
+  'Halvmone Silver Simli': 69,
+  'Halvmone Silver': 0,
+  'IT Silver': 0,
+  'Lotus Silver': 0,
+  'Merkurstav Silver Diamant': 69,
+  'Merkurstav Silver': 0,
+  'Node Silver': 0,
+  'Pi Silver': 0,
+  'Sport Silver': 0,
+  'Teater Silver': 0,
+  'Twin Silver': 0,
+  // Silver program-specific emblems
+  'HHX Silver Diamant': 69,
+  'HHX Silver': 0,
+  'Atom HTX Silver': 0,
+  'HTX Silver Diamant': 69,
+  'HTX Silver': 0,
+  'STX Silver': 0,
+  'STX Silver Diamant': 69,
+  'EUD Silver': 0,
+  'EUX Silver Diamant': 69,
+  'EUX Silver': 0,
+  // Prestige Gold - set to 89
+  'Jupiter Gold': 89,
+  'Saturn Gold': 89,
+  'Venus Gold': 89,
+  'Merkur Gold': 89,
+  'Neptun Gold': 89,
+  // Prestige Silver - set to 89
+  'Jupiter Silver': 89,
+  'Saturn Silver': 89,
+  'Venus Silver': 89,
+  'Merkur Silver': 89,
+  'Neptun Silver': 89,
+  // Stjernetegn Gold - set to 89
+  'Bull Gold': 89,
+  'IB Gold': 89,
+  'F Key Gold': 89,
+  'Fisken Gold': 89,
+  'Jomfruen Gold': 89,
+  'Krebsen Guld': 89,
+  'Lion Gold': 89,
+  'Scorpio Gold': 89,
+  'Skytten Gold': 89,
+  'Vandmand Gold': 89,
+  'Vadderen Gold': 89,
+  'Vagten Gold': 89,
+  'Stenbuk Gold': 89,
+  // Stjernetegn Silver - set to 89
+  'Bull Silver': 89,
+  'IB Silver': 89,
+  'F Key Silver': 89,
+  'Fisken Silver': 89,
+  'Jomfruen Silver': 89,
+  'Krebsen Silver': 89,
+  'Lion Silver': 89,
+  'Scorpio Silver': 89,
+  'Skytten Silver': 89,
+  'Vandmand Silv': 89,
+  'Vadderen Silver': 89,
+  'Vagten Silver': 89,
+  'Stenbuk Silver': 89,
+},
   },
 
   UDDANNELSESBÅND: {
@@ -668,19 +657,13 @@ const luksusPrices = {
     Hagerem: {
       Mat: 0,
       Blank: 0,
-      'Sort/Sort': 0,
-      'Sort/Guld': 0
-    },
-    'Hagerem Materiale':  {
-      'Mat hagerem': 0,
-      'Blank hagerem': 0,
-      'Blank kunstlæder hagerem': 0,
-      'Sort hagerem med sorte knuder': 0,
-      'Sort hagerem med guld knuder': 0,
+      'Sort med sorteknuder': 0,
       'Guld hagerem med guld knuder': 0,
-      'Sølv hagerem med Sølv knuder': 0,
-      'Sølv hagerem med sorte knuder': 0 ,
+      'Sort hagerem med guld knuder': 0,
+      'Sølv hagerem med sølvknuder': 0,
+      'Sølv hagerem med sort knuder': 0,
     },
+    
     'Broderi farve': {
       Guld: 0,
       Sølv: 0,
@@ -689,7 +672,8 @@ const luksusPrices = {
       SORT: 0
     },
     'Knap farve': {
-      Guld: 0
+      Guld: 0,
+      Sølv: 0,
     },
     'Broderi foran': {
       base: 0,
@@ -723,36 +707,43 @@ const luksusPrices = {
 
   BETRÆK: {
     Farve: {
-      '#ffffff': 0,           // WHITE - WATER REPELLENT
-      '#000000': 0,           // BLACK - WATER REPELLENT
-      '#dedede': 79,           // WHITE GLITTER
-      '#292929': 79,           // SORT GLIMMER
+      'Hvid': 0,           // WHITE - WATER REPELLENT
+      'Sort': 0,           // BLACK - WATER REPELLENT
+      'Hvid med glimmer': 79,           // WHITE GLITTER
+      'Sort med glimmer': 79,           // SORT GLIMMER
     },
     Kantbånd: {
       NONE: 0,
-      WHITE: 29,
-      BLACK: 29,
-      STX: 0,
-      HHX: 0,
-      EUD: 0,
-      GREEN: 0,
-      GUL: 0,
-      EUX: 0,
-      PINK: 0,
+      HTX: 29,
+      STX: 29,
+      HHX: 29,
+      HF: 29,
+      EUD: 29,
+      EUX: 29,
+      SORT: 29,
+      
+    },
+    Topkant: {
+      NONE: 0,
+      Guld: 29,
+      Sølv: 29,
+      
     },
     Stjerner: {
+      NONE: 0,
       '1': 39,  // One Star
       '2': 39,  // Two Stars
       '3': 39,  // Three Stars
       '4': 39,  // Four Stars
       '5': 39,  // Five Stars
+      '6': 39,  // Five Stars
     },
   },
 
   SKYGGE: {
     Type: {
       Blank: 0,    // default short/Blank shade
-      Mat: 0,      // matte type
+      Shiny: 0,      // matte type
       Glimmer: 0,  // glimmer type
     },
     Materiale: {
@@ -796,6 +787,7 @@ const luksusPrices = {
       HVID: 0,
       Sort: 0,
       Guld: 0,
+       Sølv: 0,
     },
     Foer: {
       Viskose: 29,
@@ -816,17 +808,47 @@ const luksusPrices = {
       Yes: 0,
       No: 0,
     },
-    Favre:0,
-      Type:0,
-      Skolebroderi: 0
+     Farve: {
+      'Hvid': 69,           // WHITE - WATER REPELLENT
+      'Sort': 69,           // BLACK - WATER REPELLENT
+      'Hvid med glimmer': 79,           // WHITE GLITTER
+      'Sort med glimmer': 79,           // SORT GLIMMER
+    },
+    Kantbånd: {
+      NONE: 0,
+      HTX: 29,
+      STX: 29,
+      HHX: 29,
+      HF: 29,
+      EUD: 29,
+      EUX: 29,
+      SORT: 29,
+      
+    },
+    Topkant: {
+      NONE: 0,
+      Guld: 29,
+      Sølv: 29,
+      
+    },
+    Stjerner: {
+      NONE: 0,
+      '1': 39,  // One Star
+      '2': 39,  // Two Stars
+      '3': 39,  // Three Stars
+      '4': 39,  // Four Stars
+      '5': 39,  // Five Stars
+      '6': 39,  // Five Stars
+    },
   },
 
   TILBEHØR: {
     Hueæske: {
       Standard: 0, 
-      'Premium æske': 0,
-      'Luksus æske': 100 
+      'Premium æske': 100,
+      'Luksus æske': 0 
     },
+    
     Huekuglepen: {
       Yes: 0, 
       No: 0 
@@ -848,7 +870,7 @@ const luksusPrices = {
       No: 0 
     },
     'Smart Tag': {
-      Yes: 39, 
+      Yes: 99, 
       No: 0 
     },
     Lyskugle: {
@@ -880,6 +902,397 @@ const luksusPrices = {
     },
   },
 };
+
+// ---------------- PREMIUM ----------------
+const premiumPrices = {
+  KOKARDE: {
+    'Roset farve': {
+      '#7F1D1D': 0,
+      '#1E3A8A': 0,
+      '#DC2626': 0,
+    },
+    Kokarde: {
+      Signature: 0,
+      Prestige: 0,
+      Stjernetegn: 0,
+    },
+    'Emblem': {
+      Guld: 0,
+      Sølv: 0,
+    },
+    Type: {
+  Kurdistan: 0,
+  Iraq: 0,
+  Iran: 0,
+  Somalia: 0,
+  Somaliland: 0,
+  Palestine: 0,
+  Lebanon: 0,
+  Afghanistan: 0,
+  Albania: 0,
+  Serbia: 0,
+  Bosnia: 0,
+  Denmark: 0,
+  Morocco: 0,
+  Pakistan: 0,
+  Turkey: 0,
+  // Gold Signature emblems
+  'Ahornblad Gold': 0,
+  'Anker Gold': 0,
+  'Atom Gold': 0,
+  'DNA Gold': 0,
+  'Globus Gold': 0,
+  'Hjerte Guld': 0,
+  'Halvmone Gold Simli': 0,
+  'Halvmone Gold': 0,
+  'IT Gold': 0,
+  'Lotus Gold': 0,
+  'Merkurstav Gold Diamant': 0,
+  'Merkurstav Gold': 0,
+  'Node Gold': 0,
+  'Pil Gold': 0,
+  'Sport Gold': 0,
+  'Teater Gold': 0,
+  'Twin Gold': 0,
+  // Gold program-specific emblems
+  'HHX Gold Diamant': 0,
+  'HHX Gold': 0,
+  'Atom HTX Gold': 0,
+  'HTX Gold Diam': 0,
+  'HTX Gold': 0,
+  'STX Gold Diamant': 0,
+  'STX Gold': 0,
+  'EUD Gold': 0,
+  'EUX Gold Diamant': 0,
+  'EUX Gold': 0,
+  // Silver Signature emblems
+  'Ahornblad Silver': 0,
+  'Anker Silver': 0,
+  'Atom Silver': 0,
+  'DNA Silver': 0,
+  'Globus Silver': 0,
+  'Hjerte Silv': 0,
+  'Halvmone Silver Simli': 0,
+  'Halvmone Silver': 0,
+  'IT Silver': 0,
+  'Lotus Silver': 0,
+  'Merkurstav Silver Diamant': 0,
+  'Merkurstav Silver': 0,
+  'Node Silver': 0,
+  'Pi Silver': 0,
+  'Sport Silver': 0,
+  'Teater Silver': 0,
+  'Twin Silver': 0,
+  // Silver program-specific emblems
+  'HHX Silver Diamant': 0,
+  'HHX Silver': 0,
+  'Atom HTX Silver': 0,
+  'HTX Silver Diamant': 0,
+  'HTX Silver': 0,
+  'STX Silver': 0,
+  'STX Silver Diamant': 0,
+  'EUD Silver': 0,
+  'EUX Silver Diamant': 0,
+  'EUX Silver': 0,
+  // Prestige Gold
+  'Jupiter Gold': 0,
+  'Saturn Gold': 0,
+  'Venus Gold': 0,
+  'Merkur Gold': 0,
+  'Neptun Gold': 0,
+  // Prestige Silver
+  'Jupiter Silver': 0,
+  'Saturn Silver': 0,
+  'Venus Silver': 0,
+  'Merkur Silver': 0,
+  'Neptun Silver': 0,
+  // Stjernetegn Gold
+  'Bull Gold': 0,
+  'IB Gold': 0,
+  'F Key Gold': 0,
+  'Fisken Gold': 0,
+  'Jomfruen Gold': 0,
+  'Krebsen Guld': 0,
+  'Lion Gold': 0,
+  'Scorpio Gold': 0,
+  'Skytten Gold': 0,
+  'Vandmand Gold': 0,
+  'Vadderen Gold': 0,
+  'Vagten Gold': 0,
+  'Stenbuk Gold': 0,
+  // Stjernetegn Silver
+  'Bull Silver': 0,
+  'IB Silver': 0,
+  'F Key Silver': 0,
+  'Fisken Silver': 0,
+  'Jomfruen Silver': 0,
+  'Krebsen Silver': 0,
+  'Lion Silver': 0,
+  'Scorpio Silver': 0,
+  'Skytten Silver': 0,
+  'Vandmand Silv': 0,
+  'Vadderen Silver': 0,
+  'Vagten Silver': 0,
+  'Stenbuk Silver': 0,
+},
+  },
+
+  UDDANNELSESBÅND: {
+    Huebånd: {
+      EUX: 0,
+      SORT: 0
+    },
+    Materiale: {
+      BOMULD: 0,
+      VELOUR: 0,
+      SATIN: 0,
+      GLIMMER: 0,
+      SHIMMER: 0,
+    },
+    Hagerem: {
+      Mat: 0,
+      Blank: 0,
+      'Sort med sorteknuder': 0,
+      'Guld hagerem med guld knuder': 0,
+      'Sort hagerem med guld knuder': 0,
+      'Sølv hagerem med sølvknuder': 0,
+      'Sølv hagerem med sort knuder': 0,
+    },
+    
+    'Broderi farve': {
+      Guld: 0,
+      Sølv: 0,
+      EUX: 0,
+      HVID: 0,
+      SORT: 0
+    },
+    'Knap farve': {
+      Guld: 0,
+      Sølv: 0,
+    },
+    'Broderi foran': {
+      base: 0,
+      perChar: 0
+    },
+  },
+
+  BRODERI: {
+    'Broderifarve': {
+      Guld: 0,
+      Sølv: 0,
+      STX: 0,
+      WHITE: 0,
+      BLACK: 0
+    },
+    'Navne broderi': {
+      base: 0,
+      perChar: 0
+    },
+    'Skolebroderi farve': {
+      WHITE: 0,
+      BLACK: 0,
+      Guld: 0,
+      Sølv: 0
+    },
+    Skolebroderi: {
+      base: 0,
+      perChar: 0
+    },
+  },
+
+  BETRÆK: {
+    Farve: {
+      'Hvid': 0,
+      'Sort': 0,
+      'Hvid med glimmer': 0,
+      'Sort med glimmer': 0,
+    },
+    Kantbånd: {
+      NONE: 0,
+      HTX: 0,
+      STX: 0,
+      HHX: 0,
+      HF: 0,
+      EUD: 0,
+      EUX: 0,
+      SORT: 0,
+    },
+    Topkant: {
+      NONE: 0,
+      Guld: 0,
+      Sølv: 0,
+    },
+    Stjerner: {
+      NONE: 0,
+      '1': 0,
+      '2': 0,
+      '3': 0,
+      '4': 0,
+      '5': 0,
+      '6': 0,
+    },
+  },
+
+  SKYGGE: {
+    Type: {
+      Blank: 0,
+      Shiny: 0,
+      Glimmer: 0,
+    },
+    Materiale: {
+      'Uden kant': 0,
+      'Med kant': 0,
+    },
+    Skyggebånd: {
+      INGEN: 0,
+      Guld: 0,
+      Glitter: 0,
+      Sølv: 29,
+    },
+    'Skyggegravering Line 1': {
+      base: 0,
+      perChar: 0,
+    },
+    'Skyggegravering Line 2': {
+      base: 0,
+      perChar: 0,
+    },
+    'Skyggegravering Line 3': {
+      base: 0,
+      perChar: 0,
+    },
+  },
+
+  FOER: {
+    Svederem: {
+      Læder: 0,
+      'Kunstlæder': 0,
+      Ruskin: 0,
+      Alcantra: 0,
+    },
+    Farve: {
+      HVID: 0,
+      Sort: 0,
+      Cognac: 0,
+      black: 0,
+    },
+    Sløjfe: {
+      HVID: 0,
+      Sort: 0,
+      Guld: 0,
+    },
+    Foer: {
+      Viskose: 0,
+      Polyester: 0,
+      Satin: 0,
+      Silke: 0,
+    },
+    Type: {
+      HVID: 0,
+      BRUN: 0,
+      STX: 0,
+      CHAMPAGNE: 0,
+    },
+  },
+
+  EKSTRABETRÆK: {
+    Tilvælg: {
+      Yes: 0,
+      No: 0,
+    },
+    Farve: {
+      'Hvid': 0,
+      'Sort': 0,
+      'Hvid med glimmer': 0,
+      'Sort med glimmer': 0,
+    },
+    Kantbånd: {
+      NONE: 0,
+      HTX: 0,
+      STX: 0,
+      HHX: 0,
+      HF: 0,
+      EUD: 0,
+      EUX: 0,
+      SORT: 0,
+    },
+    Topkant: {
+      NONE: 0,
+      Guld: 0,
+      Sølv: 0,
+    },
+    Stjerner: {
+      NONE: 0,
+      '1': 0,
+      '2': 0,
+      '3': 0,
+      '4': 0,
+      '5': 0,
+      '6': 0,
+    },
+  },
+
+  TILBEHØR: {
+    Hueæske: {
+      Standard: 0,
+      'Premium æske': 0,
+      'Luksus æske': 0
+    },
+    
+    Huekuglepen: {
+      Yes: 0,
+      No: 0
+    },
+    Silkepude: {
+      Yes: 0,
+      No: 0
+    },
+    Badges: {
+      Yes: 0,
+      No: 0
+    },
+    Handsker: {
+      Yes: 0,
+      No: 0
+    },
+    'Store kuglepen': {
+      Yes: 0,
+      No: 0
+    },
+    'Smart Tag': {
+      Yes: 0,
+      No: 0
+    },
+    Lyskugle: {
+      Yes: 0,
+      No: 0
+    },
+    'Luksus champagneglas': {
+      Yes: 0,
+      No: 0
+    },
+    Fløjte: {
+      Yes: 0,
+      No: 0
+    },
+    Trrompet: {
+      Yes: 0,
+      No: 0
+    },
+  },
+
+  STØRRELSE: {
+    'Vælg størrelse': {
+      base: 0,
+      perMM: 0
+    },
+    'Millimeter tilpasningssæt': {
+      Yes: 0,
+      No: 0
+    },
+  },
+};
+
 
   let prices;
   if (packageName === "standard") prices = standardPrices;
@@ -940,8 +1353,8 @@ const luksusPrices = {
     
     if (packageName === "standard") iniialPrice = 449;
       // else if (packageType === "premium") iniialPrice = 1395;
-      else if (packageName === "premium") iniialPrice = 2195;
-       else if (packageName === "luksus") iniialPrice = 1395;
+      else if (packageName === "luksus") iniialPrice = 995;
+      else if (packageName === "premium") iniialPrice = 1850;
     return total+ iniialPrice +59;
   };
 
@@ -1195,7 +1608,7 @@ const luksusPrices = {
               <div className="text-2xl font-bold text-slate-900">
                 {calculateTotalPrice().toFixed(2)} DKK
               </div>
-              <div className="text-xs text-slate-500">+59.00 DKK Service Fee incl.</div>
+              <div className="text-xs text-slate-500"> Service Fee of 59.00 DKK incl.</div>
             </div>
           </div>
           <button
