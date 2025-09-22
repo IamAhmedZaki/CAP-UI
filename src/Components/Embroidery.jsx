@@ -33,15 +33,14 @@ const nameEmbroideryColorOptions = [
     { name: 'Guld', value: '#ba9200' },
     { name: 'Sølv', value: '#757575' },
     getEmbroideryColor(),
-    { name: 'HVID', value: '#E5E7EB' },
-    { name: 'SORT', value: '#000000' },
+    { name: 'Hvid', value: '#E5E7EB' },
+    { name: 'Sort', value: '#000000' },
 ].filter(Boolean);
 
     
 
 const schoolEmbroideryColorOptions = [
-        { name: 'HVID', value: '#E5E7EB' },
-        
+        { name: 'Hvid', value: '#E5E7EB' },     
         { name: 'Guld', value: '#ba9200' },
         { name: 'Sølv', value: '#757575' },
     ];
@@ -90,7 +89,7 @@ const schoolEmbroideryColorOptions = [
                     />
                 ))}
             </div>
-            <p className="text-sm mt-2 text-slate-700">Selected: {currentSelection}</p>
+            <p className="text-sm mt-2 text-slate-700">Valgt: {currentSelection}</p>
         </div>
     );
 
@@ -148,6 +147,9 @@ const schoolEmbroideryColorOptions = [
                                 Inkluderet i pakken
                             </span>
                         </div>
+                        <span className="inline-flex items-center px-3 pt-2 rounded-full text-xs font-bold">
+                                Maks. 26 Tegn
+                        </span>
                     </div>
                 </div>
                 <div className="space-y-4">
@@ -186,6 +188,9 @@ const schoolEmbroideryColorOptions = [
                                 Inkluderet i pakken
                             </span>
                         </div>
+                        <span className="inline-flex items-center px-3 pt-2 rounded-full text-xs font-bold">
+                                Maks. 20 Tegn
+                        </span>
                     </div>
                 </div>
                 <div className="flex space-x-3 flex-wrap">

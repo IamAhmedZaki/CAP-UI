@@ -66,32 +66,32 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, curren
         case 'hhx':
             return [
                 { name: 'HHX', value: '#4169e1' },
-                { name: 'SORT', value: '#000001' }
+                { name: 'Sort', value: '#000001' }
             ];
         case 'htx':
             return [
                 { name: 'HTX', value: '#000080' },
-                { name: 'SORT', value: '#000001' }
+                { name: 'Sort', value: '#000001' }
             ];
         case 'stx':
             return [
                 { name: 'STX', value: '#7F1D1D' },
-                { name: 'SORT', value: '#000001' }
+                { name: 'Sort', value: '#000001' }
             ];
         case 'hf':
             return [
                 { name: 'HF', value: '#ADD8E6' },
-                { name: 'SORT', value: '#000001' }
+                { name: 'Sort', value: '#000001' }
             ];
         case 'eux':
             return [
                 { name: 'EUX', value: '#522854' },
-                { name: 'SORT', value: '#000001' }
+                { name: 'Sort', value: '#000001' }
             ];
         case 'eud':
             return [
                 { name: 'EUD', value: '#7c7f82' },
-                { name: 'SORT', value: '#000001' }
+                { name: 'Sort', value: '#000001' }
             ];
         case 'sosuassistent':
             return [
@@ -131,7 +131,7 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, curren
         default:
             return [
                 { name: '', value: '' },
-                { name: 'SORT', value: '#000001' }
+                { name: 'Sort', value: '#000001' }
             ];
     }
 };
@@ -172,8 +172,8 @@ const embroideryColorOptions = [
     { name: 'Guld', value: 'Guld', color: '#ba9200' },
     { name: 'Sølv', value: 'Sølv', color: '#757575' },
     getEmbroideryColor(),
-    { name: 'HVID', value: 'HVID', color: '#E5E7EB' },
-    { name: 'SORT', value: 'SORT', color: '#000000' },
+    { name: 'Hvid', value: 'Hvid', color: '#E5E7EB' },
+    { name: 'Sort', value: 'Sort', color: '#000000' },
 ].filter(Boolean); // removes null
 
 
@@ -214,7 +214,7 @@ const embroideryColorOptions = [
         case 'Ernæringsassisten':
             return materialColorTypes;
 
-        case 'SORT':
+        case 'Sort':
             return materialSORTTypes;
 
         default:
@@ -307,7 +307,7 @@ const embroideryColorOptions = [
                     </>
                 ))}
             </div>
-            <p className="text-sm mt-2 text-slate-700">Selected: {currentSelection}</p>
+            <p className="text-sm mt-2 text-slate-700">Valgt: {currentSelection}</p>
         </div>
     );
 
@@ -365,7 +365,7 @@ const embroideryColorOptions = [
                 onSelectionChange={setSelectedMaterialType}
                 options={['HTX', 'HHX', 'STX', 'HF','EUX','EUD'].includes(selectedHatbandColor)
                     ? materialEUXTypes:[ 'Sosuassistent', 'Sosuhjælper', 'Frisør', 
-   'Kosmetolog', 'Pædagog', 'PAU', 'Ernæringsassisten'].includes(selectedHatbandColor)? materialColorTypes: materialSORTTypes}
+   'Kosmetolog', 'Pædagog', 'PAU', 'Ernæringsassisten'].includes(selectedHatbandColor)? materialColorTypes:selectedHatbandColor=='Sort'? materialSORTTypes:[]}
             />
 
             {/* Chin Strap Color Selection */}
@@ -394,6 +394,9 @@ const embroideryColorOptions = [
                                 Inkluderet i pakken
                             </span>
                         </div>
+                            <span className="inline-flex items-center px-3 pt-2 rounded-full text-xs font-bold">
+                                Maks. 20 Tegn
+                            </span>
                     </div>
                 </div>
                 <div className="space-y-4">

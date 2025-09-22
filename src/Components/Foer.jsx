@@ -8,6 +8,7 @@ const Foer = ({ selectedOptions = {}, onOptionChange,currentEmblem,program }) =>
     const [selectedBowColor, setSelectedBowColor] = useState('');
     const [selectedFoerMaterial, setSelectedFoerMaterial] = useState('');
     const [selectedbowMaterialType, setBowMaterialTypes] = useState('');
+    const [selectedsilkeTypes, setSilkeTypes] = useState('');
     
     
     const restrictedPrograms = [
@@ -25,8 +26,8 @@ const Foer = ({ selectedOptions = {}, onOptionChange,currentEmblem,program }) =>
     );
 
      const kokardeMaterialTypes = isRestricted 
-        ? ['læder'] 
-        : ['læder', 'Kunstlæder', 'Ruskin', 'Alcantra'];
+        ? ['Læder'] 
+        : ['Læder', 'Kunstlæder', 'Ruskin', 'Alcantra'];
 
 
     const getCurrentEmblem = () => {
@@ -42,15 +43,23 @@ const Foer = ({ selectedOptions = {}, onOptionChange,currentEmblem,program }) =>
     }
     // Color options with descriptive names
     const bowColorOptions = [
-        { name: 'HVID', value: 'HVID', color: '#FFFFFF' },
+        { name: 'Hvid', value: 'Hvid', color: '#FFFFFF' },
+        { name: 'Sort', value: 'Sort', color: '#000000' },
         getCurrentEmblem()
     ];
 
     const bowMaterialTypes = [
-        { name: 'HVID', value: 'HVID', color: '#000000' },
-        { name: 'BRUN', value: 'BRUN', color: '#a66f5a' },
-        { name: 'BRUNBORDEAUX', value: 'BORDEAUX', color: '#800020' },
-        { name: 'CHAMPAGNE', value: 'CHAMPAGNE', img: img1 },
+        { name: 'Hvid', value: 'Hvid', color: '#fafcfd' },
+        { name: 'Brown', value: 'Brown', color: '#a66f5a' },
+        { name: 'Bordeaux', value: 'Bordeaux', color: '#800020' },
+        { name: 'Champagne', value: 'Champagne', color:'#F7E7CE' },
+    ];
+    
+    const silkeTypes = [
+        { name: 'Hvid', value: 'Hvid', color: '#ffffff' },
+        { name: 'Sort', value: 'Sort', color: '#000000' },
+        { name: 'Rosa', value: 'Rosa', color: '#FFC0CB' },
+        
     ];
     
 
@@ -75,22 +84,33 @@ const Foer = ({ selectedOptions = {}, onOptionChange,currentEmblem,program }) =>
     
     useEffect(() => {
       if (selectedFoerMaterial=='Satin') {
-        setBowMaterialTypes('HVID')
+        setBowMaterialTypes('Hvid')
         
       }else{
          setBowMaterialTypes('')
+      }
+    }, [selectedFoerMaterial]);
+    useEffect(() => {
+      if (selectedFoerMaterial=='Silke') {
+        setSilkeTypes('')
+        
+      }else{
+         setSilkeTypes('')
       }
     }, [selectedFoerMaterial]);
 
     useEffect(() => {
         onOptionChange('Type', selectedbowMaterialType);
     }, [selectedbowMaterialType]);
+    useEffect(() => {
+        onOptionChange('Type', selectedsilkeTypes);
+    }, [selectedsilkeTypes]);
 
     const getKokardeColorOptions = (material) => {
         switch (material) {
-            case 'læder':
+            case 'Læder':
                 return [
-                    { name: 'HVID', value: 'HVID', color: '#ffffff' },
+                    { name: 'Hvid', value: 'Hvid', color: '#ffffff' },
                     { name: 'Sort', value: 'Sort', color: '#000000' },
                 ];
             case 'Kunstlæder':
@@ -163,7 +183,7 @@ const Foer = ({ selectedOptions = {}, onOptionChange,currentEmblem,program }) =>
                     </button>
                 ))}
             </div>
-             <p className="text-sm mt-2 text-slate-700">Selected: {currentSelection}</p>
+             <p className="text-sm mt-2 text-slate-700">Valgt: {currentSelection}</p>
         </div>
     );
 
@@ -207,6 +227,15 @@ const Foer = ({ selectedOptions = {}, onOptionChange,currentEmblem,program }) =>
                     currentSelection={selectedbowMaterialType}
                     onSelectionChange={setBowMaterialTypes}
                     colorOptions={bowMaterialTypes}
+                />
+
+            }
+            {currentSelection == 'Silke' &&
+                <ColorSelector
+                    label="Type"
+                    currentSelection={selectedsilkeTypes}
+                    onSelectionChange={setSilkeTypes}
+                    colorOptions={silkeTypes}
                 />
 
             }

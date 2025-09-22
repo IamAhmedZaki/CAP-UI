@@ -5,9 +5,12 @@ import img3 from '../assets/stars/3-star.png';
 import img4 from '../assets/stars/4-star.png';
 import img5 from '../assets/stars/5-star.png';
 import img6 from '../assets/stars/6-star.png';
+import whiteGlitter from '../assets/button images/white glitter.png';
+import blackGlitter from '../assets/button images/black glitter.png';
 import coverColorOptionsimg1 from '../assets/cover images/silverahh.png';
 import coverColorOptionsimg2 from '../assets/cover images/none.png';
 import coverColorOptionsimg3 from '../assets/cover images/darkblueahh.png';
+
 
 const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem }) => {
     const [selectedCoverColor, setSelectedCoverColor] = useState('');
@@ -30,8 +33,8 @@ const shouldHideSelectors = hideSelectorsPrograms.includes(program?.toLowerCase(
     const coverColorOptions = [
         { name: 'Hvid', value: 'Hvid', color: '#ffffff' },
         { name: 'Sort', value: 'Sort', color: '#000000' },
-        { name: 'Hvid med glimmer', value: 'Hvid med glimmer', img: coverColorOptionsimg1 },
-        { name: 'Sort med glimmer', value: 'Sort med glimmer', color: '#292929' }
+        { name: 'Hvid med glimmer', value: 'Hvid med glimmer', img: whiteGlitter,color:'#ffffff' },
+        { name: 'Sort med glimmer', value: 'Sort med glimmer', img: blackGlitter,color:'#000000' }
     ];
 
     const getCoverColor = () => {
@@ -65,7 +68,8 @@ const shouldHideSelectors = hideSelectorsPrograms.includes(program?.toLowerCase(
     }
     const edgebandColorOptions = [
         { name: 'NONE', value: 'NONE', img: coverColorOptionsimg2 },
-        { name: 'SORT', value: 'SORT', color: '#3d3d3d' },
+        { name: 'Hvid', value: 'Hvid', color: '#ffffff'  },
+        { name: 'Sort', value: 'Sort', color: '#3d3d3d' },
         getCoverColor()
 
     ].filter(Boolean);
@@ -124,7 +128,7 @@ const shouldHideSelectors = hideSelectorsPrograms.includes(program?.toLowerCase(
                     <button
                         key={option.value}
                         onClick={() => onSelectionChange(option.value)}
-                        className={`w-12 h-12 rounded-xl border-2 mb-2 transition-all duration-200 hover:scale-110 flex items-center justify-center ${currentSelection === option.value
+                        className={`w-12 h-12 rounded-xl border-2 mb-2 transition-all duration-200 overflow-hidden hover:scale-110 flex items-center justify-center ${currentSelection === option.value
                                 ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
                                 : 'border-slate-200 hover:border-slate-400'
                             }`}
@@ -135,13 +139,13 @@ const shouldHideSelectors = hideSelectorsPrograms.includes(program?.toLowerCase(
                             <img
                                 src={option.img}
                                 alt={option.name}
-                                className="w-8 h-8 object-contain"
+                                className="w-14 h-14 object-contain"
                             />
                         )}
                     </button>
                 ))}
             </div>
-            <p className="text-sm mt-2 text-slate-700">Selected: {currentSelection}</p>
+            <p className="text-sm mt-2 text-slate-700">Valgt: {currentSelection}</p>
         </div>
     );
 

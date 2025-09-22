@@ -12,6 +12,9 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
     const [engravingLine2, setEngravingLine2] = useState('');
     const [engravingLine3, setEngravingLine3] = useState('');
 
+
+    
+
     // Shade type options
     const shadeTypeOptions = [
         { name: 'Blank', value: 'Blank', img: img3 },
@@ -109,7 +112,7 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
                     </button>
                 ))}
             </div>
-            <p className="text-sm mt-2 text-slate-700">Selected: {currentSelection}</p>
+            <p className="text-sm mt-2 text-slate-700">Valgt: {currentSelection}</p>
         </div>
     );
 
@@ -184,10 +187,11 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
                 <div className="flex items-center justify-between mb-4">
                     <div>
                         <h4 className="font-semibold text-slate-800">Skyggegravering</h4>
-                        <div className="flex items-center gap-2 mt-1">
-                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-100 to-yellow-200 text-amber-800">
-                                Inkluderet i pakken 0
+                        <span className="inline-flex items-center px-3 pt-2 rounded-full text-xs font-bold">
+                                Maks. 30 Tegn
                             </span>
+                        <div className="flex items-center gap-2 mt-1">
+                           
                         </div>
                     </div>
                 </div>

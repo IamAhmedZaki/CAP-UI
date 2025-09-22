@@ -15,6 +15,7 @@ import Bosnia from '../assets/Countries/bosnia.png';
 import Denmark from '../assets/Countries/denmark.png';
 import Morocco from '../assets/Countries/morocco.png';
 import Pakistan from '../assets/Countries/pakistan.png';
+import Sweden from '../assets/Countries/sweden.png';
 import Turkey from '../assets/Countries/turkey.png';
 import StxSilver from '../assets/images/stx silv.jpg';
 import StxSilverDiamant from '../assets/images/stx silver diamant.jpg';
@@ -144,15 +145,15 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
     const getInitialColor = (program) => {
         switch (program?.toLowerCase()) {
             case 'hhx':
-                return { name: 'Royal blue', value: '#7F1D1D' };
+                return { name: 'Royal blå', value: '#7F1D1D' };
             case 'htx':
-                return { name: 'Navy blue', value: '#7F1D1D' };
+                return { name: 'Navy blå', value: '#7F1D1D' };
             case 'stx':
                 return { name: 'Bordeaux', value: '#7F1D1D' };
             case 'hf':
-                return { name: 'Light Blue', value: '#7F1D1D' };
+                return { name: 'Light blå', value: '#7F1D1D' };
             default:
-                return { name: 'RED', value: '#DC2626' }
+                return { name: 'Rød', value: '#DC2626' }
         }
     };
 
@@ -165,152 +166,152 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
     const getFirstGoldColor = () => {
         switch (program?.toLowerCase()) {
             case 'hhx':
-                return [{ name: 'Royal blue', value: '#7F1D1D', img: blueGold },
-                { name: 'RED', value: '#DC2626', img: laalgold },
-                { name: 'SORT', value: '#1E3A8A', img: kaalagold },
+                return [{ name: 'Royal blå', value: '#7F1D1D', img: blueGold },
+                { name: 'Rød', value: '#DC2626', img: laalgold },
+                { name: 'Sort', value: '#1E3A8A', img: kaalagold },
                 ];
             case 'htx':
-                return [{ name: 'Navy blue', value: '#7F1D1D', img: blackGold },
-                { name: 'RED', value: '#DC2626', img: laalgold },
-                { name: 'SORT', value: '#1E3A8A', img: kaalagold },
+                return [{ name: 'Navy blå', value: '#7F1D1D', img: blackGold },
+                { name: 'Rød', value: '#DC2626', img: laalgold },
+                { name: 'Sort', value: '#1E3A8A', img: kaalagold },
                 ];
             case 'stx':
                 return [{ name: 'Bordeaux', value: '#7F1D1D', img: redSilve },
-                { name: 'RED', value: '#DC2626', img: laalgold },
-                { name: 'SORT', value: '#1E3A8A', img: kaalagold },
+                { name: 'Rød', value: '#DC2626', img: laalgold },
+                { name: 'Sort', value: '#1E3A8A', img: kaalagold },
                 ];
             case 'hf':
-                return [{ name: 'Light Blue', value: '#7F1D1D', img: lightbluegold },
-                { name: 'RED', value: '#DC2626', img: laalgold },
-                { name: 'SORT', value: '#1E3A8A', img: kaalagold },
+                return [{ name: 'Light blå', value: '#7F1D1D', img: lightbluegold },
+                { name: 'Rød', value: '#DC2626', img: laalgold },
+                { name: 'Sort', value: '#1E3A8A', img: kaalagold },
                 ];
             case 'eux':
                 return [
-                    { name: 'RED', value: '#DC2626', img: laalgold },
+                    { name: 'Rød', value: '#DC2626', img: laalgold },
                     { name: 'Bordeaux', value: '#7F1D1D', img: redGold },
                     { name: 'Royal blue', value: '#7F1D1DD', img: blueGold }
 
                 ];
             case 'eud':
                 return [
-                    { name: 'RED', value: '#DC2626', img: laalgold },
+                    { name: 'Rød', value: '#DC2626', img: laalgold },
                     { name: 'Purple', value: '#DC26266', img: purplegold },  
 
                 ];
             case 'sosuassistent':
                 return [
-                { name: 'RED', value: '#DC2626', img: laalgold },
-                { name: 'SORT', value: '#1E3A8A', img: kaalagold },
+                { name: 'Rød', value: '#DC2626', img: laalgold },
+                { name: 'Sort', value: '#1E3A8A', img: kaalagold },
                 ];
             case 'sosuhjælper':
                 return [
-                { name: 'RED', value: '#DC2626', img: laalgold },
-                { name: 'SORT', value: '#1E3A8A', img: kaalagold },
+                { name: 'Rød', value: '#DC2626', img: laalgold },
+                { name: 'Sort', value: '#1E3A8A', img: kaalagold },
                 ];
             case 'frisør':
                 return [
-                { name: 'RED', value: '#DC2626', img: laalgold },
-                { name: 'SORT', value: '#1E3A8A', img: kaalagold },
+                { name: 'Rød', value: '#DC2626', img: laalgold },
+                { name: 'Sort', value: '#1E3A8A', img: kaalagold },
                 ];
             case 'kosmetolog':
                 return [
-                { name: 'RED', value: '#DC2626', img: laalgold },
-                { name: 'SORT', value: '#1E3A8A', img: kaalagold },
+                { name: 'Rød', value: '#DC2626', img: laalgold },
+                { name: 'Sort', value: '#1E3A8A', img: kaalagold },
                 ];
             case 'pædagog':
                 return [,
-                { name: 'RED', value: '#DC2626', img: laalgold },
-                { name: 'SORT', value: '#1E3A8A', img: kaalagold },
+                { name: 'Rød', value: '#DC2626', img: laalgold },
+                { name: 'Sort', value: '#1E3A8A', img: kaalagold },
                 ];
             case 'pau':
                 return [
-                { name: 'RED', value: '#DC2626', img: laalgold },
-                { name: 'SORT', value: '#1E3A8A', img: kaalagold },
+                { name: 'Rød', value: '#DC2626', img: laalgold },
+                { name: 'Sort', value: '#1E3A8A', img: kaalagold },
                 ];
             case 'ernæringsassisten':
                 return [
-                { name: 'RED', value: '#DC2626', img: laalgold },
-                { name: 'SORT', value: '#1E3A8A', img: kaalagold },
+                { name: 'Rød', value: '#DC2626', img: laalgold },
+                { name: 'Sort', value: '#1E3A8A', img: kaalagold },
                 ];
 
 
             default:
-                return { name: 'RED', value: '#DC2626', img: laalgold }
+                return { name: 'Rød', value: '#DC2626', img: laalgold }
         }
     };
 
     const getFirstSilverColor = () => {
         switch (program?.toLowerCase()) {
             case 'hhx':
-                return [{ name: 'Royal blue', value: '#7F1D1D', img: blueSilv },
-                { name: 'RED', value: '#DC2626', img: laalsilver },
-                { name: 'SORT', value: '#1E3A8A', img: kaalasilver },
+                return [{ name: 'Royal blå', value: '#7F1D1D', img: blueSilv },
+                { name: 'Rød', value: '#DC2626', img: laalsilver },
+                { name: 'Sort', value: '#1E3A8A', img: kaalasilver },
                 ];
             case 'htx':
-                return [{ name: 'Navy blue', value: '#7F1D1D', img: blackSilv },
-                { name: 'RED', value: '#DC2626', img: laalsilver },
-                { name: 'SORT', value: '#1E3A8A', img: kaalasilver },
+                return [{ name: 'Navy blå', value: '#7F1D1D', img: blackSilv },
+                { name: 'Rød', value: '#DC2626', img: laalsilver },
+                { name: 'Sort', value: '#1E3A8A', img: kaalasilver },
                 ];
             case 'stx':
                 return [{ name: 'Bordeaux', value: '#7F1D1D', img: redSilve },
-                { name: 'RED', value: '#DC2626', img: laalsilver },
-                { name: 'SORT', value: '#1E3A8A', img: kaalasilver },
+                { name: 'Rød', value: '#DC2626', img: laalsilver },
+                { name: 'Sort', value: '#1E3A8A', img: kaalasilver },
                 ];
             case 'hf':
-                return [{ name: 'Light Blue', value: '#7F1D1D', img: lightbluesilver },
-                { name: 'RED', value: '#DC2626', img: laalsilver },
-                { name: 'SORT', value: '#1E3A8A', img: kaalasilver },
+                return [{ name: 'Light blå', value: '#7F1D1D', img: lightbluesilver },
+                { name: 'Rød', value: '#DC2626', img: laalsilver },
+                { name: 'Sort', value: '#1E3A8A', img: kaalasilver },
                 ];
            case 'eux':
                 return [
-                    { name: 'RED', value: '#DC2626', img: laalsilver },
+                    { name: 'Rød', value: '#DC2626', img: laalsilver },
                     { name: 'Bordeaux', value: '#7F1D1D', img: redSilve },
-                    { name: 'Royal blue', value: '#7F1D1DD', img: blueSilv }
+                    { name: 'Royal blå', value: '#7F1D1DD', img: blueSilv }
 
                 ];
             case 'eud':
                 return [
-                    { name: 'RED', value: '#DC2626', img: laalsilver },
+                    { name: 'Rød', value: '#DC2626', img: laalsilver },
                     { name: 'Purple', value: '#DC26266', img: purplesilver },
 
                 ];
             case 'sosuassistent':
                 return [
-                { name: 'RED', value: '#DC2626', img: laalsilver },
-                { name: 'SORT', value: '#1E3A8A', img: kaalasilver },
+                { name: 'Rød', value: '#DC2626', img: laalsilver },
+                { name: 'Sort', value: '#1E3A8A', img: kaalasilver },
                 ];
             case 'sosuhjælper':
                 return [
-                { name: 'RED', value: '#DC2626', img: laalsilver },
-                { name: 'SORT', value: '#1E3A8A', img: kaalasilver },
+                { name: 'Rød', value: '#DC2626', img: laalsilver },
+                { name: 'Sort', value: '#1E3A8A', img: kaalasilver },
                 ];
             case 'frisør':
                 return [
-                { name: 'RED', value: '#DC2626', img: laalsilver },
-                { name: 'SORT', value: '#1E3A8A', img: kaalasilver },
+                { name: 'Rød', value: '#DC2626', img: laalsilver },
+                { name: 'Sort', value: '#1E3A8A', img: kaalasilver },
                 ];
             case 'kosmetolog':
                 return [
-                { name: 'RED', value: '#DC2626', img: laalsilver },
-                { name: 'SORT', value: '#1E3A8A', img: kaalasilver },
+                { name: 'Rød', value: '#DC2626', img: laalsilver },
+                { name: 'Sort', value: '#1E3A8A', img: kaalasilver },
                 ];
             case 'pædagog':
                 return [
-                { name: 'RED', value: '#DC2626', img: laalsilver },
-                { name: 'SORT', value: '#1E3A8A', img: kaalasilver },
+                { name: 'Rød', value: '#DC2626', img: laalsilver },
+                { name: 'Sort', value: '#1E3A8A', img: kaalasilver },
                 ];
             case 'pau':
                 return [
-                { name: 'RED', value: '#DC2626', img: laalsilver },
-                { name: 'SORT', value: '#1E3A8A', img: kaalasilver },
+                { name: 'Rød', value: '#DC2626', img: laalsilver },
+                { name: 'Sort', value: '#1E3A8A', img: kaalasilver },
                 ]
             case 'ernæringsassisten':
                 return [
-                { name: 'RED', value: '#DC2626', img: laalsilver },
-                { name: 'SORT', value: '#1E3A8A', img: kaalasilver },
+                { name: 'Rød', value: '#DC2626', img: laalsilver },
+                { name: 'Sort', value: '#1E3A8A', img: kaalasilver },
                 ];
             default:
-                return { name: 'RED', value: '#DC2626', img: laalgold }
+                return { name: 'Rød', value: '#DC2626', img: laalgold }
 
         }
     };
@@ -321,185 +322,228 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
         getFirstSilverColor();
 
 
-   const getGoldEmblem = () => {
-        switch (program?.toLowerCase()) {
-            case 'hhx':
-                return [{ name: 'HHX Gold Diamant', icon: HhxGoldDiamant },
-                { name: 'HHX Gold', icon: HhxGold }];
-            case 'htx':
-                return [{ name: 'Atom HTX Gold', icon: AtomHtxGold },
-                { name: 'HTX Gold Diam', icon: HtxGoldDiam },
-                { name: 'HTX Gold', icon: HtxGold }];
-            case 'stx':
-                return [{ name: 'STX Gold Diamant', icon: StxGoldDiamant },
-                { name: 'STX Gold', icon: StxGold }];
-            case 'eud':
-                return [{ name: 'EUD Gold', icon: EudGold }];
-            case 'eux':
-                return [ { name: 'EUX Gold Diamant', icon: EuxGoldDiamant },
-                { name: 'EUX Gold', icon: EuxGold },];
-            default:
-                return null;
-        }
-    };
-
-    const getSilverEmblem = () => {
-        switch (program?.toLowerCase()) {
-            case 'hhx':
-                return [{ name: 'HHX Silver Diamant', icon: HhxSilverDiamant },
-                { name: 'HHX Silver', icon: HhxSilver }];
-            case 'htx':
-                return [{ name: 'Atom HTX Silver', icon: AtomHtxSilver },
-                { name: 'HTX Silver Diamant', icon: HtxSilverDiamant },
-                { name: 'HTX Silver', icon: HtxSilver }];
-            case 'stx':
-                return [{ name: 'STX Silver', icon: StxSilver },
-                { name: 'STX Silver Diamant', icon: StxSilverDiamant }];
-            case 'eud':
-                return [{ name: 'EUD Silver', icon: EudSilver },
-                ];
-            case 'eux':
-                return [{ name: 'EUX Silver Diamant', icon: EuxSilverDiamant },
-                { name: 'EUX Silver', icon: EuxSilver }];
-            default:
-                return null;
-        }
-    };
-
-    // Build full arrays with dynamic first option
-
-    const emblemOptions = [
+     const emblemOptions = [
         { name: 'Guld', value: 'Guld', color: '#FCD34D' },
         { name: 'Sølv', value: 'Sølv', color: '#E5E7EB' }
     ];
 
+
+   const getGoldEmblem = () => {
+    switch (program?.toLowerCase()) {
+        case 'hhx':
+            return [
+                { name: 'HHX Guld Simli', icon: HhxGoldDiamant },
+                { name: 'HHX Guld', icon: HhxGold }
+            ];
+        case 'htx':
+            return [
+                { name: 'Atom HTX Guld', icon: AtomHtxGold },
+                { name: 'HTX Guld Simli', icon: HtxGoldDiam },
+                { name: 'HTX Guld', icon: HtxGold }
+            ];
+        case 'stx':
+            return [
+                { name: 'STX Guld Simli', icon: StxGoldDiamant },
+                { name: 'STX Guld', icon: StxGold }
+            ];
+        case 'hf':
+            return [
+                { name: 'HF Guld Simli', icon: HfGoldDiamant },
+                { name: 'HF Guld', icon: HfGold }
+            ];
+        case 'eud':
+            return [
+                { name: 'EUD Guld', icon: EudGold }
+            ];
+        case 'eux':
+            return [
+                { name: 'EUX Guld Simli', icon: EuxGoldDiamant },
+                { name: 'EUX Guld', icon: EuxGold }
+            ];
+        default:
+            return null;
+    }
+};
+
+const getSilverEmblem = () => {
+    switch (program?.toLowerCase()) {
+        case 'hhx':
+            return [
+                { name: 'HHX Sølv Simli', icon: HhxSilverDiamant },
+                { name: 'HHX Sølv', icon: HhxSilver }
+            ];
+        case 'htx':
+            return [
+                { name: 'Atom HTX Sølv', icon: AtomHtxSilver },
+                { name: 'HTX Sølv Simli', icon: HtxSilverDiamant },
+                { name: 'HTX Sølv', icon: HtxSilver }
+            ];
+        case 'stx':
+            return [
+                { name: 'STX Sølv', icon: StxSilver },
+                { name: 'STX Sølv Simli', icon: StxSilverDiamant }
+            ];
+        case 'hf':
+            return [
+                { name: 'HF Sølv Simli', icon: HfSilverDiamant },
+                { name: 'HF Sølv', icon: HfSilver }
+            ];
+        case 'eud':
+            return [
+                { name: 'EUD Sølv', icon: EudSilver }
+            ];
+        case 'eux':
+            return [
+                { name: 'EUX Sølv Simli', icon: EuxSilverDiamant },
+                { name: 'EUX Sølv', icon: EuxSilver }
+            ];
+        default:
+            return null;
+    }
+};
+
+
+    // Build full arrays with dynamic first option
+
+   
+
     // Define all options categorized by type and emblem
-    const allTypeOptions = {
-        Signature: {
-            Guld: [
-                { name: 'Kurdistan', icon: Kurdistan },
-                { name: 'Iraq', icon: Iraq },
-                { name: 'Iran', icon: Iran },
-                { name: 'Somalia', icon: Somalia },
-                { name: 'Somaliland', icon: Somaliland },
-                { name: 'Palestine', icon: Palestine },
-                { name: 'Lebanon', icon: Lebanon },
-                { name: 'Afghanistan', icon: Afghanistan },
-                { name: 'Albania', icon: Albania },
-                { name: 'Serbia', icon: Serbia },
-                { name: 'Bosnia', icon: Bosnia },
-                { name: 'Denmark', icon: Denmark },
-                { name: 'Morocco', icon: Morocco },
-                { name: 'Pakistan', icon: Pakistan },
-                { name: 'Turkey', icon: Turkey },
-                { name: 'Ahornblad Gold', icon: AhornbladGold },
-                { name: 'Anker Gold', icon: AnkerGold },
-                { name: 'Atom Gold', icon: AtomGold },
-                { name: 'DNA Gold', icon: DnaGold },
-                { name: 'Globus Gold', icon: GlobusGold },
-                { name: 'Hjerte Guld', icon: HjerteGuld },
-                { name: 'Halvmone Gold Simli', icon: HalvmoneGoldSimli },
-                { name: 'Halvmone Gold', icon: HalvmoneGold },
-                { name: 'IT Gold', icon: ItGold },
-                { name: 'Lotus Gold', icon: LotusGold },
-                { name: 'Merkurstav Gold Diamant', icon: MerkurstavGoldDiamant },
-                { name: 'Merkurstav Gold', icon: MerkurstavGold },
-                { name: 'Node Gold', icon: NodeGold },
-                { name: 'Pil Gold', icon: PilGold },
-                { name: 'Sport Gold', icon: SportGold },
-                { name: 'Teater Gold', icon: TeaterGold },
-                { name: 'Twin Gold', icon: TwinGold },
-                ...(getGoldEmblem() || [])
-            ].filter(Boolean),
+   const allTypeOptions = {
+  Signature: {
+    Guld: [
+      { name: 'Danmark', icon: Denmark },          // 1
+      { name: 'Sweden', icon: Sweden },            // 2
+      { name: 'Palæstina', icon: Palestine },      // 3
+      { name: 'Tyrkiet', icon: Turkey },           // 4
+      { name: 'Pakistan', icon: Pakistan },        // 5
+      { name: 'Kurdistan', icon: Kurdistan },      // 6
+      { name: 'Irak', icon: Iraq },                // 7
+      { name: 'Iran', icon: Iran },                // 8
+      { name: 'Somalia', icon: Somalia },          // 9
+      { name: 'Somaliland', icon: Somaliland },    // 10
+      { name: 'Libanon', icon: Lebanon },          // 11
+      { name: 'Afghanistan', icon: Afghanistan },  // 12
+      { name: 'Albanien', icon: Albania },         // 13
+      { name: 'Serbien', icon: Serbia },           // 14
+      { name: 'Bosnien', icon: Bosnia },           // 15
+      { name: 'Marokko', icon: Morocco },           // 15
 
-            Sølv: [
-                { name: 'Kurdistan', icon: Kurdistan },
-                { name: 'Iraq', icon: Iraq },
-                { name: 'Iran', icon: Iran },
-                { name: 'Somalia', icon: Somalia },
-                { name: 'Somaliland', icon: Somaliland },
-                { name: 'Palestine', icon: Palestine },
-                { name: 'Lebanon', icon: Lebanon },
-                { name: 'Afghanistan', icon: Afghanistan },
-                { name: 'Albania', icon: Albania },
-                { name: 'Serbia', icon: Serbia },
-                { name: 'Bosnia', icon: Bosnia },
-                { name: 'Denmark', icon: Denmark },
-                { name: 'Morocco', icon: Morocco },
-                { name: 'Pakistan', icon: Pakistan },
-                { name: 'Turkey', icon: Turkey },
-                { name: 'Ahornblad Silver', icon: AhornbladSilver },
-                { name: 'Anker Silver', icon: AnkerSilver },
-                { name: 'Atom Silver', icon: AtomSilver },
-                { name: 'DNA Silver', icon: DnaSilver },
-               
-                { name: 'Globus Silver', icon: GlobusSilver },
-                { name: 'Hjerte Silv', icon: HjerteSilv },
-                { name: 'Halvmone Silver Simli', icon: HalvmoneSilverSimli },
-                { name: 'Halvmone Silver', icon: HalvmoneSilver },
-                { name: 'IT Silver', icon: ItSilver },
-                { name: 'Lotus Silver', icon: LotusSilver },
-                { name: 'Merkurstav Silver Diamant', icon: MerkurstavSilverDiamant },
-                { name: 'Merkurstav Silver', icon: MerkurstavSilver },
-                { name: 'Node Silver', icon: NodeSilver },
-                { name: 'Pi Silver', icon: PiSilver },
-                { name: 'Sport Silver', icon: SportSilver },
-                { name: 'Teater Silver', icon: TeaterSilver },
-                { name: 'Twin Silver', icon: TwinSilver },
-                ...(getSilverEmblem() || [])
+      { name: 'Halvmåne Guld', icon: HalvmoneGold },   
+      { name: 'Halvmåne Guld Simli', icon: HalvmoneGoldSimli }, 
+      { name: 'Merkurstav Guld', icon: MerkurstavGold },   
+      { name: 'Merkurstav Guld Simli', icon: MerkurstavGoldDiamant }, 
+      { name: 'Hjerte Guld', icon: HjerteGuld },   
+    //   { name: 'Hjerte Guld Simli', icon: HjerteGoldSimli },   
+      { name: 'Atom Guld', icon: AtomGold },       
+      { name: 'Ahornblad Guld', icon: AhornbladGold },   
+      { name: 'Anker Guld', icon: AnkerGold },     
+      { name: 'DNA Guld', icon: DnaGold },         
+      { name: 'Globus Guld', icon: GlobusGold },   
+      { name: 'IT Guld', icon: ItGold },           
+      { name: 'Lotus Guld', icon: LotusGold },     
+      { name: 'Node Guld', icon: NodeGold },       
+      { name: 'Pi Guld', icon: PilGold },           
+      { name: 'Sport Guld', icon: SportGold },     
+      { name: 'Teater Guld', icon: TeaterGold },   
+      { name: 'IB Guld', icon: IbGold },
+      { name: 'F Key Guld', icon: FKeyGold },
+   
 
-            ].filter(Boolean)
+      ...(getGoldEmblem() || [])
+    ].filter(Boolean),
 
-        },
-        Prestige: {
-            Guld: [
-                { name: 'Jupiter Gold', icon: JupiterGold },
-                { name: 'Saturn Gold', icon: SaturnGold },
-                { name: 'Venus Gold', icon: VenusGold },
-                { name: 'Merkur Gold', icon: MerkurGold },
-                { name: 'Neptun Gold', icon: NeptunGold },
-            ].filter(Boolean),
-            Sølv: [
-                { name: 'Jupiter Silver', icon: JupiterSilver },
-                { name: 'Saturn Silver', icon: SaturnSilver },
-                { name: 'Venus Silver', icon: VenusSilver },
-                { name: 'Merkur Silver', icon: MerkurSilver },
-                { name: 'Neptun Silver', icon: NeptunSilver },
-            ].filter(Boolean),
-        },
-        Stjernetegn: {
-            Guld: [
-                { name: 'Bull Gold', icon: BullGold },
-                { name: 'IB Gold', icon: IbGold },
-                { name: 'F Key Gold', icon: FKeyGold },
-                { name: 'Fisken Gold', icon: FiskenGold },
-                { name: 'Jomfruen Gold', icon: JomfruenGold },
-                { name: 'Krebsen Guld', icon: KrebsenGuld },
-                { name: 'Lion Gold', icon: LionGold },
-                { name: 'Scorpio Gold', icon: ScorpioGold },
-                { name: 'Skytten Gold', icon: SkyttenGold },
-                { name: 'Vandmand Gold', icon: VandmandGold },
-                { name: 'Vadderen Gold', icon: VadderenGold },
-                { name: 'Vagten Gold', icon: VagtenGold },
-                { name: 'Stenbuk Gold', icon: StenbukGold },
-            ].filter(Boolean),
-            Sølv: [
-                { name: 'Bull Silver', icon: BullSilver },
-                { name: 'IB Silver', icon: IbSilver },
-                { name: 'F Key Silver', icon: FKeySilver },
-                { name: 'Fisken Silver', icon: FiskenSilver },
-                { name: 'Jomfruen Silver', icon: JomfruenSilver },
-                { name: 'Krebsen Silver', icon: KrebsenSilver },
-                { name: 'Lion Silver', icon: LionSilver },
-                { name: 'Scorpio Silver', icon: ScorpioSilver },
-                { name: 'Skytten Silver', icon: SkyttenSilver },
-                { name: 'Vandmand Silv', icon: VandmandSilv },
-                { name: 'Vadderen Silver', icon: VadderenSilv },
-                { name: 'Vagten Silver', icon: VagtenSilver },
-                { name: 'Stenbuk Silver', icon: StenbukSilver },
-            ].filter(Boolean)
-        }
-    };
+    Sølv: [
+      { name: 'Danmark', icon: Denmark },          
+      { name: 'Sweden', icon: Sweden },            
+      { name: 'Palæstina', icon: Palestine },      
+      { name: 'Tyrkiet', icon: Turkey },           
+      { name: 'Pakistan', icon: Pakistan },        
+      { name: 'Kurdistan', icon: Kurdistan },      
+      { name: 'Irak', icon: Iraq },                
+      { name: 'Iran', icon: Iran },                
+      { name: 'Somalia', icon: Somalia },          
+      { name: 'Somaliland', icon: Somaliland },    
+      { name: 'Libanon', icon: Lebanon },          
+      { name: 'Afghanistan', icon: Afghanistan },  
+      { name: 'Albanien', icon: Albania },         
+      { name: 'Serbien', icon: Serbia },           
+      { name: 'Bosnien', icon: Bosnia },           
+    { name: 'Marokko', icon: Morocco },   
+      { name: 'Halvmåne Sølv', icon: HalvmoneSilver },
+      { name: 'Halvmåne Sølv Simli', icon: HalvmoneSilverSimli },
+      { name: 'Merkurstav Sølv', icon: MerkurstavSilver },
+      { name: 'Merkurstav Sølv Simli', icon: MerkurstavSilverDiamant },
+      { name: 'Hjerte Sølv', icon: HjerteSilv },
+    //   { name: 'Hjerte Sølv Simli', icon: HjerteSilverSimli },    
+      { name: 'Atom Sølv', icon: AtomSilver },
+      { name: 'Ahornblad Sølv', icon: AhornbladSilver },
+      { name: 'Anker Sølv', icon: AnkerSilver },
+      { name: 'DNA Sølv', icon: DnaSilver },
+      { name: 'Globus Sølv', icon: GlobusSilver },
+      { name: 'IT Sølv', icon: ItSilver },
+      { name: 'Lotus Sølv', icon: LotusSilver },
+      { name: 'Node Sølv', icon: NodeSilver },
+      { name: 'Pi Sølv', icon: PiSilver },
+      { name: 'Sport Sølv', icon: SportSilver },
+      { name: 'Teater Sølv', icon: TeaterSilver },
+      { name: 'IB Sølv', icon: IbSilver },
+      { name: 'F Key Sølv', icon: FKeySilver },
+
+      ...(getSilverEmblem() || [])
+    ].filter(Boolean)
+  },
+
+  Prestige: {
+    Guld: [
+      { name: 'Diamant', icon: JupiterGold }, 
+      { name: 'Onyx', icon: SaturnGold },      
+      { name: 'Perle', icon: VenusGold },       
+      { name: 'Nova', icon: MerkurGold },  
+    //   { name: 'Mars Rubin', icon: MarsGold },         
+      { name: 'Safir', icon: NeptunGold },     
+    ].filter(Boolean),
+    Sølv: [
+      { name: 'Diamant', icon: JupiterSilver }, 
+      { name: 'Onyx', icon: SaturnSilver },      
+      { name: 'Perle', icon: VenusSilver },       
+      { name: 'Nova', icon: MerkurSilver },  
+    //   { name: 'Mars Rubin', icon: MarsSilver },         
+      { name: 'Safir', icon: NeptunSilver },     
+    ].filter(Boolean),
+  },
+
+  Stjernetegn: {
+    Guld: [
+      { name: 'Tyr Guld', icon: BullGold },         
+      { name: 'Fisk Guld', icon: FiskenGold },      
+      { name: 'Jomfru Guld', icon: JomfruenGold },  
+      { name: 'Krebs Guld', icon: KrebsenGuld },    
+      { name: 'Løve Guld', icon: LionGold },        
+      { name: 'Skorpion Guld', icon: ScorpioGold }, 
+      { name: 'Skytte Guld', icon: SkyttenGold },   
+      { name: 'Stenbuk Guld', icon: StenbukGold },  
+      { name: 'Tvilling Guld', icon: TwinGold },    
+      { name: 'Vandmand Guld', icon: VandmandGold },
+      { name: 'Vædder Guld', icon: VadderenGold },  
+      { name: 'Vægt Guld', icon: VagtenGold },      
+    ].filter(Boolean),
+    Sølv: [
+      { name: 'Tyr Sølv', icon: BullSilver },         
+      { name: 'Fisk Sølv', icon: FiskenSilver },      
+      { name: 'Jomfru Sølv', icon: JomfruenSilver },  
+      { name: 'Krebs Sølv', icon: KrebsenSilver },    
+      { name: 'Løve Sølv', icon: LionSilver },        
+      { name: 'Skorpion Sølv', icon: ScorpioSilver }, 
+      { name: 'Skytte Sølv', icon: SkyttenSilver },   
+      { name: 'Stenbuk Sølv', icon: StenbukSilver },  
+      { name: 'Tvilling Sølv', icon: TwinSilver },    
+      { name: 'Vandmand Sølv', icon: VandmandSilv },  
+      { name: 'Vædder Sølv', icon: VadderenSilv },    
+      { name: 'Vægt Sølv', icon: VagtenSilver },      
+    ].filter(Boolean),
+  }
+};
+
 
     // Get the current options based on selected prestige and emblem
     const currentTypeOptions = allTypeOptions[selectedPrestige]?.[selectedEmblem.name] || [];
@@ -617,7 +661,7 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
                             </button>
                         ))}
                     </div>
-                    <p className="text-sm mt-2 text-slate-700">Selected: {selectedColor.name}</p>
+                    <p className="text-sm mt-2 text-slate-700">Valgt: {selectedColor.name}</p>
                 </>
             ) : (
                 <>
@@ -641,7 +685,7 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
                             </button>
                         ))}
                     </div>
-                    <p className="text-sm mt-2 text-slate-700">Selected: {selectedColor.name}</p>
+                    <p className="text-sm mt-2 text-slate-700">Valgt: {selectedColor.name}</p>
                 </>
             )}
 
@@ -661,7 +705,7 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
                         />
                     ))}
                 </div>
-                <p className="text-sm mt-2 text-slate-700">Selected: {selectedEmblem.name}</p>
+                <p className="text-sm mt-2 text-slate-700">Valgt: {selectedEmblem.name}</p>
             </div>
 
             {/* Prestige Type */}
@@ -694,7 +738,7 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
             <div className="space-y-4 mt-4">
                 <div>
                     <label className="text-sm font-semibold text-slate-700">Type</label>
-                    <p className="text-sm mt-1 text-slate-700">Selected: {selectedType}</p>
+                    <p className="text-sm mt-1 text-slate-700">Valgt: {selectedType}</p>
                 </div>
 
                 <div className="flex flex-wrap gap-3 ">

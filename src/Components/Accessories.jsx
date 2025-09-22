@@ -18,6 +18,7 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
    const [trumpetSelection, setTrumpetSelection] = useState('No');
    const [bucketpinsSelection, setBucketpinsSelection] = useState('No');
    const [embroideryText, setEmbroideryText] = useState('');
+   const [extraKokardeText, setExtraKokardeText] = useState('');
 
    const colorOptions = [
        { name: 'Burgundy', value: '#7F1D1D' },
@@ -31,7 +32,7 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
    ];
 
    const hatBoxTypes = ['Standard', 'Luksus æske','Premium æske'];
-   const premiumaske = [ 'Grøn velouræske', 'Sort velouræske', 'Læderlook æske' ];
+   const premiumaske = [ 'Grøn velour', 'Sort velour', 'Kunstlæderæske' ];
 
    // Effect hooks to propagate changes to parent component
    
@@ -43,7 +44,7 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
         if (selectedHatBoxType!='Premium æske') {
             setSelectedPremiumæske('')
         }else if (selectedHatBoxType=='Premium æske') {
-             setSelectedPremiumæske('Grøn velouræske')
+             setSelectedPremiumæske('Grøn velour')
         }
    }, [selectedHatBoxType]);
    
@@ -63,15 +64,23 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
    }, [embroideryText]);
 
    useEffect(() => {
-        onOptionChange('Badges', badgesSelection);
+        onOptionChange('Ekstra korkarde', badgesSelection);
+        if (badgesSelection=='No') {
+            setExtraKokardeText('NONE')
+        }else{
+            setExtraKokardeText('')
+        }
    }, [badgesSelection]);
+   useEffect(() => {
+        onOptionChange('Ekstra korkarde Text', extraKokardeText);
+   }, [extraKokardeText]);
 
    useEffect(() => {
         onOptionChange('Handsker', glovesSelection);
    }, [glovesSelection]);
 
    useEffect(() => {
-        onOptionChange('Store kuglepen', largeBallpointPenSelection);
+        onOptionChange('Stor kuglepen', largeBallpointPenSelection);
    }, [largeBallpointPenSelection]);
 
    useEffect(() => {
@@ -122,6 +131,10 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
                     </button>
                 ))}
             </div>
+            
+
+            
+
         </div>
     );
 
@@ -234,10 +247,30 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
 
 
            <AccessorySelector
-               label="Badges"
+               label="Ekstra korkarde"
                currentSelection={badgesSelection}
                onSelectionChange={setBadgesSelection}
            />
+
+           { badgesSelection=='Yes' ?(
+                <>
+
+             <div className="relative">
+                        <input
+                            type="text"
+                            value={extraKokardeText}
+                            onChange={(e) => setExtraKokardeText(e.target.value)}
+                            placeholder="Fri tekst"
+                            maxLength={26}
+                            className="w-full px-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
+                        />
+                        <div className="absolute inset-y-0 right-0 flex items-center pr-4">
+                            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                        </div>
+            </div>
+            </>
+            ): null
+            }
 
            <AccessorySelector
                label="Handsker"

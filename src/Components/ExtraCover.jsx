@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ForExtraCover from './ForExtraCover';
 
-const ExtraCover = ({ selectedOptions = {}, onOptionChange,currentEmblem,program }) => {
+const ExtraCover = ({ selectedOptions = {}, onOptionChange,currentEmblem,program,priceReset }) => {
     const [selectedExtraCoverOption, setSelectedExtraCoverOption] = useState('');
     // const [selectedMaterialType, setSelectedMaterialType] = useState('Standard');
     // const [selectedButtonMaterialColor, setSelectedButtonMaterialColor] = useState('Ingen');
@@ -14,8 +14,8 @@ const ExtraCover = ({ selectedOptions = {}, onOptionChange,currentEmblem,program
     ];
     
     const hatbandColorOptions = [
-        { name: 'HVID', value: '#ffffffff' },
-        { name: 'SORT', value: '#000001' }, // Consider using different colors or removing duplicate
+        { name: 'Hvid', value: '#ffffffff' },
+        { name: 'Sort', value: '#000001' }, // Consider using different colors or removing duplicate
     ];
 
     //  const [selectedHatbandColor, setSelectedHatbandColor] = useState('EUX');
@@ -26,6 +26,9 @@ const ExtraCover = ({ selectedOptions = {}, onOptionChange,currentEmblem,program
     // Effect hook to propagate changes to parent component
     useEffect(() => {
         onOptionChange('Tilvælg', selectedExtraCoverOption);
+    }, [selectedExtraCoverOption]);
+    useEffect(() => {
+        selectedExtraCoverOption=='No'?priceReset(true):priceReset(false)
     }, [selectedExtraCoverOption]);
     // useEffect(() => {
     //     onOptionChange('Favre', selectedHatbandColor);
