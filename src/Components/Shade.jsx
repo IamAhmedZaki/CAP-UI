@@ -187,9 +187,7 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
                 <div className="flex items-center justify-between mb-4">
                     <div>
                         <h4 className="font-semibold text-slate-800">Skyggegravering</h4>
-                        <span className="inline-flex items-center px-3 pt-2 rounded-full text-xs font-bold">
-                                Maks. 30 Tegn
-                            </span>
+                        
                         <div className="flex items-center gap-2 mt-1">
                            
                         </div>
@@ -197,6 +195,9 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
                 </div>
                 <div className="space-y-4">
                     <div className="relative">
+                        <span className="inline-flex items-center px-3 pt-2 rounded-full text-xs font-bold">
+                                Maks. 30 Tegn
+                            </span>
                         <input
                             type="text"
                             value={engravingLine1}
@@ -205,6 +206,9 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
                             maxLength={30}
                             className="w-full my-4 px-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
                         />
+                        <span className="inline-flex items-center px-3 pt-2 rounded-full text-xs font-bold">
+                                Maks. 30 Tegn
+                            </span>
                         <input
                             type="text"
                             value={engravingLine2}
@@ -213,6 +217,9 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
                             maxLength={30}
                             className="w-full px-4 my-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
                         />
+                        <span className="inline-flex items-center px-3 pt-2 rounded-full text-xs font-bold">
+                                Maks. 30 Tegn
+                            </span>
                         <input
                             type="text"
                             value={engravingLine3}

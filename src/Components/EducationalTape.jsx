@@ -8,7 +8,7 @@ import silverblack from '../assets/button images/silverblack.png';
 import silver from '../assets/button images/silver.png';
 import gold from '../assets/button images/gold.png';
 
-const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, currentEmblem }) => {
+const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke, currentEmblem, }) => {
     // State variables with descriptive names
     const currentYear = new Date().getFullYear();
     const [selectedHatbandColor, setSelectedHatbandColor] = useState(``);
@@ -53,128 +53,128 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, curren
             case 'Guld':
 
                 return [
-                    { name: 'Guld hagerem med guld knuder', value: '#f0bd06ff',img:gold },
-                    { name: 'Sort hagerem med guld knuder', value: '#695406ff',img:goldblack },];
+                    { name: 'Guld hagerem med guld knuder', value: '#f0bd06ff', img: gold },
+                    { name: 'Sort hagerem med guld knuder', value: '#695406ff', img: goldblack },];
             default:
-                return [{ name: 'Sølv hagerem med sølvknuder', value: '#C0C0C0',img:silver },
-                    { name: 'Sølv hagerem med sort knuder', value: '#71706C',img:silverblack }];
+                return [{ name: 'Sølv hagerem med sølvknuder', value: '#C0C0C0', img: silver },
+                { name: 'Sølv hagerem med sort knuder', value: '#71706C', img: silverblack }];
         }
     }
 
     const getHuebandColor = () => {
-    switch (program?.toLowerCase()) {
-        case 'hhx':
-            return [
-                { name: 'HHX', value: '#4169e1' },
-                { name: 'Sort', value: '#000001' }
-            ];
-        case 'htx':
-            return [
-                { name: 'HTX', value: '#000080' },
-                { name: 'Sort', value: '#000001' }
-            ];
-        case 'stx':
-            return [
-                { name: 'STX', value: '#7F1D1D' },
-                { name: 'Sort', value: '#000001' }
-            ];
-        case 'hf':
-            return [
-                { name: 'HF', value: '#ADD8E6' },
-                { name: 'Sort', value: '#000001' }
-            ];
-        case 'eux':
-            return [
-                { name: 'EUX', value: '#522854' },
-                { name: 'Sort', value: '#000001' }
-            ];
-        case 'eud':
-            return [
-                { name: 'EUD', value: '#7c7f82' },
-                { name: 'Sort', value: '#000001' }
-            ];
-        case 'sosuassistent':
-            return [
-                { name: 'Sosuassistent', value: '#7c7f82' },
-                
-            ];
-        case 'sosuhjælper':
-            return [
-                { name: 'Sosuhjælper', value: '#8f478a' },
-                
-            ];
-        case 'frisør':
-            return [
-                { name: 'Frisør', value: '#FFB6C1' },
-               
-            ];
-        case 'kosmetolog':
-            return [
-                { name: 'Kosmetolog', value: '#FFC0CB' },
-                
-            ];
-        case 'pædagog':
-            return [
-                { name: 'Pædagog', value: '#341539' },
-                
-            ];
-        case 'pau':
-            return [
-                { name: 'PAU', value: '#FFA500' },
-                
-            ];
-        case 'ernæringsassisten':
-            return [
-                { name: 'Ernæringsassisten', value: '#FFFF00' },
-                
-            ];
-        default:
-            return [
-                { name: '', value: '' },
-                { name: 'Sort', value: '#000001' }
-            ];
-    }
-};
+        switch (program?.toLowerCase()) {
+            case 'hhx':
+                return [
+                    { name: 'HHX', value: '#4169e1' },
+                    { name: 'Sort', value: '#000001' }
+                ];
+            case 'htx':
+                return [
+                    { name: 'HTX', value: '#000080' },
+                    { name: 'Sort', value: '#000001' }
+                ];
+            case 'stx':
+                return [
+                    { name: 'STX', value: '#7F1D1D' },
+                    { name: 'Sort', value: '#000001' }
+                ];
+            case 'hf':
+                return [
+                    { name: 'HF', value: '#ADD8E6' },
+                    { name: 'Sort', value: '#000001' }
+                ];
+            case 'eux':
+                return [
+                    { name: 'EUX', value: '#522854' },
+                    { name: 'Sort', value: '#000001' }
+                ];
+            case 'eud':
+                return [
+                    { name: 'EUD', value: '#7c7f82' },
+                    { name: 'Sort', value: '#000001' }
+                ];
+            case 'sosuassistent':
+                return [
+                    { name: 'Sosuassistent', value: '#7c7f82' },
+
+                ];
+            case 'sosuhjælper':
+                return [
+                    { name: 'Sosuhjælper', value: '#8f478a' },
+
+                ];
+            case 'frisør':
+                return [
+                    { name: 'Frisør', value: '#FFB6C1' },
+
+                ];
+            case 'kosmetolog':
+                return [
+                    { name: 'Kosmetolog', value: '#FFC0CB' },
+
+                ];
+            case 'pædagog':
+                return [
+                    { name: 'Pædagog', value: '#341539' },
+
+                ];
+            case 'pau':
+                return [
+                    { name: 'PAU', value: '#FFA500' },
+
+                ];
+            case 'ernæringsassisten':
+                return [
+                    { name: 'Ernæringsassisten', value: '#FFFF00' },
+
+                ];
+            default:
+                return [
+                    { name: '', value: '' },
+                    { name: 'Sort', value: '#000001' }
+                ];
+        }
+    };
 
 
-    const hatbandColorOptions = 
+    const hatbandColorOptions =
         getHuebandColor()
         // Consider using different colors or removing duplicate
-    ;
+        ;
 
     const chinStrapColorOptions = [
-        { name: 'Mat', value: '#2e2e2e',img:matteleather },
+        { name: 'Mat', value: '#2e2e2e', img: matteleather },
         { name: 'Blank', value: '#757575' },
-        { name: 'Sort med sorteknuder', value: '#000000' ,img:shinyblack},
+        { name: 'Sort med sorteknuder', value: '#000000', img: shinyblack },
         ...getCurrentEmblem()
     ];
 
- const getEmbroideryColor = () => {
-    switch (program?.toLowerCase()) {
-        case 'hhx':
-            return { name: 'HHX', value: 'HHX', color: '#4169e1' };
-        case 'htx':
-            return { name: 'HTX', value: 'HTX', color: '#000080' };
-        case 'stx':
-            return { name: 'STX', value: 'STX', color: '#7F1D1D' };
-        case 'hf':
-            return { name: 'HF', value: 'HF', color: '#ADD8E6' };
-        case 'eux':
-            return { name: 'EUX', value: 'EUX', color: '#522854' };
-        case 'eud':
-            return { name: 'EUD', value: 'EUD', color: '#7c7f82' };
-        default:
-            return null; // nothing if no match
-    }
-};
+    const getEmbroideryColor = () => {
+        switch (program?.toLowerCase()) {
+            case 'hhx':
+                return { name: 'HHX', value: 'HHX', color: '#4169e1' };
+            case 'htx':
+                return { name: 'HTX', value: 'HTX', color: '#000080' };
+            case 'stx':
+                return { name: 'STX', value: 'STX', color: '#7F1D1D' };
+            case 'hf':
+                return { name: 'HF', value: 'HF', color: '#ADD8E6' };
+            case 'eux':
+                return { name: 'EUX', value: 'EUX', color: '#522854' };
+            case 'eud':
+                return { name: 'EUD', value: 'EUD', color: '#7c7f82' };
+            default:
+                return null; // nothing if no match
+        }
+    };
 
-const embroideryColorOptions = [
-    { name: 'Guld', value: 'Guld', color: '#ba9200' },
-    { name: 'Sølv', value: 'Sølv', color: '#757575' },
-    getEmbroideryColor(),
-    { name: 'Hvid', value: 'Hvid', color: '#E5E7EB' },
-    { name: 'Sort', value: 'Sort', color: '#000000' },
-].filter(Boolean); // removes null
+    const embroideryColorOptions = [
+        { name: 'Guld', value: 'Guld', color: '#ba9200' },
+        { name: 'Sølv', value: 'Sølv', color: '#757575' },
+        getEmbroideryColor(),
+        { name: 'Hvid', value: 'Hvid', color: '#E5E7EB' },
+        { name: 'Sort', value: 'Sort', color: '#000000' },
+    ].filter(Boolean); // removes null
 
 
     const buttonColorOptions = [
@@ -183,9 +183,9 @@ const embroideryColorOptions = [
         { name: 'Sølv', value: 'Sølv', color: '#757575' },
     ];
 
-    const materialEUXTypes = ['BOMULD', 'VELOUR', 'SATIN', 'GLIMMER', 'SHIMMER',];
+    const materialEUXTypes = ['BOMULD', 'SATIN', 'VELOUR', 'GLIMMER', 'SHIMMER',];
     const materialSORTTypes = ['VELOUR', 'SATIN', 'GLIMMER'];
-    const materialColorTypes=['BOMULD','SATIN']
+    const materialColorTypes = ['BOMULD', 'SATIN']
 
     const buttonMaterialMATTypes = ['Mat hagerem'];
     const buttonMaterialBLANKTypes = ['Blank hagerem', 'Blank kunstlæder hagerem'];
@@ -197,30 +197,30 @@ const embroideryColorOptions = [
     const year = ['Ingen', ...Array.from({ length: 2 }, (_, i) => (currentYear + i).toString())];
 
     function getMaterialOptions() {
-    switch (selectedHatbandColor) {
-        case 'HHX':
-        case 'HTX':
-        case 'STX':
-        case 'HF':
-        case 'EUD':
-        case 'EUX':
-            return materialEUXTypes
-        case 'Sosuassistent':
-        case 'Sosuhjælper':
-        case 'Frisør':
-        case 'Kosmetolog':
-        case 'Pædagog':
-        case 'PAU':
-        case 'Ernæringsassisten':
-            return materialColorTypes;
+        switch (selectedHatbandColor) {
+            case 'HHX':
+            case 'HTX':
+            case 'STX':
+            case 'HF':
+            case 'EUD':
+            case 'EUX':
+                return materialEUXTypes
+            case 'Sosuassistent':
+            case 'Sosuhjælper':
+            case 'Frisør':
+            case 'Kosmetolog':
+            case 'Pædagog':
+            case 'PAU':
+            case 'Ernæringsassisten':
+                return materialColorTypes;
 
-        case 'Sort':
-            return materialSORTTypes;
+            case 'Sort':
+                return materialSORTTypes;
 
-        default:
-            return [];
+            default:
+                return [];
+        }
     }
-}
 
     useEffect(() => {
         let materialType = getMaterialOptions()
@@ -289,8 +289,8 @@ const embroideryColorOptions = [
                             key={colorOption.value}
                             onClick={() => onSelectionChange(colorOption.name)}
                             className={`w-12 h-12 flex m-1 justify-center items-center rounded-xl border-2 transition-all overflow-hidden duration-200 hover:scale-110 ${currentSelection === colorOption.name
-                                    ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
-                                    : 'border-slate-200 hover:border-slate-400'
+                                ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+                                : 'border-slate-200 hover:border-slate-400'
                                 }`}
                             style={{ backgroundColor: colorOption.color || colorOption.value }}
                             title={colorOption.name}
@@ -333,8 +333,8 @@ const embroideryColorOptions = [
                         key={type}
                         onClick={() => onSelectionChange(type)}
                         className={`px-6 py-3 rounded-xl m-3 text-sm font-medium transition-all duration-200 ${currentSelection === type
-                                ? 'bg-blue-600 text-white shadow-md'
-                                : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm'
+                            ? 'bg-blue-600 text-white shadow-md'
+                            : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm'
                             }`}
                     >
                         {type}
@@ -363,9 +363,9 @@ const embroideryColorOptions = [
                 label="Materiale"
                 currentSelection={selectedMaterialType}
                 onSelectionChange={setSelectedMaterialType}
-                options={['HTX', 'HHX', 'STX', 'HF','EUX','EUD'].includes(selectedHatbandColor)
-                    ? materialEUXTypes:[ 'Sosuassistent', 'Sosuhjælper', 'Frisør', 
-   'Kosmetolog', 'Pædagog', 'PAU', 'Ernæringsassisten'].includes(selectedHatbandColor)? materialColorTypes:selectedHatbandColor=='Sort'? materialSORTTypes:[]}
+                options={['HTX', 'HHX', 'STX', 'HF', 'EUX', 'EUD'].includes(selectedHatbandColor)
+                    ? materialEUXTypes : ['Sosuassistent', 'Sosuhjælper', 'Frisør',
+                        'Kosmetolog', 'Pædagog', 'PAU', 'Ernæringsassisten'].includes(selectedHatbandColor) ? materialColorTypes : selectedHatbandColor == 'Sort' ? materialSORTTypes : []}
             />
 
             {/* Chin Strap Color Selection */}
@@ -389,14 +389,22 @@ const embroideryColorOptions = [
                 <div className="flex items-center justify-between mb-4">
                     <div>
                         <h4 className="font-semibold text-slate-800">Broderi foran</h4>
-                        <div className="flex items-center gap-2 mt-1">
-                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-100 to-yellow-200 text-amber-800">
-                                Inkluderet i pakken
-                            </span>
-                        </div>
-                            <span className="inline-flex items-center px-3 pt-2 rounded-full text-xs font-bold">
-                                Maks. 20 Tegn
-                            </span>
+                        {
+                            pakke?.toLowerCase() == 'luksus' || pakke?.toLowerCase() == 'premium' ? (
+                                <>
+                                    <div className="flex items-center gap-2 mt-1">
+
+                                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-100 to-yellow-200 text-amber-800">
+                                            Inkluderet i pakken
+                                        </span>
+                                    </div>
+                                </>
+                            ) : null
+                        }
+
+                        <span className="inline-flex items-center px-3 pt-2 rounded-full text-xs font-bold">
+                            Maks. 20 Tegn
+                        </span>
                     </div>
                 </div>
                 <div className="space-y-4">
@@ -407,7 +415,7 @@ const embroideryColorOptions = [
                             onChange={(e) => setEmbroideryText(e.target.value)}
                             placeholder="Fri tekst"
                             className="w-full px-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
-                             maxLength={20}
+                            maxLength={20}
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-4">
                             <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>

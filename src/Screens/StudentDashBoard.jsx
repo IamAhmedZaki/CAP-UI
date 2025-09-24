@@ -229,8 +229,8 @@ const StudentDashboard = () => {
 
   // Stjernetegn Gold - set to 89
   'Tyr Guld': 89,
-  'IB Guld': 89,
-  'F Key Guld': 89,
+  'IB Guld': 0,
+  'F Key Guld': 0,
   'Fisk Guld': 89,
   'Jomfru Guld': 89,
   'Krebs Guld': 89,
@@ -245,8 +245,8 @@ const StudentDashboard = () => {
 
   // Stjernetegn Silver - set to 89
   'Tyr Sølv': 89,
-  'IB Sølv': 89,
-  'F Key Sølv': 89,
+  'IB Sølv': 0,
+  'F Key Sølv': 0,
   'Fisk Sølv': 89,
   'Jomfru Sølv': 89,
   'Krebs Sølv': 89,
@@ -268,15 +268,15 @@ const StudentDashboard = () => {
     },
     Materiale: {
       BOMULD: 0,
+      SATIN: 0,
       VELOUR: 239,
-      SATIN: 239,
       GLIMMER: 239,
       SHIMMER:0,
     },
     Hagerem: {
       Mat: 0,
       Blank: 0,
-      'Sort med sorteknuder': 0,
+      'Sort med sorteknuder': 69,
       'Guld hagerem med guld knuder': 69,
       'Sort hagerem med guld knuder': 69,
       'Sølv hagerem med sølvknuder': 69,
@@ -466,8 +466,8 @@ const StudentDashboard = () => {
   TILBEHØR: {
     Hueæske: {
       Standard: 0, 
-      'Premium æske': 199,
-      'Luksus æske': 299 
+      'Premium æske': 299,
+      'Luksus æske': 199 
     },
     
     Huekuglepen: {
@@ -486,7 +486,7 @@ const StudentDashboard = () => {
       Yes: 39, 
       No: 0 
     },
-    'Store kuglepen': {
+    'Stor kuglepen': {
       Yes: 39, 
       No: 0 
     },
@@ -499,7 +499,7 @@ const StudentDashboard = () => {
       No: 0 
     },
     'Luksus champagneglas': {
-      Yes: 99, 
+      Yes: 100, 
       No: 0 
     },
     Fløjte: {
@@ -570,11 +570,11 @@ const luksusPrices = {
   'DNA Guld': 0,
   'Globus Guld': 0,
   'Hjerte Guld': 0,
-  'Halvmåne Guld Simli': 0,
+  'Halvmåne Guld Simli': 69,
   'Halvmåne Guld': 0,
   'IT Guld': 0,
   'Lotus Guld': 0,
-  'Merkurstav Guld Simli': 0,
+  'Merkurstav Guld Simli': 69,
   'Merkurstav Guld': 0,
   'Node Guld': 0,
   'Pi Guld': 0,
@@ -583,17 +583,17 @@ const luksusPrices = {
   'Twin Guld': 0,
 
   // Gold program-specific emblems
-  'HHX Guld Simli': 0,
+  'HHX Guld Simli': 69,
   'HHX Guld': 0,
   'Atom HTX Guld': 0,
-  'HTX Guld Simli': 0,
+  'HTX Guld Simli': 69,
   'HTX Guld': 0,
-  'STX Guld Simli': 0,
+  'STX Guld Simli': 69,
   'STX Guld': 0,
   'EUD Guld': 0,
-  'EUX Guld Simli': 0,
+  'EUX Guld Simli': 69,
   'EUX Guld': 0,
-  'HF Guld Simli': 0,
+  'HF Guld Simli': 69,
   'HF Guld': 0,
 
   // Silver Signature emblems
@@ -603,11 +603,11 @@ const luksusPrices = {
   'DNA Sølv': 0,
   'Globus Sølv': 0,
   'Hjerte Sølv': 0,
-  'Halvmåne Sølv Simli': 0,
+  'Halvmåne Sølv Simli': 69,
   'Halvmåne Sølv': 0,
   'IT Sølv': 0,
   'Lotus Sølv': 0,
-  'Merkurstav Sølv Simli': 0,
+  'Merkurstav Sølv Simli': 69,
   'Merkurstav Sølv': 0,
   'Node Sølv': 0,
   'Pi Sølv': 0,
@@ -616,17 +616,17 @@ const luksusPrices = {
   'Twin Sølv': 0,
 
   // Silver program-specific emblems
-  'HHX Sølv Simli': 0,
+  'HHX Sølv Simli': 69,
   'HHX Sølv': 0,
-  'Atom HTX Sølv': 0,
-  'HTX Sølv Simli': 0,
+  'Atom HTX Sølv': 69,
+  'HTX Sølv Simli': 69,
   'HTX Sølv': 0,
   'STX Sølv': 0,
-  'STX Sølv Simli': 0,
+  'STX Sølv Simli': 69,
   'EUD Sølv': 0,
-  'EUX Sølv Simli': 0,
+  'EUX Sølv Simli': 69,
   'EUX Sølv': 0,
-  'HF Sølv Simli': 0,
+  'HF Sølv Simli': 69,
   'HF Sølv': 0,
 
   // Prestige Gold - set to 89
@@ -903,7 +903,7 @@ const luksusPrices = {
       Yes: 0, 
       No: 0 
     },
-    'Store kuglepen': {
+    'Stor kuglepen': {
       Yes: 39, 
       No: 0 
     },
@@ -1310,7 +1310,7 @@ const premiumPrices = {
       Yes: 0,
       No: 0
     },
-    'Store kuglepen': {
+    'Stor kuglepen': {
       Yes: 0,
       No: 0
     },
@@ -1356,72 +1356,87 @@ const premiumPrices = {
 
 
   const calculateTotalPrice = () => {
-    let total = 0;
+  let total = 0;
 
+  // Helper: calculate price for text-based fields
+  const calcTextPrice = (text, pricing) => {
+    if (!text || !pricing) return 0;
+    const base = pricing.base || 0;
+    const perChar = pricing.perChar || 0;
+    return base + perChar * text.length;
+  };
 
-    // Helper: calculate price for text-based fields
-    const calcTextPrice = (text, pricing) => {
-      if (!text || !pricing) return 0;
-      const base = pricing.base || 0;
-      const perChar = pricing.perChar || 0;
-      return base + perChar * text.length;
-    };
-    
-    const isExtraOptionsSelected=selectedOptions.EKSTRABETRÆK?.Tilvælg=='Yes'
-    // const isExtraOptionsSelected=selectedOptions.EKSTRABETRÆK?.Tilvælg === 'Yes';
+  const isExtraOptionsSelected =
+    selectedOptions.EKSTRABETRÆK?.Tilvælg == "Yes";
 
-    // Loop through categories in selectedOptions
-    for (const category in selectedOptions) {
-      const categoryOptions = selectedOptions[category];
-      const categoryPrices = prices[category];
+  // Track special case for SKYGGE lines
+  let skyggeLinesSelected = false;
 
-      if (!categoryPrices) continue;
+  for (const category in selectedOptions) {
+    const categoryOptions = selectedOptions[category];
+    const categoryPrices = prices[category];
 
-      
+    if (!categoryPrices) continue;
 
-      for (const optionKey in categoryOptions) {
-        const value = categoryOptions[optionKey];
-        categoryOptions
-        const optionPrices = categoryPrices[optionKey];
+    for (const optionKey in categoryOptions) {
+      const value = categoryOptions[optionKey];
+      const optionPrices = categoryPrices[optionKey];
+      if (!optionPrices) continue;
 
-        if (!optionPrices) continue;
-
-        if (category=='EKSTRABETRÆK'&& !isExtraOptionsSelected){
+      if (category == "EKSTRABETRÆK" && !isExtraOptionsSelected) {
         continue;
-        }
+      }
 
-        // Case 1: text-based pricing (has base + perChar)
-        if (typeof value === "string" && optionPrices.base !== undefined) {
-          total += calcTextPrice(value, optionPrices);
+      // Special case: SKYGGE lines (1–3)
+      if (
+        category === "SKYGGE" &&
+        ["Skyggegravering Line 1", "Skyggegravering Line 2", "Skyggegravering Line 3"].includes(optionKey)
+      ) {
+        if (typeof value === "string" && value.trim() !== "") {
+          skyggeLinesSelected = true;
         }
+        continue; // Skip normal pricing, we'll handle later
+      }
 
-        // Case 2: direct match in the price list
-        else if (typeof value === "string" && optionPrices[value] !== undefined) {
-          total += optionPrices[value];
-        }
+      // Case 1: text-based pricing (base + perChar)
+      if (typeof value === "string" && optionPrices.base !== undefined) {
+        total += calcTextPrice(value, optionPrices);
+      }
 
-        // Case 3: value is object with .value (like color pickers)
-        else if (value?.value && optionPrices[value.value] !== undefined) {
-          total += optionPrices[value.value];
-        }
+      // Case 2: direct match
+      else if (typeof value === "string" && optionPrices[value] !== undefined) {
+        total += optionPrices[value];
+      }
 
-        // Case 4: numbers (like size adjustments)
-        else if (typeof value === "number" && optionPrices.base !== undefined) {
-          const base = optionPrices.base || 0;
-          const perMM = optionPrices.perMM || 0;
-          total += base + value * perMM;
-        }
+      // Case 3: object with .value
+      else if (value?.value && optionPrices[value.value] !== undefined) {
+        total += optionPrices[value.value];
+      }
+
+      // Case 4: number-based (like size)
+      else if (typeof value === "number" && optionPrices.base !== undefined) {
+        const base = optionPrices.base || 0;
+        const perMM = optionPrices.perMM || 0;
+        total += base + value * perMM;
       }
     }
-    
-    let iniialPrice=0
-    
-    if (packageName === "standard") iniialPrice = 449;
-      // else if (packageType === "premium") iniialPrice = 1395;
-      else if (packageName === "luksus") iniialPrice = 995;
-      else if (packageName === "premium") iniialPrice = 1850;
-    return total+ iniialPrice +59;
-  };
+  }
+
+  // ✅ Apply only once if any line is selected
+ if (skyggeLinesSelected && packageName !== "premium") {
+  total += 99;
+}
+
+
+  // Package base price
+  let iniialPrice = 0;
+  if (packageName === "standard") iniialPrice = 449;
+  else if (packageName === "luksus") iniialPrice = 995;
+  else if (packageName === "premium") iniialPrice = 1850;
+
+  return total + iniialPrice + 59;
+};
+
 
 
   const menuItems = [
@@ -1578,6 +1593,7 @@ const premiumPrices = {
                   onOptionChange={(key, value) => handleOptionChange('UDDANNELSESBÅND', key, value)}
                   program={program}
                   currentEmblem={globalEmblem}
+                  pakke={packageName}
                 />
               )}
               {activeMenu === "BRODERI" && (
@@ -1585,6 +1601,8 @@ const premiumPrices = {
                   selectedOptions={selectedOptions.BRODERI}
                   onOptionChange={(key, value) => handleOptionChange('BRODERI', key, value)}
                   program={program}
+                  pakke={packageName}
+
                 />
               )}
               {activeMenu === "BETRÆK" && (
@@ -1763,6 +1781,8 @@ const premiumPrices = {
                   onOptionChange={(key, value) => handleOptionChange('UDDANNELSESBÅND', key, value)}
                   program={program}
                   currentEmblem={globalEmblem}
+                  pakke={packageName}
+
                 />
               )}
               {activeMenu === "BRODERI" && (
@@ -1770,6 +1790,8 @@ const premiumPrices = {
                   selectedOptions={selectedOptions.BRODERI}
                   onOptionChange={(key, value) => handleOptionChange('BRODERI', key, value)}
                   program={program}
+                  pakke={packageName}
+
                 />
               )}
               {activeMenu === "BETRÆK" && (

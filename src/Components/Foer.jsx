@@ -41,6 +41,20 @@ const Foer = ({ selectedOptions = {}, onOptionChange,currentEmblem,program }) =>
                     
         }
     }
+    const getSatinColor = () => {
+        switch (program?.toLowerCase()) {
+            case 'hhx':
+                return { name: 'Royal blå', value: 'Royal blå', color: '#4169e1' };
+            case 'htx':
+                return { name: 'Navy blå', value: 'Navy blå', color: '#000080' };
+            case 'stx':
+                return { name: 'Bordeaux', value: 'Bordeaux', color: '#800020' };
+            case 'hf':
+                return { name: 'Light blå', value: 'Light blå', color: '#ADD8E6' };
+            default:
+                return { name: 'Bordeaux', value: 'Bordeaux', color: '#800020' }
+        }
+    }
     // Color options with descriptive names
     const bowColorOptions = [
         { name: 'Hvid', value: 'Hvid', color: '#FFFFFF' },
@@ -50,8 +64,8 @@ const Foer = ({ selectedOptions = {}, onOptionChange,currentEmblem,program }) =>
 
     const bowMaterialTypes = [
         { name: 'Hvid', value: 'Hvid', color: '#fafcfd' },
-        { name: 'Brown', value: 'Brown', color: '#a66f5a' },
-        { name: 'Bordeaux', value: 'Bordeaux', color: '#800020' },
+        { name: 'Brun', value: 'Brun', color: '#a66f5a' },
+        getSatinColor(),
         { name: 'Champagne', value: 'Champagne', color:'#F7E7CE' },
     ];
     

@@ -337,9 +337,9 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
             ];
         case 'htx':
             return [
-                { name: 'Atom HTX Guld', icon: AtomHtxGold },
                 { name: 'HTX Guld Simli', icon: HtxGoldDiam },
-                { name: 'HTX Guld', icon: HtxGold }
+                { name: 'HTX Guld', icon: HtxGold },
+                { name: 'Atom HTX Guld', icon: AtomHtxGold },
             ];
         case 'stx':
             return [
@@ -374,14 +374,14 @@ const getSilverEmblem = () => {
             ];
         case 'htx':
             return [
-                { name: 'Atom HTX Sølv', icon: AtomHtxSilver },
                 { name: 'HTX Sølv Simli', icon: HtxSilverDiamant },
-                { name: 'HTX Sølv', icon: HtxSilver }
+                { name: 'HTX Sølv', icon: HtxSilver },
+                { name: 'Atom HTX Sølv', icon: AtomHtxSilver },
             ];
         case 'stx':
             return [
+                { name: 'STX Sølv Simli', icon: StxSilverDiamant },
                 { name: 'STX Sølv', icon: StxSilver },
-                { name: 'STX Sølv Simli', icon: StxSilverDiamant }
             ];
         case 'hf':
             return [
@@ -427,7 +427,12 @@ const getSilverEmblem = () => {
       { name: 'Serbien', icon: Serbia },           // 14
       { name: 'Bosnien', icon: Bosnia },           // 15
       { name: 'Marokko', icon: Morocco },           // 15
-
+        ...(getGoldEmblem() || []),
+        { name: 'F Key Guld', icon: FKeyGold },
+        { name: 'DNA Guld', icon: DnaGold },         
+        { name: 'Pi Guld', icon: PilGold },           
+        { name: 'IT Guld', icon: ItGold },           
+        { name: 'IB Guld', icon: IbGold },
       { name: 'Halvmåne Guld', icon: HalvmoneGold },   
       { name: 'Halvmåne Guld Simli', icon: HalvmoneGoldSimli }, 
       { name: 'Merkurstav Guld', icon: MerkurstavGold },   
@@ -437,24 +442,20 @@ const getSilverEmblem = () => {
       { name: 'Atom Guld', icon: AtomGold },       
       { name: 'Ahornblad Guld', icon: AhornbladGold },   
       { name: 'Anker Guld', icon: AnkerGold },     
-      { name: 'DNA Guld', icon: DnaGold },         
       { name: 'Globus Guld', icon: GlobusGold },   
-      { name: 'IT Guld', icon: ItGold },           
       { name: 'Lotus Guld', icon: LotusGold },     
       { name: 'Node Guld', icon: NodeGold },       
-      { name: 'Pi Guld', icon: PilGold },           
       { name: 'Sport Guld', icon: SportGold },     
       { name: 'Teater Guld', icon: TeaterGold },   
-      { name: 'IB Guld', icon: IbGold },
-      { name: 'F Key Guld', icon: FKeyGold },
+      
    
 
-      ...(getGoldEmblem() || [])
+      
     ].filter(Boolean),
 
     Sølv: [
       { name: 'Danmark', icon: Denmark },          
-      { name: 'Sweden', icon: Sweden },            
+      { name: 'Sverige', icon: Sweden },            
       { name: 'Palæstina', icon: Palestine },      
       { name: 'Tyrkiet', icon: Turkey },           
       { name: 'Pakistan', icon: Pakistan },        
@@ -468,7 +469,13 @@ const getSilverEmblem = () => {
       { name: 'Albanien', icon: Albania },         
       { name: 'Serbien', icon: Serbia },           
       { name: 'Bosnien', icon: Bosnia },           
-    { name: 'Marokko', icon: Morocco },   
+    { name: 'Marokko', icon: Morocco },
+    ...(getSilverEmblem() || []),   
+    { name: 'F Key Sølv', icon: FKeySilver },
+    { name: 'DNA Sølv', icon: DnaSilver },
+    { name: 'Pi Sølv', icon: PiSilver },
+    { name: 'IT Sølv', icon: ItSilver },
+    { name: 'IB Sølv', icon: IbSilver },
       { name: 'Halvmåne Sølv', icon: HalvmoneSilver },
       { name: 'Halvmåne Sølv Simli', icon: HalvmoneSilverSimli },
       { name: 'Merkurstav Sølv', icon: MerkurstavSilver },
@@ -478,18 +485,13 @@ const getSilverEmblem = () => {
       { name: 'Atom Sølv', icon: AtomSilver },
       { name: 'Ahornblad Sølv', icon: AhornbladSilver },
       { name: 'Anker Sølv', icon: AnkerSilver },
-      { name: 'DNA Sølv', icon: DnaSilver },
       { name: 'Globus Sølv', icon: GlobusSilver },
-      { name: 'IT Sølv', icon: ItSilver },
       { name: 'Lotus Sølv', icon: LotusSilver },
       { name: 'Node Sølv', icon: NodeSilver },
-      { name: 'Pi Sølv', icon: PiSilver },
       { name: 'Sport Sølv', icon: SportSilver },
       { name: 'Teater Sølv', icon: TeaterSilver },
-      { name: 'IB Sølv', icon: IbSilver },
-      { name: 'F Key Sølv', icon: FKeySilver },
 
-      ...(getSilverEmblem() || [])
+      
     ].filter(Boolean)
   },
 

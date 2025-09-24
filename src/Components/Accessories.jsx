@@ -92,7 +92,7 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
    }, [lightBallSelection]);
 
    useEffect(() => {
-        onOptionChange('champagneGlass', champagneGlassSelection);
+        onOptionChange('Luksus champagneglas', champagneGlassSelection);
    }, [champagneGlassSelection]);
 
    useEffect(() => {
@@ -221,29 +221,7 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
                onSelectionChange={setSilkPillowSelection}
            />
 
-            {/* Embroidery Card */}
-            <div className="bg-white/70 border border-white/50 rounded-2xl ">
-                <div className="flex items-center justify-between mb-4">
-                    <div>
-                        <h4 className="font-semibold text-slate-800">Emblem</h4>
-                        
-                    </div>
-                </div>
-                <div className="space-y-4">
-                    <div className="relative">
-                        <input
-                            type="text"
-                            value={embroideryText}
-                            onChange={(e) => setEmbroideryText(e.target.value)}
-                            placeholder="Fri tekst"
-                            className="w-full px-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
-                        />
-                        <div className="absolute inset-y-0 right-0 flex items-center pr-4">
-                            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
 
 
            <AccessorySelector

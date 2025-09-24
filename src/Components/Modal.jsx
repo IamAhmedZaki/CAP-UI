@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { X, Printer, Download, Mail, CheckCircle, Package, Star, User, CreditCard, ArrowLeft, ArrowRight, Loader2, ShoppingCart, Settings } from 'lucide-react';
+import { loadStripe } from "@stripe/stripe-js";
+const stripePromise = loadStripe("pk_test_51S0HgS2ZnQzLDaK40M9tlj1n72wtQNsUNhG986xbE6bfHxWmFfOMJfWGAbg4QrAlFtnhVCtOajoIqUbRgSBnRnkb00iMo1bD1o");
 
 const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfiguring }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -353,43 +355,63 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
 
   // Handle order submission
    const handleConfirmOrder = async () => {
-    setIsLoading(true);
-    
-    const orderData = {
-      customerDetails,
-      selectedOptions,
-      totalPrice: price,
-      currency: 'DKK',
-      orderDate: new Date().toISOString(),
-      orderNumber: `CAP-${orderDate}`,
-      email: customerDetails.email
-    };
+  setIsLoading(true);
 
-    try {
-      // Placeholder API call - replace with your actual endpoint
-      const response = await fetch('https://printmanager-api.onrender.com/api/sendEmail/capconfigurator', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(orderData)
-      });
-      
-      if (response.ok) {
-        // Success - show thank you page
-        setTimeout(() => {
-          setIsLoading(false);
-          setOrderComplete(true);
-        }, 1000);
-      } else {
-        throw new Error('Failed to submit order');
-      }
-    } catch (error) {
-      console.error('Error submitting order:', error);
-      setIsLoading(false);
-      // You can add error handling here
-    }
+  const orderDate = new Date().toISOString(); // ✅ local definition
+  const orderData = {
+    customerDetails,
+    selectedOptions,
+    totalPrice: price,
+    currency: "DKK",
+    orderDate,
+    orderNumber: `CAP-${orderDate}`,
+    email: customerDetails.email,
   };
+
+  try {
+    // 1️⃣ Send order + email
+    const response = await fetch(
+      "https://printmanager-api.onrender.com/api/sendEmail/capconfigurator",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to submit order");
+    }
+
+    // 2️⃣ Create Stripe Checkout session
+    const stripeRes = await fetch("https://printmanager-api.onrender.com/api/sendEmail/create-checkout-session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        orderNumber: orderData.orderNumber,
+        totalPrice: price,
+        email: customerDetails.email,
+      }),
+    });
+
+    if (!stripeRes.ok) {
+      throw new Error("Failed to create Stripe checkout session");
+    }
+
+    const { id: sessionId } = await stripeRes.json();
+    const stripe = await stripePromise;
+
+    // 3️⃣ Redirect to Stripe Checkout
+    await stripe.redirectToCheckout({ sessionId });
+
+  } catch (error) {
+    console.error("Error during checkout:", error);
+    setIsLoading(false);
+    // optional: show error UI
+  }
+};
 
   // Reset modal to initial state
   const handleResetModal = () => {

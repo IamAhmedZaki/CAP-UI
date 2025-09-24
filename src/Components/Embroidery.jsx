@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Embroidery = ({ selectedOptions = {}, onOptionChange, program }) => {
+const Embroidery = ({ selectedOptions = {}, onOptionChange, program,pakke }) => {
     // State variables with descriptive names
     const [selectedNameEmbroideryColor, setSelectedNameEmbroideryColor] = useState('');
     const [nameEmbroideryText, setNameEmbroideryText] = useState('');
@@ -142,11 +142,18 @@ const schoolEmbroideryColorOptions = [
                 <div className="flex items-center justify-between mb-4">
                     <div>
                         <h4 className="font-semibold text-slate-800">Navne broderi</h4>
-                        <div className="flex items-center gap-2 mt-1">
-                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-100 to-yellow-200 text-amber-800">
-                                Inkluderet i pakken
-                            </span>
-                        </div>
+                       {
+                            pakke?.toLowerCase() == 'luksus' || pakke?.toLowerCase() == 'premium' ? (
+                                <>
+                                    <div className="flex items-center gap-2 mt-1">
+
+                                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-100 to-yellow-200 text-amber-800">
+                                            Inkluderet i pakken
+                                        </span>
+                                    </div>
+                                </>
+                            ) : null
+                        }
                         <span className="inline-flex items-center px-3 pt-2 rounded-full text-xs font-bold">
                                 Maks. 26 Tegn
                         </span>
@@ -183,11 +190,18 @@ const schoolEmbroideryColorOptions = [
                 <div className="flex items-center justify-between mb-4">
                     <div>
                         <h4 className="font-semibold text-slate-800">Skolebroderi</h4>
-                        <div className="flex items-center gap-2 mt-1">
-                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-100 to-yellow-200 text-amber-800">
-                                Inkluderet i pakken
-                            </span>
-                        </div>
+                        {
+                            pakke?.toLowerCase() == 'luksus' || pakke?.toLowerCase() == 'premium' ? (
+                                <>
+                                    <div className="flex items-center gap-2 mt-1">
+
+                                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-100 to-yellow-200 text-amber-800">
+                                            Inkluderet i pakken
+                                        </span>
+                                    </div>
+                                </>
+                            ) : null
+                        }
                         <span className="inline-flex items-center px-3 pt-2 rounded-full text-xs font-bold">
                                 Maks. 20 Tegn
                         </span>
