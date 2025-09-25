@@ -867,9 +867,10 @@ const renderThankYouPage = () => (
                   <p className="text-gray-600 text-xs mt-1">Including VAT and shipping</p>
                 </div>
                 <div className="text-right">
-                  <span className="text-2xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
-                    {price}
-                  </span>
+                 <span className="text-2xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
+  {(price * 1.2).toFixed(2)}
+</span>
+
                   <span className="text-base font-semibold text-green-600 ml-1">DKK</span>
                 </div>
               </div>
