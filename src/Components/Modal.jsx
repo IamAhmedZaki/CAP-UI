@@ -361,7 +361,7 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
   const orderData = {
     customerDetails,
     selectedOptions,
-    totalPrice: price,
+    totalPrice: (price * 1.2).toFixed(2),
     currency: "DKK",
     orderDate,
     orderNumber: `CAP-${orderDate}`,
