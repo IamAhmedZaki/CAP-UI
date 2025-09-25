@@ -391,7 +391,7 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         orderNumber: orderData.orderNumber,
-        totalPrice: price,
+        totalPrice: (price * 1.2).toFixed(2),
         email: customerDetails.email,
       }),
     });
