@@ -229,7 +229,7 @@ const schoolEmbroideryColorOptions = [
                             value={ingenButton?'':schoolEmbroideryText}
                             onChange={(e) => setSchoolEmbroideryText(e.target.value)}
                             placeholder="Fri tekst"
-                            maxLength={25}
+                            maxLength={20}
                             disabled={ingenButton === true}   // 🔴 disables when 'Ingen'
                             className={`w-full px-4 py-4 rounded-2xl border-2 
               ${ingenButton === true ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-white/80 backdrop-blur-sm text-slate-700'} 

@@ -85,17 +85,19 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke,
                 ];
             case 'eux':
                 return [
-                    { name: 'EUX', value: '#522854' },
+                    { name: 'EUX', value: '#5d5d66' },
+                    // { name: 'EUX', value: '#522854' },
                     { name: 'Sort', value: '#000001' }
                 ];
             case 'eud':
                 return [
-                    { name: 'EUD', value: '#7c7f82' },
+                    // { name: 'EUD', value: '#7c7f82' },
+                    { name: 'EUD', value: '#522854' },
                     { name: 'Sort', value: '#000001' }
                 ];
             case 'sosuassistent':
                 return [
-                    { name: 'Sosuassistent', value: '#7c7f82' },
+                    { name: 'Sosuassistent', value: '#522854' },
 
                 ];
             case 'sosuhjælper':
@@ -160,9 +162,9 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke,
             case 'hf':
                 return { name: 'HF', value: 'HF', color: '#ADD8E6' };
             case 'eux':
-                return { name: 'EUX', value: 'EUX', color: '#522854' };
+                return { name: 'EUX', value: 'EUX', color: ' #5d5d66' };
             case 'eud':
-                return { name: 'EUD', value: 'EUD', color: '#7c7f82' };
+                return { name: 'EUD', value: 'EUD', color: '#522854' };
             default:
                 return null; // nothing if no match
         }
@@ -184,6 +186,7 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke,
     ];
 
     const materialEUXTypes = ['BOMULD', 'SATIN', 'VELOUR', 'GLIMMER', 'SHIMMER',];
+    const materialEUXAndEUDTypes = ['BOMULD', 'SATIN', 'VELOUR', 'GLIMMER'];
     const materialSORTTypes = ['VELOUR', 'SATIN', 'GLIMMER'];
     const materialColorTypes = ['BOMULD', 'SATIN']
 
@@ -363,8 +366,12 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke,
                 label="Materiale"
                 currentSelection={selectedMaterialType}
                 onSelectionChange={setSelectedMaterialType}
-                options={['HTX', 'HHX', 'STX', 'HF', 'EUX', 'EUD'].includes(selectedHatbandColor)
-                    ? materialEUXTypes : ['Sosuassistent', 'Sosuhjælper', 'Frisør',
+                options={['HTX', 'HHX', 'STX', 'HF'].includes(selectedHatbandColor)
+                    ? materialEUXTypes :
+                    ['EUX', 'EUD'].includes(selectedHatbandColor)
+                    ? materialEUXAndEUDTypes :
+                    
+                    ['Sosuassistent', 'Sosuhjælper', 'Frisør',
                         'Kosmetolog', 'Pædagog', 'PAU', 'Ernæringsassisten'].includes(selectedHatbandColor) ? materialColorTypes : selectedHatbandColor == 'Sort' ? materialSORTTypes : []}
             />
 

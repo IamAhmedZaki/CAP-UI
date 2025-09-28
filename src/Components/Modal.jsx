@@ -391,7 +391,7 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         orderNumber: orderData.orderNumber,
-        totalPrice: (price * 1.2).toFixed(2),
+        totalPrice: price,
         email: customerDetails.email,
       }),
     });
@@ -868,7 +868,7 @@ const renderThankYouPage = () => (
                 </div>
                 <div className="text-right">
                  <span className="text-2xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
-  {(price * 1.2).toFixed(2)}
+  {price}
 </span>
 
                   <span className="text-base font-semibold text-green-600 ml-1">DKK</span>

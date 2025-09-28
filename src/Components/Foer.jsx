@@ -51,6 +51,10 @@ const Foer = ({ selectedOptions = {}, onOptionChange,currentEmblem,program }) =>
                 return { name: 'Bordeaux', value: 'Bordeaux', color: '#800020' };
             case 'hf':
                 return { name: 'Light blå', value: 'Light blå', color: '#ADD8E6' };
+            case 'eux':
+                return { name: 'Grå', value: 'Grå', color: ' #5d5d66' };
+            case 'eud':
+                return { name: 'Purple', value: 'Purple', color: '#522854' };
             default:
                 return { name: 'Bordeaux', value: 'Bordeaux', color: '#800020' }
         }

@@ -287,7 +287,7 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
            />
 
            <AccessorySelector
-               label="Trrompet
+               label="Trompet
 "
                currentSelection={trumpetSelection}
                onSelectionChange={setTrumpetSelection}

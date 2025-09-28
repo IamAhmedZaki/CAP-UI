@@ -51,6 +51,8 @@ const shouldHideSelectors = hideSelectorsPrograms.includes(program?.toLowerCase(
                 return { name: 'EUX', value: 'EUX', color: '#7c7f82' };
             case 'eud':
                 return { name: 'EUD', value: 'EUD', color: '#522854' };
+            case 'pædagog':
+                return { name: 'Purple', value: 'Purple', color: '#522854' };
             default:
                 return null; // nothing if no match
         }

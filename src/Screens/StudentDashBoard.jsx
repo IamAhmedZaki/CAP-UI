@@ -120,6 +120,7 @@ const StudentDashboard = () => {
       '#7F1D1D': 0,
       '#1E3A8A': 39,
       '#DC2626': 39,
+      'PSort': 0,
     },
     Kokarde: {
       Signature: 0,
@@ -127,8 +128,8 @@ const StudentDashboard = () => {
       Stjernetegn: 0,
     },
     'Emblem': {
-      Guld: 89,
-      Sølv: 89,
+      Guld: 0,
+      Sølv: 0,
     },
     Type : {
   Kurdistan: 0,
@@ -1371,6 +1372,7 @@ const premiumPrices = {
 
   // Track special case for SKYGGE lines
   let skyggeLinesSelected = false;
+  let blackBow = false;
 
   for (const category in selectedOptions) {
     const categoryOptions = selectedOptions[category];
@@ -1380,7 +1382,7 @@ const premiumPrices = {
 
     for (const optionKey in categoryOptions) {
       const value = categoryOptions[optionKey];
-      const optionPrices = categoryPrices[optionKey];
+      let optionPrices = categoryPrices[optionKey];
       if (!optionPrices) continue;
 
       if (category == "EKSTRABETRÆK" && !isExtraOptionsSelected) {
@@ -1397,6 +1399,9 @@ const premiumPrices = {
         }
         continue; // Skip normal pricing, we'll handle later
       }
+     
+  // Do NOT continue for other colors, let normal pricing handle them
+
 
       // Case 1: text-based pricing (base + perChar)
       if (typeof value === "string" && optionPrices.base !== undefined) {
@@ -1477,11 +1482,12 @@ const premiumPrices = {
   const sendProgramToIframe = () => {
     // Get iframe by ID
     const iframe = document.getElementById('preview-iframe');
-    
+    const iframe2 = document.getElementById('preview-iframe2');
     if (iframe && iframe.contentWindow) {
       const message = "program:" + program.toLowerCase();
       console.log("Sending message to iframe:", message);
       iframe.contentWindow.postMessage(message, "*");
+      iframe2.contentWindow.postMessage(message, "*");
     } else {
       console.log("Iframe not ready or program not available");
     }
@@ -1661,8 +1667,8 @@ const premiumPrices = {
                     <GraduationCap className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-slate-800">Current Program</h4>
-                    <p className="text-sm text-slate-600">{program}</p>
+                    <h4 className="font-semibold text-slate-800">Valgt hue</h4>
+                    <p className="text-sm text-slate-600">{program.toUpperCase()}</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -1719,8 +1725,8 @@ const premiumPrices = {
             <GraduationCap className="w-4 h-4 text-white" />
           </div>
           <div>
-            <h4 className="font-semibold text-slate-800 text-sm">Current Program</h4>
-            <p className="text-xs text-slate-600 capitalize" >{program}</p>
+            <h4 className="font-semibold text-slate-800 text-sm">Valgt hue</h4>
+            <p className="text-xs text-slate-600 capitalize" >{program.toUpperCase()}</p>
           </div>
         </div>
         <div className="flex items-center space-x-2">
@@ -1730,11 +1736,13 @@ const premiumPrices = {
       </div>
       <div className="h-[calc(100%-60px)] rounded-b-2xl overflow-hidden">
         <iframe
-          src="https://playcanv.as/e/p/3b2251ad/"
-          className="w-full h-full"
-          frameBorder="0"
-          title="3D Student Card Preview"
-        />
+              id="preview-iframe2" // Add ID here
+              src="https://playcanv.as/e/p/3b2251ad/"
+              className="w-full h-full"
+              frameBorder="0"
+              title="3D Student Card Preview"
+              onLoad={handleIframeLoad}
+            />
       </div>
     </div>
   </div>
@@ -1782,7 +1790,6 @@ const premiumPrices = {
                   program={program}
                   currentEmblem={globalEmblem}
                   pakke={packageName}
-
                 />
               )}
               {activeMenu === "BRODERI" && (
@@ -1823,6 +1830,7 @@ const premiumPrices = {
                   selectedOptions={selectedOptions.EKSTRABETRÆK}
                   onOptionChange={(key, value) => handleOptionChange('EKSTRABETRÆK', key, value)}currentEmblem={globalEmblem}
                   program={program}
+                  priceReset={setExtraCoverReset}
                 />
               )}
               {activeMenu === "TILBEHØR" && (
@@ -1832,7 +1840,7 @@ const premiumPrices = {
                 />
               )}
               {activeMenu === "STØRRELSE" && (
-                <Size 
+                <Size
                   selectedOptions={selectedOptions.STØRRELSE}
                   onOptionChange={(key, value) => handleOptionChange('STØRRELSE', key, value)}
                 />
