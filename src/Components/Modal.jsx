@@ -361,7 +361,7 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
     const orderData = {
       customerDetails,
       selectedOptions,
-      totalPrice: (price * 1.2).toFixed(2),
+      totalPrice: price ,
       currency: "DKK",
       orderDate,
       orderNumber: `CAP-${orderDate}`,
@@ -371,8 +371,8 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
     try {
       // 1️⃣ Send order + email
       const response = await fetch(
-        "http://localhost:3000/api/sendEmail/capconfigurator",
-        // "https://cap-backend-azure.vercel.app/api/sendEmail/capconfigurator",
+        // "http://localhost:3000/api/sendEmail/capconfigurator",
+        "https://new-capbackend.vercel.app/api/sendEmail/capconfigurator",
         {
           method: "POST",
           headers: {
@@ -387,8 +387,8 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
       }
 
       // 2️⃣ Create Stripe Checkout session
-      // const stripeRes = await fetch("https://cap-backend-azure.vercel.app/api/sendEmail/create-checkout-session", {
-      const stripeRes = await fetch("http://localhost:3000/api/sendEmail/create-checkout-session", {
+      const stripeRes = await fetch("https://new-capbackend.vercel.app/api/sendEmail/create-checkout-session", {
+      // const stripeRes = await fetch("http://localhost:3000/api/sendEmail/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
