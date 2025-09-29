@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 const Embroidery = ({ selectedOptions = {}, onOptionChange, program,pakke }) => {
     // State variables with descriptive names
-    const [selectedNameEmbroideryColor, setSelectedNameEmbroideryColor] = useState('');
-    const [nameEmbroideryText, setNameEmbroideryText] = useState('');
-    const [selectedSchoolEmbroideryColor, setSelectedSchoolEmbroideryColor] = useState('');
-    const [schoolEmbroideryText, setSchoolEmbroideryText] = useState('');
-    const [ingenButton, setIngenButton] = useState(false);
+    const [selectedNameEmbroideryColor, setSelectedNameEmbroideryColor] = useState(selectedOptions['Broderi farve'] || '');
+const [nameEmbroideryText, setNameEmbroideryText] = useState(selectedOptions['Navne broderi'] || '');
+const [selectedSchoolEmbroideryColor, setSelectedSchoolEmbroideryColor] = useState(selectedOptions['Skolebroderi farve'] || '');
+const [schoolEmbroideryText, setSchoolEmbroideryText] = useState(selectedOptions.Skolebroderi || '');
+const [ingenButton, setIngenButton] = useState(selectedOptions.Ingen || false);
 
    const getEmbroideryColor = () => {
     switch (program?.toLowerCase()) {
@@ -47,20 +47,25 @@ const schoolEmbroideryColorOptions = [
 
     // Effect hooks to propagate changes to parent component
     useEffect(() => {
-        onOptionChange('Broderi farve', selectedNameEmbroideryColor);
-    }, [selectedNameEmbroideryColor]);
+    onOptionChange('Broderi farve', selectedNameEmbroideryColor);
+}, [selectedNameEmbroideryColor]);
 
-    useEffect(() => {
-        onOptionChange('Navne broderi', nameEmbroideryText);
-    }, [nameEmbroideryText]);
+useEffect(() => {
+    onOptionChange('Navne broderi', nameEmbroideryText);
+}, [nameEmbroideryText]);
 
-    useEffect(() => {
-        onOptionChange('Skolebroderi farve', selectedSchoolEmbroideryColor);
-    }, [selectedSchoolEmbroideryColor]);
+useEffect(() => {
+    onOptionChange('Skolebroderi farve', selectedSchoolEmbroideryColor);
+}, [selectedSchoolEmbroideryColor]);
 
-    useEffect(() => {
-        onOptionChange('Skolebroderi', schoolEmbroideryText);
-    }, [schoolEmbroideryText]);
+useEffect(() => {
+    onOptionChange('Skolebroderi', schoolEmbroideryText);
+}, [schoolEmbroideryText]);
+
+// ✅ New effect to track 'Ingen' button
+useEffect(() => {
+    onOptionChange('Ingen', ingenButton);
+}, [ingenButton]);
 
     // Reusable color selector component
     const ColorSelector = ({
@@ -69,7 +74,7 @@ const schoolEmbroideryColorOptions = [
         onSelectionChange,
         colorOptions
     }) => (
-        <div className="space-y-4">
+        <div className="space-y-4 mt-6">
             <div className="flex items-center justify-between">
                 <div>
                     <label className="text-sm font-semibold text-slate-700">{label}</label>
@@ -130,7 +135,7 @@ const schoolEmbroideryColorOptions = [
     );
     return (
         <>
-            <div className="">
+            <div className="mt-6 ">
                 <h3 className="text-2xl font-bold text-slate-900">BRODERI</h3>
             </div>
 
@@ -139,7 +144,7 @@ const schoolEmbroideryColorOptions = [
             <div className="bg-white/70 border border-white/50 rounded-2xl ">
 
 
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between mb-4 mt-6">
                     <div>
                         <h4 className="font-semibold text-slate-800">Navne broderi</h4>
                        {
@@ -186,7 +191,7 @@ const schoolEmbroideryColorOptions = [
 
             {/* School Embroidery Section */}
             {/* Embroidery Card */}
-            <div className="bg-white/70 border border-white/50 rounded-2xl ">
+            <div className="bg-white/70 border border-white/50 rounded-2xl mt-6 ">
                 <div className="flex items-center justify-between mb-4">
                     <div>
                         <h4 className="font-semibold text-slate-800">Skolebroderi</h4>
@@ -210,15 +215,15 @@ const schoolEmbroideryColorOptions = [
                 <div className="flex space-x-3 flex-wrap">
 
                     <button
-                        // key={type}
-                        onClick={() => {
-                            setIngenButton(!ingenButton)}}
-                        className={`px-6 py-3 rounded-xl my-3 text-sm font-medium transition-all duration-200 ${ingenButton === true
-                                ? 'bg-blue-600 text-white shadow-md'
-                                : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm'
-                            }`}>
-                        Ingen
-                    </button>
+    onClick={() => setIngenButton(!ingenButton)}
+    className={`px-6 py-3 rounded-xl my-3 text-sm font-medium transition-all duration-200 ${
+        ingenButton
+            ? 'bg-blue-600 text-white shadow-md'
+            : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm'
+    }`}
+>
+    Ingen
+</button>
 
 
                 </div>

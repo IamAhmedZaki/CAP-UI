@@ -13,10 +13,10 @@ import coverColorOptionsimg3 from '../assets/cover images/darkblueahh.png';
 
 
 const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem }) => {
-    const [selectedCoverColor, setSelectedCoverColor] = useState('');
-    const [selectedEdgebandColor, setSelectedEdgebandColor] = useState('');
-    const [selectedKantbandColor, setSelectedKantbandColor] = useState('');
-    const [selectedStarsStyle, setSelectedStarsStyle] = useState('');
+   const [selectedCoverColor, setSelectedCoverColor] = useState(selectedOptions.Farve || '');
+const [selectedTopkantColor, setSelectedTopkantColor] = useState(selectedOptions.Topkant || '');
+const [selectedKantbandColor, setSelectedKantbandColor] = useState(selectedOptions.Kantbånd || '');
+const [selectedStarsStyle, setSelectedStarsStyle] = useState(selectedOptions.Stjerner || '');
 
     const hideSelectorsPrograms = [
     'sosuassistent',
@@ -110,13 +110,14 @@ const paedagog = () => {
         onOptionChange('Farve', selectedCoverColor);
     }, [selectedCoverColor]);
 
-    useEffect(() => {
-        onOptionChange('Topkant', selectedKantbandColor);
-    }, [selectedKantbandColor]);
+   useEffect(() => {
+    onOptionChange('Topkant', selectedTopkantColor);
+}, [selectedTopkantColor]);
 
-    useEffect(() => {
-        onOptionChange('Kantbånd', selectedEdgebandColor);
-    }, [selectedEdgebandColor]);
+useEffect(() => {
+    onOptionChange('Kantbånd', selectedKantbandColor);
+}, [selectedKantbandColor]);
+
 
     useEffect(() => {
         onOptionChange('Stjerner', selectedStarsStyle);
@@ -179,22 +180,22 @@ const paedagog = () => {
 
             {/* Edgeband Color Selection */}
             <Selector
-                label="Topkant"
-                currentSelection={selectedKantbandColor}
-                onSelectionChange={setSelectedKantbandColor}
-                options={topKantColorOptions}
-                type="color"
-            />
+    label="Topkant"
+    currentSelection={selectedTopkantColor}
+    onSelectionChange={setSelectedTopkantColor}
+    options={topKantColorOptions}
+    type="color"
+/>
 
            {!shouldHideSelectors && (
     <>
         <Selector
-            label="Kantbånd"
-            currentSelection={selectedEdgebandColor}
-            onSelectionChange={setSelectedEdgebandColor}
-            options={edgebandColorOptions}
-            type="color"
-        />
+    label="Kantbånd"
+    currentSelection={selectedKantbandColor}
+    onSelectionChange={setSelectedKantbandColor}
+    options={edgebandColorOptions}
+    type="color"
+/>
 
         <Selector
             label="Stjerner"

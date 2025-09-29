@@ -2,23 +2,22 @@ import React, { useState, useEffect } from 'react';
 
 const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
    const [hatBoxColor, setHatBoxColor] = useState('#DC2626');
-   const [selectedHatBoxType, setSelectedHatBoxType] = useState('Standard');
-   const [selectedPremiumæske, setSelectedPremiumæske] = useState('');
+   const [selectedHatBoxType, setSelectedHatBoxType] = useState(selectedOptions.Hueæske || 'Standard');
+   const [selectedPremiumæske, setSelectedPremiumæske] = useState(selectedOptions['Premium æske'] || '');
    
    // Individual accessory selections
-   const [ballpointPenSelection, setBallpointPenSelection] = useState('No');
-   const [silkPillowSelection, setSilkPillowSelection] = useState('No');
-   const [badgesSelection, setBadgesSelection] = useState('No');
-   const [glovesSelection, setGlovesSelection] = useState('No');
-   const [largeBallpointPenSelection, setLargeBallpointPenSelection] = useState('No');
-   const [smartTagSelection, setSmartTagSelection] = useState('No');
-   const [lightBallSelection, setLightBallSelection] = useState('No');
-   const [champagneGlassSelection, setChampagneGlassSelection] = useState('No');
-   const [whistleSelection, setWhistleSelection] = useState('No');
-   const [trumpetSelection, setTrumpetSelection] = useState('No');
-   const [bucketpinsSelection, setBucketpinsSelection] = useState('No');
-   const [embroideryText, setEmbroideryText] = useState('');
-   const [extraKokardeText, setExtraKokardeText] = useState('');
+   const [ballpointPenSelection, setBallpointPenSelection] = useState(selectedOptions.Huekuglepen || 'No');
+   const [silkPillowSelection, setSilkPillowSelection] = useState(selectedOptions.Silkepude || 'No');
+   const [badgesSelection, setBadgesSelection] = useState(selectedOptions['Ekstra korkarde'] || 'No');
+   const [glovesSelection, setGlovesSelection] = useState(selectedOptions.Handsker || 'No');
+   const [largeBallpointPenSelection, setLargeBallpointPenSelection] = useState(selectedOptions['Store kuglepen'] || 'No');
+   const [smartTagSelection, setSmartTagSelection] = useState(selectedOptions['Smart Tag'] || 'No');
+   const [lightBallSelection, setLightBallSelection] = useState(selectedOptions.Lyskugle || 'No');
+   const [champagneGlassSelection, setChampagneGlassSelection] = useState(selectedOptions['Luksus champagneglas'] || 'No');
+   const [whistleSelection, setWhistleSelection] = useState(selectedOptions.Fløjte || 'No');
+   const [trumpetSelection, setTrumpetSelection] = useState(selectedOptions.Trompet || 'No');
+   const [bucketpinsSelection, setBucketpinsSelection] = useState(selectedOptions.Bucketpins || 'No');
+   const [extraKokardeText, setExtraKokardeText] = useState(selectedOptions['Ekstra korkarde Text'] || '');
 
    const colorOptions = [
        { name: 'Burgundy', value: '#7F1D1D' },
@@ -35,15 +34,14 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
    const premiumaske = [ 'Grøn velour', 'Sort velour', 'Kunstlæderæske' ];
 
    // Effect hooks to propagate changes to parent component
-   
-
    useEffect(() => {
         onOptionChange('Hueæske', selectedHatBoxType);
    }, [selectedHatBoxType]);
+
    useEffect(() => {
-        if (selectedHatBoxType!='Premium æske') {
+        if (selectedHatBoxType !== 'Premium æske') {
             setSelectedPremiumæske('')
-        }else if (selectedHatBoxType=='Premium æske') {
+        } else if (selectedHatBoxType === 'Premium æske' && !selectedPremiumæske) {
              setSelectedPremiumæske('Grøn velour')
         }
    }, [selectedHatBoxType]);
@@ -59,18 +57,19 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
    useEffect(() => {
         onOptionChange('Silkepude', silkPillowSelection);
    }, [silkPillowSelection]);
-   useEffect(() => {
-        onOptionChange('Emblem', embroideryText);
-   }, [embroideryText]);
-
+   
+   // FIXED: Don't set extraKokardeText to 'NONE' when badgesSelection is 'No'
    useEffect(() => {
         onOptionChange('Ekstra korkarde', badgesSelection);
-        if (badgesSelection=='No') {
-            setExtraKokardeText('NONE')
-        }else{
-            setExtraKokardeText('')
-        }
+        // Remove this logic - it's causing the text to be overwritten
+        // if (badgesSelection === 'No') {
+        //     setExtraKokardeText('NONE')
+        // } else {
+        //     setExtraKokardeText('')
+        // }
    }, [badgesSelection]);
+
+   // FIXED: Separate effect for extraKokardeText
    useEffect(() => {
         onOptionChange('Ekstra korkarde Text', extraKokardeText);
    }, [extraKokardeText]);
@@ -80,7 +79,7 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
    }, [glovesSelection]);
 
    useEffect(() => {
-        onOptionChange('Stor kuglepen', largeBallpointPenSelection);
+        onOptionChange('Store kuglepen', largeBallpointPenSelection);
    }, [largeBallpointPenSelection]);
 
    useEffect(() => {
@@ -100,8 +99,9 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
    }, [whistleSelection]);
 
    useEffect(() => {
-        onOptionChange('Trrompet', trumpetSelection);
+        onOptionChange('Trompet', trumpetSelection);
    }, [trumpetSelection]);
+
    useEffect(() => {
         onOptionChange('Bucketpins', bucketpinsSelection);
    }, [bucketpinsSelection]);
@@ -131,10 +131,6 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
                     </button>
                 ))}
             </div>
-            
-
-            
-
         </div>
     );
 
@@ -154,7 +150,7 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
                            {selectedHatBoxType}
                        </span>
                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-100 to-yellow-200 text-amber-800">
-                           {selectedHatBoxType==='Premium Box'?'Inkluderet i pakken 0':selectedHatBoxType==='Luxury Box'?'+ 249 DKK':''}
+                           {selectedHatBoxType === 'Premium Box' ? 'Inkluderet i pakken 0' : selectedHatBoxType === 'Luxury Box' ? '+ 249 DKK' : ''}
                        </span>
                    </div>
                </div>
@@ -171,13 +167,11 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
                        >
                            {type}
                        </button>
-
-                      
                    ))}
                </div>
            </div>
 
-            {selectedHatBoxType=='Premium æske' && 
+            {selectedHatBoxType === 'Premium æske' && 
              <div className="space-y-4">
                <div>
                    <label className="text-sm font-semibold text-slate-700">Premium æske</label>
@@ -186,7 +180,6 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                            {selectedPremiumæske}
                        </span>
-                       
                    </div>
                </div>
                <div className="flex space-x-3 flex-wrap">
@@ -202,8 +195,6 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
                        >
                            {type}
                        </button>
-
-                      
                    ))}
                </div>
            </div>
@@ -221,19 +212,18 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
                onSelectionChange={setSilkPillowSelection}
            />
 
-           
-
-
            <AccessorySelector
                label="Ekstra korkarde"
                currentSelection={badgesSelection}
                onSelectionChange={setBadgesSelection}
            />
 
-           { badgesSelection=='Yes' ?(
-                <>
-
-             <div className="relative">
+           {badgesSelection === 'Yes' && (
+                <div className="space-y-4">
+                    <div>
+                        <label className="text-sm font-semibold text-slate-700">Ekstra korkarde tekst</label>
+                    </div>
+                    <div className="relative">
                         <input
                             type="text"
                             value={extraKokardeText}
@@ -245,10 +235,10 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
                         <div className="absolute inset-y-0 right-0 flex items-center pr-4">
                             <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
                         </div>
-            </div>
-            </>
-            ): null
-            }
+                    </div>
+                    <p className="text-sm text-slate-600">Valgt tekst: {extraKokardeText || 'Ingen tekst'}</p>
+                </div>
+            )}
 
            <AccessorySelector
                label="Handsker"
@@ -287,14 +277,13 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
            />
 
            <AccessorySelector
-               label="Trompet
-"
+               label="Trompet"
                currentSelection={trumpetSelection}
                onSelectionChange={setTrumpetSelection}
            />
+
            <AccessorySelector
-               label="Bucketpins
-"
+               label="Bucketpins"
                currentSelection={bucketpinsSelection}
                onSelectionChange={setBucketpinsSelection}
            />

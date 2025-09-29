@@ -5,12 +5,12 @@ import img3 from '../assets/shadeimages/shade.png';
 
 const Shade = ({ selectedOptions = {}, onOptionChange }) => {
     // State variables with descriptive names
-    const [selectedShadeType, setSelectedShadeType] = useState('');
-    const [selectedMaterialType, setSelectedMaterialType] = useState('');
-    const [selectedShadowTapeColor, setSelectedShadowTapeColor] = useState('');
-    const [engravingLine1, setEngravingLine1] = useState('');
-    const [engravingLine2, setEngravingLine2] = useState('');
-    const [engravingLine3, setEngravingLine3] = useState('');
+   const [selectedShadeType, setSelectedShadeType] = useState(selectedOptions.Type || '');
+const [selectedMaterialType, setSelectedMaterialType] = useState(selectedOptions.Materiale || '');
+const [selectedShadowTapeColor, setSelectedShadowTapeColor] = useState(selectedOptions.Skyggebånd || '');
+const [engravingLine1, setEngravingLine1] = useState(selectedOptions['Skyggegravering Line 1'] || '');
+const [engravingLine2, setEngravingLine2] = useState(selectedOptions['Skyggegravering Line 2'] || '');
+const [engravingLine3, setEngravingLine3] = useState(selectedOptions['Skyggegravering Line 3'] || '');
 
 
     

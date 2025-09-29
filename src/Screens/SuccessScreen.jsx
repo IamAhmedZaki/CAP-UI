@@ -13,7 +13,7 @@ const SuccessScreen = ({ onContinueConfiguring, handleResetModal, onClose }) => 
       if (!sessionId) return;
 
       const res = await fetch(
-        `https://cap-backend-azure.vercel.app/api/sendEmail/checkout-session?session_id=${sessionId}`
+        `https://new-capbackend.vercel.app/api/sendEmail/checkout-session?session_id=${sessionId}`
       );
       const data = await res.json();
       setSession(data);
@@ -21,32 +21,7 @@ const SuccessScreen = ({ onContinueConfiguring, handleResetModal, onClose }) => 
 
     fetchSession();
   }, [searchParams]);
-  useEffect(() => {
-  const fetchSessionAndSendEmail = async () => {
-    const sessionId = searchParams.get("session_id");
-    if (!sessionId) return;
-
-    try {
-      // 1. Get session details
-      const res = await fetch(
-        `https://cap-backend-azure.vercel.app/api/sendEmail/checkout-session?session_id=${sessionId}`
-      );
-      const data = await res.json();
-      setSession(data);
-
-      // 2. Trigger backend email + DB save
-      await fetch("https://cap-backend-azure.vercel.app/api/sendEmail/capconfigurator", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ session_id: sessionId }),
-      });
-    } catch (err) {
-      console.error("Error confirming order:", err);
-    }
-  };
-
-  fetchSessionAndSendEmail();
-}, [searchParams]);
+ 
 
 
   if (!session)
@@ -111,7 +86,7 @@ const SuccessScreen = ({ onContinueConfiguring, handleResetModal, onClose }) => 
             onClick={() => {
               handleResetModal?.();
               window.location.href =
-                "https://shop.studentlife.dk/homepage-duplicate-95/";
+                "https://shop.studentlife.dk/packages/";
               onClose?.();
             }}
             className="flex items-center justify-center px-6 py-3 bg-white border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-all duration-200"

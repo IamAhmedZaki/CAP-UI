@@ -173,10 +173,10 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
         }
     };
 
-    const [selectedColor, setSelectedColor] = useState('');
-    const [selectedPrestige, setSelectedPrestige] = useState('');
-    const [selectedEmblem, setSelectedEmblem] = useState({});
-    const [selectedType, setSelectedType] = useState('');
+    const [selectedColor, setSelectedColor] = useState(selectedOptions['Roset farve'] || {});
+    const [selectedPrestige, setSelectedPrestige] = useState(selectedOptions.Kokarde || '');
+    const [selectedEmblem, setSelectedEmblem] = useState(selectedOptions.Emblem ||  {});
+    const [selectedType, setSelectedType] = useState(selectedOptions.Type || '');
 
     // Define dynamic first options based on program
     const getFirstGoldColor = () => {
@@ -710,20 +710,20 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
 
     return (
         <>
-            <div className="">
+            <div className="mt-8">
                 <h3 className="text-2xl font-bold text-slate-900">KOKARDE</h3>
             </div>
-            <div className='text-sm font-semibold text-slate-700' >Roset farve</div>
+            <div className='text-sm font-semibold text-slate-700 mt-8   ' >Roset farve</div>
 
             {/* Color Selection */}
             {selectedEmblem.name === 'Guld' ? (
                 <>
-                    <div className="flex space-x-3">
+                    <div className="flex space-x-3 mt-6">
                         {guldcolors.map((color) => (
                             <button
                                 key={`${color.name}-${color.value}`}
                                 onClick={() => handleColorChange(color)}
-                                className={`w-12 h-12 rounded-xl border-2 flex justify-center items-center transition-all duration-200 hover:scale-110 ${selectedColor.value === color.value
+                                className={`w-12 h-12  rounded-xl border-2 flex justify-center items-center transition-all duration-200 hover:scale-110 ${selectedColor.value === color.value
                                     ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
                                     : 'border-slate-200 hover:border-slate-400'
                                     }`}
@@ -742,7 +742,7 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
                 </>
             ) : (
                 <>
-                    <div className="flex space-x-3">
+                    <div className="flex space-x-3 mt-6">
                         {sulvcolors.map((color) => (
                             <button
                                 key={color.value}
@@ -769,7 +769,7 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
             {/* Emblem Selection */}
             <div className="mt-4">
                 <span className="text-sm font-semibold text-slate-700">Kokarde Type</span>
-                <div className="flex space-x-3 mt-1">
+                <div className="flex space-x-3 mt-6">
                     {emblemOptions.map((emblem) => (
                         <button
                             key={emblem.value}

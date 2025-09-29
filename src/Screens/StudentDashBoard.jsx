@@ -1719,215 +1719,228 @@ const premiumPrices = {
       <div className="md:hidden flex flex-col ">
 
   {/* Mobile Preview Panel - Top */}
-  <div
-    className={`transition-all duration-300 ${
-      isConfigOpen ? 'h-[35vh]' : 'h-[70vh]'
-    }`}
-  >
-    <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-200 h-full">
-      <div className="flex items-center justify-between p-4 border-b border-slate-200">
-        <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
-            <GraduationCap className="w-4 h-4 text-white" />
-          </div>
-          <div>
-            <h4 className="font-semibold text-slate-800 text-sm">Valgt hue</h4>
-            <p className="text-xs text-slate-600 capitalize" >{program.toUpperCase()}</p>
-          </div>
-        </div>
-        <div className="flex items-center space-x-2">
-          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-          <span className="text-xs font-medium text-slate-600">LIVE</span>
-        </div>
-      </div>
-      <div className="h-[calc(100%-60px)] rounded-b-2xl overflow-hidden">
-        <iframe
-              id="preview-iframe2" // Add ID here
-              src="https://playcanv.as/e/p/3b2251ad/"
-              className="w-full h-full"
-              frameBorder="0"
-              title="3D Student Card Preview"
-              onLoad={handleIframeLoad}
-            />
-      </div>
-    </div>
-  </div>
-
-  {/* Config Toggle Button */}
-  <div className="px-4 py-2 bg-white/80 border-t border-slate-200 flex justify-center">
-    <button
-      onClick={() => setIsConfigOpen(!isConfigOpen)}
-      className="flex items-center justify-center w-full py-2 bg-slate-100 rounded-lg text-slate-700 font-medium"
+  <div className="flex flex-col h-screen">
+  {/* Main content area that will scroll */}
+  <div className="flex-1 flex flex-col overflow-hidden">
+    {/* Preview section */}
+    <div
+      className={`transition-all duration-300 ${
+        isConfigOpen ? 'h-[35vh]' : 'h-[70vh]'
+      }`}
     >
-      {isConfigOpen ? (
-        <>
-          <ChevronDown className="w-4 h-4 mr-1" />
-          Hide Configuration
-        </>
-      ) : (
-        <>
-          <ChevronUp className="w-4 h-4 mr-1" />
-          Show Configuration
-        </>
-      )}
-    </button>
-  </div>
-
-  {/* Config Panel (collapsible + scrollable) */}
-  <div
-    className={`transition-all duration-300 overflow-y-auto flex-1 ${
-      isConfigOpen ? 'max-h-[35vh] opacity-100' : 'max-h-0 opacity-0'
-    }`}
-  >
-    {isConfigOpen && (
-      <div className="p-4 space-y-6">
-        {activeMenu === 'KOKARDE' && (
-                <Bows
-                  selectedOptions={selectedOptions.KOKARDE}
-                  onOptionChange={(key, value) => handleOptionChange('KOKARDE', key, value)}
-                  program={program}
-                  changeCurrentEmblem={setGlobalEmblem}
-                />
-              )}
-              {activeMenu === "UDDANNELSESBÅND" && (
-                <EducationalTape
-                  selectedOptions={selectedOptions.UDDANNELSESBÅND}
-                  onOptionChange={(key, value) => handleOptionChange('UDDANNELSESBÅND', key, value)}
-                  program={program}
-                  currentEmblem={globalEmblem}
-                  pakke={packageName}
-                />
-              )}
-              {activeMenu === "BRODERI" && (
-                <Embroidery
-                  selectedOptions={selectedOptions.BRODERI}
-                  onOptionChange={(key, value) => handleOptionChange('BRODERI', key, value)}
-                  program={program}
-                  pakke={packageName}
-
-                />
-              )}
-              {activeMenu === "BETRÆK" && (
-                <Cover
-                  selectedOptions={selectedOptions.BETRÆK}
-                  onOptionChange={(key, value) => handleOptionChange('BETRÆK', key, value)}
-                  program={program}
-                  currentEmblem={globalEmblem}
-
-                />
-              )}
-              {activeMenu === "SKYGGE" && (
-                <Shade
-                  selectedOptions={selectedOptions.SKYGGE}
-                  onOptionChange={(key, value) => handleOptionChange('SKYGGE', key, value)}
-                />
-              )}
-              {activeMenu === "FOER" && (
-                <Foer
-                  selectedOptions={selectedOptions.FOER}
-                  onOptionChange={(key, value) => handleOptionChange('FOER', key, value)}
-                  currentEmblem={globalEmblem}
-                  program={program}
-
-                />
-              )}
-              {activeMenu === "EKSTRA BETRÆK" && (
-                <ExtraCover
-                  selectedOptions={selectedOptions.EKSTRABETRÆK}
-                  onOptionChange={(key, value) => handleOptionChange('EKSTRABETRÆK', key, value)}currentEmblem={globalEmblem}
-                  program={program}
-                  priceReset={setExtraCoverReset}
-                />
-              )}
-              {activeMenu === "TILBEHØR" && (
-                <Accessories
-                  selectedOptions={selectedOptions.TILBEHØR}
-                  onOptionChange={(key, value) => handleOptionChange('TILBEHØR', key, value)}
-                />
-              )}
-              {activeMenu === "STØRRELSE" && (
-                <Size
-                  selectedOptions={selectedOptions.STØRRELSE}
-                  onOptionChange={(key, value) => handleOptionChange('STØRRELSE', key, value)}
-                  size={setSizeFlag}
-                />
-              )}
-        {/* ... other configuration components */}
-      </div>
-    )}
-  </div>
-
-  {/* Bottom fixed area: Sidebar + Footer */}
-  <div className="bg-white/70 backdrop-blur-sm border-t border-slate-200">
-    {/* Sidebar */}
-    <div className="px-4 pt-2">
-      <h3 className="text-xs font-semibold text-center text-slate-600 uppercase tracking-wider mb-3">
-        Caps
-      </h3>
-      <div className="flex overflow-x-auto space-x-3 pb-2">
-        {menuItems.map((item, index) => (
-          <button
-            key={index}
-            onClick={() => setActiveMenu(item.name)}
-            className={`flex-shrink-0 flex flex-col items-center px-3 rounded-xl transition-all duration-200 min-w-[80px] ${
-              activeMenu === item.name
-                ? 'bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 shadow-sm'
-                : 'hover:bg-slate-50 hover:shadow-sm'
-            }`}
-          >
-            <div
-              className={`w-8 rounded-lg flex items-center justify-center mb-2 transition-transform duration-200 ${
-                activeMenu === item.name ? 'scale-110' : 'hover:scale-105'
-              }`}
-            >
-              <img
-                src={item.icon}
-                alt={item.name}
-                className="w-6 h-6 object-contain"
-              />
+      <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-200 h-full">
+        <div className="flex items-center justify-between p-4 border-b border-slate-200">
+          <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
+              <GraduationCap className="w-4 h-4 text-white" />
             </div>
-            <span className="text-xs font-medium text-slate-600 text-center leading-tight">
-              {item.name.replace(' ', '\n')}
-            </span>
-            {activeMenu === item.name && (
-              <div className="mt-1 w-2 h-2 bg-blue-500 rounded-full"></div>
-            )}
-          </button>
-        ))}
+            <div>
+              <h4 className="font-semibold text-slate-800 text-sm">Valgt hue</h4>
+              <p className="text-xs text-slate-600 capitalize" >{program.toUpperCase()}</p>
+            </div>
+          </div>
+          <div className="flex items-center space-x-2">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span className="text-xs font-medium text-slate-600">LIVE</span>
+          </div>
+        </div>
+        <div className="h-[calc(100%-60px)] rounded-b-2xl overflow-hidden">
+          <iframe
+            id="preview-iframe2"
+            src="https://playcanv.as/e/p/3b2251ad/"
+            className="w-full h-full"
+            frameBorder="0"
+            title="3D Student Card Preview"
+            onLoad={handleIframeLoad}
+          />
+        </div>
       </div>
     </div>
 
-    {/* Footer */}
-    <div className="border-t border-slate-200 p-4 bg-white/80 backdrop-blur-sm">
-      <div className="flex justify-between items-center mb-3">
-        <span className="text-sm font-medium text-slate-600">Total Price</span>
-        <div className="text-right">
-          <div className="text-xl font-bold text-slate-900">
-            {calculateTotalPrice().toFixed(2)} DKK
-          </div>
-          <div className="text-xs text-slate-500">+59.00 DKK Service Fee incl. </div>
-        </div>
-      </div>
+    {/* Config Toggle Button */}
+    <div className="px-4 py-2 bg-white/80 border-t border-slate-200 flex justify-center flex-shrink-0">
       <button
-        onClick={collectSelectedOptions}
-        disabled={!sizeFlag} 
-        className={`w-full py-3 rounded-xl font-semibold transition-all duration-200 shadow-md
-      ${sizeFlag 
-        ? "bg-gradient-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800 hover:shadow-lg" 
-        : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
+        onClick={() => setIsConfigOpen(!isConfigOpen)}
+        className="flex items-center justify-center w-full py-2 bg-slate-100 rounded-lg text-slate-700 font-medium"
       >
-        Godkend og Betal
+        {isConfigOpen ? (
+          <>
+            <ChevronDown className="w-4 h-4 mr-1" />
+            Hide Configuration
+          </>
+        ) : (
+          <>
+            <ChevronUp className="w-4 h-4 mr-1" />
+            Show Configuration
+          </>
+        )}
       </button>
     </div>
+
+    {/* Config Panel (collapsible + scrollable) */}
+   {/* Config Panel (collapsible + scrollable) */}
+<div
+  className={`transition-all duration-300 overflow-y-auto ${
+    isConfigOpen ? 'flex-1' : 'flex-none h-0'
+  }`}
+>
+  {isConfigOpen && (
+    <div className="p-4 space-y-6">
+      {/* Keep all components mounted but conditionally show based on activeMenu */}
+      <div className={activeMenu === 'KOKARDE' ? 'block' : 'hidden'}>
+        <Bows
+          selectedOptions={selectedOptions.KOKARDE}
+          onOptionChange={(key, value) => handleOptionChange('KOKARDE', key, value)}
+          program={program}
+          changeCurrentEmblem={setGlobalEmblem}
+        />
+      </div>
+      
+      <div className={activeMenu === "UDDANNELSESBÅND" ? 'block' : 'hidden'}>
+        <EducationalTape
+          selectedOptions={selectedOptions.UDDANNELSESBÅND}
+          onOptionChange={(key, value) => handleOptionChange('UDDANNELSESBÅND', key, value)}
+          program={program}
+          currentEmblem={globalEmblem}
+          pakke={packageName}
+        />
+      </div>
+      
+      <div className={activeMenu === "BRODERI" ? 'block' : 'hidden'}>
+        <Embroidery
+          selectedOptions={selectedOptions.BRODERI}
+          onOptionChange={(key, value) => handleOptionChange('BRODERI', key, value)}
+          program={program}
+          pakke={packageName}
+        />
+      </div>
+      
+      <div className={activeMenu === "BETRÆK" ? 'block' : 'hidden'}>
+        <Cover
+          selectedOptions={selectedOptions.BETRÆK}
+          onOptionChange={(key, value) => handleOptionChange('BETRÆK', key, value)}
+          program={program}
+          currentEmblem={globalEmblem}
+        />
+      </div>
+      
+      <div className={activeMenu === "SKYGGE" ? 'block' : 'hidden'}>
+        <Shade
+          selectedOptions={selectedOptions.SKYGGE}
+          onOptionChange={(key, value) => handleOptionChange('SKYGGE', key, value)}
+        />
+      </div>
+      
+      <div className={activeMenu === "FOER" ? 'block' : 'hidden'}>
+        <Foer
+          selectedOptions={selectedOptions.FOER}
+          onOptionChange={(key, value) => handleOptionChange('FOER', key, value)}
+          currentEmblem={globalEmblem}
+          program={program}
+        />
+      </div>
+      
+      <div className={activeMenu === "EKSTRA BETRÆK" ? 'block' : 'hidden'}>
+        <ExtraCover
+          selectedOptions={selectedOptions.EKSTRABETRÆK}
+          onOptionChange={(key, value) => handleOptionChange('EKSTRABETRÆK', key, value)}
+          currentEmblem={globalEmblem}
+          program={program}
+          priceReset={setExtraCoverReset}
+        />
+      </div>
+      
+      <div className={activeMenu === "TILBEHØR" ? 'block' : 'hidden'}>
+        <Accessories
+          selectedOptions={selectedOptions.TILBEHØR}
+          onOptionChange={(key, value) => handleOptionChange('TILBEHØR', key, value)}
+        />
+      </div>
+      
+      <div className={activeMenu === "STØRRELSE" ? 'block' : 'hidden'}>
+        <Size
+          selectedOptions={selectedOptions.STØRRELSE}
+          onOptionChange={(key, value) => handleOptionChange('STØRRELSE', key, value)}
+          size={setSizeFlag}
+        />
+      </div>
+    </div>
+  )}
+</div>
+
+    {/* Sidebar - Now inside the scrollable area but above footer */}
+    <div className="bg-white/70 backdrop-blur-sm border-t border-slate-200 flex-shrink-0">
+      <div className="px-4 pt-2">
+        <h3 className="text-xs font-semibold text-center text-slate-600 uppercase tracking-wider mb-3">
+          Caps
+        </h3>
+        <div className="flex overflow-x-auto space-x-3 pb-2">
+          {menuItems.map((item, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveMenu(item.name)}
+              className={`flex-shrink-0 flex flex-col items-center px-3 rounded-xl transition-all duration-200 min-w-[80px] ${
+                activeMenu === item.name
+                  ? 'bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 shadow-sm'
+                  : 'hover:bg-slate-50 hover:shadow-sm'
+              }`}
+            >
+              <div
+                className={`w-8 rounded-lg flex items-center justify-center mb-2 transition-transform duration-200 ${
+                  activeMenu === item.name ? 'scale-110' : 'hover:scale-105'
+                }`}
+              >
+                <img
+                  src={item.icon}
+                  alt={item.name}
+                  className="w-6 h-6 object-contain"
+                />
+              </div>
+              <span className="text-xs font-medium text-slate-600 text-center leading-tight">
+                {item.name.replace(' ', '\n')}
+              </span>
+              {activeMenu === item.name && (
+                <div className="mt-1 w-2 h-2 bg-blue-500 rounded-full"></div>
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Fixed Footer - Always visible at bottom */}
+  <div className="border-t border-slate-200 p-4 bg-white/90 backdrop-blur-sm flex-shrink-0">
+    <div className="flex justify-between items-center mb-3">
+      <span className="text-sm font-medium text-slate-600">Total Price</span>
+      <div className="text-right">
+        <div className="text-xl font-bold text-slate-900">
+          {calculateTotalPrice().toFixed(2)} DKK
+        </div>
+        <div className="text-xs text-slate-500">+59.00 DKK Service Fee incl. </div>
+      </div>
+    </div>
+    <button
+      onClick={collectSelectedOptions}
+      disabled={!sizeFlag} 
+      className={`w-full py-3 rounded-xl font-semibold transition-all duration-200 shadow-md
+        ${sizeFlag 
+          ? "bg-gradient-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800 hover:shadow-lg" 
+          : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
+    >
+      Godkend og Betal
+    </button>
   </div>
 </div>
-      {/* Quote Modal */}
-      <QuoteModal
-        isOpen={isQuoteModalOpen}
-        onClose={() => setIsQuoteModalOpen(false)}
-        selectedOptions={selectedOptions}
-        price={calculateTotalPrice().toFixed(2)}
-      />
+
+{/* Quote Modal */}
+    </div>
+<QuoteModal
+  isOpen={isQuoteModalOpen}
+  onClose={() => setIsQuoteModalOpen(false)}
+  selectedOptions={selectedOptions}
+  price={calculateTotalPrice().toFixed(2)}
+/>
     </div>
   );
 };

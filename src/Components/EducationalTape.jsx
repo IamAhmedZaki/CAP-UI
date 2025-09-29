@@ -11,14 +11,14 @@ import gold from '../assets/button images/gold.png';
 const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke, currentEmblem, }) => {
     // State variables with descriptive names
     const currentYear = new Date().getFullYear();
-    const [selectedHatbandColor, setSelectedHatbandColor] = useState(``);
-    const [selectedMaterialType, setSelectedMaterialType] = useState('');
-    const [selectedChinStrapColor, setSelectedChinStrapColor] = useState('');
-    const [selectedButtonMaterialColor, setSelectedButtonMaterialColor] = useState('');
-    const [selectedEmbroideryColor, setSelectedEmbroideryColor] = useState('');
-    const [selectedButtonColor, setSelectedButtonColor] = useState('');
-    const [embroideryText, setEmbroideryText] = useState('');
-    const [selectedYear, setSelectedYear] = useState(currentYear.toString());
+   const [selectedHatbandColor, setSelectedHatbandColor] = useState(selectedOptions.Huebånd || '');
+const [selectedMaterialType, setSelectedMaterialType] = useState(selectedOptions.Materiale || '');
+const [selectedChinStrapColor, setSelectedChinStrapColor] = useState(selectedOptions.Hagerem || '');
+const [selectedButtonMaterialColor, setSelectedButtonMaterialColor] = useState(selectedOptions['Hagerem Materiale'] || '');
+const [selectedEmbroideryColor, setSelectedEmbroideryColor] = useState(selectedOptions['Broderi farve'] || '');
+const [selectedButtonColor, setSelectedButtonColor] = useState(selectedOptions['Knap farve'] || '');
+const [embroideryText, setEmbroideryText] = useState(selectedOptions['Broderi foran'] || '');
+const [selectedYear, setSelectedYear] = useState(selectedOptions.Year || currentYear.toString());
 
 
 
@@ -279,7 +279,7 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke,
         onSelectionChange,
         colorOptions
     }) => (
-        <div className="space-y-4">
+        <div className="space-y-4 mt-6">
             <div className="flex items-center justify-between">
                 <div>
                     <label className="text-sm font-semibold text-slate-700">{label}</label>
@@ -321,7 +321,7 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke,
         onSelectionChange,
         options
     }) => (
-        <div className="space-y-4">
+        <div className="space-y-4 mt-6">
             <div>
                 <label className="text-sm font-semibold text-slate-700">{label}</label>
                 <div className="flex items-center gap-2 mt-1">

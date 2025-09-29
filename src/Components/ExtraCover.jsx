@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ForExtraCover from './ForExtraCover';
 
 const ExtraCover = ({ selectedOptions = {}, onOptionChange,currentEmblem,program,priceReset }) => {
-    const [selectedExtraCoverOption, setSelectedExtraCoverOption] = useState('');
-    // const [selectedMaterialType, setSelectedMaterialType] = useState('Standard');
+const [selectedExtraCoverOption, setSelectedExtraCoverOption] = useState(selectedOptions.Tilvælg || '');    // const [selectedMaterialType, setSelectedMaterialType] = useState('Standard');
     // const [selectedButtonMaterialColor, setSelectedButtonMaterialColor] = useState('Ingen');
 
     const theProgram=program
@@ -165,6 +164,7 @@ const ExtraCover = ({ selectedOptions = {}, onOptionChange,currentEmblem,program
             current={currentEmblem}
             programNew={`${theProgram}`}
             forOptionChange={onOptionChange}
+            selectedOptions={selectedOptions}
             />
             
             )}

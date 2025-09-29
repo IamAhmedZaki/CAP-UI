@@ -361,7 +361,7 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
     const orderData = {
       customerDetails,
       selectedOptions,
-      totalPrice: price ,
+      totalPrice: price,
       currency: "DKK",
       orderDate,
       orderNumber: `CAP-${orderDate}`,
