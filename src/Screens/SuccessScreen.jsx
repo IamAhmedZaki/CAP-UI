@@ -21,6 +21,33 @@ const SuccessScreen = ({ onContinueConfiguring, handleResetModal, onClose }) => 
 
     fetchSession();
   }, [searchParams]);
+  useEffect(() => {
+  const fetchSessionAndSendEmail = async () => {
+    const sessionId = searchParams.get("session_id");
+    if (!sessionId) return;
+
+    try {
+      // 1. Get session details
+      const res = await fetch(
+        `https://cap-backend-azure.vercel.app/api/sendEmail/checkout-session?session_id=${sessionId}`
+      );
+      const data = await res.json();
+      setSession(data);
+
+      // 2. Trigger backend email + DB save
+      await fetch("https://cap-backend-azure.vercel.app/api/sendEmail/capconfigurator", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ session_id: sessionId }),
+      });
+    } catch (err) {
+      console.error("Error confirming order:", err);
+    }
+  };
+
+  fetchSessionAndSendEmail();
+}, [searchParams]);
+
 
   if (!session)
     return (

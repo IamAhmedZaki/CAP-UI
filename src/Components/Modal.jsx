@@ -12,7 +12,7 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
     lastName: '',
     email: '',
     phone: '',
-    company: '',
+    Skolenavn: '',
     address: '',
     city: '',
     postalCode: '',
@@ -23,13 +23,13 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
   // const orderNumber = `CAP-${Date.now().toString()}`;
   // setOrderDate(orderNumber); 
 
-// In your handleConfirmOrder function:
+  // In your handleConfirmOrder function:
 
-  
+
   // Generate the date once when order is confirmed
   // Store just the date part
 
- 
+
   if (!isOpen) return null;
 
   const steps = orderComplete ? ['Thank You'] : ['Ordre oversigt', 'Leveringsoplysninger', 'Ordrebekræftelse'];
@@ -293,13 +293,13 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
   };
 
   // Function to calculate total price
-  
+
 
   // Function to format values for display
   const formatValue = (value, section, key) => {
     let displayValue = '';
     let price = 0;
-    
+
     if (typeof value === 'object' && value.name) {
       displayValue = value.name;
       if (priceConfig[section] && priceConfig[section][key] && priceConfig[section][key][value.name] !== undefined) {
@@ -316,15 +316,15 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
         price = priceConfig[section][key][value.toString()];
       }
     }
-    
+
     if (displayValue === '' || displayValue === 'Not specified') {
       return 'Not specified';
     }
-    
+
     if (price > 0) {
       return `${displayValue} (+${price} DKK)`;
     }
-    
+
     return displayValue;
   };
 
@@ -354,64 +354,67 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
   };
 
   // Handle order submission
-   const handleConfirmOrder = async () => {
-  setIsLoading(true);
+  const handleConfirmOrder = async () => {
+    setIsLoading(true);
 
-  const orderDate = new Date().toISOString(); // ✅ local definition
-  const orderData = {
-    customerDetails,
-    selectedOptions,
-    totalPrice: (price * 1.2).toFixed(2),
-    currency: "DKK",
-    orderDate,
-    orderNumber: `CAP-${orderDate}`,
-    email: customerDetails.email,
-  };
+    const orderDate = new Date().toISOString(); // ✅ local definition
+    const orderData = {
+      customerDetails,
+      selectedOptions,
+      totalPrice: (price * 1.2).toFixed(2),
+      currency: "DKK",
+      orderDate,
+      orderNumber: `CAP-${orderDate}`,
+      email: customerDetails.email,
+    };
 
-  try {
-    // 1️⃣ Send order + email
-    const response = await fetch(
-      "https://cap-backend-azure.vercel.app/api/sendEmail/capconfigurator",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(orderData),
+    try {
+      // 1️⃣ Send order + email
+      const response = await fetch(
+        "http://localhost:3000/api/sendEmail/capconfigurator",
+        // "https://cap-backend-azure.vercel.app/api/sendEmail/capconfigurator",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(orderData),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to submit order");
       }
-    );
 
-    if (!response.ok) {
-      throw new Error("Failed to submit order");
+      // 2️⃣ Create Stripe Checkout session
+      // const stripeRes = await fetch("https://cap-backend-azure.vercel.app/api/sendEmail/create-checkout-session", {
+      const stripeRes = await fetch("http://localhost:3000/api/sendEmail/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          orderNumber: orderData.orderNumber,
+          totalPrice: price,
+          email: customerDetails.email,
+          orderData:orderData
+        }),
+      });
+
+      if (!stripeRes.ok) {
+        throw new Error("Failed to create Stripe checkout session");
+      }
+
+      const { id: sessionId } = await stripeRes.json();
+      const stripe = await stripePromise;
+
+      // 3️⃣ Redirect to Stripe Checkout
+      await stripe.redirectToCheckout({ sessionId });
+
+    } catch (error) {
+      console.error("Error during checkout:", error);
+      setIsLoading(false);
+      // optional: show error UI
     }
-
-    // 2️⃣ Create Stripe Checkout session
-    const stripeRes = await fetch("https://cap-backend-azure.vercel.app/api/sendEmail/create-checkout-session", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        orderNumber: orderData.orderNumber,
-        totalPrice: price,
-        email: customerDetails.email,
-      }),
-    });
-
-    if (!stripeRes.ok) {
-      throw new Error("Failed to create Stripe checkout session");
-    }
-
-    const { id: sessionId } = await stripeRes.json();
-    const stripe = await stripePromise;
-
-    // 3️⃣ Redirect to Stripe Checkout
-    await stripe.redirectToCheckout({ sessionId });
-
-  } catch (error) {
-    console.error("Error during checkout:", error);
-    setIsLoading(false);
-    // optional: show error UI
-  }
-};
+  };
 
   // Reset modal to initial state
   const handleResetModal = () => {
@@ -423,7 +426,7 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
       lastName: '',
       email: '',
       phone: '',
-      company: '',
+      Skolenavn: '',
       address: '',
       city: '',
       postalCode: '',
@@ -441,8 +444,8 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
           if (Object.keys(filteredOptions).length === 0) return null;
 
           return (
-            <div 
-              key={category} 
+            <div
+              key={category}
               className="group hover:bg-gray-50/50 rounded-xl p-4 transition-all duration-300 border border-transparent hover:border-green-100"
             >
               <div className="flex items-center mb-4">
@@ -454,11 +457,11 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
                 </h3>
                 <div className="flex-1 h-px bg-gradient-to-r from-green-200 to-transparent ml-3"></div>
               </div>
-              
+
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
                 {Object.entries(filteredOptions).map(([key, value]) => (
-                  <div 
-                    key={key} 
+                  <div
+                    key={key}
                     className="flex justify-between items-center p-3 bg-white rounded-lg border border-gray-100 hover:border-green-200 hover:shadow-sm transition-all duration-200"
                   >
                     <span className="text-sm text-gray-600 capitalize font-medium">
@@ -482,114 +485,128 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
     <div className="overflow-y-auto px-6 py-4">
       <div className="max-w-4xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-  <div className="space-y-3">
-    <div>
-      <label className="block text-sm font-semibold text-gray-700 mb-1">Fornavn *</label>
-      <input
-        type="text"
-        value={customerDetails.firstName}
-        onChange={(e) => handleInputChange('firstName', e.target.value)}
-        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-        placeholder="Enter your first name"
-      />
-    </div>
-    
-    <div>
-      <label className="block text-sm font-semibold text-gray-700 mb-1">Email *</label>
-      <input
-        type="email"
-        value={customerDetails.email}
-        onChange={(e) => handleInputChange('email', e.target.value)}
-        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-        placeholder="Enter your email address"
-      />
-    </div>
-    
-    <div>
-      <label className="block text-sm font-semibold text-gray-700 mb-1">Skole navn *</label>
-      <input
-        type="text"
-        value={customerDetails.company}
-        onChange={(e) => handleInputChange('company', e.target.value)}
-        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-        placeholder="Enter company name"
-      />
-    </div>
-    
-    <div>
-      <label className="block text-sm font-semibold text-gray-700 mb-1">By *</label>
-      <input
-        type="text"
-        value={customerDetails.city}
-        onChange={(e) => handleInputChange('city', e.target.value)}
-        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-        placeholder="Enter your city"
-      />
-    </div>
-    
-    <div>
-      <label className="block text-sm font-semibold text-gray-700 mb-1">Land</label>
-      <select
-        value={customerDetails.country}
-        onChange={(e) => handleInputChange('country', e.target.value)}
-        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-      >
-        <option value="Denmark">Denmark</option>
-        <option value="Sweden">Sweden</option>
-        <option value="Norway">Norway</option>
-        <option value="Germany">Germany</option>
-        <option value="Other">Other</option>
-      </select>
-    </div>
-  </div>
-  
-  <div className="space-y-3">
-    <div>
-      <label className="block text-sm font-semibold text-gray-700 mb-1">Efternavn *</label>
-      <input
-        type="text"
-        value={customerDetails.lastName}
-        onChange={(e) => handleInputChange('lastName', e.target.value)}
-        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-        placeholder="Enter your last name"
-      />
-    </div>
-    
-    <div>
-      <label className="block text-sm font-semibold text-gray-700 mb-1">Telefonnr. *</label>
-      <input
-        type="tel"
-        value={customerDetails.phone}
-        onChange={(e) => handleInputChange('phone', e.target.value)}
-        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-        placeholder="Enter your phone number"
-      />
-    </div>
-    
-    <div>
-      <label className="block text-sm font-semibold text-gray-700 mb-1">Adresse *</label>
-      <input
-        type="text"
-        value={customerDetails.address}
-        onChange={(e) => handleInputChange('address', e.target.value)}
-        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-        placeholder="Enter your street address"
-      />
-    </div>
-    
-    <div>
-      <label className="block text-sm font-semibold text-gray-700 mb-1">Postnr. *</label>
-      <input
-        type="text"
-        value={customerDetails.postalCode}
-        onChange={(e) => handleInputChange('postalCode', e.target.value)}
-        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-        placeholder="Enter postal code"
-      />
-    </div>
-  </div>
-</div>
-        
+          <div className="space-y-3">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Fornavn *</label>
+              <input
+                type="text"
+                value={customerDetails.firstName}
+                onChange={(e) => handleInputChange('firstName', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                placeholder="Indtast dit fornavn"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Email *</label>
+              <input
+                type="email"
+                value={customerDetails.email}
+                onChange={(e) => handleInputChange('email', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                placeholder="Indtast din mail"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Skole navn *</label>
+              <input
+                type="text"
+                value={customerDetails.Skolenavn}
+                onChange={(e) => handleInputChange('Skolenavn', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                placeholder="Indtast dit skolenavn"
+              />
+
+              {/* New checkbox for delivery */}
+              <div className="mt-2 flex items-center">
+                <input
+                  type="checkbox"
+                  checked={customerDetails.deliverToSchool || false}
+                  onChange={(e) => handleInputChange('deliverToSchool', e.target.checked)}
+                  className="h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
+                  id="deliverToSchool"
+                />
+                <label htmlFor="deliverToSchool" className="ml-2 text-sm text-gray-700">
+                  Levering til skolen
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">By *</label>
+              <input
+                type="text"
+                value={customerDetails.city}
+                onChange={(e) => handleInputChange('city', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                placeholder="Indtast din by"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Land</label>
+              <select
+                value={customerDetails.country}
+                onChange={(e) => handleInputChange('country', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+              >
+                <option value="Denmark">Denmark</option>
+                <option value="Sweden">Sweden</option>
+                <option value="Norway">Norway</option>
+                <option value="Germany">Germany</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Efternavn *</label>
+              <input
+                type="text"
+                value={customerDetails.lastName}
+                onChange={(e) => handleInputChange('lastName', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                placeholder="Indtast dit efternavn"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Telefonnr. *</label>
+              <input
+                type="tel"
+                value={customerDetails.phone}
+                onChange={(e) => handleInputChange('phone', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                placeholder="Indtast dit tlf nr."
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Adresse *</label>
+              <input
+                type="text"
+                value={customerDetails.address}
+                onChange={(e) => handleInputChange('address', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                placeholder="Indtast dit vejnavn"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Postnr. *</label>
+              <input
+                type="text"
+                value={customerDetails.postalCode}
+                onChange={(e) => handleInputChange('postalCode', e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                placeholder="Indtast dit post nr"
+              />
+            </div>
+          </div>
+        </div>
+
         <div className="mt-4">
           <label className="block text-sm font-semibold text-gray-700 mb-1">Bemærkninger til ordren (valgfrit)</label>
           <textarea
@@ -597,12 +614,13 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
             onChange={(e) => handleInputChange('notes', e.target.value)}
             rows={3}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-            placeholder="= Har du særlige ønsker eller kommentarer til din ordre..."
+            placeholder="Har du særlige ønsker eller kommentarer til din ordre..."
           />
         </div>
       </div>
     </div>
   );
+
 
   // Step 3: Order Confirmation
   const renderOrderConfirmation = () => (
@@ -614,57 +632,57 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
             <User className="w-4 h-4 text-blue-600 mr-2" />
             <h3 className="text-lg font-bold text-gray-800">Dine oplysninger</h3>
           </div>
-         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-  {/* Left Column */}
-<div className="space-y-1">
-  <p className="text-sm">
-    <span className="font-medium text-gray-700">Navn:</span>{" "}
-    {customerDetails.firstName} {customerDetails.lastName}
-  </p>
-  <p className="text-sm">
-    <span className="font-medium text-gray-700">Email:</span>{" "}
-    {customerDetails.email}
-  </p>
-  <p className="text-sm">
-    <span className="font-medium text-gray-700">Telefonnr.:</span>{" "}
-    {customerDetails.phone}
-  </p>
-  {customerDetails.company && (
-    <p className="text-sm">
-      <span className="font-medium text-gray-700">Skole navn:</span>{" "}
-      {customerDetails.company}
-    </p>
-  )}
-</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {/* Left Column */}
+            <div className="space-y-1">
+              <p className="text-sm">
+                <span className="font-medium text-gray-700">Navn:</span>{" "}
+                {customerDetails.firstName} {customerDetails.lastName}
+              </p>
+              <p className="text-sm">
+                <span className="font-medium text-gray-700">Email:</span>{" "}
+                {customerDetails.email}
+              </p>
+              <p className="text-sm">
+                <span className="font-medium text-gray-700">Telefonnr.:</span>{" "}
+                {customerDetails.phone}
+              </p>
+              {customerDetails.Skolenavn && (
+                <p className="text-sm">
+                  <span className="font-medium text-gray-700">Skole navn:</span>{" "}
+                  {customerDetails.Skolenavn}
+                </p>
+              )}
+            </div>
 
-{/* Right Column */}
-<div className="space-y-1">
-  <p className="text-sm">
-    <span className="font-medium text-gray-700">Adresse:</span>{" "}
-    {customerDetails.address}
-  </p>
-  <p className="text-sm">
-    <span className="font-medium text-gray-700">By:</span>{" "}
-    {customerDetails.city}, {customerDetails.postalCode}
-  </p>
-  <p className="text-sm">
-    <span className="font-medium text-gray-700">Land:</span>{" "}
-    {customerDetails.country}
-  </p>
-</div>
-</div>
+            {/* Right Column */}
+            <div className="space-y-1">
+              <p className="text-sm">
+                <span className="font-medium text-gray-700">Adresse:</span>{" "}
+                {customerDetails.address}
+              </p>
+              <p className="text-sm">
+                <span className="font-medium text-gray-700">By:</span>{" "}
+                {customerDetails.city}, {customerDetails.postalCode}
+              </p>
+              <p className="text-sm">
+                <span className="font-medium text-gray-700">Land:</span>{" "}
+                {customerDetails.country}
+              </p>
+            </div>
+          </div>
 
-{/* Notes Section */}
-{customerDetails.notes && (
-  <div className="mt-3 pt-3 border-t border-blue-200">
-    <p className="text-sm">
-      <span className="font-medium text-gray-700">Bemærkninger til ordren:</span>{" "}
-      {customerDetails.notes}
-    </p>
-  </div>
-)}
+          {/* Notes Section */}
+          {customerDetails.notes && (
+            <div className="mt-3 pt-3 border-t border-blue-200">
+              <p className="text-sm">
+                <span className="font-medium text-gray-700">Bemærkninger til ordren:</span>{" "}
+                {customerDetails.notes}
+              </p>
+            </div>
+          )}
 
-          
+
         </div>
 
         {/* Product Configuration Summary */}
@@ -699,7 +717,7 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
       </div>
     </div>
   );
-const renderThankYouPage = () => (
+  const renderThankYouPage = () => (
     <div className="overflow-y-auto px-6 py-8">
       <div className="max-w-2xl mx-auto text-center">
         <div className="flex justify-center mb-6">
@@ -707,23 +725,23 @@ const renderThankYouPage = () => (
             <CheckCircle className="w-12 h-12 text-green-600" />
           </div>
         </div>
-        
+
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Thank You for Your Order!</h2>
         <p className="text-gray-600 mb-6">
           Your custom cap configuration has been received successfully. We'll send a confirmation email to{' '}
           <span className="font-medium text-green-600">{customerDetails.email}</span> shortly.
         </p>
-        
+
         <div className="bg-gray-50 rounded-lg p-4 mb-6">
           <p className="text-sm text-gray-600 mb-1">Order Reference</p>
           <p className="font-bold text-gray-900">{orderDate}</p>
         </div>
-        
+
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
             onClick={() => {
               handleResetModal();
-              window.location.href="https://shop.studentlife.dk/homepage-duplicate-95/";
+              window.location.href = "https://shop.studentlife.dk/homepage-duplicate-95/";
               onClose()
 
             }}
@@ -732,7 +750,7 @@ const renderThankYouPage = () => (
             <ShoppingCart className="w-5 h-5 mr-2" />
             Fortsæt med at handle
           </button>
-          
+
           <button
             onClick={() => {
               handleResetModal();
@@ -750,12 +768,12 @@ const renderThankYouPage = () => (
     </div>
   );
   // Get step content
- // Get step content
+  // Get step content
   const getStepContent = () => {
     if (orderComplete) {
       return renderThankYouPage();
     }
-    
+
     switch (currentStep) {
       case 0:
         return renderQuoteReview();
@@ -771,7 +789,7 @@ const renderThankYouPage = () => (
   // Get step icon
   const getStepIcon = (step) => {
     if (orderComplete) return CheckCircle;
-    
+
     switch (step) {
       case 0:
         return Package;
@@ -784,7 +802,7 @@ const renderThankYouPage = () => (
     }
   };
 
-    return (
+  return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-300">
       <div className="bg-white rounded-xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl border border-gray-100 animate-in slide-in-from-bottom duration-500">
         {/* Modal Header with Step Indicator */}
@@ -809,7 +827,7 @@ const renderThankYouPage = () => (
                 </div>
               </div>
               {!orderComplete && (
-                <button 
+                <button
                   onClick={onClose}
                   className="p-2 hover:bg-gray-100 rounded-full transition-all duration-200 hover:scale-110 group"
                 >
@@ -823,26 +841,23 @@ const renderThankYouPage = () => (
               <div className="flex items-center space-x-3">
                 {steps.map((step, index) => (
                   <div key={step} className="flex items-center">
-                    <div className={`flex items-center justify-center w-6 h-6 rounded-full border-2 transition-all duration-200 ${
-                      index <= currentStep 
-                        ? 'bg-green-600 border-green-600 text-white' 
+                    <div className={`flex items-center justify-center w-6 h-6 rounded-full border-2 transition-all duration-200 ${index <= currentStep
+                        ? 'bg-green-600 border-green-600 text-white'
                         : 'border-gray-300 text-gray-400'
-                    }`}>
+                      }`}>
                       {index < currentStep ? (
                         <CheckCircle className="w-4 h-4" />
                       ) : (
                         <span className="text-xs font-bold">{index + 1}</span>
                       )}
                     </div>
-                    <span className={`ml-1 text-xs font-medium ${
-                      index <= currentStep ? 'text-green-700' : 'text-gray-400'
-                    }`}>
+                    <span className={`ml-1 text-xs font-medium ${index <= currentStep ? 'text-green-700' : 'text-gray-400'
+                      }`}>
                       {step}
                     </span>
                     {index < steps.length - 1 && (
-                      <div className={`w-6 h-0.5 mx-2 ${
-                        index < currentStep ? 'bg-green-600' : 'bg-gray-300'
-                      }`} />
+                      <div className={`w-6 h-0.5 mx-2 ${index < currentStep ? 'bg-green-600' : 'bg-gray-300'
+                        }`} />
                     )}
                   </div>
                 ))}
@@ -864,12 +879,12 @@ const renderThankYouPage = () => (
               <div className="flex justify-between items-center">
                 <div>
                   <span className="text-base font-bold text-gray-900">Din pris</span>
-                  <p className="text-gray-600 text-xs mt-1">Including VAT and shipping</p>
+                  <p className="text-gray-600 text-xs mt-1">Inkluderet forsendelse og gebyr</p>
                 </div>
                 <div className="text-right">
-                 <span className="text-2xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
-  {price}
-</span>
+                  <span className="text-2xl font-bold bg-gradient-to-r from-green-600 to-green-700 bg-clip-text text-transparent">
+                    {price}
+                  </span>
 
                   <span className="text-base font-semibold text-green-600 ml-1">DKK</span>
                 </div>
@@ -880,7 +895,7 @@ const renderThankYouPage = () => (
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="flex gap-3 flex-1">
                 {currentStep > 0 && (
-                  <button 
+                  <button
                     onClick={() => setCurrentStep(prev => prev - 1)}
                     className="flex items-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium text-sm hover:border-gray-400 hover:bg-gray-50 transition-all duration-200"
                   >
@@ -888,9 +903,9 @@ const renderThankYouPage = () => (
                     Tilbage
                   </button>
                 )}
-                
+
                 {currentStep === 0 && (
-                  <button 
+                  <button
                     onClick={onClose}
                     className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium text-sm hover:border-gray-400 hover:bg-gray-50 transition-all duration-200"
                   >
@@ -900,7 +915,7 @@ const renderThankYouPage = () => (
               </div>
 
               {currentStep < steps.length - 1 ? (
-                <button 
+                <button
                   onClick={() => {
                     if (currentStep === 1 && !validateCustomerDetails()) {
                       alert('Please fill in all required fields.');
@@ -917,7 +932,7 @@ const renderThankYouPage = () => (
                   <div className="absolute inset-0 bg-gradient-to-r from-green-700 to-green-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
               ) : (
-                <button 
+                <button
                   onClick={handleConfirmOrder}
                   disabled={isLoading}
                   className="flex-1 bg-gradient-to-r from-green-600 via-green-600 to-green-700 text-white py-2 px-4 rounded-lg font-medium text-sm hover:from-green-700 hover:to-green-800 transition-all duration-300 shadow-md hover:shadow-lg relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed"

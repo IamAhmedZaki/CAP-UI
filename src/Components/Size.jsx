@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Size = ({ selectedOptions = {}, onOptionChange }) => {
+const Size = ({ selectedOptions = {}, onOptionChange,size }) => {
     const [selectedSize, setSelectedSize] = useState();
     const [selectedMillimeterAdjustment, setSelectedMillimeterAdjustment] = useState('');
     
@@ -21,6 +21,11 @@ const Size = ({ selectedOptions = {}, onOptionChange }) => {
     // Effect hooks to propagate changes to parent component
     useEffect(() => {
         onOptionChange('Vælg størrelse', selectedSize);
+    }, [selectedSize]);
+    useEffect(() => {
+        if (selectedSize) {
+            size(true)
+        }
     }, [selectedSize]);
 
     useEffect(() => {

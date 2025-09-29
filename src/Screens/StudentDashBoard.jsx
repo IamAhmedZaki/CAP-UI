@@ -33,6 +33,7 @@ const StudentDashboard = () => {
    const [isAppReady, setIsAppReady] = useState(false);
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
   const [extraCoverReset,setExtraCoverReset]=useState(false)
+  const [sizeFlag,setSizeFlag]=useState(false)
 
 
 
@@ -1653,6 +1654,7 @@ const premiumPrices = {
                 <Size
                   selectedOptions={selectedOptions.STØRRELSE}
                   onOptionChange={(key, value) => handleOptionChange('STØRRELSE', key, value)}
+                  size={setSizeFlag}
                 />
               )}
             </div>
@@ -1702,10 +1704,14 @@ const premiumPrices = {
             </div>
           </div>
           <button
+           disabled={!sizeFlag} 
             onClick={collectSelectedOptions}
-            className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-md hover:shadow-lg"
+            className={`w-full py-3 rounded-xl font-semibold transition-all duration-200 shadow-md
+      ${sizeFlag 
+        ? "bg-gradient-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800 hover:shadow-lg" 
+        : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
           >
-            Get Quote
+            Godkend og Betal
           </button>
         </div>
       </div>
@@ -1843,6 +1849,7 @@ const premiumPrices = {
                 <Size
                   selectedOptions={selectedOptions.STØRRELSE}
                   onOptionChange={(key, value) => handleOptionChange('STØRRELSE', key, value)}
+                  size={setSizeFlag}
                 />
               )}
         {/* ... other configuration components */}
@@ -1903,9 +1910,13 @@ const premiumPrices = {
       </div>
       <button
         onClick={collectSelectedOptions}
-        className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-3 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-md hover:shadow-lg"
+        disabled={!sizeFlag} 
+        className={`w-full py-3 rounded-xl font-semibold transition-all duration-200 shadow-md
+      ${sizeFlag 
+        ? "bg-gradient-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800 hover:shadow-lg" 
+        : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
       >
-        Get Quote
+        Godkend og Betal
       </button>
     </div>
   </div>

@@ -30,12 +30,23 @@ const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem })
 
 const shouldHideSelectors = hideSelectorsPrograms.includes(program?.toLowerCase());
 
+const paedagog = () => {
+        switch (program?.toLowerCase()) {
+            
+            case 'pædagog':
+                return { name: 'Purple', value: 'Purple', color: '#522854' };
+            default:
+                return null; // nothing if no match
+        }
+    };
+
     const coverColorOptions = [
         { name: 'Hvid', value: 'Hvid', color: '#ffffff' },
         { name: 'Sort', value: 'Sort', color: '#000000' },
+        paedagog(),
         { name: 'Hvid med glimmer', value: 'Hvid med glimmer', img: whiteGlitter,color:'#ffffff' },
-        { name: 'Sort med glimmer', value: 'Sort med glimmer', img: blackGlitter,color:'#000000' }
-    ];
+        { name: 'Sort med glimmer', value: 'Sort med glimmer', img: blackGlitter,color:'#000000' },
+    ].filter(Boolean);
 
     const getCoverColor = () => {
         switch (program?.toLowerCase()) {
