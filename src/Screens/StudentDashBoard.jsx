@@ -488,7 +488,7 @@ const StudentDashboard = () => {
       Yes: 39, 
       No: 0 
     },
-    'Stor kuglepen': {
+    'Store kuglepen': {
       Yes: 39, 
       No: 0 
     },
@@ -508,7 +508,7 @@ const StudentDashboard = () => {
       Yes: 29, 
       No: 0 
     },
-    Trrompet: {
+    Trompet: {
       Yes: 29, 
       No: 0 
     },

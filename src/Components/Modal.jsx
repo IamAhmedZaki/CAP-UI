@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { X, Printer, Download, Mail, CheckCircle, Package, Star, User, CreditCard, ArrowLeft, ArrowRight, Loader2, ShoppingCart, Settings } from 'lucide-react';
 import { loadStripe } from "@stripe/stripe-js";
+import { useRef } from 'react';
+import { useEffect } from 'react';
 const stripePromise = loadStripe("pk_test_51S0HgS2ZnQzLDaK40M9tlj1n72wtQNsUNhG986xbE6bfHxWmFfOMJfWGAbg4QrAlFtnhVCtOajoIqUbRgSBnRnkb00iMo1bD1o");
 
 const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfiguring }) => {
@@ -19,16 +21,72 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
     country: 'Denmark',
     notes: ''
   });
+
+   // --- outside renderCustomerDetails, in your component ---
+const refs = {
+  firstName: useRef(null),
+  lastName: useRef(null),
+  email: useRef(null),
+  phone: useRef(null),
+  Skolenavn: useRef(null),
+  city: useRef(null),
+  country: useRef(null),
+  address: useRef(null),
+  postalCode: useRef(null),
+  notes: useRef(null),
+};
+
+// ordered list of refs (for enter + click navigation)
+const refOrder = [
+  refs.firstName,
+  refs.lastName,
+  refs.email,
+  refs.phone,
+  refs.Skolenavn,
+  refs.address,
+  refs.city,
+  refs.postalCode,
+  refs.country,
+  refs.notes,
+];
+
+const lastFocusedIndex = useRef(-1);
+
+// track which field was last focused
+useEffect(() => {
+  refOrder.forEach((ref, index) => {
+    ref.current?.addEventListener("focus", () => {
+      lastFocusedIndex.current = index;
+    });
+  });
+}, []);
+
+// click outside → focus next field
+useEffect(() => {
+  // if (currentStep !== 1) return;
+
+  const handleClick = (e) => {
+    if (
+      e.target.closest("input, textarea, select, button") // ignore form controls
+    ) {
+      return;
+    }
+
+    if (
+      lastFocusedIndex.current >= 0 &&
+      lastFocusedIndex.current < refOrder.length - 1
+    ) {
+      refOrder[lastFocusedIndex.current + 1].current?.focus();
+    } else if (lastFocusedIndex.current === -1) {
+      refOrder[0].current?.focus();
+    }
+  };
+
+  document.addEventListener("click", handleClick);
+  return () => document.removeEventListener("click", handleClick);
+}, [currentStep]);
+
   const [orderDate, setOrderDate] = useState(`CAP-${Date.now().toString()}`);
-  // const orderNumber = `CAP-${Date.now().toString()}`;
-  // setOrderDate(orderNumber); 
-
-  // In your handleConfirmOrder function:
-
-
-  // Generate the date once when order is confirmed
-  // Store just the date part
-
 
   if (!isOpen) return null;
 
@@ -481,145 +539,233 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
   );
 
   // Step 2: Customer Details Form
-  const renderCustomerDetails = () => (
-    <div className="overflow-y-auto px-6 py-4">
-      <div className="max-w-4xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-3">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Fornavn *</label>
-              <input
-                type="text"
-                value={customerDetails.firstName}
-                onChange={(e) => handleInputChange('firstName', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-                placeholder="Indtast dit fornavn"
-              />
-            </div>
+  // Step 2: Customer Details Form
+ const renderCustomerDetails = () => {
+    // Handle Enter key press
+    const handleKeyPress = (e, nextField) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const nextRef = refOrder.find(ref => ref.current?.name === nextField);
+        if (nextRef?.current) {
+          nextRef.current.focus();
+        }
+      }
+    };
 
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Email *</label>
-              <input
-                type="email"
-                value={customerDetails.email}
-                onChange={(e) => handleInputChange('email', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-                placeholder="Indtast din mail"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Skole navn *</label>
-              <input
-                type="text"
-                value={customerDetails.Skolenavn}
-                onChange={(e) => handleInputChange('Skolenavn', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-                placeholder="Indtast dit skolenavn"
-              />
-
-              {/* New checkbox for delivery */}
-              <div className="mt-2 flex items-center">
-                <input
-                  type="checkbox"
-                  checked={customerDetails.deliverToSchool || false}
-                  onChange={(e) => handleInputChange('deliverToSchool', e.target.checked)}
-                  className="h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
-                  id="deliverToSchool"
-                />
-                <label htmlFor="deliverToSchool" className="ml-2 text-sm text-gray-700">
-                  Levering til skolen
+    return (
+      <div className="overflow-y-auto px-6 py-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Left Column */}
+            <div className="space-y-3">
+              {/* First Name */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                  Fornavn *
                 </label>
+                <input
+                  ref={refs.firstName}
+                  name="firstName"
+                  type="text"
+                  value={customerDetails.firstName || ""}
+                  onChange={(e) => handleInputChange("firstName", e.target.value)}
+                  onKeyPress={(e) => handleKeyPress(e, "lastName")}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                  placeholder="Indtast dit fornavn"
+                />
+              </div>
+
+              {/* Email */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                  Email *
+                </label>
+                <input
+                  ref={refs.email}
+                  name="email"
+                  type="email"
+                  value={customerDetails.email || ""}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  onKeyPress={(e) => handleKeyPress(e, "phone")}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                  placeholder="Indtast din mail"
+                />
+              </div>
+
+              {/* School Name + Deliver to School */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                  Skole navn *
+                </label>
+                <input
+                  ref={refs.Skolenavn}
+                  name="Skolenavn"
+                  type="text"
+                  value={customerDetails.Skolenavn || ""}
+                  onChange={(e) => handleInputChange("Skolenavn", e.target.value)}
+                  onKeyPress={(e) => handleKeyPress(e, "city")}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                  placeholder="Indtast dit skolenavn"
+                />
+
+                <div className="mt-2 flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={customerDetails.deliverToSchool || false}
+                    onChange={(e) =>
+                      handleInputChange("deliverToSchool", e.target.checked)
+                    }
+                    className="h-4 w-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
+                    id="deliverToSchool"
+                  />
+                  <label
+                    htmlFor="deliverToSchool"
+                    className="ml-2 text-sm text-gray-700"
+                  >
+                    Levering til skolen
+                  </label>
+                </div>
+              </div>
+
+              {/* City */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                  By *
+                </label>
+                <input
+                  ref={refs.city}
+                  name="city"
+                  type="text"
+                  value={customerDetails.city || ""}
+                  onChange={(e) => handleInputChange("city", e.target.value)}
+                  onKeyPress={(e) => handleKeyPress(e, "country")}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                  placeholder="Indtast din by"
+                />
+              </div>
+
+              {/* Country */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                  Land
+                </label>
+                <select
+                  ref={refs.country}
+                  name="country"
+                  value={customerDetails.country || "Denmark"}
+                  onChange={(e) => handleInputChange("country", e.target.value)}
+                  onKeyPress={(e) => handleKeyPress(e, "address")}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                >
+                  <option value="Denmark">Denmark</option>
+                  <option value="Sweden">Sweden</option>
+                  <option value="Norway">Norway</option>
+                  <option value="Germany">Germany</option>
+                  <option value="Other">Other</option>
+                </select>
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">By *</label>
-              <input
-                type="text"
-                value={customerDetails.city}
-                onChange={(e) => handleInputChange('city', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-                placeholder="Indtast din by"
-              />
-            </div>
+            {/* Right Column */}
+            <div className="space-y-3">
+              {/* Last Name */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                  Efternavn *
+                </label>
+                <input
+                  ref={refs.lastName}
+                  name="lastName"
+                  type="text"
+                  value={customerDetails.lastName || ""}
+                  onChange={(e) => handleInputChange("lastName", e.target.value)}
+                  onKeyPress={(e) => handleKeyPress(e, "email")}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                  placeholder="Indtast dit efternavn"
+                />
+              </div>
 
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Land</label>
-              <select
-                value={customerDetails.country}
-                onChange={(e) => handleInputChange('country', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-              >
-                <option value="Denmark">Denmark</option>
-                <option value="Sweden">Sweden</option>
-                <option value="Norway">Norway</option>
-                <option value="Germany">Germany</option>
-                <option value="Other">Other</option>
-              </select>
+              {/* Phone */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                  Telefonnr. *
+                </label>
+                <input
+                  ref={refs.phone}
+                  name="phone"
+                  type="tel"
+                  value={customerDetails.phone || ""}
+                  onChange={(e) => handleInputChange("phone", e.target.value)}
+                  onKeyPress={(e) => handleKeyPress(e, "Skolenavn")}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                  placeholder="Indtast dit tlf nr."
+                />
+              </div>
+
+              {/* Address */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                  Adresse *
+                </label>
+                <input
+                  ref={refs.address}
+                  name="address"
+                  type="text"
+                  value={customerDetails.address || ""}
+                  onChange={(e) => handleInputChange("address", e.target.value)}
+                  onKeyPress={(e) => handleKeyPress(e, "postalCode")}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                  placeholder="Indtast dit vejnavn"
+                />
+              </div>
+
+              {/* Postal Code */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                  Postnr. *
+                </label>
+                <input
+                  ref={refs.postalCode}
+                  name="postalCode"
+                  type="text"
+                  value={customerDetails.postalCode || ""}
+                  onChange={(e) => handleInputChange("postalCode", e.target.value)}
+                  onKeyPress={(e) => handleKeyPress(e, "notes")}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+                  placeholder="Indtast dit post nr"
+                />
+              </div>
             </div>
           </div>
 
-          <div className="space-y-3">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Efternavn *</label>
-              <input
-                type="text"
-                value={customerDetails.lastName}
-                onChange={(e) => handleInputChange('lastName', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-                placeholder="Indtast dit efternavn"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Telefonnr. *</label>
-              <input
-                type="tel"
-                value={customerDetails.phone}
-                onChange={(e) => handleInputChange('phone', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-                placeholder="Indtast dit tlf nr."
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Adresse *</label>
-              <input
-                type="text"
-                value={customerDetails.address}
-                onChange={(e) => handleInputChange('address', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-                placeholder="Indtast dit vejnavn"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Postnr. *</label>
-              <input
-                type="text"
-                value={customerDetails.postalCode}
-                onChange={(e) => handleInputChange('postalCode', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-                placeholder="Indtast dit post nr"
-              />
-            </div>
+          {/* Notes */}
+          <div className="mt-4">
+            <label className="block text-sm font-semibold text-gray-700 mb-1">
+              Bemærkninger til ordren (valgfrit)
+            </label>
+            <textarea
+              ref={refs.notes}
+              name="notes"
+              value={customerDetails.notes || ""}
+              onChange={(e) => handleInputChange("notes", e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  // If on notes and pressing Enter, proceed to next step if all required fields are filled
+                  if (validateCustomerDetails()) {
+                    setCurrentStep(prev => prev + 1);
+                  }
+                }
+              }}
+              rows={3}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+              placeholder="Har du særlige ønsker eller kommentarer til din ordre..."
+            />
           </div>
-        </div>
-
-        <div className="mt-4">
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Bemærkninger til ordren (valgfrit)</label>
-          <textarea
-            value={customerDetails.notes}
-            onChange={(e) => handleInputChange('notes', e.target.value)}
-            rows={3}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
-            placeholder="Har du særlige ønsker eller kommentarer til din ordre..."
-          />
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
 
   // Step 3: Order Confirmation
