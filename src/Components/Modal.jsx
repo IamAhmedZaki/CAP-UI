@@ -3,7 +3,7 @@ import { X, Printer, Download, Mail, CheckCircle, Package, Star, User, CreditCar
 import { loadStripe } from "@stripe/stripe-js";
 import { useRef } from 'react';
 import { useEffect } from 'react';
-const stripePromise = loadStripe("pk_test_51S0HgS2ZnQzLDaK40M9tlj1n72wtQNsUNhG986xbE6bfHxWmFfOMJfWGAbg4QrAlFtnhVCtOajoIqUbRgSBnRnkb00iMo1bD1o");
+const stripePromise = loadStripe("pk_live_51S0HgIFDBW3pcErGOmI6vsVCXStMih46KJXjrOiFHppAj6h0tHOp4zDYMoLyTQn7Uk99pePatnCFrqLh6AAblGa300Wm8qbiRe");
 
 const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfiguring }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -23,68 +23,87 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
   });
 
    // --- outside renderCustomerDetails, in your component ---
-const refs = {
-  firstName: useRef(null),
-  lastName: useRef(null),
-  email: useRef(null),
-  phone: useRef(null),
-  Skolenavn: useRef(null),
-  city: useRef(null),
-  country: useRef(null),
-  address: useRef(null),
-  postalCode: useRef(null),
-  notes: useRef(null),
-};
-
-// ordered list of refs (for enter + click navigation)
-const refOrder = [
-  refs.firstName,
-  refs.lastName,
-  refs.email,
-  refs.phone,
-  refs.Skolenavn,
-  refs.address,
-  refs.city,
-  refs.postalCode,
-  refs.country,
-  refs.notes,
-];
-
-const lastFocusedIndex = useRef(-1);
-
-// track which field was last focused
-useEffect(() => {
-  refOrder.forEach((ref, index) => {
-    ref.current?.addEventListener("focus", () => {
-      lastFocusedIndex.current = index;
-    });
-  });
-}, []);
-
-// click outside → focus next field
-useEffect(() => {
-  // if (currentStep !== 1) return;
-
-  const handleClick = (e) => {
-    if (
-      e.target.closest("input, textarea, select, button") // ignore form controls
-    ) {
-      return;
-    }
-
-    if (
-      lastFocusedIndex.current >= 0 &&
-      lastFocusedIndex.current < refOrder.length - 1
-    ) {
-      refOrder[lastFocusedIndex.current + 1].current?.focus();
-    } else if (lastFocusedIndex.current === -1) {
-      refOrder[0].current?.focus();
-    }
+ const refs = {
+    firstName: useRef(null),
+    lastName: useRef(null),
+    email: useRef(null),
+    phone: useRef(null),
+    Skolenavn: useRef(null),
+    address: useRef(null),
+    city: useRef(null),
+    country: useRef(null),
+    postalCode: useRef(null),
+    notes: useRef(null),
   };
 
-  document.addEventListener("click", handleClick);
-  return () => document.removeEventListener("click", handleClick);
-}, [currentStep]);
+  // Ordered list of refs (for enter + click navigation)
+  const refOrder = [
+    refs.firstName,
+    refs.lastName,
+    refs.email,
+    refs.phone,
+    refs.Skolenavn,
+    refs.address,
+    refs.city,
+    refs.postalCode,
+    refs.country,
+    refs.notes,
+  ];
+
+  const lastFocusedIndex = useRef(-1);
+
+  // Track which field was last focused - ONLY on step 1
+  useEffect(() => {
+    if (currentStep !== 1) return;
+    console.log('first');
+    
+    const handleFocus = (index) => {
+      lastFocusedIndex.current = index;
+      console.log('second');
+    };
+
+    // Add focus event listeners to all refs
+    refOrder.forEach((ref, index) => {
+      if (ref.current) {
+        ref.current.addEventListener("focus", () => handleFocus(index));
+        console.log('third');
+      }
+    });
+
+    return () => {
+      // Cleanup focus event listeners
+      refOrder.forEach((ref) => {
+        if (ref.current) {
+          ref.current.removeEventListener("focus", () => {});
+          console.log('fourth');
+        }
+      });
+    };
+  }, [currentStep]); // Re-run when step changes
+
+  // Click outside → focus next field - ONLY on step 1
+  useEffect(() => {
+    if (currentStep !== 1) return;
+
+    const handleClick = (e) => {
+      // Don't trigger if clicking on form elements or buttons
+     if (e.target.matches('input, textarea, select')) {
+      return;
+    }
+      // If we have a last focused field and it's not the last one
+      if (lastFocusedIndex.current >= 0 && lastFocusedIndex.current < refOrder.length - 1) {
+        const nextIndex = lastFocusedIndex.current + 1;
+        refOrder[nextIndex].current?.focus();
+      } else if (lastFocusedIndex.current === -1) {
+        // No field focused yet, focus first field
+        refOrder[0].current?.focus();
+      }
+      // If lastFocusedIndex.current is the last field, do nothing
+    };
+
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, [currentStep]); // Re-run when step changes
 
   const [orderDate, setOrderDate] = useState(`CAP-${Date.now().toString()}`);
 
@@ -540,14 +559,23 @@ useEffect(() => {
 
   // Step 2: Customer Details Form
   // Step 2: Customer Details Form
- const renderCustomerDetails = () => {
-    // Handle Enter key press
-    const handleKeyPress = (e, nextField) => {
+const renderCustomerDetails = () => {
+    // Handle Enter key press - follow the refOrder sequence
+    const handleKeyPress = (e, currentFieldName) => {
       if (e.key === 'Enter') {
         e.preventDefault();
-        const nextRef = refOrder.find(ref => ref.current?.name === nextField);
-        if (nextRef?.current) {
-          nextRef.current.focus();
+        
+        // Find current field index
+        const currentIndex = refOrder.findIndex(ref => ref.current?.name === currentFieldName);
+        
+        // Move to next field if not last
+        if (currentIndex >= 0 && currentIndex < refOrder.length - 1) {
+          refOrder[currentIndex + 1].current?.focus();
+        } else if (currentIndex === refOrder.length - 1) {
+          // If on last field (notes), proceed to next step if validation passes
+          if (validateCustomerDetails()) {
+            setCurrentStep(prev => prev + 1);
+          }
         }
       }
     };
@@ -569,7 +597,7 @@ useEffect(() => {
                   type="text"
                   value={customerDetails.firstName || ""}
                   onChange={(e) => handleInputChange("firstName", e.target.value)}
-                  onKeyPress={(e) => handleKeyPress(e, "lastName")}
+                  onKeyPress={(e) => handleKeyPress(e, "firstName")}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
                   placeholder="Indtast dit fornavn"
                 />
@@ -586,7 +614,7 @@ useEffect(() => {
                   type="email"
                   value={customerDetails.email || ""}
                   onChange={(e) => handleInputChange("email", e.target.value)}
-                  onKeyPress={(e) => handleKeyPress(e, "phone")}
+                  onKeyPress={(e) => handleKeyPress(e, "email")}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
                   placeholder="Indtast din mail"
                 />
@@ -603,7 +631,7 @@ useEffect(() => {
                   type="text"
                   value={customerDetails.Skolenavn || ""}
                   onChange={(e) => handleInputChange("Skolenavn", e.target.value)}
-                  onKeyPress={(e) => handleKeyPress(e, "city")}
+                  onKeyPress={(e) => handleKeyPress(e, "Skolenavn")}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
                   placeholder="Indtast dit skolenavn"
                 />
@@ -638,7 +666,7 @@ useEffect(() => {
                   type="text"
                   value={customerDetails.city || ""}
                   onChange={(e) => handleInputChange("city", e.target.value)}
-                  onKeyPress={(e) => handleKeyPress(e, "country")}
+                  onKeyPress={(e) => handleKeyPress(e, "city")}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
                   placeholder="Indtast din by"
                 />
@@ -654,7 +682,7 @@ useEffect(() => {
                   name="country"
                   value={customerDetails.country || "Denmark"}
                   onChange={(e) => handleInputChange("country", e.target.value)}
-                  onKeyPress={(e) => handleKeyPress(e, "address")}
+                  onKeyPress={(e) => handleKeyPress(e, "country")}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
                 >
                   <option value="Denmark">Denmark</option>
@@ -679,7 +707,7 @@ useEffect(() => {
                   type="text"
                   value={customerDetails.lastName || ""}
                   onChange={(e) => handleInputChange("lastName", e.target.value)}
-                  onKeyPress={(e) => handleKeyPress(e, "email")}
+                  onKeyPress={(e) => handleKeyPress(e, "lastName")}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
                   placeholder="Indtast dit efternavn"
                 />
@@ -696,7 +724,7 @@ useEffect(() => {
                   type="tel"
                   value={customerDetails.phone || ""}
                   onChange={(e) => handleInputChange("phone", e.target.value)}
-                  onKeyPress={(e) => handleKeyPress(e, "Skolenavn")}
+                  onKeyPress={(e) => handleKeyPress(e, "phone")}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
                   placeholder="Indtast dit tlf nr."
                 />
@@ -713,7 +741,7 @@ useEffect(() => {
                   type="text"
                   value={customerDetails.address || ""}
                   onChange={(e) => handleInputChange("address", e.target.value)}
-                  onKeyPress={(e) => handleKeyPress(e, "postalCode")}
+                  onKeyPress={(e) => handleKeyPress(e, "address")}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
                   placeholder="Indtast dit vejnavn"
                 />
@@ -730,7 +758,7 @@ useEffect(() => {
                   type="text"
                   value={customerDetails.postalCode || ""}
                   onChange={(e) => handleInputChange("postalCode", e.target.value)}
-                  onKeyPress={(e) => handleKeyPress(e, "notes")}
+                  onKeyPress={(e) => handleKeyPress(e, "postalCode")}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
                   placeholder="Indtast dit post nr"
                 />
@@ -748,15 +776,7 @@ useEffect(() => {
               name="notes"
               value={customerDetails.notes || ""}
               onChange={(e) => handleInputChange("notes", e.target.value)}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                  e.preventDefault();
-                  // If on notes and pressing Enter, proceed to next step if all required fields are filled
-                  if (validateCustomerDetails()) {
-                    setCurrentStep(prev => prev + 1);
-                  }
-                }
-              }}
+              onKeyPress={(e) => handleKeyPress(e, "notes")}
               rows={3}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
               placeholder="Har du særlige ønsker eller kommentarer til din ordre..."
@@ -766,6 +786,7 @@ useEffect(() => {
       </div>
     );
   };
+
 
 
   // Step 3: Order Confirmation

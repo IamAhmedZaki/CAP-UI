@@ -1,44 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import ForExtraCover from './ForExtraCover';
 
-const ExtraCover = ({ selectedOptions = {}, onOptionChange,currentEmblem,program,priceReset }) => {
-const [selectedExtraCoverOption, setSelectedExtraCoverOption] = useState(selectedOptions.Tilvælg || '');    // const [selectedMaterialType, setSelectedMaterialType] = useState('Standard');
-    // const [selectedButtonMaterialColor, setSelectedButtonMaterialColor] = useState('Ingen');
+const ExtraCover = ({ selectedOptions = {}, onOptionChange, currentEmblem, program, priceReset }) => {
+    const [selectedExtraCoverOption, setSelectedExtraCoverOption] = useState(selectedOptions.Tilvælg || '');
 
-    const theProgram=program
+    const theProgram = program;
 
     const extraCoverOptions = [
         { name: 'Yes', value: 'Yes', icon: '✔️' },
         { name: 'No', value: 'No', icon: '❌' },
     ];
-    
+
     const hatbandColorOptions = [
         { name: 'Hvid', value: '#ffffffff' },
-        { name: 'Sort', value: '#000001' }, // Consider using different colors or removing duplicate
+        { name: 'Sort', value: '#000001' },
     ];
 
-    //  const [selectedHatbandColor, setSelectedHatbandColor] = useState('EUX');
+    const buttonMaterialMATTypes = ['Standard', 'Kantbånd', 'Flagbånd'];
+    const buttonMaterialBLANKTypes = ['Ingen', 'Skolebroderi'];
 
-
-    const buttonMaterialMATTypes = [ 'Standard','Kantbånd','Flagbånd'];
-    const buttonMaterialBLANKTypes = [ 'Ingen','Skolebroderi'];
     // Effect hook to propagate changes to parent component
     useEffect(() => {
         onOptionChange('Tilvælg', selectedExtraCoverOption);
+        
+        // If "No" is selected, clear all other EKSTRABETRÆK options
+        if (selectedExtraCoverOption === 'No') {
+            // Clear all EKSTRABETRÆK options except 'Tilvælg'
+            const clearedOptions = {
+                Tilvælg: 'No'
+            };
+            
+            // Update parent with only the 'No' option
+            Object.keys(selectedOptions).forEach(key => {
+                if (key !== 'Tilvælg') {
+                    onOptionChange(key, '');
+                }
+            });
+            
+            priceReset(true);
+        } else if (selectedExtraCoverOption === 'Yes') {
+            priceReset(false);
+        }
     }, [selectedExtraCoverOption]);
-    useEffect(() => {
-        selectedExtraCoverOption=='No'?priceReset(true):priceReset(false)
-    }, [selectedExtraCoverOption]);
-    // useEffect(() => {
-    //     onOptionChange('Favre', selectedHatbandColor);
-    // }, [selectedHatbandColor]);
-    // useEffect(() => {
-    //     onOptionChange('Type', selectedMaterialType);
-    // }, [selectedMaterialType]);
-    // useEffect(() => {
-    //     onOptionChange('Skolebroderi', selectedButtonMaterialColor);
-    // }, [selectedButtonMaterialColor]);
-    
+
+    // Handler for when "No" is selected - clear all options
+    const handleExtraCoverChange = (value) => {
+        setSelectedExtraCoverOption(value);
+        
+        // If selecting "No", immediately clear local state for other options
+        if (value === 'No') {
+            // You can also clear any local state for other options here if needed
+        }
+    };
+
     // Reusable option selector component
     const OptionSelector = ({ 
         label, 
@@ -50,7 +64,6 @@ const [selectedExtraCoverOption, setSelectedExtraCoverOption] = useState(selecte
             <div className="flex items-center justify-between">
                 <div>
                     <label className="text-sm font-semibold text-slate-700">{label}</label>
-                    
                 </div>
             </div>
             <div className="flex space-x-3 flex-wrap">
@@ -154,43 +167,18 @@ const [selectedExtraCoverOption, setSelectedExtraCoverOption] = useState(selecte
             <OptionSelector
                 label="Tilvælg"
                 currentSelection={selectedExtraCoverOption}
-                onSelectionChange={setSelectedExtraCoverOption}
+                onSelectionChange={handleExtraCoverChange}
                 options={extraCoverOptions}
             />
 
-            {selectedExtraCoverOption=='Yes'&&(
-                
-            <ForExtraCover
-            current={currentEmblem}
-            programNew={`${theProgram}`}
-            forOptionChange={onOptionChange}
-            selectedOptions={selectedOptions}
-            />
-            
+            {selectedExtraCoverOption === 'Yes' && (
+                <ForExtraCover
+                    current={currentEmblem}
+                    programNew={`${theProgram}`}
+                    forOptionChange={onOptionChange}
+                    selectedOptions={selectedOptions}
+                />
             )}
-
-              {/* <ColorSelector
-                label="Favre"
-                currentSelection={selectedHatbandColor}
-                onSelectionChange={setSelectedHatbandColor}
-                colorOptions={hatbandColorOptions}
-            />
-
-            
-            <TypeSelector
-                label="Type"
-                currentSelection={selectedMaterialType}
-                onSelectionChange={setSelectedMaterialType}
-                options={buttonMaterialMATTypes}
-            />
-            
-            <TypeSelector
-                label="Skolebroderi"
-                currentSelection={selectedButtonMaterialColor}
-                onSelectionChange={setSelectedButtonMaterialColor}
-                options={buttonMaterialBLANKTypes}
-            />  */}
-            
         </>
     );
 }

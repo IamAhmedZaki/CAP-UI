@@ -122,6 +122,7 @@ const StudentDashboard = () => {
       '#1E3A8A': 39,
       '#DC2626': 39,
       'PSort': 0,
+      'SosuSort': 0,
     },
     Kokarde: {
       Signature: 0,
@@ -1584,7 +1585,7 @@ const premiumPrices = {
         {/* Main Content Area */}
         <div className="flex-1 flex">
           {/* Configuration Panel */}
-          <div className="w-[40%] bg-white/50 backdrop-blur-sm border-r border-slate-200">
+          <div className="w-[40%] bg-white/50 backdrop-blur-sm">
             <div className="p-6 space-y-8 h-full overflow-y-auto pb-[133px]">
               {activeMenu === 'KOKARDE' && (
                 <Bows
@@ -1662,7 +1663,7 @@ const premiumPrices = {
 
           {/* Preview Panel */}
           <div className="flex-1 p-6">
-            <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl h-full flex flex-col border border-slate-200">
+            <div className="bg-white/50 backdrop-blur-sm rounded-2xl shadow-xl h-full flex flex-col border border-slate-200">
               <div className="flex items-center justify-between p-6 border-b border-slate-200">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
@@ -1693,7 +1694,7 @@ const premiumPrices = {
         </div>
 
         {/* Desktop Footer */}
-        <div className="border-t border-slate-200 p-6 bg-white/80 backdrop-blur-sm w-[43.5%] absolute bottom-0 left-0">
+        <div className=" border-slate-200 p-6 bg-white/50 backdrop-blur-sm w-[49.5%] absolute bottom-0 left-0 lg:w-[47%] 2xl:w-[43.5%] xl:w-[45%] ">
           <div className="flex justify-between items-center mb-4">
             <span className="text-sm font-medium text-slate-600">Total Price</span>
             <div className="text-right">

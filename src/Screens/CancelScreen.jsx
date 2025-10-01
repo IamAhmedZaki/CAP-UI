@@ -27,7 +27,7 @@ const CancelScreen = ({ handleResetModal, onClose }) => {
             onClick={() => {
               handleResetModal?.();
               window.location.href =
-                "https://shop.studentlife.dk/homepage-duplicate-95/";
+                "https://shop.studentlife.dk/packages/";
               onClose?.();
             }}
             className="flex items-center justify-center px-6 py-3 bg-white border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-all duration-200"

@@ -217,22 +217,22 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
                 ];
             case 'sosuassistent':
                 return [
-                    { name: 'Sort', value: '#1E3A8A', img: kaalagold },
+                    { name: 'Sort', value: 'SosuSort', img: kaalagold },
                     { name: 'Rød', value: '#DC2626', img: laalgold },
                 ];
             case 'sosuhjælper':
                 return [
-                    { name: 'Sort', value: '#1E3A8A', img: kaalagold },
+                    { name: 'Sort', value: 'SosuSort', img: kaalagold },
                     { name: 'Rød', value: '#DC2626', img: laalgold },
                 ];
             case 'frisør':
                 return [
-                    { name: 'Sort', value: '#1E3A8A', img: kaalagold },
+                    { name: 'Sort', value: 'SosuSort', img: kaalagold },
                     { name: 'Rød', value: '#DC2626', img: laalgold },
                 ];
             case 'kosmetolog':
                 return [
-                    { name: 'Sort', value: '#1E3A8A', img: kaalagold },
+                    { name: 'Sort', value: 'SosuSort', img: kaalagold },
                     { name: 'Rød', value: '#DC2626', img: laalgold },
                 ];
             case 'pædagog':
@@ -242,12 +242,12 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
                 ];
             case 'pau':
                 return [
-                    { name: 'Sort', value: '#1E3A8A', img: kaalagold },
+                    { name: 'Sort', value: 'SosuSort', img: kaalagold },
                     { name: 'Rød', value: '#DC2626', img: laalgold },
                 ];
             case 'ernæringsassisten':
                 return [
-                    { name: 'Sort', value: '#1E3A8A', img: kaalagold },
+                    { name: 'Sort', value: 'SosuSort', img: kaalagold },
                     { name: 'Rød', value: '#DC2626', img: laalgold },
                 ];
 
@@ -294,22 +294,22 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
                 ];
             case 'sosuassistent':
                 return [
-                    { name: 'Sort', value: '#1E3A8A', img: kaalasilver },
+                    { name: 'Sort', value: 'SosuSort', img: kaalasilver },
                     { name: 'Rød', value: '#DC2626', img: laalsilver },
                 ];
             case 'sosuhjælper':
                 return [
-                    { name: 'Sort', value: 'PSort', img: kaalasilver },
+                    { name: 'Sort', value: 'SosuSort', img: kaalasilver },
                     { name: 'Rød', value: '#DC2626', img: laalsilver },
                 ];
             case 'frisør':
                 return [
-                    { name: 'Sort', value: '#1E3A8A', img: kaalasilver },
+                    { name: 'Sort', value: 'SosuSort', img: kaalasilver },
                     { name: 'Rød', value: '#DC2626', img: laalsilver },
                 ];
             case 'kosmetolog':
                 return [
-                    { name: 'Sort', value: '#1E3A8A', img: kaalasilver },
+                    { name: 'Sort', value: 'SosuSort', img: kaalasilver },
                     { name: 'Rød', value: '#DC2626', img: laalsilver },
                 ];
             case 'pædagog':
@@ -319,12 +319,12 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
                 ];
             case 'pau':
                 return [
-                    { name: 'Sort', value: '#1E3A8A', img: kaalasilver },
+                    { name: 'Sort', value: 'SosuSort', img: kaalasilver },
                     { name: 'Rød', value: '#DC2626', img: laalsilver },
                 ]
             case 'ernæringsassisten':
                 return [
-                    { name: 'Sort', value: '#1E3A8A', img: kaalasilver },
+                    { name: 'Sort', value: 'SosuSort', img: kaalasilver },
                     { name: 'Rød', value: '#DC2626', img: laalsilver },
                 ];
             default:
