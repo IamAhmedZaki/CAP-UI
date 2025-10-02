@@ -2,13 +2,58 @@ import React, { useState, useEffect } from 'react';
 import img1 from '../assets/shadeimages/glimmer.png';
 
 const Foer = ({ selectedOptions = {}, onOptionChange, currentEmblem, program }) => {
-    // State variables with descriptive names
-    const [selectedKokardeMaterial, setSelectedKokardeMaterial] = useState(selectedOptions.Svederem || '');
-    const [selectedKokardeColor, setSelectedKokardeColor] = useState(selectedOptions.Farve || '');
-    const [selectedBowColor, setSelectedBowColor] = useState(selectedOptions.Sløjfe || '');
-    const [selectedFoerMaterial, setSelectedFoerMaterial] = useState(selectedOptions.Foer || '');
-    const [selectedbowMaterialType, setBowMaterialTypes] = useState(selectedOptions.SatinType || '');
-    const [selectedsilkeTypes, setSilkeTypes] = useState(selectedOptions.SilkeType || '');
+    // Default value functions
+    const getDefaultKokardeMaterial = () => {
+        return 'Læder'; // Default material
+    };
+
+    const getDefaultKokardeColor = () => {
+        return 'Hvid'; // Default color
+    };
+
+    const getDefaultBowColor = () => {
+        return 'Hvid'; // Default bow color
+    };
+
+    const getDefaultFoerMaterial = () => {
+        return 'Polyester'; // Default foer material
+    };
+
+    const getDefaultSatinType = () => {
+        switch (program?.toLowerCase()) {
+            case 'hhx': return 'Royal blå';
+            case 'htx': return 'Navy blå';
+            case 'stx': return 'Bordeaux';
+            case 'hf': return 'Light blå';
+            case 'eux': return 'Grå';
+            case 'eud': return 'Purple';
+            default: return 'Bordeaux';
+        }
+    };
+
+    const getDefaultSilkeType = () => {
+        return 'Hvid'; // Default silk color
+    };
+
+    // State variables with proper default values
+    const [selectedKokardeMaterial, setSelectedKokardeMaterial] = useState(
+        selectedOptions.Svederem || getDefaultKokardeMaterial()
+    );
+    const [selectedKokardeColor, setSelectedKokardeColor] = useState(
+        selectedOptions.Farve || getDefaultKokardeColor()
+    );
+    const [selectedBowColor, setSelectedBowColor] = useState(
+        selectedOptions.Sløjfe || getDefaultBowColor()
+    );
+    const [selectedFoerMaterial, setSelectedFoerMaterial] = useState(
+        selectedOptions.Foer || getDefaultFoerMaterial()
+    );
+    const [selectedbowMaterialType, setBowMaterialTypes] = useState(
+        selectedOptions.SatinType || getDefaultSatinType()
+    );
+    const [selectedsilkeTypes, setSilkeTypes] = useState(
+        selectedOptions.SilkeType || getDefaultSilkeType()
+    );
 
     const restrictedPrograms = [
         'Sosuassistent',
@@ -93,7 +138,6 @@ const Foer = ({ selectedOptions = {}, onOptionChange, currentEmblem, program }) 
         onOptionChange('Foer', selectedFoerMaterial);
     }, [selectedFoerMaterial]);
     
-    // FIXED: Use different keys for Satin and Silke
     useEffect(() => {
         if (selectedbowMaterialType) {
             onOptionChange('SatinType', selectedbowMaterialType);
@@ -106,22 +150,16 @@ const Foer = ({ selectedOptions = {}, onOptionChange, currentEmblem, program }) 
         }
     }, [selectedsilkeTypes]);
 
-    // FIXED: Only reset when switching between Satin/Silke, don't reset when same material is selected
     useEffect(() => {
         if (selectedFoerMaterial === 'Satin') {
-            // Only set default if not already set
             if (!selectedbowMaterialType && bowMaterialTypes.length > 0) {
                 setBowMaterialTypes(bowMaterialTypes[0].value);
             }
-            // Don't clear silk type - keep it in state but don't show it
         } else if (selectedFoerMaterial === 'Silke') {
-            // Only set default if not already set
             if (!selectedsilkeTypes && silkeTypes.length > 0) {
                 setSilkeTypes(silkeTypes[0].value);
             }
-            // Don't clear satin type - keep it in state but don't show it
         }
-        // Don't clear anything when selecting other materials - preserve both values
     }, [selectedFoerMaterial]);
 
     const getKokardeColorOptions = (material) => {
@@ -153,7 +191,6 @@ const Foer = ({ selectedOptions = {}, onOptionChange, currentEmblem, program }) 
     const kokardeColorOptions = getKokardeColorOptions(selectedKokardeMaterial);
 
     useEffect(() => {
-        // Reset Kokarde color to first available option
         if (kokardeColorOptions.length > 0 && !kokardeColorOptions.some(opt => opt.value === selectedKokardeColor)) {
             setSelectedKokardeColor(kokardeColorOptions[0].value);
         }
@@ -168,7 +205,7 @@ const Foer = ({ selectedOptions = {}, onOptionChange, currentEmblem, program }) 
         onSelectionChange,
         colorOptions
     }) => (
-        <div className="space-y-4">
+        <div className="space-y-4 mt-6">
             <div>
                 <label className="text-sm font-semibold text-slate-700">{label}</label>
             </div>
@@ -177,10 +214,11 @@ const Foer = ({ selectedOptions = {}, onOptionChange, currentEmblem, program }) 
                     <button
                         key={colorOption.value}
                         onClick={() => onSelectionChange(colorOption.value)}
-                        className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 flex items-center justify-center ${currentSelection === colorOption.value
+                        className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 flex items-center justify-center ${
+                            currentSelection === colorOption.value
                                 ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
                                 : 'border-slate-200 hover:border-slate-400'
-                            }`}
+                        }`}
                         style={colorOption.color ? { backgroundColor: colorOption.color || colorOption.value } : {}}
                         title={colorOption.name}
                     >
@@ -205,7 +243,7 @@ const Foer = ({ selectedOptions = {}, onOptionChange, currentEmblem, program }) 
         onSelectionChange,
         options
     }) => (
-        <div className="space-y-4">
+        <div className="space-y-4 mt-6">
             <div>
                 <label className="text-sm font-semibold text-slate-700">{label}</label>
                 <div className="flex items-center gap-2 mt-1">
@@ -219,10 +257,11 @@ const Foer = ({ selectedOptions = {}, onOptionChange, currentEmblem, program }) 
                     <button
                         key={type}
                         onClick={() => onSelectionChange(type)}
-                        className={`px-6 py-3 rounded-xl text-sm m-4 font-medium transition-all duration-200 ${currentSelection === type
+                        className={`px-6 py-3 rounded-xl text-sm m-4 font-medium transition-all duration-200 ${
+                            currentSelection === type
                                 ? 'bg-blue-600 text-white shadow-md'
                                 : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm'
-                            }`}
+                        }`}
                     >
                         {type}
                     </button>

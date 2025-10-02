@@ -11,32 +11,62 @@ import coverColorOptionsimg1 from '../assets/cover images/silverahh.png';
 import coverColorOptionsimg2 from '../assets/cover images/none.png';
 import coverColorOptionsimg3 from '../assets/cover images/darkblueahh.png';
 
-
 const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem }) => {
-   const [selectedCoverColor, setSelectedCoverColor] = useState(selectedOptions.Farve || '');
-const [selectedTopkantColor, setSelectedTopkantColor] = useState(selectedOptions.Topkant || '');
-const [selectedKantbandColor, setSelectedKantbandColor] = useState(selectedOptions.Kantbånd || '');
-const [selectedStarsStyle, setSelectedStarsStyle] = useState(selectedOptions.Stjerner || '');
+    // Default value functions
+    const getDefaultCoverColor = () => {
+        switch (program?.toLowerCase()) {
+            case 'pædagog': return 'Purple';
+            default: return 'Hvid';
+        }
+    };
+
+    const getDefaultTopkantColor = () => {
+        return 'NONE'; // Default no topkant
+    };
+
+    const getDefaultKantbandColor = () => {
+        switch (program?.toLowerCase()) {
+           
+            default: return 'NONE';
+        }
+    };
+
+    const getDefaultStarsStyle = () => {
+        return 'NONE'; // Default no stars
+    };
+
+    // State variables with proper default values
+    const [selectedCoverColor, setSelectedCoverColor] = useState(
+        selectedOptions.Farve || getDefaultCoverColor()
+    );
+    const [selectedTopkantColor, setSelectedTopkantColor] = useState(
+        selectedOptions.Topkant || getDefaultTopkantColor()
+    );
+    const [selectedKantbandColor, setSelectedKantbandColor] = useState(
+        selectedOptions.Kantbånd || getDefaultKantbandColor()
+    );
+    const [selectedStarsStyle, setSelectedStarsStyle] = useState(
+        selectedOptions.Stjerner || getDefaultStarsStyle()
+    );
 
     const hideSelectorsPrograms = [
-    'sosuassistent',
-    'sosuhjælper',
-    'frisør',
-    'kosmetolog',
-    'pædagog',
-    'pau',
-    'ernæringsassisten'
-];
+        'sosuassistent',
+        'sosuhjælper',
+        'frisør',
+        'kosmetolog',
+        'pædagog',
+        'pau',
+        'ernæringsassisten'
+    ];
 
-const shouldHideSelectors = hideSelectorsPrograms.includes(program?.toLowerCase());
+    const shouldHideSelectors = hideSelectorsPrograms.includes(program?.toLowerCase());
 
-const paedagog = () => {
+    const paedagog = () => {
         switch (program?.toLowerCase()) {
-            
             case 'pædagog':
                 return { name: 'Purple', value: 'Purple', color: '#522854' };
             default:
-                return null; // nothing if no match
+                return null;
         }
     };
 
@@ -44,8 +74,8 @@ const paedagog = () => {
         { name: 'Hvid', value: 'Hvid', color: '#ffffff' },
         { name: 'Sort', value: 'Sort', color: '#000000' },
         paedagog(),
-        { name: 'Hvid med glimmer', value: 'Hvid med glimmer', img: whiteGlitter,color:'#ffffff' },
-        { name: 'Sort med glimmer', value: 'Sort med glimmer', img: blackGlitter,color:'#000000' },
+        { name: 'Hvid med glimmer', value: 'Hvid med glimmer', img: whiteGlitter, color: '#ffffff' },
+        { name: 'Sort med glimmer', value: 'Sort med glimmer', img: blackGlitter, color: '#000000' },
     ].filter(Boolean);
 
     const getCoverColor = () => {
@@ -65,35 +95,30 @@ const paedagog = () => {
             case 'pædagog':
                 return { name: 'Purple', value: 'Purple', color: '#522854' };
             default:
-                return null; // nothing if no match
+                return null;
         }
     };
+
     const getCurrentEmblem = () => {
         switch (currentEmblem.name) {
             case 'Guld':
-
                 return { name: 'Guld', value: 'Guld', color: '#FFD700' };
-
             default:
                 return { name: 'Sølv', value: 'Sølv', color: '#C0C0C0' };
-
         }
-    }
+    };
+
     const edgebandColorOptions = [
         { name: 'NONE', value: 'NONE', img: coverColorOptionsimg2 },
-        { name: 'Hvid', value: 'Hvid', color: '#ffffff'  },
+        { name: 'Hvid', value: 'Hvid', color: '#ffffff' },
         { name: 'Sort', value: 'Sort', color: '#3d3d3d' },
         getCoverColor()
-
     ].filter(Boolean);
 
     const topKantColorOptions = [
         { name: 'NONE', value: 'NONE', img: coverColorOptionsimg2 },
         getCurrentEmblem(),
-
-
-
-    ];
+    ].filter(Boolean);
 
     const starsOptions = [
         { name: 'NONE', value: 'NONE', img: coverColorOptionsimg2 },
@@ -110,14 +135,13 @@ const paedagog = () => {
         onOptionChange('Farve', selectedCoverColor);
     }, [selectedCoverColor]);
 
-   useEffect(() => {
-    onOptionChange('Topkant', selectedTopkantColor);
-}, [selectedTopkantColor]);
+    useEffect(() => {
+        onOptionChange('Topkant', selectedTopkantColor);
+    }, [selectedTopkantColor]);
 
-useEffect(() => {
-    onOptionChange('Kantbånd', selectedKantbandColor);
-}, [selectedKantbandColor]);
-
+    useEffect(() => {
+        onOptionChange('Kantbånd', selectedKantbandColor);
+    }, [selectedKantbandColor]);
 
     useEffect(() => {
         onOptionChange('Stjerner', selectedStarsStyle);
@@ -129,9 +153,9 @@ useEffect(() => {
         currentSelection,
         onSelectionChange,
         options,
-        type = 'color' // 'color' or 'image'
+        type = 'color'
     }) => (
-        <div className="space-y-4">
+        <div className="space-y-4 mt-6">
             <div className="flex items-center justify-between flex-wrap">
                 <div>
                     <label className="text-sm font-semibold text-slate-700">{label}</label>
@@ -142,10 +166,11 @@ useEffect(() => {
                     <button
                         key={option.value}
                         onClick={() => onSelectionChange(option.value)}
-                        className={`w-12 h-12 rounded-xl border-2 mb-2 transition-all duration-200 overflow-hidden hover:scale-110 flex items-center justify-center ${currentSelection === option.value
+                        className={`w-12 h-12 rounded-xl border-2 mb-2 transition-all duration-200 overflow-hidden hover:scale-110 flex items-center justify-center ${
+                            currentSelection === option.value
                                 ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
                                 : 'border-slate-200 hover:border-slate-400'
-                            }`}
+                        }`}
                         style={option.color ? { backgroundColor: option.color || option.value } : {}}
                         title={option.name}
                     >
@@ -180,32 +205,32 @@ useEffect(() => {
 
             {/* Edgeband Color Selection */}
             <Selector
-    label="Topkant"
-    currentSelection={selectedTopkantColor}
-    onSelectionChange={setSelectedTopkantColor}
-    options={topKantColorOptions}
-    type="color"
-/>
+                label="Topkant"
+                currentSelection={selectedTopkantColor}
+                onSelectionChange={setSelectedTopkantColor}
+                options={topKantColorOptions}
+                type="color"
+            />
 
-           {!shouldHideSelectors && (
-    <>
-        <Selector
-    label="Kantbånd"
-    currentSelection={selectedKantbandColor}
-    onSelectionChange={setSelectedKantbandColor}
-    options={edgebandColorOptions}
-    type="color"
-/>
+            {!shouldHideSelectors && (
+                <>
+                    <Selector
+                        label="Kantbånd"
+                        currentSelection={selectedKantbandColor}
+                        onSelectionChange={setSelectedKantbandColor}
+                        options={edgebandColorOptions}
+                        type="color"
+                    />
 
-        <Selector
-            label="Stjerner"
-            currentSelection={selectedStarsStyle}
-            onSelectionChange={setSelectedStarsStyle}
-            options={starsOptions}
-            type="image"
-        />
-    </>
-)}
+                    <Selector
+                        label="Stjerner"
+                        currentSelection={selectedStarsStyle}
+                        onSelectionChange={setSelectedStarsStyle}
+                        options={starsOptions}
+                        type="image"
+                    />
+                </>
+            )}
         </>
     );
 }

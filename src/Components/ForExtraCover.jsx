@@ -10,10 +10,38 @@ import whiteGlitter from '../assets/button images/white glitter.png';
 import blackGlitter from '../assets/button images/black glitter.png';
 
 const ForExtraCover = ({ programNew, current, forOptionChange, selectedOptions }) => {
-    const [selectedCoverColor, setSelectedCoverColor] = useState(selectedOptions.Farve || '');
-    const [selectedTopkantColor, setSelectedTopkantColor] = useState(selectedOptions.Topkant || '');
-    const [selectedKantbandColor, setSelectedKantbandColor] = useState(selectedOptions.Kantbånd || '');
-    const [selectedStarsStyle, setSelectedStarsStyle] = useState(selectedOptions.Stjerner || '');
+    // Default value functions
+    const getDefaultCoverColor = () => {
+        return 'Hvid'; // Default extra cover color
+    };
+
+    const getDefaultTopkantColor = () => {
+        return 'NONE'; // Default no topkant
+    };
+
+    const getDefaultKantbandColor = () => {
+        switch (programNew?.toLowerCase()) {
+           
+            default: return 'NONE';
+        }
+    };
+
+    const getDefaultStarsStyle = () => {
+        return 'NONE'; // Default no stars
+    };
+
+    const [selectedCoverColor, setSelectedCoverColor] = useState(
+        selectedOptions.Farve || getDefaultCoverColor()
+    );
+    const [selectedTopkantColor, setSelectedTopkantColor] = useState(
+        selectedOptions.Topkant || getDefaultTopkantColor()
+    );
+    const [selectedKantbandColor, setSelectedKantbandColor] = useState(
+        selectedOptions.Kantbånd || getDefaultKantbandColor()
+    );
+    const [selectedStarsStyle, setSelectedStarsStyle] = useState(
+        selectedOptions.Stjerner || getDefaultStarsStyle()
+    );
 
     const coverColorOptions = [
         { name: 'Hvid', value: 'Hvid', color: '#ffffff' },
@@ -79,7 +107,7 @@ const ForExtraCover = ({ programNew, current, forOptionChange, selectedOptions }
     useEffect(() => { forOptionChange('Stjerner', selectedStarsStyle); }, [selectedStarsStyle]);
 
     const Selector = ({ label, currentSelection, onSelectionChange, options, type = 'color' }) => (
-        <div className="space-y-4">
+        <div className="space-y-4 mt-6">
             <div className="flex items-center justify-between flex-wrap">
                 <div>
                     <label className="text-sm font-semibold text-slate-700">{label}</label>

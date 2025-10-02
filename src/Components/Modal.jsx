@@ -430,6 +430,14 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
     return required.every(field => customerDetails[field].trim() !== '');
   };
 
+  const buildFilteredOptions = (selectedOptions) => {
+  return Object.fromEntries(
+    Object.entries(selectedOptions).map(([category, options]) => {
+      return [category, filterOptions(options)];
+    }).filter(([_, filtered]) => Object.keys(filtered).length > 0) // remove empty categories
+  );
+};
+
   // Handle order submission
   const handleConfirmOrder = async () => {
     setIsLoading(true);
@@ -437,7 +445,7 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
     const orderDate = new Date().toISOString(); // ✅ local definition
     const orderData = {
       customerDetails,
-      selectedOptions,
+      selectedOptions:buildFilteredOptions(selectedOptions),
       totalPrice: price,
       currency: "DKK",
       orderDate,
@@ -516,8 +524,11 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
   const renderQuoteReview = () => (
     <div className="overflow-y-auto px-6 py-4">
       <div className="space-y-6">
+        {console.log(selectedOptions)
+        }
         {Object.entries(selectedOptions).map(([category, options], categoryIndex) => {
           const filteredOptions = filterOptions(options);
+
           if (Object.keys(filteredOptions).length === 0) return null;
 
           return (

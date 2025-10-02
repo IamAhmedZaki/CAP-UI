@@ -11,17 +11,86 @@ import gold from '../assets/button images/gold.png';
 const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke, currentEmblem, }) => {
     // State variables with descriptive names
     const currentYear = new Date().getFullYear();
-   const [selectedHatbandColor, setSelectedHatbandColor] = useState(selectedOptions.Huebånd || '');
-const [selectedMaterialType, setSelectedMaterialType] = useState(selectedOptions.Materiale || '');
-const [selectedChinStrapColor, setSelectedChinStrapColor] = useState(selectedOptions.Hagerem || '');
-const [selectedButtonMaterialColor, setSelectedButtonMaterialColor] = useState(selectedOptions['Hagerem Materiale'] || '');
-const [selectedEmbroideryColor, setSelectedEmbroideryColor] = useState(selectedOptions['Broderi farve'] || '');
-const [selectedButtonColor, setSelectedButtonColor] = useState(selectedOptions['Knap farve'] || '');
-const [embroideryText, setEmbroideryText] = useState(selectedOptions['Broderi foran'] || '');
-const [selectedYear, setSelectedYear] = useState(selectedOptions.Year || currentYear.toString());
+    // Default value functions
+    const getDefaultHatbandColor = () => {
+        switch (program?.toLowerCase()) {
+            case 'hhx': return 'HHX';
+            case 'htx': return 'HTX';
+            case 'stx': return 'STX';
+            case 'hf': return 'HF';
+            case 'eux': return 'EUX';
+            case 'eud': return 'EUD';
+            case 'sosuassistent': return 'Sosuassistent';
+            case 'sosuhjælper': return 'Sosuhjælper';
+            case 'frisør': return 'Frisør';
+            case 'kosmetolog': return 'Kosmetolog';
+            case 'pædagog': return 'Pædagog';
+            case 'pau': return 'PAU';
+            case 'ernæringsassisten': return 'Ernæringsassisten';
+            default: return 'Sort';
+        }
+    };
 
+    const getDefaultMaterialType = () => {
+        return 'BOMULD'; // Default material
+    };
 
+    const getDefaultChinStrapColor = () => {
+        return 'Mat'; // Default chin strap
+    };
 
+    const getDefaultButtonMaterialColor = () => {
+        return 'Mat hagerem'; // Default button material
+    };
+
+    const getDefaultEmbroideryColor = () => {
+        switch (program?.toLowerCase()) {
+            case 'hhx': return 'HHX';
+            case 'htx': return 'HTX';
+            case 'stx': return 'STX';
+            case 'hf': return 'HF';
+            case 'eux': return 'EUX';
+            case 'eud': return 'EUD';
+            default: return 'Guld';
+        }
+    };
+
+    const getDefaultButtonColor = () => {
+        return 'Guld'; // Default button color
+    };
+
+    // State variables with proper default values
+    const [selectedHatbandColor, setSelectedHatbandColor] = useState(
+        selectedOptions.Huebånd || getDefaultHatbandColor()
+    );
+    const [selectedMaterialType, setSelectedMaterialType] = useState(
+        selectedOptions.Materiale || getDefaultMaterialType()
+    );
+    const [selectedChinStrapColor, setSelectedChinStrapColor] = useState(
+        selectedOptions.Hagerem || getDefaultChinStrapColor()
+    );
+    const [selectedButtonMaterialColor, setSelectedButtonMaterialColor] = useState(
+        selectedOptions['Hagerem Materiale'] || getDefaultButtonMaterialColor()
+    );
+    const [selectedEmbroideryColor, setSelectedEmbroideryColor] = useState(
+        selectedOptions['Broderi farve'] || getDefaultEmbroideryColor()
+    );
+    const [selectedButtonColor, setSelectedButtonColor] = useState(
+        selectedOptions['Knap farve'] || getDefaultButtonColor()
+    );
+    const [embroideryText, setEmbroideryText] = useState(
+        selectedOptions['Broderi foran'] || ''
+    );
+    const [selectedYear, setSelectedYear] = useState(
+        selectedOptions.år || currentYear.toString()
+    );
+
+    // Function to handle embroidery text change - ensures we always send a value
+    const handleEmbroideryTextChange = (text) => {
+        setEmbroideryText(text);
+        // Always send the text value, even if empty - the email formatter will handle "Ingen"
+        onOptionChange('Broderi foran', text);
+    };
 
     useEffect(() => {
         onOptionChange('Huebånd', selectedHatbandColor)
@@ -42,11 +111,19 @@ const [selectedYear, setSelectedYear] = useState(selectedOptions.Year || current
         onOptionChange('Knap farve', selectedButtonColor)
     }, [selectedButtonColor])
     useEffect(() => {
-        onOptionChange('Broderi foran', embroideryText)
+        // Use the new handler to ensure Broderi foran is always set
+        handleEmbroideryTextChange(embroideryText);
     }, [embroideryText])
     useEffect(() => {
         onOptionChange('år', selectedYear)
     }, [selectedYear])
+
+    // Initialize Broderi foran on component mount if not already set
+    useEffect(() => {
+        if (!selectedOptions['Broderi foran']) {
+            handleEmbroideryTextChange('');
+        }
+    }, []);
 
     const getCurrentEmblem = () => {
         switch (currentEmblem.name) {
@@ -419,7 +496,7 @@ const [selectedYear, setSelectedYear] = useState(selectedOptions.Year || current
                         <input
                             type="text"
                             value={embroideryText}
-                            onChange={(e) => setEmbroideryText(e.target.value)}
+                            onChange={(e) => handleEmbroideryTextChange(e.target.value)}
                             placeholder="Fri tekst"
                             className="w-full px-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
                             maxLength={20}

@@ -2,7 +2,14 @@ import React, { useState, useEffect } from 'react';
 import ForExtraCover from './ForExtraCover';
 
 const ExtraCover = ({ selectedOptions = {}, onOptionChange, currentEmblem, program, priceReset }) => {
-    const [selectedExtraCoverOption, setSelectedExtraCoverOption] = useState(selectedOptions.Tilvælg || '');
+    // Default value function
+    const getDefaultExtraCoverOption = () => {
+        return 'No'; // Default to not selecting extra cover
+    };
+
+    const [selectedExtraCoverOption, setSelectedExtraCoverOption] = useState(
+        selectedOptions.Tilvælg || getDefaultExtraCoverOption()
+    );
 
     const theProgram = program;
 
@@ -60,7 +67,7 @@ const ExtraCover = ({ selectedOptions = {}, onOptionChange, currentEmblem, progr
         onSelectionChange, 
         options 
     }) => (
-        <div className="space-y-4">
+        <div className="space-y-4 mt-6">
             <div className="flex items-center justify-between">
                 <div>
                     <label className="text-sm font-semibold text-slate-700">{label}</label>

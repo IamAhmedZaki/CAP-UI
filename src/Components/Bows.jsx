@@ -158,25 +158,123 @@ import purplesilver from '../assets/rosent/purplesilver.png';
 
 
 const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmblem }) => {
-    const getInitialColor = (program) => {
+     const getInitialColor = () => {
         switch (program?.toLowerCase()) {
             case 'hhx':
-                return { name: 'Royal blå', value: '#7F1D1D' };
+                return { name: 'Royal blå', value: '#7F1D1D', img: blueGold };
             case 'htx':
-                return { name: 'Navy blå', value: '#7F1D1D' };
+                return { name: 'Navy blå', value: '#7F1D1D', img: blackGold };
             case 'stx':
-                return { name: 'Bordeaux', value: '#7F1D1D' };
+                return { name: 'Bordeaux', value: '#7F1D1D', img: redSilve };
             case 'hf':
-                return { name: 'Light blå', value: '#7F1D1D' };
+                return { name: 'Light blå', value: '#7F1D1D', img: lightbluegold };
+            case 'eux':
+                return { name: 'Rød', value: '#DC2626', img: laalsilver };
+            case 'eud':
+                return { name: 'Purple', value: '#DC26266', img: purplegold };
+            case 'sosuassistent':
+            case 'sosuhjælper':
+            case 'frisør':
+            case 'kosmetolog':
+            case 'pau':
+            case 'ernæringsassisten':
+                return { name: 'Sort', value: 'SosuSort', img: kaalagold };
+            case 'pædagog':
+                return { name: 'Sort', value: 'PSort', img: kaalagold };
             default:
-                return { name: 'Rød', value: '#DC2626' }
+                return { name: 'Rød', value: '#DC2626', img: laalgold };
         }
     };
 
-    const [selectedColor, setSelectedColor] = useState(selectedOptions['Roset farve'] || {});
-    const [selectedPrestige, setSelectedPrestige] = useState(selectedOptions.Kokarde || '');
-    const [selectedEmblem, setSelectedEmblem] = useState(selectedOptions.Emblem ||  {});
-    const [selectedType, setSelectedType] = useState(selectedOptions.Type || '');
+    const getInitialEmblem = () => {
+        switch (program?.toLowerCase()) {
+            case 'hhx':
+                return { name: 'Guld', value: 'Guld', color: '#FCD34D' };
+            case 'htx':
+                return { name: 'Guld', value: 'Guld', color: '#FCD34D' };
+            case 'stx':
+                return { name: 'Guld', value: 'Guld', color: '#FCD34D' };
+            case 'hf':
+                return { name: 'Guld', value: 'Guld', color: '#FCD34D' };
+            case 'eud':
+                return { name: 'Guld', value: 'Guld', color: '#FCD34D' };
+            case 'eux':
+                return { name: 'Guld', value: 'Guld', color: '#FCD34D' };
+            case 'sosuassistent':
+                return { name: 'Guld', value: 'Guld', color: '#FCD34D' };
+            case 'sosuhjælper':
+                return { name: 'Guld', value: 'Guld', color: '#FCD34D' };
+            case 'frisør':
+                return { name: 'Guld', value: 'Guld', color: '#FCD34D' };
+            case 'pædagog':
+                return { name: 'Guld', value: 'Guld', color: '#FCD34D' };
+            case 'pau':
+                return { name: 'Guld', value: 'Guld', color: '#FCD34D' };
+            case 'ernæringsassisten':
+                return { name: 'Guld', value: 'Guld', color: '#FCD34D' };
+            default:
+                return { name: 'Guld', value: 'Guld', color: '#FCD34D' };
+        }
+    };
+
+    const getInitialType = () => {
+    switch (program?.toLowerCase()) {
+        case 'hhx':
+            return 'Hjerte Guld';
+
+        case 'htx':
+            return 'Hjerte Guld';
+
+        case 'stx':
+            return 'Hjerte Guld';
+
+        case 'hf':
+            return 'Hjerte Guld';
+
+        case 'eud':
+            return 'Hjerte Guld';
+
+        case 'eux':
+            return 'Hjerte Guld';
+
+        case 'sosuassistent':
+            return 'Hjerte Guld';
+
+        case 'sosuhjælper':
+            return 'Hjerte Guld';
+
+        case 'frisør':
+            return 'Hjerte Guld';
+
+        case 'pædagog':
+            return 'Hjerte Guld';
+
+        case 'pau':
+            return 'Hjerte Guld';
+
+        case 'ernæringsassisten':
+            return 'Hjerte Guld';
+
+        default:
+            return 'Hjerte Guld';
+    }
+};
+
+
+    // FIXED: Proper default values
+    const [selectedColor, setSelectedColor] = useState(
+        selectedOptions['Roset farve'] || getInitialColor()
+    );
+    const [selectedPrestige, setSelectedPrestige] = useState(
+        selectedOptions.Kokarde || 'Signature'
+    );
+    const [selectedEmblem, setSelectedEmblem] = useState(
+        selectedOptions.Emblem || getInitialEmblem()
+    );
+    const [selectedType, setSelectedType] = useState(
+        selectedOptions.Type || getInitialType()
+    );
+
 
     // Define dynamic first options based on program
     const getFirstGoldColor = () => {
