@@ -22,6 +22,20 @@ import QuoteModal from '../Components/Modal';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { GraduationCap, ChevronUp, ChevronDown } from 'lucide-react';
 
+import HHX from '../Default/HHX';
+import HTX from '../Default/HTX';
+import STX from '../Default/STX';
+import HF from '../Default/HF';
+import EUX from '../Default/EUX';
+import EUD from '../Default/EUD';
+import sosuassistent from '../Default/sosuassistent';
+import sosuhjælper from '../Default/sosuhjælper';
+import frisør from '../Default/frisør';
+import kosmetolog from '../Default/kosmetolog';
+import pædagog from '../Default/pædagog';
+import pau from '../Default/pau';
+import ernæringsassisten from '../Default/ernæringsassisten';
+
 const StudentDashboard = () => {
   const [activeMenu, setActiveMenu] = useState('KOKARDE');
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -38,80 +52,40 @@ const StudentDashboard = () => {
 
 
   // Complete state for all components
-  const [selectedOptions, setSelectedOptions] = useState({
-    // KOKARDE: {
-    //   'Roset farve': { name: 'RED', value: 'RED' },
-    //   Kokarde: 'Signature',
-    //   Emblem: { name: 'Guld', value: 'Guld', color: 'Guld' },
-    //   'Type': 'Kurdistan'
-    // },
-    // UDDANNELSESBÅND: {
-    //   Huebånd: 'EUD',
-    //   Materiale: 'VELOUR',
-    //   Hagerem: 'Mat',
-    //   'Hagerem Materiale': 'Mat hagerem',
-    //   'Broderi foran': '',
-    //   'Broderi farve': 'Guld',
-    //   'Knap farve': 'Guld',
-    // },
-    // BRODERI: {
-    //   'Broderifarve': 'Guld',
-    //   'Navne broderi': '',
-    //   'Skolebroderi farve': 'HVID',
-    //   Skolebroderi: ''
-    // },
-    // BETRÆK: {
-    //   Farve: 'Hvid',
-    //   Kantbånd: 'NONE',
-    //   Stjerner: '1',
-    //   Topkant: 'NONE'
-    // },
-    // SKYGGE: {
-    //   Type: 'Blank',
-    //   Materiale: 'Uden kant',
-    //   Skyggebånd: 'Guld',
-    //   'Skyggegravering Line 1': '',
-    //   'Skyggegravering Line 2': '',
-    //   'Skyggegravering Line 3': ''
-    // },
-    // FOER: {
-    //   Svederem: 'læder',
-    //   Farve: 'HVID',
-    //   Sløjfe: 'HVID',
-    //   Foer: 'Viskose',
-    //   Type: ''
-    // },
-    // EKSTRABETRÆK: {
-    //   Tilvælg: 'Yes',
-    //   Farve: 'Hvid',
-    //   Type: '',
-    //   Skolebroderi: '',
-    //   Topkant: 'NONE',
-    //   Kantbånd: 'NONE',
-    //   Stjerner: '1'
-    // },
-    // TILBEHØR: {
-    //   Hueæske: 'Standard',
-    //   'Premium æske': '',
-    //   Huekuglepen: 'No',
-    //   Silkepude: 'No',
-    //   Emblem: '',
-    //   Badges: 'No',
-    //   Handsker: 'No',
-    //   'Store kuglepen': 'No',
-    //   'Smart Tag': 'No',
-    //   Lyskugle: 'No',
-    //   'Luksus champagneglas': 'No',
-    //   Fløjte: 'No',
-    //   Trrompet: 'No',
-    //   Bucketpins: 'No',
-    // },
-    // STØRRELSE: {
-    //   'Vælg størrelse': 49.5,
-    //   'Millimeter tilpasningssæt': 'No'
-    // }
-  });
+  const initialoption = () => {
+    switch (program?.toLowerCase()) {
+        case 'hhx':
+            return HHX;
+        case 'htx':
+            return HTX;
+        case 'stx':
+            return STX;
+        case 'hf':
+            return HF;
+        case 'eux':
+            return EUX;
+        case 'eud':
+            return EUD;
+        case 'sosuassistent':
+            return sosuassistent;
+        case 'sosuhjælper':
+            return sosuhjælper;
+        case 'frisør':
+            return frisør;
+        case 'kosmetolog':
+            return kosmetolog;
+        case 'pau':
+            return pau;
+        case 'ernæringsassisten':
+            return ernæringsassisten;
+        case 'pædagog':
+            return pædagog;
+        default:
+            return {};
+    }
+};
 
+const [selectedOptions, setSelectedOptions] = useState(initialoption());
 
 
 
@@ -123,6 +97,7 @@ const StudentDashboard = () => {
         '#DC2626': 39,
         'PSort': 0,
         'SosuSort': 0,
+        'EuxRed': 0,
       },
       Kokarde: {
         Signature: 0,
@@ -536,9 +511,14 @@ const StudentDashboard = () => {
   const luksusPrices = {
     KOKARDE: {
       'Roset farve': {
-        '#7F1D1D': 0,
+       '#7F1D1D': 0,
+       '#7F1D1DD': 39,
+       '#7F1D1DX': 39,
         '#1E3A8A': 39,
         '#DC2626': 39,
+        'PSort': 0,
+        'SosuSort': 0,
+        'EuxRed': 0,
       },
       Kokarde: {
         Signature: 0,
@@ -956,6 +936,9 @@ const StudentDashboard = () => {
         '#7F1D1D': 0,
         '#1E3A8A': 0,
         '#DC2626': 0,
+        'PSort': 0,
+        'SosuSort': 0,
+        'EuxRed': 0,
       },
       Kokarde: {
         Signature: 0,
@@ -1543,6 +1526,11 @@ const StudentDashboard = () => {
     console.log("Iframe loaded status:", isIframeLoaded);
     console.log("App ready status:", isAppReady);
   }, [program, isIframeLoaded, isAppReady]);
+  
+  useEffect(() => {
+    console.log(selectedOptions);
+    
+  }, [activeMenu]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
@@ -1658,6 +1646,8 @@ const StudentDashboard = () => {
                   onOptionChange={(key, value) => handleOptionChange('STØRRELSE', key, value)}
                   size={setSizeFlag}
                 />
+              
+                
               )}
             </div>
           </div>
@@ -1723,15 +1713,14 @@ const StudentDashboard = () => {
             </div>
           </div>
           <button
-            disabled={!sizeFlag}
             onClick={collectSelectedOptions}
             className={`w-full py-3 rounded-xl font-semibold transition-all duration-200 shadow-md
-      ${sizeFlag
-                ? "bg-gradient-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800 hover:shadow-lg"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
-          >
-            Godkend og Betal
-          </button>
+        ${sizeFlag
+                  ? "bg-gradient-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800 hover:shadow-lg"
+                  : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
+            >
+              Godkend og Betal
+            </button>
         </div>
       </div>
 

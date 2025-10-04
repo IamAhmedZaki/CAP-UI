@@ -169,7 +169,7 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
             case 'hf':
                 return { name: 'Light blå', value: '#7F1D1D', img: lightbluegold };
             case 'eux':
-                return { name: 'Rød', value: '#DC2626', img: laalsilver };
+                return { name: 'Rød', value: 'EudRed', img: laalsilver };
             case 'eud':
                 return { name: 'Purple', value: '#DC26266', img: purplegold };
             case 'sosuassistent':
@@ -301,9 +301,9 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
                 ];
             case 'eux':
                 return [
-                    { name: 'Rød', value: '#DC2626', img: laalsilver },
-                    { name: 'Bordeaux', value: '#7F1D1D', img: redSilve },
-                    { name: 'Royal blå', value: '#7F1D1DD', img: blueSilv }
+                    { name: 'Rød', value: 'EudRed', img: laalgold },
+                    { name: 'Bordeaux', value: '#7F1D1DX', img: redGold },
+                    { name: 'Royal blå', value: '#7F1D1DD', img: blueGold }
 
 
                 ];
@@ -379,8 +379,8 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
                 ];
             case 'eux':
                 return [
-                    { name: 'Rød', value: '#DC2626', img: laalsilver },
-                    { name: 'Bordeaux', value: '#7F1D1D', img: redSilve },
+                    { name: 'Rød', value: 'EudRed', img: laalsilver },
+                    { name: 'Bordeaux', value: '#7F1D1DX', img: redSilve },
                     { name: 'Royal blå', value: '#7F1D1DD', img: blueSilv }
 
                 ];

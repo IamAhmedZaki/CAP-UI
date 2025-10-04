@@ -4,6 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useRef } from 'react';
 import { useEffect } from 'react';
 const stripePromise = loadStripe("pk_live_51S0HgIFDBW3pcErGOmI6vsVCXStMih46KJXjrOiFHppAj6h0tHOp4zDYMoLyTQn7Uk99pePatnCFrqLh6AAblGa300Wm8qbiRe");
+// const stripePromise = loadStripe("pk_test_51S0HgS2ZnQzLDaK40M9tlj1n72wtQNsUNhG986xbE6bfHxWmFfOMJfWGAbg4QrAlFtnhVCtOajoIqUbRgSBnRnkb00iMo1bD1o");
 
 const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfiguring }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -455,33 +456,29 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
 
     try {
       // 1️⃣ Send order + email
-      const response = await fetch(
-        // "http://localhost:3000/api/sendEmail/capconfigurator",
-        "https://new-capbackend.vercel.app/api/sendEmail/capconfigurator",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(orderData),
-        }
-      );
+      // const response = await fetch(
+      //   // "http://localhost:3000/api/sendEmail/capconfigurator",
+      //   "https://new-capbackend.vercel.app/api/sendEmail/capconfigurator",
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(orderData),
+      //   }
+      // );
 
-      if (!response.ok) {
-        throw new Error("Failed to submit order");
-      }
+      // if (!response.ok) {
+      //   throw new Error("Failed to submit order");
+      // }
 
       // 2️⃣ Create Stripe Checkout session
-      const stripeRes = await fetch("https://new-capbackend.vercel.app/api/sendEmail/create-checkout-session", {
+      // const stripeRes = await fetch("https://new-capbackend.vercel.app/api/sendEmail/create-checkout-session", {
+      const stripeRes = await fetch("https://cap-stripe-webhook-backend.vercel.app/api/sendEmail/create-checkout-session", {
       // const stripeRes = await fetch("http://localhost:3000/api/sendEmail/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          orderNumber: orderData.orderNumber,
-          totalPrice: price,
-          email: customerDetails.email,
-          orderData:orderData
-        }),
+        body: JSON.stringify(orderData),
       });
 
       if (!stripeRes.ok) {
