@@ -39,8 +39,7 @@ const STX = {
   FOER: {
     Farve: "Hvid",
     Foer: "Polyester",
-    SatinType: "Bordeaux",
-    SilkeType: "Hvid",
+    
     Sløjfe: "Hvid",
     Svederem: "Læder"
   },

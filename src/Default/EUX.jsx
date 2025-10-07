@@ -39,8 +39,7 @@ const EUX = {
   FOER: {
     Farve: "Hvid",
     Foer: "Polyester",
-    SatinType: "Grå",
-    SilkeType: "Hvid",
+   
     Sløjfe: "Hvid",
     Svederem: "Læder"
   },

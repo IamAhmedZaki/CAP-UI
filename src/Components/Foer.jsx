@@ -48,11 +48,11 @@ const Foer = ({ selectedOptions = {}, onOptionChange, currentEmblem, program }) 
     const [selectedFoerMaterial, setSelectedFoerMaterial] = useState(
         selectedOptions.Foer || getDefaultFoerMaterial()
     );
-    const [selectedbowMaterialType, setBowMaterialTypes] = useState(
-        selectedOptions.SatinType || getDefaultSatinType()
+    const [selectedbowMaterialType, setBowMaterialTypes] = useState(''
+        
     );
     const [selectedsilkeTypes, setSilkeTypes] = useState(
-        selectedOptions.SilkeType || getDefaultSilkeType()
+        ''
     );
 
     const restrictedPrograms = [

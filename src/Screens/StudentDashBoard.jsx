@@ -1436,7 +1436,7 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
     { name: 'BETRÆK', icon: img4 },
     { name: 'SKYGGE', icon: img5 },
     { name: 'FOER', icon: img6 },
-    { name: 'EKSTRA BETRÆK', icon: img7 },
+    { name: 'EKSTRABETRÆK', icon: img7 },
     { name: 'TILBEHØR', icon: img8 },
     { name: 'STØRRELSE', icon: img9 }
   ];
@@ -1626,7 +1626,7 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
 
                 />
               )}
-              {activeMenu === "EKSTRA BETRÆK" && (
+              {activeMenu === 'EKSTRABETRÆK' && (
                 <ExtraCover
                   selectedOptions={selectedOptions.EKSTRABETRÆK}
                   onOptionChange={(key, value) => handleOptionChange('EKSTRABETRÆK', key, value)} currentEmblem={globalEmblem}
@@ -1854,7 +1854,7 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
                     />
                   </div>
 
-                  <div className={activeMenu === "EKSTRA BETRÆK" ? 'block' : 'hidden'}>
+                  <div className={activeMenu === 'EKSTRABETRÆK' ? 'block' : 'hidden'}>
                     <ExtraCover
                       selectedOptions={selectedOptions.EKSTRABETRÆK}
                       onOptionChange={(key, value) => handleOptionChange('EKSTRABETRÆK', key, value)}
@@ -1952,6 +1952,7 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
         onClose={() => setIsQuoteModalOpen(false)}
         selectedOptions={selectedOptions}
         price={calculateTotalPrice().toFixed(2)}
+        packageName={packageName}
       />
     </div>
   );

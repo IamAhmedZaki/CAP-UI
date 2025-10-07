@@ -39,8 +39,7 @@ const HF = {
   FOER: {
     Farve: "Hvid",
     Foer: "Polyester",
-    SatinType: "Light blå",
-    SilkeType: "Hvid",
+    
     Sløjfe: "Hvid",
     Svederem: "Læder"
   },

@@ -39,8 +39,7 @@ const HTX = {
   FOER: {
     Farve: "Hvid",
     Foer: "Polyester",
-    SatinType: "Navy blå",
-    SilkeType: "Hvid",
+   
     Sløjfe: "Hvid",
     Svederem: "Læder"
   },

@@ -39,12 +39,11 @@ const HHX = {
       FOER: {
         Farve: "Hvid",
         Foer: "Polyester",
-        SatinType: "Royal blå",
-        SilkeType: "Hvid",
+       
         Sløjfe: "Hvid",
         Svederem: "Læder"
       },
-      'EKSTRA BETRÆK': {
+      EKSTRABETRÆK: {
         Tilvælg: "No"
       },
       TILBEHØR: {

@@ -39,8 +39,7 @@ const EUD = {
   FOER: {
     Farve: "Hvid",
     Foer: "Polyester",
-    SatinType: "Purple",
-    SilkeType: "Hvid",
+   
     Sløjfe: "Hvid",
     Svederem: "Læder"
   },
