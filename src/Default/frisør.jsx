@@ -17,7 +17,7 @@ const Frisør = {
   },
   BRODERI: {
     Broderifarve: "Guld",
-    Ingen: false,
+     // Ingen: false,
     "Navne broderi": "",
     Skolebroderi: "",
     "Skolebroderi farve": "Hvid"

@@ -17,7 +17,7 @@ const EUX = {
   },
   BRODERI: {
     Broderifarve: "EUX",
-    Ingen: false,
+     // Ingen: false,
     "Navne broderi": "",
     Skolebroderi: "",
     "Skolebroderi farve": "Hvid"

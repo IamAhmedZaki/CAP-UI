@@ -123,6 +123,21 @@ const Foer = ({ selectedOptions = {}, onOptionChange, currentEmblem, program }) 
 
     // Effect hooks to propagate changes to parent component
     useEffect(() => {
+        // if(selectedFoerMaterial=='Viskose'|| selectedFoerMaterial=='Polyester'){
+        //     setBowMaterialTypes('')
+        //     setSilkeTypes('')
+        //      onOptionChange('SatinType', selectedbowMaterialType)
+        //     onOptionChange('SilkeType', selectedsilkeTypes)
+        // }
+        
+    }, [selectedFoerMaterial]);
+   
+
+    useEffect(() => {
+        onOptionChange('Svederem', selectedKokardeMaterial);
+    }, [selectedKokardeMaterial]);
+    
+    useEffect(() => {
         onOptionChange('Svederem', selectedKokardeMaterial);
     }, [selectedKokardeMaterial]);
 
@@ -154,11 +169,19 @@ const Foer = ({ selectedOptions = {}, onOptionChange, currentEmblem, program }) 
         if (selectedFoerMaterial === 'Satin') {
             if (!selectedbowMaterialType && bowMaterialTypes.length > 0) {
                 setBowMaterialTypes(bowMaterialTypes[0].value);
+                onOptionChange('SilkeType', '');
             }
         } else if (selectedFoerMaterial === 'Silke') {
             if (!selectedsilkeTypes && silkeTypes.length > 0) {
                 setSilkeTypes(silkeTypes[0].value);
+                onOptionChange('SatinType', '');
             }
+        }
+        else if(selectedFoerMaterial=='Viskose'|| selectedFoerMaterial=='Polyester'){
+            setBowMaterialTypes('');
+    setSilkeTypes('');
+    onOptionChange('SatinType', '');
+    onOptionChange('SilkeType', '');
         }
     }, [selectedFoerMaterial]);
 

@@ -410,7 +410,7 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
   const filterOptions = (options) => {
     return Object.fromEntries(
       Object.entries(options).filter(([key, value]) => {
-        if (value === '' || value === null || value === undefined) return false;
+        if ( value === null || value === undefined) return false;
         if (typeof value === 'object' && (!value.name || value.name === '')) return false;
         return true;
       })

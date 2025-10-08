@@ -17,7 +17,7 @@ const HHX = {
       },
       BRODERI: {
         Broderifarve: "HHX",
-        Ingen: false,
+        // Ingen: false,
         "Navne broderi": "",
         Skolebroderi: "",
         "Skolebroderi farve": "Hvid"

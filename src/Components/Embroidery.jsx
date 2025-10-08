@@ -77,18 +77,24 @@ const Embroidery = ({ selectedOptions = {}, onOptionChange, program, pakke }) =>
     useEffect(() => {
         onOptionChange('Navne broderi', nameEmbroideryText);
     }, [nameEmbroideryText]);
-
+    
     useEffect(() => {
         onOptionChange('Skolebroderi farve', selectedSchoolEmbroideryColor);
     }, [selectedSchoolEmbroideryColor]);
-
+    
     useEffect(() => {
         onOptionChange('Skolebroderi', schoolEmbroideryText);
     }, [schoolEmbroideryText]);
-
+    
     useEffect(() => {
-        onOptionChange('Ingen', ingenButton);
+        if (ingenButton===true) {
+            onOptionChange('Navne broderi', '')
+            setSchoolEmbroideryText('')
+        }
+       
     }, [ingenButton]);
+
+   
 
     // Reusable color selector component
     const ColorSelector = ({
