@@ -1953,6 +1953,7 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
         selectedOptions={selectedOptions}
         price={calculateTotalPrice().toFixed(2)}
         packageName={packageName}
+        program={program}
       />
     </div>
   );
