@@ -9,6 +9,7 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
    const [ballpointPenSelection, setBallpointPenSelection] = useState(selectedOptions.Huekuglepen || 'No');
    const [silkPillowSelection, setSilkPillowSelection] = useState(selectedOptions.Silkepude || 'No');
    const [badgesSelection, setBadgesSelection] = useState(selectedOptions['Ekstra korkarde'] || 'No');
+   const [lilFlagSelection, setLilFlagSelection] = useState(selectedOptions['Lille Flag'] || 'No');
    const [glovesSelection, setGlovesSelection] = useState(selectedOptions.Handsker || 'No');
    const [largeBallpointPenSelection, setLargeBallpointPenSelection] = useState(selectedOptions['Store kuglepen'] || 'No');
    const [smartTagSelection, setSmartTagSelection] = useState(selectedOptions['Smart Tag'] || 'No');
@@ -18,6 +19,7 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
    const [trumpetSelection, setTrumpetSelection] = useState(selectedOptions.Trompet || 'No');
    const [bucketpinsSelection, setBucketpinsSelection] = useState(selectedOptions.Bucketpins || 'No');
    const [extraKokardeText, setExtraKokardeText] = useState(selectedOptions['Ekstra korkarde Text'] || '');
+   const [lilFlagText, setLilFlagText] = useState(selectedOptions['Lille Flag Text'] || '');
 
    const colorOptions = [
        { name: 'Burgundy', value: '#7F1D1D' },
@@ -68,11 +70,23 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
         //     setExtraKokardeText('')
         // }
    }, [badgesSelection]);
+   useEffect(() => {
+        onOptionChange('Lille Flag', lilFlagSelection);
+        // Remove this logic - it's causing the text to be overwritten
+        // if (badgesSelection === 'No') {
+        //     setExtraKokardeText('NONE')
+        // } else {
+        //     setExtraKokardeText('')
+        // }
+   }, [lilFlagSelection]);
 
    // FIXED: Separate effect for extraKokardeText
    useEffect(() => {
         onOptionChange('Ekstra korkarde Text', extraKokardeText);
    }, [extraKokardeText]);
+   useEffect(() => {
+        onOptionChange('Lille Flag Text', lilFlagText);
+   }, [lilFlagText]);
 
    useEffect(() => {
         onOptionChange('Handsker', glovesSelection);
@@ -237,6 +251,36 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
                         </div>
                     </div>
                     <p className="text-sm text-slate-600">Valgt tekst: {extraKokardeText || 'Ingen tekst'}</p>
+                </div>
+            )}
+           
+           
+           
+           <AccessorySelector
+               label="Lille flag"
+               currentSelection={lilFlagSelection}
+               onSelectionChange={setLilFlagSelection}
+           />
+
+           {lilFlagSelection === 'Yes' && (
+                <div className="space-y-4">
+                    <div>
+                        <label className="text-sm font-semibold text-slate-700">Lille Flag tekst</label>
+                    </div>
+                    <div className="relative">
+                        <input
+                            type="text"
+                            value={lilFlagText}
+                            onChange={(e) => setLilFlagText(e.target.value)}
+                            placeholder="Skriv navnet på det, land som du ønsker"
+                            maxLength={26}
+                            className="w-full px-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
+                        />
+                        <div className="absolute inset-y-0 right-0 flex items-center pr-4">
+                            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                        </div>
+                    </div>
+                    <p className="text-sm text-slate-600">Valgt tekst: {lilFlagText || 'Ingen tekst'}</p>
                 </div>
             )}
 

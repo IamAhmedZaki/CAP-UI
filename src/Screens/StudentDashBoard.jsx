@@ -1689,7 +1689,7 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
               <div className="flex-1 rounded-b-2xl overflow-hidden">
                 <iframe
                   id="preview-iframe"
-                  src="https://playcanv.as/e/p/3b2251ad/"
+                  src="https://playcanv.as/e/p/QIG7fh8C/"
                   className="w-full h-full"
                   frameBorder="0"
                   title="3D Student Card Preview"
@@ -1762,7 +1762,7 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
                 <div className="h-[calc(100%-130px)] rounded-b-2xl overflow-hidden">
                   <iframe
                     id="preview-iframe2"
-                    src="https://playcanv.as/e/p/3b2251ad/"
+                    src="https://playcanv.as/e/p/QIG7fh8C/"
                     className="w-full h-full"
                     frameBorder="0"
                     title="3D Student Card Preview"

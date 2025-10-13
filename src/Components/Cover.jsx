@@ -11,8 +11,20 @@ import coverColorOptionsimg1 from '../assets/cover images/silverahh.png';
 import coverColorOptionsimg2 from '../assets/cover images/none.png';
 import coverColorOptionsimg3 from '../assets/cover images/darkblueahh.png';
 
+
+import international from '../assets/flagbandimages/international.jpg';
+import usakinaden from '../assets/flagbandimages/USAKINADEN.png';
+import europe from '../assets/flagbandimages/europe.png';
+
 const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem }) => {
     // Default value functions
+    
+    const accessoryOptions = [
+        { name: 'Yes', value: 'Yes', icon: '✔️' },
+        { name: 'No', value: 'No', icon: '❌' },
+   ];
+    
+    
     const getDefaultCoverColor = () => {
         switch (program?.toLowerCase()) {
             case 'pædagog': return 'Purple';
@@ -47,6 +59,12 @@ const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem })
     );
     const [selectedStarsStyle, setSelectedStarsStyle] = useState(
         selectedOptions.Stjerner || getDefaultStarsStyle()
+    );
+    const [selectedFlagbånd, setSelectedFlagbånd] = useState(
+        selectedOptions.Flagbånd|| ''
+    );
+    const [selectedFlagbåndOption, setSelectedFlagbåndOption] = useState(
+        selectedOptions.FlagbåndOption|| ''
     );
 
     const hideSelectorsPrograms = [
@@ -129,6 +147,13 @@ const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem })
         { name: 'Five Stars', value: '5', img: img5 },
         { name: 'Six Stars', value: '6', img: img6 },
     ];
+    
+    const flagbandOptions = [
+        { name: 'International', value: 'International', img: international },
+        { name: 'Frankrig-Spanien-Tyskland-UK-Danmark', value: 'Frankrig-Spanien-Tyskland-UK-Danmark', img: europe },
+        { name: 'Usa-Kina-Danmark', value: 'Usa-Kina-Danmark', img: usakinaden },
+        
+    ];
 
     // Effect hooks to propagate changes to parent component
     useEffect(() => {
@@ -146,7 +171,38 @@ const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem })
     useEffect(() => {
         onOptionChange('Stjerner', selectedStarsStyle);
     }, [selectedStarsStyle]);
+    
+    useEffect(() => {
+        onOptionChange('Flagbånd', selectedFlagbånd);
+    }, [selectedFlagbånd]);
 
+
+    const AccessorySelector = ({ 
+        label, 
+        currentSelection, 
+        onSelectionChange 
+    }) => (
+        <div className="space-y-4">
+            <div>
+                <label className="text-sm font-semibold text-slate-700">{label}</label>
+            </div>
+            <div className="flex space-x-3">
+                {accessoryOptions.map((option) => (
+                    <button
+                        key={option.value}
+                        onClick={() => onSelectionChange(option.value)}
+                        className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 ${
+                            currentSelection === option.value
+                                ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+                                : 'border-slate-200 hover:border-slate-400'
+                        }`}
+                    >
+                        {option.icon}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
     // Reusable selector component for both colors and images
     const Selector = ({
         label,
@@ -187,6 +243,48 @@ const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem })
             <p className="text-sm mt-2 text-slate-700">Valgt: {currentSelection}</p>
         </div>
     );
+    
+    
+    
+    const flagBandSelector = ({
+        label,
+        currentSelection,
+        onSelectionChange,
+        options,
+        type = 'color'
+    }) => (
+        <div className="space-y-4 mt-6">
+            <div className="flex items-center justify-between flex-wrap">
+                <div>
+                    <label className="text-sm font-semibold text-slate-700">{label}</label>
+                </div>
+            </div>
+            <div className="flex space-x-3 flex-wrap">
+                {options.map((option) => (
+                    <div
+                        key={option.value}
+                        onClick={() => onSelectionChange(option.value)}
+                        className={`w-12 h-12 rounded-xl border-2 mb-2 transition-all duration-200 overflow-hidden hover:scale-110 flex items-center justify-center ${
+                            currentSelection === option.value
+                                ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+                                : 'border-slate-200 hover:border-slate-400'
+                        }`}
+                        style={option.color ? { backgroundColor: option.color || option.value } : {}}
+                        title={option.name}
+                    >
+                        {option.img && (
+                            <img
+                                src={option.img}
+                                alt={option.name}
+                                className="w-14 h-14 object-contain"
+                            />
+                        )}
+                    </div>
+                ))}
+            </div>
+            <p className="text-sm mt-2 text-slate-700">Valgt: {currentSelection}</p>
+        </div>
+    );
 
     return (
         <>
@@ -221,6 +319,57 @@ const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem })
                         options={edgebandColorOptions}
                         type="color"
                     />
+
+                    
+                </>
+            )}
+
+
+            <AccessorySelector
+               label="Flagbånd"
+               currentSelection={selectedFlagbånd}
+               onSelectionChange={setSelectedFlagbånd}
+           />
+
+           {selectedFlagbånd === 'Yes' && (
+                    
+                <div className="space-y-4 mt-6">
+            <div className="flex items-center justify-between flex-wrap">
+                <div>
+                    <label className="text-sm font-semibold text-slate-700">Flagbånd</label>
+                </div>
+            </div>
+            <div className=" space-x-3 ">
+                {flagbandOptions.map((option) => (
+                    <div
+                        key={option.value}
+                        onClick={() => setSelectedFlagbåndOption(option.value)}
+                        className={`w-65 h-12 rounded-xl border-2 mb-2 transition-all duration-200 overflow-hidden hover:scale-110 flex items-center justify-center ${
+                            selectedFlagbåndOption === option.value
+                                ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+                                : 'border-slate-200 hover:border-slate-400'
+                        }`}
+                        style={option.color ? { backgroundColor: option.color || option.value } : {}}
+                        title={option.name}
+                    >
+                        {option.img && (
+                            <img
+                                src={option.img}
+                                alt={option.name}
+                                className="w-70 h-50 object-contain"
+                            />
+                        )}
+                    </div>
+                ))}
+            </div>
+            <p className="text-sm mt-2 text-slate-700">Valgt: {selectedFlagbåndOption}</p>
+        </div>
+            )}
+
+
+            {!shouldHideSelectors && (
+                <>
+                    
 
                     <Selector
                         label="Stjerner"
