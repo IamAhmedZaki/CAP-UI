@@ -41,7 +41,9 @@ const EUX = {
     Foer: "Polyester",
    
     Sløjfe: "Hvid",
-    Svederem: "Læder"
+    Svederem: "Læder",
+    'Silk Type': "",
+    'Satin Type': ""
   },
   EKSTRABETRÆK: {
     Tilvælg: "No"

@@ -48,6 +48,7 @@ const StudentDashboard = () => {
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
   const [extraCoverReset, setExtraCoverReset] = useState(false)
   const [sizeFlag, setSizeFlag] = useState(false)
+  const [errors, setErrors] = useState({});
 
 
 
@@ -326,6 +327,12 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
         Sølv: 29,
 
       },
+      Flagbånd: {
+        International: 59,
+        'Frankrig-Spanien-Tyskland-UK-Danmark': 59,
+        'Usa-Kina-Danmark': 59,
+
+      },
       Stjerner: {
         NONE: 0,
         '1': 39,  // One Star
@@ -430,6 +437,12 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
         Sølv: 29,
 
       },
+      Flagbånd: {
+      International: 59,
+      'Frankrig-Spanien-Tyskland-UK-Danmark': 59,
+      'Usa-Kina-Danmark': 59,
+
+      },
       Stjerner: {
         NONE: 0,
         '1': 39,  // One Star
@@ -458,6 +471,10 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
       },
       'Ekstra korkarde': {
         Yes: 99,
+        No: 0
+      },
+       'Lille Flag': {
+        Yes: 49,
         No: 0
       },
       Handsker: {
@@ -748,6 +765,12 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
         Sølv: 29,
 
       },
+      Flagbånd: {
+      International: 59,
+      'Frankrig-Spanien-Tyskland-UK-Danmark': 59,
+      'Usa-Kina-Danmark': 59,
+
+      },
       Stjerner: {
         NONE: 0,
         '1': 39,  // One Star
@@ -852,6 +875,12 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
         Sølv: 29,
 
       },
+      Flagbånd: {
+      International: 59,
+      'Frankrig-Spanien-Tyskland-UK-Danmark': 59,
+      'Usa-Kina-Danmark': 59,
+
+      },
       Stjerner: {
         NONE: 0,
         '1': 39,  // One Star
@@ -880,6 +909,10 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
       },
       'Ekstra korkarde': {
         Yes: 0,
+        No: 0
+      },
+      'Lille Flag': {
+        Yes: 49,
         No: 0
       },
       Handsker: {
@@ -1548,6 +1581,9 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
                 <button
                   key={index}
                   onClick={() => {
+                  if (errors && Object.keys(errors).length > 0) {
+                return;
+              }
                     setActiveMenu(item.name)
 
 
@@ -1638,6 +1674,8 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
                 <Accessories
                   selectedOptions={selectedOptions.TILBEHØR}
                   onOptionChange={(key, value) => handleOptionChange('TILBEHØR', key, value)}
+                  errors={errors}
+                  setErrors={setErrors}
                 />
               )}
               {activeMenu === "STØRRELSE" && (
@@ -1868,6 +1906,8 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
                     <Accessories
                       selectedOptions={selectedOptions.TILBEHØR}
                       onOptionChange={(key, value) => handleOptionChange('TILBEHØR', key, value)}
+                      errors={errors}
+                      setErrors={setErrors}
                     />
                   </div>
 

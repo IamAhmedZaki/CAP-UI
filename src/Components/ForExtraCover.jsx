@@ -9,7 +9,18 @@ import coverColorOptionsimg2 from '../assets/cover images/none.png';
 import whiteGlitter from '../assets/button images/white glitter.png';
 import blackGlitter from '../assets/button images/black glitter.png';
 
+import international from '../assets/flagbandimages/international.jpg';
+import usakinaden from '../assets/flagbandimages/USAKINADEN.png';
+import europe from '../assets/flagbandimages/europe.png';
+
+
 const ForExtraCover = ({ programNew, current, forOptionChange, selectedOptions }) => {
+
+
+     const accessoryOptions = [
+        { name: 'Yes', value: 'Yes', icon: '✔️' },
+        { name: 'No', value: 'No', icon: '❌' },
+   ];
     // Default value functions
     const getDefaultCoverColor = () => {
         return 'Hvid'; // Default extra cover color
@@ -21,7 +32,7 @@ const ForExtraCover = ({ programNew, current, forOptionChange, selectedOptions }
 
     const getDefaultKantbandColor = () => {
         switch (programNew?.toLowerCase()) {
-           
+
             default: return 'NONE';
         }
     };
@@ -42,12 +53,18 @@ const ForExtraCover = ({ programNew, current, forOptionChange, selectedOptions }
     const [selectedStarsStyle, setSelectedStarsStyle] = useState(
         selectedOptions.Stjerner || getDefaultStarsStyle()
     );
+    const [selectedFlagbånd, setSelectedFlagbånd] = useState(
+            selectedOptions.Flagbånd? 'Yes': 'No'
+       );
+       const [selectedFlagbåndOption, setSelectedFlagbåndOption] = useState(
+            selectedOptions.Flagbånd||'Nej'
+       );
 
     const coverColorOptions = [
         { name: 'Hvid', value: 'Hvid', color: '#ffffff' },
         { name: 'Sort', value: 'Sort', color: '#000000' },
-        { name: 'Hvid med glimmer', value: 'Hvid med glimmer', img: whiteGlitter, color:'#ffffff' },
-        { name: 'Sort med glimmer', value: 'Sort med glimmer', img: blackGlitter, color:'#000000' }
+        { name: 'Hvid med glimmer', value: 'Hvid med glimmer', img: whiteGlitter, color: '#ffffff' },
+        { name: 'Sort med glimmer', value: 'Sort med glimmer', img: blackGlitter, color: '#000000' }
     ];
 
     const restrictedPrograms = [
@@ -64,23 +81,23 @@ const ForExtraCover = ({ programNew, current, forOptionChange, selectedOptions }
 
     const getCoverColor = () => {
         switch (programNew?.toLowerCase()) {
-            case 'hhx': return { name: 'HHX', value:'HHX', color: '#4169e1' };
-            case 'htx': return { name: 'HTX', value:'HTX', color: '#000080' };
-            case 'stx': return { name: 'STX', value:'STX', color: '#7F1D1D' };
-            case 'hf': return { name: 'HF', value:'HF', color: '#ADD8E6' };
+            case 'hhx': return { name: 'HHX', value: 'HHX', color: '#4169e1' };
+            case 'htx': return { name: 'HTX', value: 'HTX', color: '#000080' };
+            case 'stx': return { name: 'STX', value: 'STX', color: '#7F1D1D' };
+            case 'hf': return { name: 'HF', value: 'HF', color: '#ADD8E6' };
             default: return null;
         }
     };
 
     const getCurrentEmblem = () => {
         return current.name === 'Guld'
-            ? { name: 'Guld', value: 'Guld', color:'#FFD700' }
-            : { name: 'Sølv', value: 'Sølv', color:'#C0C0C0' };
+            ? { name: 'Guld', value: 'Guld', color: '#FFD700' }
+            : { name: 'Sølv', value: 'Sølv', color: '#C0C0C0' };
     };
 
     const edgebandColorOptions = [
         { name: 'NONE', value: 'NONE', img: coverColorOptionsimg2 },
-        { name: 'Hvid', value: 'Hvid', color: '#ffffff'  },
+        { name: 'Hvid', value: 'Hvid', color: '#ffffff' },
         { name: 'Sort', value: 'Sort', color: '#3d3d3d' },
         getCoverColor()
     ].filter(Boolean);
@@ -100,11 +117,63 @@ const ForExtraCover = ({ programNew, current, forOptionChange, selectedOptions }
         { name: 'Six Stars', value: '6', img: img6 },
     ];
 
+    const flagbandOptions = [
+        { name: 'International', value: 'International', img: international },
+        { name: 'Frankrig-Spanien-Tyskland-UK-Danmark', value: 'Frankrig-Spanien-Tyskland-UK-Danmark', img: europe },
+        { name: 'Usa-Kina-Danmark', value: 'Usa-Kina-Danmark', img: usakinaden },
+
+    ];
+
+
     // Propagate changes to parent
     useEffect(() => { forOptionChange('Farve', selectedCoverColor); }, [selectedCoverColor]);
     useEffect(() => { forOptionChange('Topkant', selectedTopkantColor); }, [selectedTopkantColor]);
     useEffect(() => { forOptionChange('Kantbånd', selectedKantbandColor); }, [selectedKantbandColor]);
     useEffect(() => { forOptionChange('Stjerner', selectedStarsStyle); }, [selectedStarsStyle]);
+    useEffect(() => {
+        if (selectedFlagbånd == 'Yes') {
+            setSelectedFlagbåndOption('International')
+            forOptionChange('Flagbånd', 'International');
+        } else if (selectedFlagbånd == 'No') {
+            forOptionChange('Flagbånd', 'Nej');
+
+        }
+    }, [selectedFlagbånd]);
+    useEffect(() => {
+
+
+        forOptionChange('Flagbånd', selectedFlagbåndOption);
+
+    }, [selectedFlagbåndOption]);
+
+
+    const AccessorySelector = ({ 
+        label, 
+        currentSelection, 
+        onSelectionChange 
+    }) => (
+        <div className="space-y-4">
+            <div>
+                <label className="text-sm font-semibold text-slate-700">{label}</label>
+            </div>
+            <div className="flex space-x-3">
+                {accessoryOptions.map((option) => (
+                    <button
+                        key={option.value}
+                        onClick={() => onSelectionChange(option.value)}
+                        className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 ${
+                            currentSelection === option.value
+                                ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+                                : 'border-slate-200 hover:border-slate-400'
+                        }`}
+                    >
+                        {option.icon}
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+
 
     const Selector = ({ label, currentSelection, onSelectionChange, options, type = 'color' }) => (
         <div className="space-y-4 mt-6">
@@ -118,11 +187,10 @@ const ForExtraCover = ({ programNew, current, forOptionChange, selectedOptions }
                     <button
                         key={option.value}
                         onClick={() => onSelectionChange(option.value)}
-                        className={`w-12 h-12 rounded-xl border-2 mb-2 transition-all duration-200 overflow-hidden hover:scale-110 flex items-center justify-center ${
-                            currentSelection === option.value
+                        className={`w-12 h-12 rounded-xl border-2 mb-2 transition-all duration-200 overflow-hidden hover:scale-110 flex items-center justify-center ${currentSelection === option.value
                                 ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
                                 : 'border-slate-200 hover:border-slate-400'
-                        }`}
+                            }`}
                         style={option.color ? { backgroundColor: option.color } : {}}
                         title={option.name}
                     >
@@ -155,7 +223,60 @@ const ForExtraCover = ({ programNew, current, forOptionChange, selectedOptions }
                         currentSelection={selectedKantbandColor}
                         onSelectionChange={setSelectedKantbandColor}
                         options={edgebandColorOptions}
+                        type="color"
                     />
+
+                    
+                </>
+            )}
+
+
+            <AccessorySelector
+               label="Flagbånd"
+               currentSelection={selectedFlagbånd}
+               onSelectionChange={setSelectedFlagbånd}
+           />
+
+           {selectedFlagbånd === 'Yes' && (
+                    
+                <div className="space-y-4 mt-6">
+            <div className="flex items-center justify-between flex-wrap">
+                <div>
+                    <label className="text-sm font-semibold text-slate-700">Flagbånd</label>
+                </div>
+            </div>
+            <div className=" space-x-3 ">
+                {flagbandOptions.map((option) => (
+                    <div
+                        key={option.value}
+                        onClick={() => setSelectedFlagbåndOption(option.value)}
+                        className={`w-65 h-12 rounded-xl border-2 mb-2 transition-all duration-200 overflow-hidden hover:scale-110 flex items-center justify-center ${
+                            selectedFlagbåndOption === option.value
+                                ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
+                                : 'border-slate-200 hover:border-slate-400'
+                        }`}
+                        style={option.color ? { backgroundColor: option.color || option.value } : {}}
+                        title={option.name}
+                    >
+                        {option.img && (
+                            <img
+                                src={option.img}
+                                alt={option.name}
+                                className="w-70 h-50 object-contain"
+                            />
+                        )}
+                    </div>
+                ))}
+            </div>
+            <p className="text-sm mt-2 text-slate-700">Valgt: {selectedFlagbåndOption}</p>
+        </div>
+            )}
+
+
+            {!isRestricted && (
+                <>
+                    
+
                     <Selector
                         label="Stjerner"
                         currentSelection={selectedStarsStyle}

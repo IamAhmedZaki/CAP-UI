@@ -61,10 +61,10 @@ const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem })
         selectedOptions.Stjerner || getDefaultStarsStyle()
     );
     const [selectedFlagbånd, setSelectedFlagbånd] = useState(
-        selectedOptions.Flagbånd|| ''
+         selectedOptions.Flagbånd? 'Yes': 'No'
     );
     const [selectedFlagbåndOption, setSelectedFlagbåndOption] = useState(
-        selectedOptions.FlagbåndOption|| ''
+         selectedOptions.Flagbånd||'Nej'
     );
 
     const hideSelectorsPrograms = [
@@ -173,8 +173,20 @@ const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem })
     }, [selectedStarsStyle]);
     
     useEffect(() => {
-        onOptionChange('Flagbånd', selectedFlagbånd);
+        if (selectedFlagbånd=='Yes') {
+            setSelectedFlagbåndOption('International')
+            onOptionChange('Flagbånd', 'International');
+        }else if (selectedFlagbånd=='No') {
+            onOptionChange('Flagbånd', 'Nej');
+
+        }
     }, [selectedFlagbånd]);
+    useEffect(() => {
+        
+            
+            onOptionChange('Flagbånd', selectedFlagbåndOption);
+        
+    }, [selectedFlagbåndOption]);
 
 
     const AccessorySelector = ({ 

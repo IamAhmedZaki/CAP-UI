@@ -26,7 +26,9 @@ const ernæringsassisten = {
     Farve: "Hvid",
     Kantbånd: "NONE",
     Stjerner: "NONE",
-    Topkant: "NONE"
+    Topkant: "NONE",
+     Flagbånd:'Nej'
+    
   },
   SKYGGE: {
     Materiale: "Uden kant",
@@ -40,7 +42,9 @@ const ernæringsassisten = {
     Farve: "Hvid",
     Foer: "Polyester",
     Sløjfe: "Hvid",
-    Svederem: "Læder"
+    Svederem: "Læder",
+    'Silk Type': "",
+    'Satin Type': ""
   },
   EKSTRABETRÆK: {
     Tilvælg: "No"

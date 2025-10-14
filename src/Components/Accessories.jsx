@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
+const Accessories = ({ selectedOptions = {}, onOptionChange,errors,setErrors }) => {
    const [hatBoxColor, setHatBoxColor] = useState('#DC2626');
    const [selectedHatBoxType, setSelectedHatBoxType] = useState(selectedOptions.Hueæske || 'Standard');
    const [selectedPremiumæske, setSelectedPremiumæske] = useState(selectedOptions['Premium æske'] || '');
@@ -20,6 +20,9 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
    const [bucketpinsSelection, setBucketpinsSelection] = useState(selectedOptions.Bucketpins || 'No');
    const [extraKokardeText, setExtraKokardeText] = useState(selectedOptions['Ekstra korkarde Text'] || '');
    const [lilFlagText, setLilFlagText] = useState(selectedOptions['Lille Flag Text'] || '');
+   
+   // Validation states
+   
 
    const colorOptions = [
        { name: 'Burgundy', value: '#7F1D1D' },
@@ -35,90 +38,125 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
    const hatBoxTypes = ['Standard', 'Luksus æske','Premium æske'];
    const premiumaske = [ 'Grøn velour', 'Sort velour', 'Kunstlæderæske' ];
 
-   // Effect hooks to propagate changes to parent component
-   useEffect(() => {
-        onOptionChange('Hueæske', selectedHatBoxType);
-   }, [selectedHatBoxType]);
+   // Validation function
+   const validateFields = () => {
+  const newErrors = {};
 
-   useEffect(() => {
-        if (selectedHatBoxType !== 'Premium æske') {
-            setSelectedPremiumæske('')
-        } else if (selectedHatBoxType === 'Premium æske' && !selectedPremiumæske) {
-             setSelectedPremiumæske('Grøn velour')
-        }
-   }, [selectedHatBoxType]);
-   
-   useEffect(() => {
-        onOptionChange('Premium æske', selectedPremiumæske);
-   }, [selectedPremiumæske]);
+  if (badgesSelection === 'Yes' && !extraKokardeText.trim()) {
+    newErrors.extraKokardeText = 'Ekstra korkarde tekst er påkrævet';
+  }
 
-   useEffect(() => {
-        onOptionChange('Huekuglepen', ballpointPenSelection);
-   }, [ballpointPenSelection]);
+  if (lilFlagSelection === 'Yes' && !lilFlagText.trim()) {
+    newErrors.lilFlagText = 'Lille flag tekst er påkrævet';
+  }
 
-   useEffect(() => {
-        onOptionChange('Silkepude', silkPillowSelection);
-   }, [silkPillowSelection]);
-   
-   // FIXED: Don't set extraKokardeText to 'NONE' when badgesSelection is 'No'
-   useEffect(() => {
-        onOptionChange('Ekstra korkarde', badgesSelection);
-        // Remove this logic - it's causing the text to be overwritten
-        // if (badgesSelection === 'No') {
-        //     setExtraKokardeText('NONE')
-        // } else {
-        //     setExtraKokardeText('')
-        // }
-   }, [badgesSelection]);
-   useEffect(() => {
-        onOptionChange('Lille Flag', lilFlagSelection);
-        // Remove this logic - it's causing the text to be overwritten
-        // if (badgesSelection === 'No') {
-        //     setExtraKokardeText('NONE')
-        // } else {
-        //     setExtraKokardeText('')
-        // }
-   }, [lilFlagSelection]);
+  setErrors(newErrors);
+  return newErrors; // ✅ Return the actual object, not a boolean
+};
 
-   // FIXED: Separate effect for extraKokardeText
-   useEffect(() => {
-        onOptionChange('Ekstra korkarde Text', extraKokardeText);
-   }, [extraKokardeText]);
-   useEffect(() => {
-        onOptionChange('Lille Flag Text', lilFlagText);
-   }, [lilFlagText]);
+// =====================
+// === EFFECT HOOKS ===
+// =====================
 
-   useEffect(() => {
-        onOptionChange('Handsker', glovesSelection);
-   }, [glovesSelection]);
+// ✅ Hueæske
+useEffect(() => {
+  onOptionChange('Hueæske', selectedHatBoxType);
+}, [selectedHatBoxType]);
 
-   useEffect(() => {
-        onOptionChange('Store kuglepen', largeBallpointPenSelection);
-   }, [largeBallpointPenSelection]);
+useEffect(() => {
+  if (selectedHatBoxType !== 'Premium æske') {
+    setSelectedPremiumæske('');
+  } else if (selectedHatBoxType === 'Premium æske' && !selectedPremiumæske) {
+    setSelectedPremiumæske('Grøn velour');
+  }
+}, [selectedHatBoxType]);
 
-   useEffect(() => {
-        onOptionChange('Smart Tag', smartTagSelection);
-   }, [smartTagSelection]);
+useEffect(() => {
+  onOptionChange('Premium æske', selectedPremiumæske);
+}, [selectedPremiumæske]);
 
-   useEffect(() => {
-        onOptionChange('Lyskugle', lightBallSelection);
-   }, [lightBallSelection]);
+useEffect(() => {
+  onOptionChange('Huekuglepen', ballpointPenSelection);
+}, [ballpointPenSelection]);
 
-   useEffect(() => {
-        onOptionChange('Luksus champagneglas', champagneGlassSelection);
-   }, [champagneGlassSelection]);
+useEffect(() => {
+  onOptionChange('Silkepude', silkPillowSelection);
+}, [silkPillowSelection]);
 
-   useEffect(() => {
-        onOptionChange('Fløjte', whistleSelection);
-   }, [whistleSelection]);
+// ✅ Ekstra korkarde (badges)
+useEffect(() => {
+  onOptionChange('Ekstra korkarde', badgesSelection);
 
-   useEffect(() => {
-        onOptionChange('Trompet', trumpetSelection);
-   }, [trumpetSelection]);
+  if (badgesSelection === 'Yes') {
+    const errs = validateFields();
+    setErrors(errs);
+  } else {
+    // Clear only this field's error when turned off
+    setErrors(prev => {
+      const { extraKokardeText, ...rest } = prev;
+      return rest;
+    });
+  }
+}, [badgesSelection, extraKokardeText]);
 
-   useEffect(() => {
-        onOptionChange('Bucketpins', bucketpinsSelection);
-   }, [bucketpinsSelection]);
+// ✅ Lille Flag
+useEffect(() => {
+  onOptionChange('Lille Flag', lilFlagSelection);
+
+  if (lilFlagSelection === 'Yes') {
+    const errs = validateFields();
+    setErrors(errs);
+  } else {
+    setErrors(prev => {
+      const { lilFlagText, ...rest } = prev;
+      return rest;
+    });
+  }
+}, [lilFlagSelection, lilFlagText]);
+
+// ✅ Text fields (update parent and validate)
+useEffect(() => {
+  onOptionChange('Ekstra korkarde Text', extraKokardeText);
+  if (badgesSelection === 'Yes') validateFields();
+}, [extraKokardeText]);
+
+useEffect(() => {
+  onOptionChange('Lille Flag Text', lilFlagText);
+  if (lilFlagSelection === 'Yes') validateFields();
+}, [lilFlagText]);
+
+// ✅ Other simple fields
+useEffect(() => {
+  onOptionChange('Handsker', glovesSelection);
+}, [glovesSelection]);
+
+useEffect(() => {
+  onOptionChange('Store kuglepen', largeBallpointPenSelection);
+}, [largeBallpointPenSelection]);
+
+useEffect(() => {
+  onOptionChange('Smart Tag', smartTagSelection);
+}, [smartTagSelection]);
+
+useEffect(() => {
+  onOptionChange('Lyskugle', lightBallSelection);
+}, [lightBallSelection]);
+
+useEffect(() => {
+  onOptionChange('Luksus champagneglas', champagneGlassSelection);
+}, [champagneGlassSelection]);
+
+useEffect(() => {
+  onOptionChange('Fløjte', whistleSelection);
+}, [whistleSelection]);
+
+useEffect(() => {
+  onOptionChange('Trompet', trumpetSelection);
+}, [trumpetSelection]);
+
+useEffect(() => {
+  onOptionChange('Bucketpins', bucketpinsSelection);
+}, [bucketpinsSelection]);
 
    // Helper component for accessory selection
    const AccessorySelector = ({ 
@@ -244,17 +282,24 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
                             onChange={(e) => setExtraKokardeText(e.target.value)}
                             placeholder="Fri tekst"
                             maxLength={26}
-                            className="w-full px-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
+                            className={`w-full px-4 py-4 rounded-2xl border-2 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400 ${
+                                errors.extraKokardeText 
+                                    ? 'border-red-500 focus:border-red-500 focus:ring-4 focus:ring-red-100' 
+                                    : 'border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100'
+                            }`}
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-4">
-                            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                            <div className={`w-2 h-2 rounded-full animate-pulse ${
+                                errors.extraKokardeText ? 'bg-red-500' : 'bg-blue-500'
+                            }`}></div>
                         </div>
                     </div>
+                    {errors.extraKokardeText && (
+                        <p className="text-sm text-red-600 font-medium">{errors.extraKokardeText}</p>
+                    )}
                     <p className="text-sm text-slate-600">Valgt tekst: {extraKokardeText || 'Ingen tekst'}</p>
                 </div>
             )}
-           
-           
            
            <AccessorySelector
                label="Lille flag"
@@ -274,12 +319,21 @@ const Accessories = ({ selectedOptions = {}, onOptionChange }) => {
                             onChange={(e) => setLilFlagText(e.target.value)}
                             placeholder="Skriv navnet på det, land som du ønsker"
                             maxLength={26}
-                            className="w-full px-4 py-4 rounded-2xl border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400"
+                            className={`w-full px-4 py-4 rounded-2xl border-2 transition-all duration-200 bg-white/80 backdrop-blur-sm text-slate-700 placeholder-slate-400 ${
+                                errors.lilFlagText 
+                                    ? 'border-red-500 focus:border-red-500 focus:ring-4 focus:ring-red-100' 
+                                    : 'border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100'
+                            }`}
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-4">
-                            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                            <div className={`w-2 h-2 rounded-full animate-pulse ${
+                                errors.lilFlagText ? 'bg-red-500' : 'bg-blue-500'
+                            }`}></div>
                         </div>
                     </div>
+                    {errors.lilFlagText && (
+                        <p className="text-sm text-red-600 font-medium">{errors.lilFlagText}</p>
+                    )}
                     <p className="text-sm text-slate-600">Valgt tekst: {lilFlagText || 'Ingen tekst'}</p>
                 </div>
             )}
