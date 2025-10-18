@@ -13,7 +13,7 @@ const SuccessScreen = ({ onContinueConfiguring, handleResetModal, onClose }) => 
       if (!sessionId) return;
 
       const res = await fetch(
-        `https://cap-backend-test.vercel.app/api/sendEmail/checkout-session?session_id=${sessionId}`
+        `https://cap-stripe-webhook-backend.vercel.app/api/sendEmail/checkout-session?session_id=${sessionId}`
       );
       const data = await res.json();
       setSession(data);

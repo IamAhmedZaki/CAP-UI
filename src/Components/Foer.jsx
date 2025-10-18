@@ -48,10 +48,10 @@ const Foer = ({ selectedOptions = {}, onOptionChange, currentEmblem, program }) 
     const [selectedFoerMaterial, setSelectedFoerMaterial] = useState(
         selectedOptions.Foer || getDefaultFoerMaterial()
     );
-    const [selectedbowMaterialType, setBowMaterialTypes] = useState(''
+    const [selectedbowMaterialType, setBowMaterialTypes] = useState(selectedOptions['Satin Type'] ||''
         
     );
-    const [selectedsilkeTypes, setSilkeTypes] = useState(
+    const [selectedsilkeTypes, setSilkeTypes] = useState(selectedOptions['Silk Type'] ||
         ''
     );
 
@@ -153,37 +153,45 @@ const Foer = ({ selectedOptions = {}, onOptionChange, currentEmblem, program }) 
         onOptionChange('Foer', selectedFoerMaterial);
     }, [selectedFoerMaterial]);
     
-    useEffect(() => {
-        if (selectedbowMaterialType) {
-            onOptionChange('SatinType', selectedbowMaterialType);
-        }
-    }, [selectedbowMaterialType]);
-
-    useEffect(() => {
-        if (selectedsilkeTypes) {
-            onOptionChange('SilkeType', selectedsilkeTypes);
-        }
-    }, [selectedsilkeTypes]);
-
-    useEffect(() => {
-        if (selectedFoerMaterial === 'Satin') {
-            if (!selectedbowMaterialType && bowMaterialTypes.length > 0) {
-                setBowMaterialTypes(bowMaterialTypes[0].value);
-                onOptionChange('SilkeType', '');
-            }
-        } else if (selectedFoerMaterial === 'Silke') {
-            if (!selectedsilkeTypes && silkeTypes.length > 0) {
-                setSilkeTypes(silkeTypes[0].value);
-                onOptionChange('SatinType', '');
-            }
-        }
-        else if(selectedFoerMaterial=='Viskose'|| selectedFoerMaterial=='Polyester'){
-            setBowMaterialTypes('');
+   // Handle Satin Type
+useEffect(() => {
+  if (selectedbowMaterialType) {
+    // Clear Silk type if Satin selected
     setSilkeTypes('');
-    onOptionChange('SatinType', '');
-    onOptionChange('SilkeType', '');
-        }
-    }, [selectedFoerMaterial]);
+    onOptionChange('Silk Type', '');
+    onOptionChange('Satin Type', selectedbowMaterialType);
+  }
+}, [selectedbowMaterialType]);
+
+// Handle Silk Type
+useEffect(() => {
+  if (selectedsilkeTypes) {
+    // Clear Satin type if Silk selected
+    setBowMaterialTypes('');
+    onOptionChange('Satin Type', '');
+    onOptionChange('Silk Type', selectedsilkeTypes);
+  }
+}, [selectedsilkeTypes]);
+
+// Handle Foer Material logic
+useEffect(() => {
+  if (selectedFoerMaterial === 'Satin') {
+    if (!selectedbowMaterialType && bowMaterialTypes.length > 0) {
+      setBowMaterialTypes(bowMaterialTypes[0].value);
+      onOptionChange('Silk Type', '');
+    }
+  } else if (selectedFoerMaterial === 'Silk') {
+    if (!selectedsilkeTypes && silkeTypes.length > 0) {
+      setSilkeTypes(silkeTypes[0].value);
+      onOptionChange('Satin Type', '');
+    }
+  } else if (selectedFoerMaterial === 'Viskose' || selectedFoerMaterial === 'Polyester') {
+    setBowMaterialTypes('');
+    setSilkeTypes('');
+    onOptionChange('Satin Type', '');
+    onOptionChange('Silk Type', '');
+  }
+}, [selectedFoerMaterial]);
 
     const getKokardeColorOptions = (material) => {
         switch (material) {
@@ -219,7 +227,7 @@ const Foer = ({ selectedOptions = {}, onOptionChange, currentEmblem, program }) 
         }
     }, [selectedKokardeMaterial, kokardeColorOptions, selectedKokardeColor]);
 
-    const foerMaterialTypes = ['Viskose', 'Polyester', 'Satin', 'Silke'];
+    const foerMaterialTypes = ['Viskose', 'Polyester', 'Satin', 'Silk'];
 
     // Reusable color selector component
     const ColorSelector = ({
@@ -299,9 +307,9 @@ const Foer = ({ selectedOptions = {}, onOptionChange, currentEmblem, program }) 
                     colorOptions={bowMaterialTypes}
                 />
             )}
-            {currentSelection === 'Silke' && (
+            {currentSelection === 'Silk' && (
                 <ColorSelector
-                    label="Silke Type"
+                    label="Silk Type"
                     currentSelection={selectedsilkeTypes}
                     onSelectionChange={setSilkeTypes}
                     colorOptions={silkeTypes}

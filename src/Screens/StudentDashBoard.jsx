@@ -1574,7 +1574,7 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
         <aside className="bg-white/70 backdrop-blur-sm border-r border-slate-200 overflow-y-auto pb-[133px]">
           <div className="p-6">
             <h2 className="text-sm font-semibold text-center text-slate-600 uppercase tracking-wider mb-4">
-              Caps
+              Kasketter
             </h2>
             <nav className="">
               {menuItems.map((item, index) => (
@@ -1706,7 +1706,7 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                  <span className="text-xs font-medium text-slate-600">LIVE PREVIEW</span>
+                  <span className="text-xs font-medium text-slate-600">LIVE FORSIDE</span>
                 </div>
               </div>
 
@@ -1725,14 +1725,8 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
 
               {/* Iframe Preview */}
               <div className="flex-1 rounded-b-2xl overflow-hidden">
-                <iframe
-                  id="preview-iframe"
-                  src="https://playcanv.as/e/p/QIG7fh8C/"
-                  className="w-full h-full"
-                  frameBorder="0"
-                  title="3D Student Card Preview"
-                  onLoad={handleIframeLoad}
-                />
+                <iframe id="preview-iframe" src="https://playcanv.as/e/p/QIG7fh8C/" className="w-full h-full" frameBorder="0" title="3D Student Card Preview" onLoad={handleIframeLoad}
+                 /> 
               </div>
             </div>
           </div>
@@ -1742,12 +1736,12 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
         {/* Desktop Footer */}
         <div className=" border-slate-200 p-6 bg-white/50 backdrop-blur-sm w-[49.5%] absolute bottom-0 left-0 lg:w-[47%] 2xl:w-[43.5%] xl:w-[45%] ">
           <div className="flex justify-between items-center mb-4">
-            <span className="text-sm font-medium text-slate-600">Total Price</span>
+            <span className="text-sm font-medium text-slate-600">Samlet pris</span>
             <div className="text-right">
               <div className="text-2xl font-bold text-slate-900">
                 {calculateTotalPrice().toFixed(2)} DKK
               </div>
-              <div className="text-xs text-slate-500"> Service Fee of 59.00 DKK incl.</div>
+              <div className="text-xs text-slate-500"> Servicegebyr på 59,00 kr. inkl.</div>
             </div>
           </div>
           <button
@@ -1797,15 +1791,14 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
                     Er du i tvivl? Skriv til os på Instagram eller TikTok, så uploader vi en video af en hue, der ligner din 🎥✨
                   </p>
                 </div>
-                <div className="h-[calc(100%-130px)] rounded-b-2xl overflow-hidden">
-                  <iframe
-                    id="preview-iframe2"
-                    src="https://playcanv.as/e/p/QIG7fh8C/"
-                    className="w-full h-full"
-                    frameBorder="0"
-                    title="3D Student Card Preview"
-                    onLoad={handleIframeLoad}
-                  />
+                <div
+  className="h-[calc(100%-130px)] rounded-b-2xl overflow-hidden"
+  style={{
+    pointerEvents: isConfigOpen ? 'none' : 'auto',
+  }}
+>
+                  <iframe id="preview-iframe2"  src="https://playcanv.as/e/p/QIG7fh8C/"  className="w-full h-full"  frameBorder="0"  title="3D Student Card Preview"  onLoad={handleIframeLoad}
+                   /> 
                 </div>
               </div>
             </div>
@@ -1819,12 +1812,12 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
                 {isConfigOpen ? (
                   <>
                     <ChevronDown className="w-4 h-4 mr-1" />
-                    Hide Configuration
+                    Skjul konfiguration
                   </>
                 ) : (
                   <>
                     <ChevronUp className="w-4 h-4 mr-1" />
-                    Show Configuration
+                    Vis konfiguration
                   </>
                 )}
               </button>
@@ -1833,91 +1826,87 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
             {/* Config Panel (collapsible + scrollable) */}
             {/* Config Panel (collapsible + scrollable) */}
             <div
-              className={`transition-all duration-300 overflow-y-auto ${isConfigOpen ? 'flex-1' : 'flex-none h-0'
+              className={`transition-all duration-300 overflow-y-auto ${isConfigOpen ? '' : 'flex-none h-0'
                 }`}
             >
               {isConfigOpen && (
                 <div className="p-4 space-y-6">
                   {/* Keep all components mounted but conditionally show based on activeMenu */}
-                  <div className={activeMenu === 'KOKARDE' ? 'block' : 'hidden'}>
-                    <Bows
-                      selectedOptions={selectedOptions.KOKARDE}
-                      onOptionChange={(key, value) => handleOptionChange('KOKARDE', key, value)}
-                      program={program}
-                      changeCurrentEmblem={setGlobalEmblem}
-                    />
-                  </div>
+                  {activeMenu === 'KOKARDE' && (
+                <Bows
+                  selectedOptions={selectedOptions.KOKARDE}
+                  onOptionChange={(key, value) => handleOptionChange('KOKARDE', key, value)}
+                  program={program}
+                  changeCurrentEmblem={setGlobalEmblem}
+                />
+              )}
+              {activeMenu === "UDDANNELSESBÅND" && (
+                <EducationalTape
+                  selectedOptions={selectedOptions.UDDANNELSESBÅND}
+                  onOptionChange={(key, value) => handleOptionChange('UDDANNELSESBÅND', key, value)}
+                  program={program}
+                  currentEmblem={globalEmblem}
+                  pakke={packageName}
+                />
+              )}
+              {activeMenu === "BRODERI" && (
+                <Embroidery
+                  selectedOptions={selectedOptions.BRODERI}
+                  onOptionChange={(key, value) => handleOptionChange('BRODERI', key, value)}
+                  program={program}
+                  pakke={packageName}
 
-                  <div className={activeMenu === "UDDANNELSESBÅND" ? 'block' : 'hidden'}>
-                    <EducationalTape
-                      selectedOptions={selectedOptions.UDDANNELSESBÅND}
-                      onOptionChange={(key, value) => handleOptionChange('UDDANNELSESBÅND', key, value)}
-                      program={program}
-                      currentEmblem={globalEmblem}
-                      pakke={packageName}
-                    />
-                  </div>
+                />
+              )}
+              {activeMenu === "BETRÆK" && (
+                <Cover
+                  selectedOptions={selectedOptions.BETRÆK}
+                  onOptionChange={(key, value) => handleOptionChange('BETRÆK', key, value)}
+                  program={program}
+                  currentEmblem={globalEmblem}
 
-                  <div className={activeMenu === "BRODERI" ? 'block' : 'hidden'}>
-                    <Embroidery
-                      selectedOptions={selectedOptions.BRODERI}
-                      onOptionChange={(key, value) => handleOptionChange('BRODERI', key, value)}
-                      program={program}
-                      pakke={packageName}
-                    />
-                  </div>
+                />
+              )}
+              {activeMenu === "SKYGGE" && (
+                <Shade
+                  selectedOptions={selectedOptions.SKYGGE}
+                  onOptionChange={(key, value) => handleOptionChange('SKYGGE', key, value)}
+                />
+              )}
+              {activeMenu === "FOER" && (
+                <Foer
+                  selectedOptions={selectedOptions.FOER}
+                  onOptionChange={(key, value) => handleOptionChange('FOER', key, value)}
+                  currentEmblem={globalEmblem}
+                  program={program}
 
-                  <div className={activeMenu === "BETRÆK" ? 'block' : 'hidden'}>
-                    <Cover
-                      selectedOptions={selectedOptions.BETRÆK}
-                      onOptionChange={(key, value) => handleOptionChange('BETRÆK', key, value)}
-                      program={program}
-                      currentEmblem={globalEmblem}
-                    />
-                  </div>
-
-                  <div className={activeMenu === "SKYGGE" ? 'block' : 'hidden'}>
-                    <Shade
-                      selectedOptions={selectedOptions.SKYGGE}
-                      onOptionChange={(key, value) => handleOptionChange('SKYGGE', key, value)}
-                    />
-                  </div>
-
-                  <div className={activeMenu === "FOER" ? 'block' : 'hidden'}>
-                    <Foer
-                      selectedOptions={selectedOptions.FOER}
-                      onOptionChange={(key, value) => handleOptionChange('FOER', key, value)}
-                      currentEmblem={globalEmblem}
-                      program={program}
-                    />
-                  </div>
-
-                  <div className={activeMenu === 'EKSTRABETRÆK' ? 'block' : 'hidden'}>
-                    <ExtraCover
-                      selectedOptions={selectedOptions.EKSTRABETRÆK}
-                      onOptionChange={(key, value) => handleOptionChange('EKSTRABETRÆK', key, value)}
-                      currentEmblem={globalEmblem}
-                      program={program}
-                      priceReset={setExtraCoverReset}
-                    />
-                  </div>
-
-                  <div className={activeMenu === "TILBEHØR" ? 'block' : 'hidden'}>
-                    <Accessories
-                      selectedOptions={selectedOptions.TILBEHØR}
-                      onOptionChange={(key, value) => handleOptionChange('TILBEHØR', key, value)}
-                      errors={errors}
-                      setErrors={setErrors}
-                    />
-                  </div>
-
-                  <div className={activeMenu === "STØRRELSE" ? 'block' : 'hidden'}>
-                    <Size
-                      selectedOptions={selectedOptions.STØRRELSE}
-                      onOptionChange={(key, value) => handleOptionChange('STØRRELSE', key, value)}
-                      size={setSizeFlag}
-                    />
-                  </div>
+                />
+              )}
+              {activeMenu === 'EKSTRABETRÆK' && (
+                <ExtraCover
+                  selectedOptions={selectedOptions.EKSTRABETRÆK}
+                  onOptionChange={(key, value) => handleOptionChange('EKSTRABETRÆK', key, value)} currentEmblem={globalEmblem}
+                  program={program}
+                  priceReset={setExtraCoverReset}
+                />
+              )}
+              {activeMenu === "TILBEHØR" && (
+                <Accessories
+                  selectedOptions={selectedOptions.TILBEHØR}
+                  onOptionChange={(key, value) => handleOptionChange('TILBEHØR', key, value)}
+                  errors={errors}
+                  setErrors={setErrors}
+                />
+              )}
+              {activeMenu === "STØRRELSE" && (
+                <Size
+                  selectedOptions={selectedOptions.STØRRELSE}
+                  onOptionChange={(key, value) => handleOptionChange('STØRRELSE', key, value)}
+                  size={setSizeFlag}
+                />
+              
+                
+              )}
                 </div>
               )}
             </div>
@@ -1926,7 +1915,7 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
             <div className="bg-white/70 backdrop-blur-sm border-t border-slate-200 flex-shrink-0">
               <div className="px-4 pt-2">
                 <h3 className="text-xs font-semibold text-center text-slate-600 uppercase tracking-wider mb-3">
-                  Caps
+                  Kasketter
                 </h3>
                 <div className="flex overflow-x-auto space-x-3 pb-2">
                   {menuItems.map((item, index) => (
@@ -1964,12 +1953,12 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
           {/* Fixed Footer - Always visible at bottom */}
           <div className="border-t border-slate-200 p-4 bg-white/90 backdrop-blur-sm flex-shrink-0">
             <div className="flex justify-between items-center mb-3">
-              <span className="text-sm font-medium text-slate-600">Total Price</span>
+              <span className="text-sm font-medium text-slate-600">Samlet pris</span>
               <div className="text-right">
                 <div className="text-xl font-bold text-slate-900">
                   {calculateTotalPrice().toFixed(2)} DKK
                 </div>
-                <div className="text-xs text-slate-500">+59.00 DKK Service Fee incl. </div>
+                <div className="text-xs text-slate-500">Servicegebyr på 59,00 kr. inkl.</div>
               </div>
             </div>
             <button

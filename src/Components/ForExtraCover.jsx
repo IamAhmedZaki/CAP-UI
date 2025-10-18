@@ -53,12 +53,15 @@ const ForExtraCover = ({ programNew, current, forOptionChange, selectedOptions }
     const [selectedStarsStyle, setSelectedStarsStyle] = useState(
         selectedOptions.Stjerner || getDefaultStarsStyle()
     );
-    const [selectedFlagbånd, setSelectedFlagbånd] = useState(
-            selectedOptions.Flagbånd? 'Yes': 'No'
-       );
-       const [selectedFlagbåndOption, setSelectedFlagbåndOption] = useState(
-            selectedOptions.Flagbånd||'Nej'
-       );
+    // ✅ Initialize cleanly
+const [selectedFlagbånd, setSelectedFlagbånd] = useState(
+  selectedOptions.Flagbånd && selectedOptions.Flagbånd !== 'Nej' ? 'Yes' : 'No'
+);
+
+const [selectedFlagbåndOption, setSelectedFlagbåndOption] = useState(
+  selectedOptions.Flagbånd === 'Nej' ? '' : selectedOptions.Flagbånd || 'Nej'
+);
+
 
     const coverColorOptions = [
         { name: 'Hvid', value: 'Hvid', color: '#ffffff' },
@@ -131,20 +134,27 @@ const ForExtraCover = ({ programNew, current, forOptionChange, selectedOptions }
     useEffect(() => { forOptionChange('Kantbånd', selectedKantbandColor); }, [selectedKantbandColor]);
     useEffect(() => { forOptionChange('Stjerner', selectedStarsStyle); }, [selectedStarsStyle]);
     useEffect(() => {
-        if (selectedFlagbånd == 'Yes') {
-            setSelectedFlagbåndOption('International')
-            forOptionChange('Flagbånd', 'International');
-        } else if (selectedFlagbånd == 'No') {
-            forOptionChange('Flagbånd', 'Nej');
+  if (selectedFlagbånd === 'Yes') {
+    // If user already has a valid selection, keep it
+    if (selectedFlagbåndOption && selectedFlagbåndOption !== 'Nej') {
+      forOptionChange('Flagbånd', selectedFlagbåndOption);
+    } 
+    // Otherwise, set default to International
+    else {
+      setSelectedFlagbåndOption('International');
+      forOptionChange('Flagbånd', 'International');
+    }
+  } else if (selectedFlagbånd === 'No') {
+    forOptionChange('Flagbånd', 'Nej');
+  }
+}, [selectedFlagbånd]);
 
-        }
-    }, [selectedFlagbånd]);
-    useEffect(() => {
+useEffect(() => {
+  if (selectedFlagbånd === 'Yes' && selectedFlagbåndOption) {
+    forOptionChange('Flagbånd', selectedFlagbåndOption);
+  }
+}, [selectedFlagbåndOption]);
 
-
-        forOptionChange('Flagbånd', selectedFlagbåndOption);
-
-    }, [selectedFlagbåndOption]);
 
 
     const AccessorySelector = ({ 
@@ -230,7 +240,8 @@ const ForExtraCover = ({ programNew, current, forOptionChange, selectedOptions }
                 </>
             )}
 
-
+             {!isRestricted && (
+                <>
             <AccessorySelector
                label="Flagbånd"
                currentSelection={selectedFlagbånd}
@@ -270,6 +281,8 @@ const ForExtraCover = ({ programNew, current, forOptionChange, selectedOptions }
             </div>
             <p className="text-sm mt-2 text-slate-700">Valgt: {selectedFlagbåndOption}</p>
         </div>
+            )}
+             </>
             )}
 
 

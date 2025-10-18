@@ -87,8 +87,9 @@ const Embroidery = ({ selectedOptions = {}, onOptionChange, program, pakke }) =>
     }, [schoolEmbroideryText]);
     
     useEffect(() => {
+         onOptionChange('Ingen', ingenButton)
         if (ingenButton===true) {
-            onOptionChange('Navne broderi', '')
+           
             setSchoolEmbroideryText('')
         }
        

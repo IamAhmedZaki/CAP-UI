@@ -60,12 +60,15 @@ const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem })
     const [selectedStarsStyle, setSelectedStarsStyle] = useState(
         selectedOptions.Stjerner || getDefaultStarsStyle()
     );
-    const [selectedFlagbånd, setSelectedFlagbånd] = useState(
-         selectedOptions.Flagbånd? 'Yes': 'No'
-    );
+   const [selectedFlagbånd, setSelectedFlagbånd] = useState(
+  selectedOptions.Flagbånd && selectedOptions.Flagbånd !== 'Nej'
+    ? 'Yes'
+    : 'No'
+);
+
     const [selectedFlagbåndOption, setSelectedFlagbåndOption] = useState(
-         selectedOptions.Flagbånd||'Nej'
-    );
+  selectedOptions.Flagbånd === 'Nej' ? '' : selectedOptions.Flagbånd || 'Nej'
+);
 
     const hideSelectorsPrograms = [
         'sosuassistent',
@@ -172,16 +175,27 @@ const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem })
         onOptionChange('Stjerner', selectedStarsStyle);
     }, [selectedStarsStyle]);
     
-    useEffect(() => {
-        if (selectedFlagbånd=='Yes') {
-            setSelectedFlagbåndOption('International')
-            onOptionChange('Flagbånd', 'International');
-        }else if (selectedFlagbånd=='No') {
-            onOptionChange('Flagbånd', 'Nej');
 
-        }
-    }, [selectedFlagbånd]);
+
     useEffect(() => {
+  if (selectedFlagbånd === 'Yes') {
+    // If user already has a choice, keep it
+    if (selectedFlagbåndOption && selectedFlagbåndOption !== 'Nej') {
+      onOptionChange('Flagbånd', selectedFlagbåndOption);
+    } 
+    // If no prior selection, default to International
+    else {
+      setSelectedFlagbåndOption('International');
+      onOptionChange('Flagbånd', 'International');
+    }
+  } else if (selectedFlagbånd === 'No') {
+    onOptionChange('Flagbånd', 'Nej');
+  }
+}, [selectedFlagbånd]);
+
+
+
+useEffect(() => {
         
             
             onOptionChange('Flagbånd', selectedFlagbåndOption);
@@ -336,7 +350,8 @@ const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem })
                 </>
             )}
 
-
+            {!shouldHideSelectors && (
+                <>
             <AccessorySelector
                label="Flagbånd"
                currentSelection={selectedFlagbånd}
@@ -376,6 +391,8 @@ const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem })
             </div>
             <p className="text-sm mt-2 text-slate-700">Valgt: {selectedFlagbåndOption}</p>
         </div>
+            )}
+              </>
             )}
 
 

@@ -408,14 +408,37 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
 
   // Filter out empty or default values for cleaner display
   const filterOptions = (options) => {
-    return Object.fromEntries(
-      Object.entries(options).filter(([key, value]) => {
-        if ( value === null || value === undefined) return false;
-        if (typeof value === 'object' && (!value.name || value.name === '')) return false;
-        return true;
-      })
-    );
-  };
+  return Object.fromEntries(
+    Object.entries(options).filter(([key, value]) => {
+      // ❌ Skip "Ingen" key completely
+      if (key === 'Ingen') return false;
+      if (key === 'Silk Type') {
+        if ( value=='') {
+          return false;} 
+          
+        }
+       
+      if (key === 'Satin Type') {
+        if (value=='') {
+          
+          return false;}
+        }
+        
+      if (key === 'Ingen') return false;
+
+      // ❌ Skip null or undefined values
+      if (value === null || value === undefined) return false;
+
+      // ❌ Skip empty object options
+      if (typeof value === 'object' && (!value.name || value.name === '')) return false;
+
+      // ✅ Keep everything else
+      return true;
+    })
+  );
+};
+
+
 
   // Handle input changes
   const handleInputChange = (field, value) => {
