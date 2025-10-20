@@ -3,8 +3,8 @@ import { X, Printer, Download, Mail, CheckCircle, Package, Star, User, CreditCar
 import { loadStripe } from "@stripe/stripe-js";
 import { useRef } from 'react';
 import { useEffect } from 'react';
-const stripePromise = loadStripe("pk_live_51S0HgIFDBW3pcErGOmI6vsVCXStMih46KJXjrOiFHppAj6h0tHOp4zDYMoLyTQn7Uk99pePatnCFrqLh6AAblGa300Wm8qbiRe");
-// const stripePromise = loadStripe("pk_test_51S0HgS2ZnQzLDaK40M9tlj1n72wtQNsUNhG986xbE6bfHxWmFfOMJfWGAbg4QrAlFtnhVCtOajoIqUbRgSBnRnkb00iMo1bD1o");
+// const stripePromise = loadStripe("pk_live_51S0HgIFDBW3pcErGOmI6vsVCXStMih46KJXjrOiFHppAj6h0tHOp4zDYMoLyTQn7Uk99pePatnCFrqLh6AAblGa300Wm8qbiRe");
+const stripePromise = loadStripe("pk_test_51S0HgS2ZnQzLDaK40M9tlj1n72wtQNsUNhG986xbE6bfHxWmFfOMJfWGAbg4QrAlFtnhVCtOajoIqUbRgSBnRnkb00iMo1bD1o");
 
 const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfiguring,packageName,program }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -395,8 +395,8 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
       }
     }
 
-    if (displayValue === '' || displayValue === 'Not specified') {
-      return 'Not specified';
+    if (displayValue === '' || displayValue === 'Ikke valgt') {
+      return 'Ikke valgt';
     }
 
     if (price > 0) {
@@ -407,36 +407,76 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
   };
 
   // Filter out empty or default values for cleaner display
-  const filterOptions = (options) => {
+//   const filterOptions = (options) => {
+//   // Define relationships between text fields and their color fields
+//   const relatedPairs = {
+//     "Broderi foran": "Broderi farve",
+//     "Navne broderi": "Broderifarve",
+//     "Skolebroderi": "Skolebroderi farve",
+//   };
+
+//   // First, make a shallow copy so we can safely delete keys
+//   const filtered = { ...options };
+
+//   // Loop through each related pair
+//   for (const [textKey, colorKey] of Object.entries(relatedPairs)) {
+//     if (filtered[textKey] === "") {
+//       // If the main text field is empty, remove its color field
+//       delete filtered[colorKey];
+//     }
+//   }
+
+//   // Now remove unwanted keys and empty/null values
+//   return Object.fromEntries(
+//     Object.entries(filtered).filter(([key, value]) => {
+//       if (key === "Ingen") return false;
+//       if (value === null || value === undefined) return false;
+//       if (typeof value === "object" && (!value.name || value.name === "")) return false;
+//       // Keep empty strings for display logic if needed
+//       return true;
+//     })
+//   );
+// };
+
+const filterOptions = (options) => {
+  // Define pairs of text fields and their related color fields
+  const relatedPairs = {
+    "Broderi foran": "Broderi farve",
+    "Navne broderi": "Broderifarve",
+    "Skolebroderi": "Skolebroderi farve",
+  };
+
+  // Make a shallow copy so we can safely modify it
+  const filtered = { ...options };
+
+  // Remove empty text fields and their related color fields
+  for (const [textKey, colorKey] of Object.entries(relatedPairs)) {
+    if (filtered[textKey] === "") {
+      delete filtered[textKey];
+      delete filtered[colorKey];
+    }
+  }
+
+  // Now filter out unwanted keys and handle value translations
   return Object.fromEntries(
-    Object.entries(options).filter(([key, value]) => {
-      // ❌ Skip "Ingen" key completely
-      if (key === 'Ingen') return false;
-      if (key === 'Silk Type') {
-        if ( value=='') {
-          return false;} 
-          
-        }
-       
-      if (key === 'Satin Type') {
-        if (value=='') {
-          
-          return false;}
-        }
-        
-      if (key === 'Ingen') return false;
-
-      // ❌ Skip null or undefined values
+    Object.entries(filtered).filter(([key, value]) => {
+      if (key === "Ingen") return false;
       if (value === null || value === undefined) return false;
-
-      // ❌ Skip empty object options
-      if (typeof value === 'object' && (!value.name || value.name === '')) return false;
-
-      // ✅ Keep everything else
+      if (typeof value === "object" && (!value.name || value.name === "")) return false;
+      if (value === "") return false; // Remove any other empty strings
       return true;
+    }).map(([key, value]) => {
+      // 🟢 Convert specific values
+      if (typeof value === "string") {
+        if (value.trim().toLowerCase() === "none") value = "INGEN";
+        else if (value.trim().toLowerCase() === "yes") value = "Ja";
+        else if (value.trim().toLowerCase() === "no") value = "Fravalgt";
+      }
+      return [key, value];
     })
   );
 };
+
 
 
 
@@ -500,7 +540,9 @@ const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfigu
       // 2️⃣ Create Stripe Checkout session
       // const stripeRes = await fetch("https://new-capbackend.vercel.app/api/sendEmail/create-checkout-session", {
       // const stripeRes = await fetch("https://cap-stripe-webhook-backend.vercel.app/api/sendEmail/create-checkout-session", {
-      const stripeRes = await fetch("https://cap-backend-test.vercel.app/api/sendEmail/create-checkout-session", {
+      const stripeRes = await fetch("https://cap-stripewebhook-backend-production.up.railway.app/api/sendEmail/create-checkout-session", {
+      // const stripeRes = await fetch("https://cap-backend-test.vercel.app/api/sendEmail/create-checkout-session", {
+      // const stripeRes = await fetch("https://cap-stripewebhook-backend.onrender.com/api/sendEmail/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderData),

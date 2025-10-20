@@ -1962,7 +1962,9 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
               </div>
             </div>
             <button
-              onClick={collectSelectedOptions}
+              onClick={collectSelectedOptions 
+                
+              }
               disabled={!sizeFlag}
               className={`w-full py-3 rounded-xl font-semibold transition-all duration-200 shadow-md
         ${sizeFlag
@@ -1983,6 +1985,7 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
         price={calculateTotalPrice().toFixed(2)}
         packageName={packageName}
         program={program}
+        
       />
     </div>
   );
