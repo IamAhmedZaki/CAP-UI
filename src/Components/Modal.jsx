@@ -540,9 +540,9 @@ const filterOptions = (options) => {
       // 2️⃣ Create Stripe Checkout session
       // const stripeRes = await fetch("https://new-capbackend.vercel.app/api/sendEmail/create-checkout-session", {
       // const stripeRes = await fetch("https://cap-stripe-webhook-backend.vercel.app/api/sendEmail/create-checkout-session", {
-      const stripeRes = await fetch("https://cap-stripewebhook-backend-production.up.railway.app/api/sendEmail/create-checkout-session", {
-      // const stripeRes = await fetch("https://cap-backend-test.vercel.app/api/sendEmail/create-checkout-session", {
-      // const stripeRes = await fetch("https://cap-stripewebhook-backend.onrender.com/api/sendEmail/create-checkout-session", {
+      // const stripeRes = await fetch("https://cap-stripewebhook-backend-production.up.railway.app/api/sendEmail/create-checkout-session", {
+      // const stripeRes = await fetch("https://cap-backend-test-production.up.railway.app/api/sendEmail/create-checkout-session", {
+      const stripeRes = await fetch("https://cap-backend-test.vercel.app/api/sendEmail/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderData),
