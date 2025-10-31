@@ -1488,6 +1488,7 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
 
   // Function to collect all selected options
   const collectSelectedOptions = useCallback(() => {
+   
     setIsQuoteModalOpen(true);
   }, []);
 
@@ -1746,7 +1747,9 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
           </div>
           <button
             onClick={collectSelectedOptions}
+            disabled={!sizeFlag}
             className={`w-full py-3 rounded-xl font-semibold transition-all duration-200 shadow-md
+            
         ${sizeFlag
                   ? "bg-gradient-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800 hover:shadow-lg"
                   : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}
@@ -1966,6 +1969,7 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
                 
               }
               disabled={!sizeFlag}
+              // disabled={!sizeFlag}
               className={`w-full py-3 rounded-xl font-semibold transition-all duration-200 shadow-md
         ${sizeFlag
                   ? "bg-gradient-to-r from-green-600 to-green-700 text-white hover:from-green-700 hover:to-green-800 hover:shadow-lg"

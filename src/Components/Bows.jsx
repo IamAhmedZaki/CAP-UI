@@ -275,6 +275,8 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
         selectedOptions.Type || getInitialType()
     );
 
+    const [isAppReady, setIsAppReady] = useState(false);
+
 
     // Define dynamic first options based on program
     const getFirstGoldColor = () => {
@@ -289,13 +291,13 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
                 { name: 'Rød', value: '#DC2626', img: laalgold },
                 { name: 'Sort', value: '#1E3A8A', img: kaalagold },
                 ];
+                case 'hf':
+                    return [{ name: 'Light blå', value: '#7F1D1D', img: lightbluegold },
+                        { name: 'Rød', value: '#DC2626', img: laalgold },
+                        { name: 'Sort', value: '#1E3A8A', img: kaalagold },
+                    ];
             case 'stx':
                 return [{ name: 'Bordeaux', value: '#7F1D1D', img: redSilve },
-                { name: 'Rød', value: '#DC2626', img: laalgold },
-                { name: 'Sort', value: '#1E3A8A', img: kaalagold },
-                ];
-            case 'hf':
-                return [{ name: 'Light blå', value: '#7F1D1D', img: lightbluegold },
                 { name: 'Rød', value: '#DC2626', img: laalgold },
                 { name: 'Sort', value: '#1E3A8A', img: kaalagold },
                 ];
@@ -724,17 +726,132 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
     const currentTypeOptions = allTypeOptions[selectedPrestige]?.[selectedEmblem.name] || [];
 
     // Update parent when local state changes
-    useEffect(() => {
-        if (onOptionChange) {
+   useEffect(() => {
+    const handleMessage = (event) => {
+      // For security, you might want to check event.origin
+      if (event.data === "app:ready") {
+        console.log("Received app:ready message from iframe");
+        setIsAppReady(true);
 
+        // Send program if we have one
+      
+      }
+
+      // Handle other messages if needed
+      if (typeof event.data === 'object') {
+        console.log("Received object from iframe:", event.data);
+      } else if (typeof event.data === 'string' && event.data.startsWith('{')) {
+        try {
+          const parsedData = JSON.parse(event.data);
+          console.log("Received JSON from iframe:", parsedData);
+        } catch (e) {
+          console.log("Received string from iframe:", event.data);
         }
-    }, []);
+      } else {
+        console.log("Received from iframe:", event.data);
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+
+    // Clean up the event listener
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, [program]);
 
     useEffect(() => {
         if (onOptionChange) {
             onOptionChange('Roset farve', selectedColor);
         }
     }, [selectedColor, onOptionChange]);
+    useEffect(() => {
+        
+        if (selectedColor.name=='Royal blå') {
+             const iframe = document.getElementById('preview-iframe');
+    const iframe2 = document.getElementById('preview-iframe2');
+    if (iframe && iframe.contentWindow) {
+      const message = "flowerRoyalBlue";
+      console.log("Sending message to iframe:", message);
+      iframe.contentWindow.postMessage(message, "*");
+      iframe2.contentWindow.postMessage(message, "*");
+    } else {
+      console.log("Iframe not ready or program not available");
+    }
+        }
+        if (selectedColor.name=='Navy blå') {
+             const iframe = document.getElementById('preview-iframe');
+    const iframe2 = document.getElementById('preview-iframe2');
+    if (iframe && iframe.contentWindow) {
+      const message = "flowerNavyBlue";
+      console.log("Sending message to iframe:", message);
+      iframe.contentWindow.postMessage(message, "*");
+      iframe2.contentWindow.postMessage(message, "*");
+    } else {
+      console.log("Iframe not ready or program not available");
+    }
+        }
+        if (selectedColor.name=='Bordeaux') {
+             const iframe = document.getElementById('preview-iframe');
+    const iframe2 = document.getElementById('preview-iframe2');
+    if (iframe && iframe.contentWindow) {
+      const message = "flowerMaroon";
+      console.log("Sending message to iframe:", message);
+      iframe.contentWindow.postMessage(message, "*");
+      iframe2.contentWindow.postMessage(message, "*");
+    } else {
+      console.log("Iframe not ready or program not available");
+    }
+        }
+        if (selectedColor.name=='Light blå') {
+             const iframe = document.getElementById('preview-iframe');
+    const iframe2 = document.getElementById('preview-iframe2');
+    if (iframe && iframe.contentWindow) {
+      const message = "flowerSkyBlue";
+      console.log("Sending message to iframe:", message);
+      iframe.contentWindow.postMessage(message, "*");
+      iframe2.contentWindow.postMessage(message, "*");
+    } else {
+      console.log("Iframe not ready or program not available");
+    }
+        }
+        if (selectedColor.name=='Rød') {
+             const iframe = document.getElementById('preview-iframe');
+    const iframe2 = document.getElementById('preview-iframe2');
+    if (iframe && iframe.contentWindow) {
+      const message = "flowerRed";
+      console.log("Sending message to iframe:", message);
+      iframe.contentWindow.postMessage(message, "*");
+      iframe2.contentWindow.postMessage(message, "*");
+    } else {
+      console.log("Iframe not ready or program not available");
+    }
+        }
+        if (selectedColor.name=='Purple') {
+             const iframe = document.getElementById('preview-iframe');
+    const iframe2 = document.getElementById('preview-iframe2');
+    if (iframe && iframe.contentWindow) {
+      const message = "flowerPurple";
+      console.log("Sending message to iframe:", message);
+      iframe.contentWindow.postMessage(message, "*");
+      iframe2.contentWindow.postMessage(message, "*");
+    } else {
+      console.log("Iframe not ready or program not available");
+    }
+        }
+        if (selectedColor.name=='Sort') {
+             const iframe = document.getElementById('preview-iframe');
+    const iframe2 = document.getElementById('preview-iframe2');
+    if (iframe && iframe.contentWindow) {
+      const message = "flowerBlack";
+      console.log("Sending message to iframe:", message);
+      iframe.contentWindow.postMessage(message, "*");
+      iframe2.contentWindow.postMessage(message, "*");
+    } else {
+      console.log("Iframe not ready or program not available");
+    }
+        }
+    }, [selectedColor,isAppReady]);
 
     useEffect(() => {
         if (onOptionChange) {
@@ -747,6 +864,34 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
             onOptionChange('Emblem', selectedEmblem);
         }
     }, [selectedEmblem, onOptionChange]);
+    
+    useEffect(() => {
+        if (selectedEmblem.value=='Sølv') {
+           const iframe = document.getElementById('preview-iframe');
+    const iframe2 = document.getElementById('preview-iframe2');
+    if (iframe && iframe.contentWindow) {
+      const message = "rosetfarveSilver";
+      console.log("Sending message to iframe:", message);
+      iframe.contentWindow.postMessage(message, "*");
+      iframe2.contentWindow.postMessage(message, "*");
+    } else {
+      console.log("Iframe not ready or program not available");
+    }
+        }
+        
+        if (selectedEmblem.value=='Guld') {
+           const iframe = document.getElementById('preview-iframe');
+    const iframe2 = document.getElementById('preview-iframe2');
+    if (iframe && iframe.contentWindow) {
+      const message = "rosetfarveGold";
+      console.log("Sending message to iframe:", message);
+      iframe.contentWindow.postMessage(message, "*");
+      iframe2.contentWindow.postMessage(message, "*");
+    } else {
+      console.log("Iframe not ready or program not available");
+    }
+        }
+    }, [selectedEmblem]);
 
     useEffect(() => {
         if (onOptionChange) {

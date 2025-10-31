@@ -51,6 +51,7 @@ const EUX = {
   TILBEHØR: {
     Bucketpins: "No",
     "Ekstra korkarde": "No",
+     "Lille Flag": "No",
     "Ekstra korkarde Text": "",
     Fløjte: "No",
     Handsker: "No",

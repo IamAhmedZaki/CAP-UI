@@ -3,8 +3,8 @@ import { X, Printer, Download, Mail, CheckCircle, Package, Star, User, CreditCar
 import { loadStripe } from "@stripe/stripe-js";
 import { useRef } from 'react';
 import { useEffect } from 'react';
-// const stripePromise = loadStripe("pk_live_51S0HgIFDBW3pcErGOmI6vsVCXStMih46KJXjrOiFHppAj6h0tHOp4zDYMoLyTQn7Uk99pePatnCFrqLh6AAblGa300Wm8qbiRe");
-const stripePromise = loadStripe("pk_test_51S0HgS2ZnQzLDaK40M9tlj1n72wtQNsUNhG986xbE6bfHxWmFfOMJfWGAbg4QrAlFtnhVCtOajoIqUbRgSBnRnkb00iMo1bD1o");
+const stripePromise = loadStripe("pk_live_51S0HgIFDBW3pcErGOmI6vsVCXStMih46KJXjrOiFHppAj6h0tHOp4zDYMoLyTQn7Uk99pePatnCFrqLh6AAblGa300Wm8qbiRe");
+// const stripePromise = loadStripe("pk_test_51S0HgS2ZnQzLDaK40M9tlj1n72wtQNsUNhG986xbE6bfHxWmFfOMJfWGAbg4QrAlFtnhVCtOajoIqUbRgSBnRnkb00iMo1bD1o");
 
 const QuoteModal = ({ isOpen, onClose, selectedOptions, price, onContinueConfiguring,packageName,program }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -562,10 +562,10 @@ const filterOptions = (options) => {
 
       // 2️⃣ Create Stripe Checkout session
       // const stripeRes = await fetch("https://new-capbackend.vercel.app/api/sendEmail/create-checkout-session", {
-      const stripeRes = await fetch("https://cap-stripe-webhook-backend.vercel.app/api/sendEmail/create-checkout-session", {
+      // const stripeRes = await fetch("https://cap-stripe-webhook-backend.vercel.app/api/sendEmail/create-checkout-session", {
       // const stripeRes = await fetch("https://cap-stripewebhook-backend-production.up.railway.app/api/sendEmail/create-checkout-session", {
-      // const stripeRes = await fetch("https://cap-backend-test-production.up.railway.app/api/sendEmail/create-checkout-session", {
-      // const stripeRes = await fetch("https://cap-backend-test.vercel.app/api/sendEmail/create-checkout-session", {
+      // const stripeRes = await fetch("https://cap-stripe-webhook-backend.vercel.app/api/sendEmail/create-checkout-session", {
+      const stripeRes = await fetch("https://cap-backend-test.vercel.app/api/sendEmail/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderData),
