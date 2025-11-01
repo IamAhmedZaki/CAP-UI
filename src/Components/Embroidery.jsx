@@ -73,17 +73,136 @@ const Embroidery = ({ selectedOptions = {}, onOptionChange, program, pakke }) =>
     useEffect(() => {
         onOptionChange('Broderifarve', selectedNameEmbroideryColor);
     }, [selectedNameEmbroideryColor]);
+    useEffect(() => {
+        const colorMap = {
+             'hhx': 'broderiNamefarve:HHX',
+  'htx': 'broderiNamefarve:HTX',
+  'stx': 'broderiNamefarve:STX',
+  'hf': 'broderiNamefarve:HF',
+  'eux': 'broderiNamefarve:EUX',
+  'eud': 'broderiNamefarve:EUD',
+  'hvid': 'broderiNamefarve:Hvid',
+  'sort': 'broderiNamefarve:Sort',
+  'guld': 'broderiNamefarve:Guld',
+  'sølv': 'broderiNamefarve:Sølv'
+        };
 
+        if (!selectedNameEmbroideryColor) return;
+
+        // lowercase safety
+        const message = colorMap[selectedNameEmbroideryColor.toLowerCase()];
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
+    }, [selectedNameEmbroideryColor]);
+
+    
+    
+    
+    
+    
+    
+    
     useEffect(() => {
         onOptionChange('Navne broderi', nameEmbroideryText);
     }, [nameEmbroideryText]);
     
     useEffect(() => {
+       const message = `nameEmbroidery:${nameEmbroideryText}`
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
+    }, [nameEmbroideryText]);
+    
+    
+    
+    
+    
+    
+    useEffect(() => {
         onOptionChange('Skolebroderi farve', selectedSchoolEmbroideryColor);
     }, [selectedSchoolEmbroideryColor]);
+    useEffect(() => {
+      const colorMap = {
+  'hvid': 'broderiNamefarve:Hvid',
+  'guld': 'broderiNamefarve:Guld',
+  'sølv': 'broderiNamefarve:Sølv'
+        };
+
+        if (!selectedSchoolEmbroideryColor) return;
+
+        // lowercase safety
+        const message = colorMap[selectedSchoolEmbroideryColor.toLowerCase()];
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
+    }, [selectedSchoolEmbroideryColor]);
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     useEffect(() => {
         onOptionChange('Skolebroderi', schoolEmbroideryText);
+    }, [schoolEmbroideryText]);
+    useEffect(() => {
+         const message = `schoolEmbroidery:${schoolEmbroideryText}`
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
     }, [schoolEmbroideryText]);
     
     useEffect(() => {

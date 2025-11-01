@@ -90,34 +90,277 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke,
         setEmbroideryText(text);
         // Always send the text value, even if empty - the email formatter will handle "Ingen"
         onOptionChange('Broderi foran', text);
+         const message = `Broderi foran: ${embroideryText}`;
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
+
     };
 
     useEffect(() => {
         onOptionChange('Huebånd', selectedHatbandColor)
     }, [selectedHatbandColor])
+
+
+    useEffect(() => {
+        const colorMap = {
+            'stx': 'Hueband:STX',
+            'htx': 'Hueband:HTX',
+            'hhx': 'Hueband:HHX',
+            'hf': 'Hueband:HF',
+
+            'eux': 'Hueband:EUX',
+            'eud': 'Hueband:EUD',
+
+            'sosuassistent': 'Hueband:Sosuassistent',
+            'sosuhjælper': 'Hueband:Sosuhjælper',
+            'frisør': 'Hueband:Frisør',
+            'kosmetolog': 'Hueband:Kosmetolog',
+            'pædagog': 'Hueband:Pædagog',
+            'pau': 'Hueband:PAU',
+            'ernæringsassisten': 'Hueband:Ernæringsassisten',
+            'sort': 'Hueband:Sort',
+        };
+
+        if (!selectedHatbandColor) return;
+
+        // lowercase safety
+        const message = colorMap[selectedHatbandColor.toLowerCase()];
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
+    }, [selectedHatbandColor]);
+
+
+
+
+
+
+
     useEffect(() => {
         onOptionChange('Materiale', selectedMaterialType)
     }, [selectedMaterialType])
     useEffect(() => {
+        const colorMap = {
+            'bomuld': 'UDDANNELSESBÅNDMateriale:bomuld',
+            'satin': 'UDDANNELSESBÅNDMateriale:satin',
+            'velour': 'UDDANNELSESBÅNDMateriale:velour',
+            'glimmer': 'UDDANNELSESBÅNDMateriale:glimmer',
+            'shimmer': 'UDDANNELSESBÅNDMateriale:shimmer'
+        };
+
+        if (!selectedHatbandColor) return;
+
+        // lowercase safety
+        const message = colorMap[selectedMaterialType.toLowerCase()];
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
+    }, [selectedMaterialType])
+
+
+
+
+
+
+
+    useEffect(() => {
         onOptionChange('Hagerem', selectedChinStrapColor)
     }, [selectedChinStrapColor])
     useEffect(() => {
+        const colorMap = {
+            'sølv hagerem med sølvknuder': 'hagerem:sølv hagerem med sølvknuder',
+            'sølv hagerem med sort knuder': 'hagerem:sølv hagerem med sort knuder',
+
+            'guld hagerem med guld knuder': 'hagerem:guld hagerem med guld knuder',
+            'sort hagerem med guld knuder': 'hagerem:sort hagerem med guld knuder',
+
+            'mat': 'hagerem:mat',
+            'blank': 'hagerem:blank',
+            'sort med sorteknuder': 'hagerem:sort med sorteknuder'
+        };
+
+        if (!selectedHatbandColor) return;
+
+        // lowercase safety
+        const message = colorMap[selectedChinStrapColor.toLowerCase()];
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
+    }, [selectedChinStrapColor])
+
+
+
+
+    useEffect(() => {
         onOptionChange('Hagerem Materiale', selectedButtonMaterialColor)
     }, [selectedButtonMaterialColor])
+    
+    
+    
     useEffect(() => {
         onOptionChange('Broderi farve', selectedEmbroideryColor)
     }, [selectedEmbroideryColor])
     useEffect(() => {
+        const colorMap = {
+           'hhx': 'broderiForanfarve:HHX',
+  'htx': 'broderiForanfarve:HTX',
+  'stx': 'broderiForanfarve:STX',
+  'hf': 'broderiForanfarve:HF',
+  'eux': 'broderiForanfarve:EUX',
+  'eud': 'broderiForanfarve:EUD',
+  'hvid': 'broderiForanfarve:Hvid',
+  'sort': 'broderiForanfarve:Sort',
+  'guld': 'broderiForanfarve:Guld',
+  'sølv': 'broderiForanfarve:Sølv'
+        };
+
+        if (!selectedHatbandColor) return;
+
+        // lowercase safety
+        const message = colorMap[selectedEmbroideryColor.toLowerCase()];
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
+    }, [selectedEmbroideryColor])
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    useEffect(() => {
         onOptionChange('Knap farve', selectedButtonColor)
     }, [selectedButtonColor])
+    useEffect(() => {
+         const colorMap = {
+           'sølv': 'KnapSølv',
+  'guld': 'KnapGuld',
+  
+        };
+
+        if (!selectedButtonColor) return;
+
+        // lowercase safety
+        const message = colorMap[selectedButtonColor.toLowerCase()];
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
+    }, [selectedButtonColor])
+    
+    
+    
+    
     useEffect(() => {
         // Use the new handler to ensure Broderi foran is always set
         handleEmbroideryTextChange(embroideryText);
     }, [embroideryText])
+    
+    
     useEffect(() => {
         onOptionChange('år', selectedYear)
     }, [selectedYear])
+    useEffect(() => {
+       
+        if (!selectedYear) return;
 
+        // lowercase safety
+        const message = `Year:${selectedYear}`;
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
+    }, [selectedYear])
+
+    
+    
     // Initialize Broderi foran on component mount if not already set
     useEffect(() => {
         if (!selectedOptions['Broderi foran']) {
@@ -446,10 +689,10 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke,
                 options={['HTX', 'HHX', 'STX', 'HF'].includes(selectedHatbandColor)
                     ? materialEUXTypes :
                     ['EUX', 'EUD'].includes(selectedHatbandColor)
-                    ? materialEUXAndEUDTypes :
-                    
-                    ['Sosuassistent', 'Sosuhjælper', 'Frisør',
-                        'Kosmetolog', 'Pædagog', 'PAU', 'Ernæringsassisten'].includes(selectedHatbandColor) ? materialColorTypes : selectedHatbandColor == 'Sort' ? materialSORTTypes : []}
+                        ? materialEUXAndEUDTypes :
+
+                        ['Sosuassistent', 'Sosuhjælper', 'Frisør',
+                            'Kosmetolog', 'Pædagog', 'PAU', 'Ernæringsassisten'].includes(selectedHatbandColor) ? materialColorTypes : selectedHatbandColor == 'Sort' ? materialSORTTypes : []}
             />
 
             {/* Chin Strap Color Selection */}

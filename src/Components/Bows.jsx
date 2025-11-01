@@ -760,137 +760,130 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
     };
   }, [program]);
 
-    useEffect(() => {
+    
+  
+  
+  
+  
+  useEffect(() => {
         if (onOptionChange) {
             onOptionChange('Roset farve', selectedColor);
         }
     }, [selectedColor, onOptionChange]);
+    
+    
     useEffect(() => {
-        
-        if (selectedColor.name=='Royal blå') {
-             const iframe = document.getElementById('preview-iframe');
-    const iframe2 = document.getElementById('preview-iframe2');
-    if (iframe && iframe.contentWindow) {
-      const message = "flowerRoyalBlue";
-      console.log("Sending message to iframe:", message);
-      iframe.contentWindow.postMessage(message, "*");
-      iframe2.contentWindow.postMessage(message, "*");
-    } else {
-      console.log("Iframe not ready or program not available");
-    }
-        }
-        if (selectedColor.name=='Navy blå') {
-             const iframe = document.getElementById('preview-iframe');
-    const iframe2 = document.getElementById('preview-iframe2');
-    if (iframe && iframe.contentWindow) {
-      const message = "flowerNavyBlue";
-      console.log("Sending message to iframe:", message);
-      iframe.contentWindow.postMessage(message, "*");
-      iframe2.contentWindow.postMessage(message, "*");
-    } else {
-      console.log("Iframe not ready or program not available");
-    }
-        }
-        if (selectedColor.name=='Bordeaux') {
-             const iframe = document.getElementById('preview-iframe');
-    const iframe2 = document.getElementById('preview-iframe2');
-    if (iframe && iframe.contentWindow) {
-      const message = "flowerMaroon";
-      console.log("Sending message to iframe:", message);
-      iframe.contentWindow.postMessage(message, "*");
-      iframe2.contentWindow.postMessage(message, "*");
-    } else {
-      console.log("Iframe not ready or program not available");
-    }
-        }
-        if (selectedColor.name=='Light blå') {
-             const iframe = document.getElementById('preview-iframe');
-    const iframe2 = document.getElementById('preview-iframe2');
-    if (iframe && iframe.contentWindow) {
-      const message = "flowerSkyBlue";
-      console.log("Sending message to iframe:", message);
-      iframe.contentWindow.postMessage(message, "*");
-      iframe2.contentWindow.postMessage(message, "*");
-    } else {
-      console.log("Iframe not ready or program not available");
-    }
-        }
-        if (selectedColor.name=='Rød') {
-             const iframe = document.getElementById('preview-iframe');
-    const iframe2 = document.getElementById('preview-iframe2');
-    if (iframe && iframe.contentWindow) {
-      const message = "flowerRed";
-      console.log("Sending message to iframe:", message);
-      iframe.contentWindow.postMessage(message, "*");
-      iframe2.contentWindow.postMessage(message, "*");
-    } else {
-      console.log("Iframe not ready or program not available");
-    }
-        }
-        if (selectedColor.name=='Purple') {
-             const iframe = document.getElementById('preview-iframe');
-    const iframe2 = document.getElementById('preview-iframe2');
-    if (iframe && iframe.contentWindow) {
-      const message = "flowerPurple";
-      console.log("Sending message to iframe:", message);
-      iframe.contentWindow.postMessage(message, "*");
-      iframe2.contentWindow.postMessage(message, "*");
-    } else {
-      console.log("Iframe not ready or program not available");
-    }
-        }
-        if (selectedColor.name=='Sort') {
-             const iframe = document.getElementById('preview-iframe');
-    const iframe2 = document.getElementById('preview-iframe2');
-    if (iframe && iframe.contentWindow) {
-      const message = "flowerBlack";
-      console.log("Sending message to iframe:", message);
-      iframe.contentWindow.postMessage(message, "*");
-      iframe2.contentWindow.postMessage(message, "*");
-    } else {
-      console.log("Iframe not ready or program not available");
-    }
-        }
-    }, [selectedColor,isAppReady]);
+  if (!selectedColor?.name || !isAppReady) return;
 
-    useEffect(() => {
-        if (onOptionChange) {
-            onOptionChange('Kokarde', selectedPrestige);
-        }
-    }, [selectedPrestige, onOptionChange]);
+  const colorMap = {
+    'Royal blå': 'flowerRoyalBlue',
+    'Navy blå': 'flowerNavyBlue',
+    'Bordeaux': 'flowerMaroon',
+    'Light blå': 'flowerSkyBlue',
+    'Rød': 'flowerRed',
+    'Purple': 'flowerPurple',
+    'Sort': 'flowerBlack',
+  };
 
-    useEffect(() => {
+  const message = colorMap[selectedColor.name];
+  if (!message) return;
+
+  const sendMessageToIframes = (msg) => {
+    ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+      const iframe = document.getElementById(id);
+      if (iframe?.contentWindow) {
+        console.log("Sending message to iframe:", msg);
+        iframe.contentWindow.postMessage(msg, "*");
+      } else {
+        console.log("Iframe not ready or program not available");
+      }
+    });
+  };
+
+  sendMessageToIframes(message);
+}, [selectedColor, isAppReady]);
+    
+
+
+    
+
+
+
+
+
+
+
+
+
+
+useEffect(() => {
+            if (onOptionChange) {
+                onOptionChange('Kokarde', selectedPrestige);
+            }
+        }, [selectedPrestige, onOptionChange]);
+
+
+useEffect(() => {
+           const colorMap = {
+    'Standard': 'StandardEmblem',
+    'Prestige': 'PrestigeEmblem',
+    'Stjernetegn': 'StjernetegnEmblem',
+    
+  };
+
+  const message = colorMap[selectedPrestige];
+  if (!message) return;
+
+  const sendMessageToIframes = (msg) => {
+    ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+      const iframe = document.getElementById(id);
+      if (iframe?.contentWindow) {
+        console.log("Sending message to iframe:", msg);
+        iframe.contentWindow.postMessage(msg, "*");
+      } else {
+        console.log("Iframe not ready or program not available");
+      }
+    });
+  };
+
+  sendMessageToIframes(message);
+
+
+        }, [selectedPrestige]);
+
+    
+    
+    
+    
+    
+    
+    
+    
+        useEffect(() => {
         if (onOptionChange) {
             onOptionChange('Emblem', selectedEmblem);
         }
     }, [selectedEmblem, onOptionChange]);
     
     useEffect(() => {
-        if (selectedEmblem.value=='Sølv') {
-           const iframe = document.getElementById('preview-iframe');
-    const iframe2 = document.getElementById('preview-iframe2');
-    if (iframe && iframe.contentWindow) {
-      const message = "rosetfarveSilver";
-      console.log("Sending message to iframe:", message);
-      iframe.contentWindow.postMessage(message, "*");
-      iframe2.contentWindow.postMessage(message, "*");
-    } else {
-      console.log("Iframe not ready or program not available");
-    }
+
+        const colorMap={
+            "Guld":"rosetfarveGold",
+            "Sølv":"rosetfarveSilver"
         }
         
-        if (selectedEmblem.value=='Guld') {
-           const iframe = document.getElementById('preview-iframe');
-    const iframe2 = document.getElementById('preview-iframe2');
-    if (iframe && iframe.contentWindow) {
-      const message = "rosetfarveGold";
-      console.log("Sending message to iframe:", message);
-      iframe.contentWindow.postMessage(message, "*");
-      iframe2.contentWindow.postMessage(message, "*");
-    } else {
-      console.log("Iframe not ready or program not available");
-    }
+        const message=colorMap[selectedEmblem.value]
+
+        const sendMessageToIframes=(msg)=>{
+            ['preview-iframe', 'preview-iframe2'].forEach((id)=>{
+             const iframe=document.getElementById(id)
+             if (iframe?.contentWindow) {
+                 iframe.contentWindow.postMessage(msg,'*')
+             }
+            })
+
         }
+         sendMessageToIframes(message);
     }, [selectedEmblem]);
 
     useEffect(() => {
@@ -898,6 +891,26 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
             onOptionChange('Type', selectedType);
         }
     }, [selectedType, onOptionChange]);
+    
+    
+    useEffect(() => {
+       
+        
+        const message=selectedType;
+
+        const sendMessageToIframes = (msg) => {
+    ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+      const iframe = document.getElementById(id);
+      if (iframe?.contentWindow) {
+        console.log("Sending message to iframe:", msg);
+        iframe.contentWindow.postMessage(msg, "*");
+      } else {
+        console.log("Iframe not ready or program not available");
+      }
+    });
+  };
+         sendMessageToIframes(message);
+    }, [selectedType]);
 
     // Update local state when props change
     useEffect(() => {

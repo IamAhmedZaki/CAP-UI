@@ -59,25 +59,210 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
     useEffect(() => {
         onOptionChange('Type', selectedShadeType);
     }, [selectedShadeType]);
+    useEffect(() => {
+       
+        const colorMap =  {
+  'blank': 'Skygge:Blank',
+  'shiny': 'Skygge:Shiny',
+  'glimmer': 'Skygge:Glimmer'
+};
+
+  const message = colorMap[selectedShadeType.toLowerCase()];
+  if (!message) return;
+
+  const sendMessageToIframes = (msg) => {
+    ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+      const iframe = document.getElementById(id);
+      if (iframe?.contentWindow) {
+        console.log("Sending message to iframe:", msg);
+        iframe.contentWindow.postMessage(msg, "*");
+      } else {
+        console.log("Iframe not ready or program not available");
+      }
+    });
+  };
+
+  sendMessageToIframes(message);
+
+    }, [selectedShadeType]);
+    
+
+
 
     useEffect(() => {
         onOptionChange('Materiale', selectedMaterialType);
     }, [selectedMaterialType]);
+    useEffect(() => {
+          const colorMap =  {
+  'uden kant': 'SkyggeMateriale:Uden kant',
+  'med kant': 'SkyggeMateriale:Med kant',
+  
+};
 
+  const message = colorMap[selectedMaterialType.toLowerCase()];
+  if (!message) return;
+
+  const sendMessageToIframes = (msg) => {
+     if (selectedShadeType==='Glimmer') {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+      const iframe = document.getElementById(id);
+      if (iframe?.contentWindow) {
+        console.log("Sending message to iframe:",'SkyggeMateriale:none' );
+        iframe.contentWindow.postMessage('SkyggeMateriale:none', "*");
+      } else {
+        console.log("Iframe not ready or program not available");
+      }
+    });
+            return
+        }
+    ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+      const iframe = document.getElementById(id);
+      if (iframe?.contentWindow) {
+        console.log("Sending message to iframe:", msg);
+        iframe.contentWindow.postMessage(msg, "*");
+      } else {
+        console.log("Iframe not ready or program not available");
+      }
+    });
+  };
+
+  sendMessageToIframes(message);
+    }, [selectedMaterialType,selectedShadeType]);
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     useEffect(() => {
         onOptionChange('Skyggebånd', selectedShadowTapeColor);
     }, [selectedShadowTapeColor]);
+    useEffect(() => {
+         const colorMap = {
+  'ingen': 'skyggeband:none',
+  'guld': 'skyggeband:guld',
+  'sølv': 'skyggeband:sølv'
+};
 
+  const message = colorMap[selectedShadowTapeColor.toLowerCase()];
+  if (!message) return;
+
+  const sendMessageToIframes = (msg) => {
+    ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+      const iframe = document.getElementById(id);
+      if (iframe?.contentWindow) {
+        console.log("Sending message to iframe:", msg);
+        iframe.contentWindow.postMessage(msg, "*");
+      } else {
+        console.log("Iframe not ready or program not available");
+      }
+    });
+  };
+
+  sendMessageToIframes(message);
+    }, [selectedShadowTapeColor]);
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
     useEffect(() => {
         onOptionChange('Skyggegravering Line 1', engravingLine1);
     }, [engravingLine1]);
+    
+    useEffect(() => {
+        
+  const message = `engravingLine1:${engravingLine1}`
+  if (!message) return;
 
+  const sendMessageToIframes = (msg) => {
+    ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+      const iframe = document.getElementById(id);
+      if (iframe?.contentWindow) {
+        console.log("Sending message to iframe:", msg);
+        iframe.contentWindow.postMessage(msg, "*");
+      } else {
+        console.log("Iframe not ready or program not available");
+      }
+    });
+  };
+
+  sendMessageToIframes(message);
+    }, [engravingLine1]);
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     useEffect(() => {
         onOptionChange('Skyggegravering Line 2', engravingLine2);
     }, [engravingLine2]);
+    useEffect(() => {
+        const message = `engravingLine2:${engravingLine2}`
+  if (!message) return;
 
+  const sendMessageToIframes = (msg) => {
+    ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+      const iframe = document.getElementById(id);
+      if (iframe?.contentWindow) {
+        console.log("Sending message to iframe:", msg);
+        iframe.contentWindow.postMessage(msg, "*");
+      } else {
+        console.log("Iframe not ready or program not available");
+      }
+    });
+  };
+
+  sendMessageToIframes(message);
+    }, [engravingLine2]);
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     useEffect(() => {
         onOptionChange('Skyggegravering Line 3', engravingLine3);
+    }, [engravingLine3]);
+    useEffect(() => {
+       const message = `engravingLine3:${engravingLine3}`
+  if (!message) return;
+
+  const sendMessageToIframes = (msg) => {
+    ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+      const iframe = document.getElementById(id);
+      if (iframe?.contentWindow) {
+        console.log("Sending message to iframe:", msg);
+        iframe.contentWindow.postMessage(msg, "*");
+      } else {
+        console.log("Iframe not ready or program not available");
+      }
+    });
+  };
+
+  sendMessageToIframes(message);
     }, [engravingLine3]);
 
     // Get available material options based on selected shade type

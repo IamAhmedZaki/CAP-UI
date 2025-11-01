@@ -152,9 +152,9 @@ const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem })
     ];
     
     const flagbandOptions = [
-        { name: 'International', value: 'International', img: international },
-        { name: 'Frankrig-Spanien-Tyskland-UK-Danmark', value: 'Frankrig-Spanien-Tyskland-UK-Danmark', img: europe },
-        { name: 'Usa-Kina-Danmark', value: 'Usa-Kina-Danmark', img: usakinaden },
+            { name: 'International', value: 'International', img: international },
+            { name: 'Frankrig-Spanien-Tyskland-UK-Danmark', value: 'Frankrig-Spanien-Tyskland-UK-Danmark', img: europe },
+            { name: 'Usa-Kina-Danmark', value: 'Usa-Kina-Danmark', img: usakinaden },
         
     ];
 
@@ -162,26 +162,184 @@ const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem })
     useEffect(() => {
         onOptionChange('Farve', selectedCoverColor);
     }, [selectedCoverColor]);
+    
+    
+    useEffect(() => {
+        const colorMap = {
+  'purple': 'CoverColor:Purple',
+  'hvid med glimmer': 'CoverColor:Hvid med glimmer',
+  'sort med glimmer': 'CoverColor:Sort med glimmer',
+  'hvid': 'CoverColor:Hvid',
+  'sort': 'CoverColor:Sort'
+};
 
+        if (!selectedCoverColor) return;
+
+        // lowercase safety
+        const message = colorMap[selectedCoverColor.toLowerCase()];
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
+    }, [selectedCoverColor]);
+
+    
+    
     useEffect(() => {
         onOptionChange('Topkant', selectedTopkantColor);
     }, [selectedTopkantColor]);
+    useEffect(() => {
+        const colorMap = {
+  'none': 'Topkant:none',
+  'guld': 'Topkant:Hvid guld',
+  'sølv': 'Topkant:sølv',
+  
+};
 
+        if (!selectedTopkantColor) return;
+
+        // lowercase safety
+        const message = colorMap[selectedTopkantColor.toLowerCase()];
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
+    }, [selectedTopkantColor]);
+
+    
+    
+    
+    
+    
+    
+    
     useEffect(() => {
         onOptionChange('Kantbånd', selectedKantbandColor);
     }, [selectedKantbandColor]);
+    useEffect(() => {
+        const colorMap = {
+  'hhx': 'Kantband:HHX',
+  'htx': 'Kantband:HTX',
+  'stx': 'Kantband:STX',
+  'hf': 'Kantband:HF',
+  'eux': 'Kantband:EUX',
+  'eud': 'Kantband:EUD',
+  'purple': 'Kantband:Purple',
+  'none': 'Kantband:NONE',
+  'hvid': 'Kantband:Hvid',
+  'sort': 'Kantband:Sort'
+};
 
+        if (!selectedKantbandColor) return;
+
+        // lowercase safety
+        const message = colorMap[selectedKantbandColor.toLowerCase()];
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
+    }, [selectedKantbandColor]);
+
+    
+    
+    
+    
+    
+    
+    
+    
     useEffect(() => {
         onOptionChange('Stjerner', selectedStarsStyle);
+    }, [selectedStarsStyle]);
+    useEffect(() => {
+        const colorMap = {
+  'none': 'Star:0',
+  '1': 'Star:1',
+  '2': 'Star:2',
+  '3': 'Star:3',
+  '4': 'Star:4',
+  '5': 'Star:5',
+  '6': 'Star:6'
+};
+
+        if (!selectedStarsStyle) return;
+
+        // lowercase safety
+        const message = colorMap[selectedStarsStyle.toLowerCase()];
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
     }, [selectedStarsStyle]);
     
 
 
+   
+   
+   
+   
+   
+   
+   
+   
     useEffect(() => {
   if (selectedFlagbånd === 'Yes') {
     // If user already has a choice, keep it
     if (selectedFlagbåndOption && selectedFlagbåndOption !== 'Nej') {
       onOptionChange('Flagbånd', selectedFlagbåndOption);
+      ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", `Flagband:${selectedFlagbåndOption}`);
+                    iframe.contentWindow.postMessage(`Flagband:${selectedFlagbåndOption}`, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
     } 
     // If no prior selection, default to International
     else {
@@ -190,6 +348,16 @@ const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem })
     }
   } else if (selectedFlagbånd === 'No') {
     onOptionChange('Flagbånd', 'Nej');
+    ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", "Flagband:none");
+                    iframe.contentWindow.postMessage('Flagband:none', "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+
   }
 }, [selectedFlagbånd]);
 
@@ -199,6 +367,36 @@ useEffect(() => {
         
             
             onOptionChange('Flagbånd', selectedFlagbåndOption);
+        
+    }, [selectedFlagbåndOption]);
+useEffect(() => {
+        
+          const colorMap = {
+  'international': 'Flagband:International',
+  'frankrig-spanien-tyskland-uk-danmark': 'Flagband:Frankrig-Spanien-Tyskland-UK-Danmark',
+  'usa-kina-danmark': 'Flagband:Usa-Kina-Danmark'
+}
+
+        if (!selectedFlagbåndOption) return;
+
+        // lowercase safety
+        const message = colorMap[selectedFlagbåndOption.toLowerCase()];
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);  
+            
         
     }, [selectedFlagbåndOption]);
 
