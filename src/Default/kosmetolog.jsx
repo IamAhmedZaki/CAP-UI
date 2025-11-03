@@ -9,7 +9,7 @@ const Kosmetolog = {
     "Broderi farve": "Guld",
     "Broderi foran": "",
     Hagerem: "Mat",
-    "Hagerem Materiale": "Mat hagerem",
+   
     Huebånd: "Kosmetolog",
     "Knap farve": "Guld",
     Materiale: "BOMULD",

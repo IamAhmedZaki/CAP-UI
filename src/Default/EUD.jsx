@@ -9,7 +9,7 @@ const EUD = {
     "Broderi farve": "EUD",
     "Broderi foran": "",
     Hagerem: "Mat",
-    "Hagerem Materiale": "Mat hagerem",
+   
     Huebånd: "EUD",
     "Knap farve": "Guld",
     Materiale: "BOMULD",

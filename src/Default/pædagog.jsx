@@ -9,7 +9,7 @@ const Pædagog = {
     "Broderi farve": "Guld",
     "Broderi foran": "",
     Hagerem: "Mat",
-    "Hagerem Materiale": "Mat hagerem",
+   
     Huebånd: "Pædagog",
     "Knap farve": "Guld",
     Materiale: "BOMULD",

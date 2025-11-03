@@ -9,7 +9,7 @@ const EUX = {
     "Broderi farve": "EUX",
     "Broderi foran": "",
     Hagerem: "Mat",
-    "Hagerem Materiale": "Mat hagerem",
+   
     Huebånd: "EUX",
     "Knap farve": "Guld",
     Materiale: "BOMULD",

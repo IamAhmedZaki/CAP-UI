@@ -9,7 +9,7 @@ const STX = {
     "Broderi farve": "STX",
     "Broderi foran": "",
     Hagerem: "Mat",
-    "Hagerem Materiale": "Mat hagerem",
+   
     Huebånd: "STX",
     "Knap farve": "Guld",
     Materiale: "BOMULD",

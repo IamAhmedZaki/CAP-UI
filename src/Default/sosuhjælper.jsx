@@ -9,7 +9,7 @@ const Sosuhjælper = {
     "Broderi farve": "Guld",
     "Broderi foran": "",
     Hagerem: "Mat",
-    "Hagerem Materiale": "Mat hagerem",
+   
     Huebånd: "Sosuhjælper",
     "Knap farve": "Guld",
     Materiale: "BOMULD",

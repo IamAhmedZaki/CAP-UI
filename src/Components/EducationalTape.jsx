@@ -69,9 +69,9 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke,
     const [selectedChinStrapColor, setSelectedChinStrapColor] = useState(
         selectedOptions.Hagerem || getDefaultChinStrapColor()
     );
-    const [selectedButtonMaterialColor, setSelectedButtonMaterialColor] = useState(
-        selectedOptions['Hagerem Materiale'] || getDefaultButtonMaterialColor()
-    );
+    // const [selectedButtonMaterialColor, setSelectedButtonMaterialColor] = useState(
+    //     selectedOptions['Hagerem Materiale'] || getDefaultButtonMaterialColor()
+    // );
     const [selectedEmbroideryColor, setSelectedEmbroideryColor] = useState(
         selectedOptions['Broderi farve'] || getDefaultEmbroideryColor()
     );
@@ -240,9 +240,9 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke,
 
 
 
-    useEffect(() => {
-        onOptionChange('Hagerem Materiale', selectedButtonMaterialColor)
-    }, [selectedButtonMaterialColor])
+    // useEffect(() => {
+    //     onOptionChange('Hagerem Materiale', selectedButtonMaterialColor)
+    // }, [selectedButtonMaterialColor])
     
     
     
@@ -583,14 +583,14 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke,
                 return [];
         }
     }
-    useEffect(() => {
-        let materialType = getMaterialOptions2()
-        if (materialType.length > 0) {
-            console.log(materialType);
+    // useEffect(() => {
+    //     let materialType = getMaterialOptions2()
+    //     if (materialType.length > 0) {
+    //         console.log(materialType);
 
-            setSelectedButtonMaterialColor(materialType[0])
-        }
-    }, [selectedChinStrapColor])
+    //         setSelectedButtonMaterialColor(materialType[0])
+    //     }
+    // }, [selectedChinStrapColor])
 
     // Reusable color selector component
     const ColorSelector = ({

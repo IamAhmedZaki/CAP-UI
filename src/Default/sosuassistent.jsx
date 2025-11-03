@@ -9,7 +9,7 @@ const Sosuassistent = {
     "Broderi farve": "Guld",
     "Broderi foran": "",
     Hagerem: "Mat",
-    "Hagerem Materiale": "Mat hagerem",
+   
     Huebånd: "Sosuassistent",
     "Knap farve": "Guld",
     Materiale: "BOMULD",

@@ -9,7 +9,7 @@ const ernæringsassisten = {
     "Broderi farve": "Guld",
     "Broderi foran": "",
     Hagerem: "Mat",
-    "Hagerem Materiale": "Mat hagerem",
+   
     Huebånd: "Ernæringsassisten",
     "Knap farve": "Guld",
     Materiale: "BOMULD",

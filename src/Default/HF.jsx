@@ -9,7 +9,7 @@ const HF = {
     "Broderi farve": "HF",
     "Broderi foran": "",
     Hagerem: "Mat",
-    "Hagerem Materiale": "Mat hagerem",
+   
     Huebånd: "HF",
     "Knap farve": "Guld",
     Materiale: "BOMULD",
