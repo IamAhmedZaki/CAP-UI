@@ -138,19 +138,127 @@ const Foer = ({ selectedOptions = {}, onOptionChange, currentEmblem, program }) 
     }, [selectedKokardeMaterial]);
     
     useEffect(() => {
-        onOptionChange('Svederem', selectedKokardeMaterial);
+       const colorMap = {
+            
+        };
+
+        if (!selectedKokardeMaterial) return;
+
+        // lowercase safety
+        const message = `Foer Svederem:${selectedKokardeMaterial.toLowerCase()}`
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
     }, [selectedKokardeMaterial]);
 
+    
+    
+    
+    
+    
+    
+    
     useEffect(() => {
         onOptionChange('Farve', selectedKokardeColor);
+    }, [selectedKokardeColor]);
+    useEffect(() => {
+        const colorMap = {
+            
+        };
+
+        if (!selectedKokardeColor) return;
+
+        // lowercase safety
+        const message = `Foer Farve:${selectedKokardeColor.toLowerCase()}`
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
+        
     }, [selectedKokardeColor]);
 
     useEffect(() => {
         onOptionChange('Sløjfe', selectedBowColor);
     }, [selectedBowColor]);
+    
+    
+    useEffect(() => {
+         const colorMap = {
+            
+        };
+
+        if (!selectedBowColor) return;
+
+        // lowercase safety
+        const message = `Foer Slojfe:${selectedBowColor.toLowerCase()}`
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
+    }, [selectedBowColor]);
 
     useEffect(() => {
         onOptionChange('Foer', selectedFoerMaterial);
+    }, [selectedFoerMaterial]);
+    
+    useEffect(() => {
+         const colorMap = {
+            
+        };
+
+        if (!selectedFoerMaterial) return;
+
+        // lowercase safety
+        const message = `Foer Foring:${selectedFoerMaterial.toLowerCase()}`
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
     }, [selectedFoerMaterial]);
     
    // Handle Satin Type

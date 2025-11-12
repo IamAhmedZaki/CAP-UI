@@ -1532,18 +1532,17 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
       }
 
       // Handle other messages if needed
-      if (typeof event.data === 'object') {
-        console.log("Received object from iframe:", event.data);
-      } else if (typeof event.data === 'string' && event.data.startsWith('{')) {
+       if (typeof event.data === 'string' && event.data.startsWith('{')) {
         try {
           const parsedData = JSON.parse(event.data);
           console.log("Received JSON from iframe:", parsedData);
         } catch (e) {
           console.log("Received string from iframe:", event.data);
         }
-      } else {
-        console.log("Received from iframe:", event.data);
-      }
+      } 
+      // else {
+      //   console.log("Received from iframe:", event.data);
+      // }
     };
 
     window.addEventListener('message', handleMessage);

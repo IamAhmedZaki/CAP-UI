@@ -172,12 +172,34 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke,
             'glimmer': 'UDDANNELSESBÅNDMateriale:glimmer',
             'shimmer': 'UDDANNELSESBÅNDMateriale:shimmer'
         };
+        let message=null
+        
 
         if (!selectedHatbandColor) return;
+const programMap = {
+    hhx: 'hhx',
+    htx: 'htx',
+    stx: 'stx',
+    hf: 'hf',
+    eux: 'eux',
+    eud: 'eud',
+    sosuassistent: 'sosuassistent',
+    sosuhjælper: 'sosuhjælper',
+    frisør: 'frisør',
+    kosmetolog: 'kosmetolog',
+    pædagog: 'pædagog',
+    pau: 'pau',
+    ernæringsassisten: 'ernæringsassisten'
+};
 
-        // lowercase safety
-        const message = colorMap[selectedMaterialType.toLowerCase()];
-        if (!message) return;
+const key = program.toLowerCase();
+
+if (selectedHatbandColor.toLowerCase() === key) {
+    message = `UDDANNELSESBÅNDMateriale:${programMap[key] || 'unknown'}:${selectedMaterialType.toLowerCase()}`;
+} else {
+    message = `UDDANNELSESBÅNDMateriale:black:${selectedMaterialType.toLowerCase()}`;
+}
+            if (!message) return;
 
         const sendMessageToIframes = (msg) => {
             ['preview-iframe', 'preview-iframe2'].forEach((id) => {

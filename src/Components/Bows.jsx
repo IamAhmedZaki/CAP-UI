@@ -630,7 +630,7 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
 
             Sølv: [
                 { name: 'Danmark', icon: Denmark },
-                { name: 'Sverige', icon: Sweden },
+                { name: 'Sweden', icon: Sweden },
                 { name: 'Palæstina', icon: Palestine },
                 { name: 'Tyrkiet', icon: Turkey },
                 { name: 'Pakistan', icon: Pakistan },
@@ -894,16 +894,17 @@ useEffect(() => {
     
     
     useEffect(() => {
+       let message=null
        
-        
-        const message=selectedType;
+
+        message=selectedType;
 
         const sendMessageToIframes = (msg) => {
     ['preview-iframe', 'preview-iframe2'].forEach((id) => {
       const iframe = document.getElementById(id);
       if (iframe?.contentWindow) {
-        console.log("Sending message to iframe:", msg);
-        iframe.contentWindow.postMessage(msg, "*");
+        console.log("Sending message to iframe:", msg+" "+selectedEmblem.value);
+        iframe.contentWindow.postMessage(msg+" "+selectedEmblem.value , "*");
       } else {
         console.log("Iframe not ready or program not available");
       }
@@ -943,23 +944,52 @@ useEffect(() => {
         setSelectedColor(color);
     };
 
-    const handlePrestigeChange = (type) => {
+     const getBaseName = (name) => {
+        return name.replace(/\s*(Guld|Sølv|Solv)\s*$/i, '').trim();
+    };
+
+    // Helper function to apply emblem suffix to base name
+    const applyEmblemSuffix = (baseName, emblem) => {
+        const suffix = emblem.name === 'Guld' ? 'Guld' : 'Sølv';
+        return `${baseName} ${suffix}`;
+    };
+     const handlePrestigeChange = (type) => {
+        const currentBaseName = getBaseName(selectedType);
         setSelectedPrestige(type);
         const newOptions = allTypeOptions[type]?.[selectedEmblem.name] || [];
+        
         if (newOptions.length > 0) {
-            setSelectedType(newOptions[0].name);
+            // Try to find the same base name in new options, otherwise use first option
+            const matchingOption = newOptions.find(option => 
+                getBaseName(option.name) === currentBaseName
+            );
+            setSelectedType(matchingOption ? matchingOption.name : newOptions[0].name);
         }
     };
 
     const handleEmblemChange = (emblem) => {
+        const currentBaseName = getBaseName(selectedType);
         setSelectedEmblem(emblem);
-        changeCurrentEmblem(emblem)
+        changeCurrentEmblem(emblem);
+        
         const newOptions = allTypeOptions[selectedPrestige]?.[emblem.name] || [];
         if (newOptions.length > 0) {
-            setSelectedType(newOptions[0].name);
+            // Try to find the same base name in new options
+            const matchingOption = newOptions.find(option => 
+                getBaseName(option.name) === currentBaseName
+            );
+            
+            if (matchingOption) {
+                setSelectedType(matchingOption.name);
+            } else {
+                // If exact match not found, use first option
+                setSelectedType(newOptions[0].name);
+            }
         }
     };
 
+    // Helper function to extract base name (remove "Guld" and "Sølv" variants)
+   
     const handleTypeChange = (typeName) => {
         setSelectedType(typeName);
     };
