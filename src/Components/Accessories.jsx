@@ -77,6 +77,42 @@ useEffect(() => {
 
 useEffect(() => {
   onOptionChange('Huekuglepen', ballpointPenSelection);
+  if (ballpointPenSelection=="Yes") {
+    const message = "Accessories Huekuglepen:yes";
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
+  }else {
+
+    const message = "Accessories Huekuglepen:no";
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+
+        sendMessageToIframes(message);
+  }
 }, [ballpointPenSelection]);
 
 useEffect(() => {

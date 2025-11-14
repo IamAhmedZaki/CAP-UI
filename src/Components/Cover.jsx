@@ -271,6 +271,7 @@ const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem })
         };
 
         sendMessageToIframes(message);
+        
     }, [selectedKantbandColor]);
 
     
@@ -314,7 +315,24 @@ const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem })
         };
 
         sendMessageToIframes(message);
-    }, [selectedStarsStyle]);
+
+        if (selectedKantbandColor=="NONE") {
+            
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", 'Star:0');
+                    iframe.contentWindow.postMessage('Star:0', "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        
+        }
+
+
+        
+    }, [selectedStarsStyle,selectedKantbandColor]);
     
 
 
@@ -596,15 +614,17 @@ useEffect(() => {
 
             {!shouldHideSelectors && (
                 <>
-                    
-
+                    {selectedKantbandColor!='NONE'?
                     <Selector
                         label="Stjerner"
                         currentSelection={selectedStarsStyle}
                         onSelectionChange={setSelectedStarsStyle}
                         options={starsOptions}
                         type="image"
-                    />
+                    />:null
+                }
+
+                    
                 </>
             )}
         </>
