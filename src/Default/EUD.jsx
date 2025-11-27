@@ -8,7 +8,7 @@ const EUD = {
   UDDANNELSESBÅND: {
     "Broderi farve": "EUD",
     "Broderi foran": "",
-    Hagerem: "Mat",
+    Hagerem: "Guld hagerem med guld knuder",
    
     Huebånd: "EUD",
     "Knap farve": "Guld",

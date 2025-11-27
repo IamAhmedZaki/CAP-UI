@@ -8,7 +8,7 @@ const Frisør = {
   UDDANNELSESBÅND: {
     "Broderi farve": "Guld",
     "Broderi foran": "",
-    Hagerem: "Mat",
+    Hagerem: "Guld hagerem med guld knuder",
    
     Huebånd: "Frisør",
     "Knap farve": "Guld",

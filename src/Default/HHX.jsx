@@ -8,7 +8,7 @@ const HHX = {
       UDDANNELSESBÅND: {
         "Broderi farve": "HHX",
         "Broderi foran": "",
-        Hagerem: "Mat",
+        Hagerem: "Guld hagerem med guld knuder",
        
         Huebånd: "HHX",
         "Knap farve": "Guld",

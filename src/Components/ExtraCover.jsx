@@ -30,6 +30,22 @@ const ExtraCover = ({ selectedOptions = {}, onOptionChange, currentEmblem, progr
     useEffect(() => {
         onOptionChange('Tilvælg', selectedExtraCoverOption);
         
+        const message = `Tilvælg:${selectedExtraCoverOption.toLowerCase()}`
+        if (!message) return;
+
+        const sendMessageToIframes = (msg) => {
+            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                    console.log("Sending message to iframe:", msg);
+                    iframe.contentWindow.postMessage(msg, "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+        };
+        sendMessageToIframes(message);
+        
         // If "No" is selected, clear all other EKSTRABETRÆK options
         if (selectedExtraCoverOption === 'No') {
             // Clear all EKSTRABETRÆK options except 'Tilvælg'

@@ -1454,8 +1454,8 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
     // Package base price
     let iniialPrice = 0;
     if (packageName === "standard") iniialPrice = 449;
-    else if (packageName === "luksus") iniialPrice = 995;
-    else if (packageName === "premium") iniialPrice = 1850;
+    else if (packageName === "luksus") iniialPrice = 599;
+    else if (packageName === "premium") iniialPrice = 995;
 
     return total + iniialPrice + 59;
   };
@@ -1518,40 +1518,110 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
   };
 
   // Listen for messages from the iframe
-  useEffect(() => {
-    const handleMessage = (event) => {
-      // For security, you might want to check event.origin
-      if (event.data === "app:ready") {
-        console.log("Received app:ready message from iframe");
-        setIsAppReady(true);
+useEffect(() => {
+  const handleMessage = (event) => {
+    if (event.data === "app:ready") {
+      console.log("Iframe ready → Sab components ke initial messages bhej rahe hain");
 
-        // Send program if we have one
-        if (program) {
-          sendProgramToIframe();
-        }
+      setIsAppReady(true);
+
+      // Program bhejo
+      if (program) {
+        sendProgramToIframe();
       }
 
-      // Handle other messages if needed
-       if (typeof event.data === 'string' && event.data.startsWith('{')) {
-        try {
-          const parsedData = JSON.parse(event.data);
-          console.log("Received JSON from iframe:", parsedData);
-        } catch (e) {
-          console.log("Received string from iframe:", event.data);
-        }
-      } 
-      // else {
-      //   console.log("Received from iframe:", event.data);
-      // }
-    };
+      const iframes = ['preview-iframe', 'preview-iframe2']
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
 
-    window.addEventListener('message', handleMessage);
+      if (iframes.length === 0) return;
 
-    // Clean up the event listener
-    return () => {
-      window.removeEventListener('message', handleMessage);
-    };
-  }, [program]);
+      const send = (msg) => {
+        iframes.forEach(iframe => {
+          if (iframe?.contentWindow) iframe.contentWindow.postMessage(msg, "*");
+        });
+      };
+
+      // ===== BETRÆK =====
+      send(`CoverColor:${selectedOptions.BETRÆK?.Farve || ''}`);
+      send(`Topkant:${selectedOptions.BETRÆK?.Topkant || ''}`);
+      send(`Kantband:${selectedOptions.BETRÆK?.Kantbånd || ''}`);
+      send(`Star:${selectedOptions.BETRÆK?.Stjerner || ''}`);
+      send(`Flagband:${selectedOptions.BETRÆK?.Flagbånd || ''}`);
+
+      // ===== EKSTRABETRÆK =====
+      send(`Tilvælg:${(selectedOptions.EKSTRABETRÆK?.Tilvælg || 'No').toLowerCase()}`);
+
+      // ===== UDDANNELSESBÅND (EducationalTape) =====
+      const hb = selectedOptions.UDDANNELSESBÅND?.Huebånd?.toLowerCase() || program?.toLowerCase();
+      const huebandMap = {
+        hhx: 'Hueband:HHX', htx: 'Hueband:HTX', stx: 'Hueband:STX', hf: 'Hueband:HF',
+        eux: 'Hueband:EUX', eud: 'Hueband:EUD', sosuassistent: 'Hueband:Sosuassistent',
+        sosuhjælper: 'Hueband:Sosuhjælper', frisør: 'Hueband:Frisør', kosmetolog: 'Hueband:Kosmetolog',
+        pædagog: 'Hueband:Pædagog', pau: 'Hueband:PAU', ernæringsassisten: 'Hueband:Ernæringsassisten',
+        sort: 'Hueband:Sort'
+      };
+      send(huebandMap[hb] || 'Hueband:Sort');
+
+      const mat = (selectedOptions.UDDANNELSESBÅND?.Materiale || 'bomuld').toLowerCase();
+      const progKey = program?.toLowerCase();
+      const isProgBand = ['hhx','htx','stx','hf','eux','eud'].includes(progKey);
+      send(isProgBand ? `UDDANNELSESBÅNDMateriale:${progKey}:${mat}` : `UDDANNELSESBÅNDMateriale:black:${mat}`);
+
+      const hagerem = (selectedOptions.UDDANNELSESBÅND?.Hagerem || 'mat').toLowerCase();
+      const hageremMap = {
+        mat: 'hagerem:mat', blank: 'hagerem:blank', 'sort med sorteknuder': 'hagerem:sort med sorteknuder',
+        'guld hagerem med guld knuder': 'hagerem:guld hagerem med guld knuder',
+        'sort hagerem med guld knuder': 'hagerem:sort hagerem med guld knuder',
+        'sølv hagerem med sølvknuder': 'hagerem:sølv hagerem med sølvknuder',
+        'sølv hagerem med sort knuder': 'hagerem:sølv hagerem med sort knuder'
+      };
+      send(hageremMap[hagerem] || 'hagerem:mat');
+
+      const brod = (selectedOptions.UDDANNELSESBÅND?.['Broderi farve'] || 'guld').toLowerCase();
+      const broderiMap = { hhx: 'broderiForanfarve:HHX', htx: 'broderiForanfarve:HTX', stx: 'broderiForanfarve:STX',
+        hf: 'broderiForanfarve:HF', eux: 'broderiForanfarve:EUX', eud: 'broderiForanfarve:EUD',
+        guld: 'broderiForanfarve:Guld', sølv: 'broderiForanfarve:Sølv', hvid: 'broderiForanfarve:Hvid', sort: 'broderiForanfarve:Sort'
+      };
+      send(broderiMap[brod] || 'broderiForanfarve:Guld');
+
+      send(selectedOptions.UDDANNELSESBÅND?.['Knap farve'] === 'Sølv' ? 'KnapSølv' : 'KnapGuld');
+
+      // ===== FOER COMPONENT – YEHI SABSE ZAROORI HAI TUMHARE LIYE AB =====
+      const foer = selectedOptions.FOER || {};
+
+      // Svederem
+      const svederem = (foer.Svederem || 'Læder').toLowerCase();
+      send(`Foer Svederem:${svederem}`);
+
+      // Farve
+      const farve = (foer.Farve || 'Hvid').toLowerCase();
+      send(`Foer Farve:${farve}`);
+
+      // Sløjfe
+      const slojfe = (foer.Sløjfe || 'Hvid').toLowerCase();
+      send(`Foer Slojfe:${slojfe}`);
+
+      // Foer (material)
+      const foerMaterial = (foer.Foer || 'Polyester').toLowerCase();
+      send(`Foer Foring:${foerMaterial}`);
+
+      // Satin Type
+      const satinType = foer['Satin Type'] || '';
+      send(satinType ? `Foer SatinType:${satinType.toLowerCase()}` : `Foer SatinType:`);
+
+      // Silk Type
+      const silkType = foer['Silk Type'] || '';
+      send(silkType ? `Foer SilkType:${silkType.toLowerCase()}` : `Foer SilkType:`);
+
+      // ===== Default Page =====
+      send("Page : 1");
+    }
+  };
+
+  window.addEventListener('message', handleMessage);
+  return () => window.removeEventListener('message', handleMessage);
+}, [program, selectedOptions]); // ← selectedOptions dependency zaroori hai!
 
   // Add this useEffect to debug
   useEffect(() => {
@@ -1561,7 +1631,7 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
   }, [program, isIframeLoaded, isAppReady]);
   
   useEffect(() => {
-    console.log(selectedOptions);
+    // console.log(selectedOptions);
     
   }, [activeMenu]);
 
@@ -1581,10 +1651,46 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
                 <button
                   key={index}
                   onClick={() => {
+                    
+                    
+                    // console.log(selectedOptions.BETRÆK);
+                   
+               
+                    ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                  console.log("Sending message to iframe:", `Page : ${index+1}`);
+                  iframe.contentWindow.postMessage(`Page : ${index+1}`, "*");
+                  console.log("Sending message to iframe:", 'Tilvælg:no');
+                  iframe.contentWindow.postMessage('Tilvælg:no', "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
                   if (errors && Object.keys(errors).length > 0) {
                 return;
               }
                     setActiveMenu(item.name)
+
+
+                     if (item.name !== 'EKSTRABETRÆK') {
+                           ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                  
+                  iframe.contentWindow.postMessage(`CoverColor:${selectedOptions.BETRÆK.Farve}`, "*");
+                  iframe.contentWindow.postMessage(`Topkant:${selectedOptions.BETRÆK.Topkant}`, "*");
+                  iframe.contentWindow.postMessage(`Kantband:${selectedOptions.BETRÆK.Kantbånd}`, "*");
+                  iframe.contentWindow.postMessage(`Star:${selectedOptions.BETRÆK.Stjerner}`, "*");
+                  iframe.contentWindow.postMessage(`Flagband:${selectedOptions.BETRÆK.Flagbånd}`, "*");
+                 
+                  
+                  
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            }); 
+                    }
 
 
                   }}
@@ -1725,7 +1831,8 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
 
               {/* Iframe Preview */}
               <div className="flex-1 rounded-b-2xl overflow-hidden">
-                <iframe id="preview-iframe" src="https://playcanv.as/e/p/QIG7fh8C/" className="w-full h-full" frameBorder="0" title="3D Student Card Preview" onLoad={handleIframeLoad}
+                <iframe id="preview-iframe"  src="https://playcanv.as/e/p/QIG7fh8C/"  className="w-full h-full"  frameBorder="0"  title="3D Student Card Preview"  onLoad={handleIframeLoad}
+                  // <iframe id="preview-iframe"  src="https://playcanv.as/e/b/a3486a33"  className="w-full h-full"  frameBorder="0"  title="3D Student Card Preview"  onLoad={handleIframeLoad}
                  /> 
               </div>
             </div>
@@ -1800,6 +1907,7 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
   }}
 >
                   <iframe id="preview-iframe2"  src="https://playcanv.as/e/p/QIG7fh8C/"  className="w-full h-full"  frameBorder="0"  title="3D Student Card Preview"  onLoad={handleIframeLoad}
+                  // <iframe id="preview-iframe2"  src="https://playcanv.as/e/b/a3486a33 "  className="w-full h-full"  frameBorder="0"  title="3D Student Card Preview"  onLoad={handleIframeLoad}
                    /> 
                 </div>
               </div>
@@ -1923,7 +2031,20 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
                   {menuItems.map((item, index) => (
                     <button
                       key={index}
-                      onClick={() => setActiveMenu(item.name)}
+                      onClick={() =>{ 
+                             ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+                const iframe = document.getElementById(id);
+                if (iframe?.contentWindow) {
+                  console.log("Sending message to iframe:", `Page : ${index+1}`);
+                  iframe.contentWindow.postMessage(`Page : ${index+1}`, "*");
+                  console.log("Sending message to iframe:", 'Tilvælg:no');
+                  iframe.contentWindow.postMessage('Tilvælg:no', "*");
+                } else {
+                    console.log("Iframe not ready or program not available");
+                }
+            });
+                        
+                        setActiveMenu(item.name)}}
                       className={`flex-shrink-0 flex flex-col items-center px-3 rounded-xl transition-all duration-200 min-w-[80px] ${activeMenu === item.name
                           ? 'bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 shadow-sm'
                           : 'hover:bg-slate-50 hover:shadow-sm'

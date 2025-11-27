@@ -8,7 +8,7 @@ const HTX = {
   UDDANNELSESBÅND: {
     "Broderi farve": "HTX",
     "Broderi foran": "",
-    Hagerem: "Mat",
+    Hagerem: "Guld hagerem med guld knuder",
    
     Huebånd: "HTX",
     "Knap farve": "Guld",

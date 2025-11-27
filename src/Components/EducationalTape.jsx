@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import coverColorOptionsimg2 from '../assets/cover images/none.png';
 import matteleather from '../assets/button images/matteleather.png';
@@ -8,9 +8,10 @@ import silverblack from '../assets/button images/silverblack.png';
 import silver from '../assets/button images/silver.png';
 import gold from '../assets/button images/gold.png';
 
-const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke, currentEmblem, }) => {
+const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke, currentEmblem }) => {
     // State variables with descriptive names
     const currentYear = new Date().getFullYear();
+
     // Default value functions
     const getDefaultHatbandColor = () => {
         switch (program?.toLowerCase()) {
@@ -85,34 +86,77 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke,
         selectedOptions.år || currentYear.toString()
     );
 
-    // Function to handle embroidery text change - ensures we always send a value
-    const handleEmbroideryTextChange = (text) => {
-        setEmbroideryText(text);
-        // Always send the text value, even if empty - the email formatter will handle "Ingen"
-        onOptionChange('Broderi foran', text);
-         const message = `Broderi foran: ${embroideryText}`;
-        if (!message) return;
+    // Hidden canvases for generating Base-64 image of embroidery text
+    const canvasRef = useRef(document.createElement('canvas'));
+    const yearCanvasRef = useRef(document.createElement('canvas'));
 
-        const sendMessageToIframes = (msg) => {
-            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
-                const iframe = document.getElementById(id);
-                if (iframe?.contentWindow) {
-                    console.log("Sending message to iframe:", msg);
-                    iframe.contentWindow.postMessage(msg, "*");
-                } else {
-                    console.log("Iframe not ready or program not available");
-                }
-            });
+    // --- COLOR MAPPING: Broderi farve → Hex Code ---
+    const getTextColorHex = () => {
+        const map = {
+            'HHX': '#4169e1',
+            'HTX': '#000080',
+            'STX': '#7F1D1D',
+            'HF': '#ADD8E6',
+            'EUX': '#5d5d66',
+            'EUD': '#522854',
+            'Guld': '#ba9200',
+            'Sølv': '#757575',
+            'Hvid': '#ffffff',
+            'Sort': '#000000'
         };
-
-        sendMessageToIframes(message);
-
+        return map[selectedEmbroideryColor] || '#000000';
     };
+
+const handleEmbroideryTextChange = async (text) => {
+    setEmbroideryText(text);
+    onOptionChange("Broderi foran", text);
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+
+    const fontSize = 150; // always same
+    const fontFamily = "lucidaCalligraphyItalic"; // your font
+
+    // --- STEP 1: Set font temporarily for measurement ---
+    ctx.font = `italic ${fontSize}px ${fontFamily}`;
+
+    // --- STEP 2: Dynamic width + fixed height ---
+    canvas.width = 2800; // 200px padding
+    canvas.height = 512;
+
+    // --- STEP 3: Font resets after resizing → set again ---
+    ctx.font = `italic ${fontSize}px ${fontFamily}`;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#fff";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+
+    // --- STEP 4: Draw clean centered text ---
+    ctx.fillText(text || " ", canvas.width / 2, canvas.height / 2);
+
+    // --- STEP 5: Export ---
+    const base64Image = canvas.toDataURL("image/png", 10);
+
+    const message = `BroderiImage:${base64Image}`;
+    ["preview-iframe", "preview-iframe2"].forEach((id) => {
+        const iframe = document.getElementById(id);
+        if (iframe?.contentWindow) {
+            iframe.contentWindow.postMessage(message, "*");
+        }
+    });
+};
+
+
+    useEffect(() => {
+        handleEmbroideryTextChange(embroideryText);
+    }, [selectedEmbroideryColor]);
 
     useEffect(() => {
         onOptionChange('Huebånd', selectedHatbandColor)
     }, [selectedHatbandColor])
-
 
     useEffect(() => {
         const colorMap = {
@@ -120,10 +164,8 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke,
             'htx': 'Hueband:HTX',
             'hhx': 'Hueband:HHX',
             'hf': 'Hueband:HF',
-
             'eux': 'Hueband:EUX',
             'eud': 'Hueband:EUD',
-
             'sosuassistent': 'Hueband:Sosuassistent',
             'sosuhjælper': 'Hueband:Sosuhjælper',
             'frisør': 'Hueband:Frisør',
@@ -155,15 +197,10 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke,
         sendMessageToIframes(message);
     }, [selectedHatbandColor]);
 
-
-
-
-
-
-
     useEffect(() => {
         onOptionChange('Materiale', selectedMaterialType)
     }, [selectedMaterialType])
+
     useEffect(() => {
         const colorMap = {
             'bomuld': 'UDDANNELSESBÅNDMateriale:bomuld',
@@ -172,34 +209,33 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke,
             'glimmer': 'UDDANNELSESBÅNDMateriale:glimmer',
             'shimmer': 'UDDANNELSESBÅNDMateriale:shimmer'
         };
-        let message=null
-        
+        let message = null
 
         if (!selectedHatbandColor) return;
-const programMap = {
-    hhx: 'hhx',
-    htx: 'htx',
-    stx: 'stx',
-    hf: 'hf',
-    eux: 'eux',
-    eud: 'eud',
-    sosuassistent: 'sosuassistent',
-    sosuhjælper: 'sosuhjælper',
-    frisør: 'frisør',
-    kosmetolog: 'kosmetolog',
-    pædagog: 'pædagog',
-    pau: 'pau',
-    ernæringsassisten: 'ernæringsassisten'
-};
+        const programMap = {
+            hhx: 'hhx',
+            htx: 'htx',
+            stx: 'stx',
+            hf: 'hf',
+            eux: 'eux',
+            eud: 'eud',
+            sosuassistent: 'sosuassistent',
+            sosuhjælper: 'sosuhjælper',
+            frisør: 'frisør',
+            kosmetolog: 'kosmetolog',
+            pædagog: 'pædagog',
+            pau: 'pau',
+            ernæringsassisten: 'ernæringsassisten'
+        };
 
-const key = program.toLowerCase();
+        const key = program.toLowerCase();
 
-if (selectedHatbandColor.toLowerCase() === key) {
-    message = `UDDANNELSESBÅNDMateriale:${programMap[key] || 'unknown'}:${selectedMaterialType.toLowerCase()}`;
-} else {
-    message = `UDDANNELSESBÅNDMateriale:black:${selectedMaterialType.toLowerCase()}`;
-}
-            if (!message) return;
+        if (selectedHatbandColor.toLowerCase() === key) {
+            message = `UDDANNELSESBÅNDMateriale:${programMap[key] || 'unknown'}:${selectedMaterialType.toLowerCase()}`;
+        } else {
+            message = `UDDANNELSESBÅNDMateriale:black:${selectedMaterialType.toLowerCase()}`;
+        }
+        if (!message) return;
 
         const sendMessageToIframes = (msg) => {
             ['preview-iframe', 'preview-iframe2'].forEach((id) => {
@@ -216,23 +252,16 @@ if (selectedHatbandColor.toLowerCase() === key) {
         sendMessageToIframes(message);
     }, [selectedMaterialType])
 
-
-
-
-
-
-
     useEffect(() => {
         onOptionChange('Hagerem', selectedChinStrapColor)
     }, [selectedChinStrapColor])
+
     useEffect(() => {
         const colorMap = {
             'sølv hagerem med sølvknuder': 'hagerem:sølv hagerem med sølvknuder',
             'sølv hagerem med sort knuder': 'hagerem:sølv hagerem med sort knuder',
-
             'guld hagerem med guld knuder': 'hagerem:guld hagerem med guld knuder',
             'sort hagerem med guld knuder': 'hagerem:sort hagerem med guld knuder',
-
             'mat': 'hagerem:mat',
             'blank': 'hagerem:blank',
             'sort med sorteknuder': 'hagerem:sort med sorteknuder'
@@ -259,30 +288,26 @@ if (selectedHatbandColor.toLowerCase() === key) {
         sendMessageToIframes(message);
     }, [selectedChinStrapColor])
 
-
-
-
     // useEffect(() => {
     //     onOptionChange('Hagerem Materiale', selectedButtonMaterialColor)
     // }, [selectedButtonMaterialColor])
-    
-    
-    
+
     useEffect(() => {
         onOptionChange('Broderi farve', selectedEmbroideryColor)
     }, [selectedEmbroideryColor])
+
     useEffect(() => {
         const colorMap = {
-           'hhx': 'broderiForanfarve:HHX',
-  'htx': 'broderiForanfarve:HTX',
-  'stx': 'broderiForanfarve:STX',
-  'hf': 'broderiForanfarve:HF',
-  'eux': 'broderiForanfarve:EUX',
-  'eud': 'broderiForanfarve:EUD',
-  'hvid': 'broderiForanfarve:Hvid',
-  'sort': 'broderiForanfarve:Sort',
-  'guld': 'broderiForanfarve:Guld',
-  'sølv': 'broderiForanfarve:Sølv'
+            'hhx': 'broderiForanfarve:HHX',
+            'htx': 'broderiForanfarve:HTX',
+            'stx': 'broderiForanfarve:STX',
+            'hf': 'broderiForanfarve:HF',
+            'eux': 'broderiForanfarve:EUX',
+            'eud': 'broderiForanfarve:EUD',
+            'hvid': 'broderiForanfarve:Hvid',
+            'sort': 'broderiForanfarve:Sort',
+            'guld': 'broderiForanfarve:Guld',
+            'sølv': 'broderiForanfarve:Sølv'
         };
 
         if (!selectedHatbandColor) return;
@@ -305,24 +330,15 @@ if (selectedHatbandColor.toLowerCase() === key) {
 
         sendMessageToIframes(message);
     }, [selectedEmbroideryColor])
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     useEffect(() => {
         onOptionChange('Knap farve', selectedButtonColor)
     }, [selectedButtonColor])
+
     useEffect(() => {
-         const colorMap = {
-           'sølv': 'KnapSølv',
-  'guld': 'KnapGuld',
-  
+        const colorMap = {
+            'sølv': 'KnapSølv',
+            'guld': 'KnapGuld',
         };
 
         if (!selectedButtonColor) return;
@@ -345,21 +361,63 @@ if (selectedHatbandColor.toLowerCase() === key) {
 
         sendMessageToIframes(message);
     }, [selectedButtonColor])
-    
-    
-    
-    
+
     useEffect(() => {
         // Use the new handler to ensure Broderi foran is always set
         handleEmbroideryTextChange(embroideryText);
     }, [embroideryText])
-    
-    
+
+    // NEW FUNCTION: Generate 512×512 Year Image
+const generateYearImage = (yearText) => {
+    if (!yearText || yearText === 'Ingen') {
+        const message = `YearImage:`;
+        ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+            const iframe = document.getElementById(id);
+            if (iframe?.contentWindow) {
+                iframe.contentWindow.postMessage(message, "*");
+            }
+        });
+        return;
+    }
+
+    const canvas = yearCanvasRef.current;
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = 512;
+    canvas.height = 512;
+
+    ctx.clearRect(0, 0, 512, 512);
+
+    const fontSize = 240;
+    const fontFamily = 'Arial';
+    ctx.font = `${fontSize}px ${fontFamily}`;
+    ctx.fillStyle = '#ffffff';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+
+    // Draw year in absolute center
+    ctx.fillText(yearText, 256, 256);
+
+    // Generate and send image
+    const base64Image = canvas.toDataURL('image/png', 1.0);
+    const message = `YearImage:${base64Image}`;
+
+    ['preview-iframe', 'preview-iframe2'].forEach((id) => {
+        const iframe = document.getElementById(id);
+        if (iframe?.contentWindow) {
+            iframe.contentWindow.postMessage(message, "*");
+        }
+    });
+};
+
     useEffect(() => {
-        onOptionChange('år', selectedYear)
+        onOptionChange('år', selectedYear);
+        generateYearImage(selectedYear);
     }, [selectedYear])
+
     useEffect(() => {
-       
         if (!selectedYear) return;
 
         // lowercase safety
@@ -381,8 +439,6 @@ if (selectedHatbandColor.toLowerCase() === key) {
         sendMessageToIframes(message);
     }, [selectedYear])
 
-    
-    
     // Initialize Broderi foran on component mount if not already set
     useEffect(() => {
         if (!selectedOptions['Broderi foran']) {
@@ -393,7 +449,6 @@ if (selectedHatbandColor.toLowerCase() === key) {
     const getCurrentEmblem = () => {
         switch (currentEmblem.name) {
             case 'Guld':
-
                 return [
                     { name: 'Guld hagerem med guld knuder', value: '#f0bd06ff', img: gold },
                     { name: 'Sort hagerem med guld knuder', value: '#695406ff', img: goldblack },];
@@ -440,37 +495,30 @@ if (selectedHatbandColor.toLowerCase() === key) {
             case 'sosuassistent':
                 return [
                     { name: 'Sosuassistent', value: '#522854' },
-
                 ];
             case 'sosuhjælper':
                 return [
                     { name: 'Sosuhjælper', value: '#8f478a' },
-
                 ];
             case 'frisør':
                 return [
                     { name: 'Frisør', value: '#FFB6C1' },
-
                 ];
             case 'kosmetolog':
                 return [
                     { name: 'Kosmetolog', value: '#FFC0CB' },
-
                 ];
             case 'pædagog':
                 return [
                     { name: 'Pædagog', value: '#341539' },
-
                 ];
             case 'pau':
                 return [
                     { name: 'PAU', value: '#FFA500' },
-
                 ];
             case 'ernæringsassisten':
                 return [
                     { name: 'Ernæringsassisten', value: '#FFFF00' },
-
                 ];
             default:
                 return [
@@ -479,7 +527,6 @@ if (selectedHatbandColor.toLowerCase() === key) {
                 ];
         }
     };
-
 
     const hatbandColorOptions =
         getHuebandColor()
@@ -519,7 +566,6 @@ if (selectedHatbandColor.toLowerCase() === key) {
         { name: 'Hvid', value: 'Hvid', color: '#E5E7EB' },
         { name: 'Sort', value: 'Sort', color: '#000000' },
     ].filter(Boolean); // removes null
-
 
     const buttonColorOptions = [
         // { name: 'BLANK', value: 'BLANK', img: coverColorOptionsimg2 },
@@ -576,29 +622,21 @@ if (selectedHatbandColor.toLowerCase() === key) {
         }
     }, [selectedHatbandColor])
 
-
     function getMaterialOptions2() {
         switch (selectedChinStrapColor) {
             case 'Mat':
-
                 return buttonMaterialMATTypes;
             case 'Blank':
-
                 return buttonMaterialBLANKTypes;
             case 'Sort/Sort':
-
                 return buttonMaterialSortSortTypes;
             case 'Sort/Guld':
-
                 return buttonMaterialSortGuldTypes;
             case 'Sølv':
-
                 return buttonMaterialSolvTypes;
             case 'Sølv/Sort':
-
                 return buttonMaterialSolveSortTypes;
             case 'Guld':
-
                 return buttonMaterialGuldTypes;
 
             default:

@@ -74,3 +74,9 @@
     </script>
     <?php
 }, 99); */
+
+
+@font-face {
+  font-family: "lucidaCalligraphyItalic";
+  src: url("./assets/fonts/lucidaCalligraphyItalic.ttf") format("truetype");
+}

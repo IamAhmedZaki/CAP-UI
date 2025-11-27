@@ -1,41 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import img1 from '../assets/shadeimages/glimmer.png';
 
 const Foer = ({ selectedOptions = {}, onOptionChange, currentEmblem, program }) => {
-    // Default value functions
-    const getDefaultKokardeMaterial = () => {
-        return 'Læder'; // Default material
-    };
-
-    const getDefaultKokardeColor = () => {
-        return 'Hvid'; // Default color
-    };
-
-    const getDefaultBowColor = () => {
-        return 'Hvid'; // Default bow color
-    };
-
-    const getDefaultFoerMaterial = () => {
-        return 'Polyester'; // Default foer material
-    };
+    // ====================== Default Values ======================
+    const getDefaultKokardeMaterial = () => 'Læder';
+    const getDefaultKokardeColor = () => 'Hvid';
+    const getDefaultBowColor = () => 'Hvid';
+    const getDefaultFoerMaterial = () => 'Polyester';
 
     const getDefaultSatinType = () => {
         switch (program?.toLowerCase()) {
             case 'hhx': return 'Royal blå';
             case 'htx': return 'Navy blå';
             case 'stx': return 'Bordeaux';
-            case 'hf': return 'Light blå';
+            case 'hf':  return 'Light blå';
             case 'eux': return 'Grå';
             case 'eud': return 'Purple';
-            default: return 'Bordeaux';
+            default:    return 'Bordeaux';
         }
     };
 
-    const getDefaultSilkeType = () => {
-        return 'Hvid'; // Default silk color
-    };
+    const getDefaultSilkeType = () => 'Hvid';
 
-    // State variables with proper default values
+    // ====================== State ======================
     const [selectedKokardeMaterial, setSelectedKokardeMaterial] = useState(
         selectedOptions.Svederem || getDefaultKokardeMaterial()
     );
@@ -48,365 +34,221 @@ const Foer = ({ selectedOptions = {}, onOptionChange, currentEmblem, program }) 
     const [selectedFoerMaterial, setSelectedFoerMaterial] = useState(
         selectedOptions.Foer || getDefaultFoerMaterial()
     );
-    const [selectedbowMaterialType, setBowMaterialTypes] = useState(selectedOptions['Satin Type'] ||''
-        
+    const [selectedbowMaterialType, setBowMaterialTypes] = useState(
+        selectedOptions['Satin Type'] || ''
     );
-    const [selectedsilkeTypes, setSilkeTypes] = useState(selectedOptions['Silk Type'] ||
-        ''
+    const [selectedsilkeTypes, setSilkeTypes] = useState(
+        selectedOptions['Silk Type'] || ''
     );
 
+    // ====================== Restricted Programs ======================
     const restrictedPrograms = [
-        'Sosuassistent',
-        'Sosuhjælper',
-        'Frisør',
-        'Kosmetolog',
-        'Pædagog',
-        'PAU',
-        'Ernæringsassisten'
+        'Sosuassistent', 'Sosuhjælper', 'Frisør', 'Kosmetolog',
+        'Pædagog', 'PAU', 'Ernæringsassisten'
     ];
-
     const isRestricted = restrictedPrograms.some(
         p => p.toLowerCase() === program?.toLowerCase()
     );
 
-    const kokardeMaterialTypes = isRestricted 
-        ? ['Læder'] 
+    const kokardeMaterialTypes = isRestricted
+        ? ['Læder']
         : ['Læder', 'Kunstlæder', 'Ruskin', 'Alcantra'];
 
+    // ====================== Emblem & Colors ======================
     const getCurrentEmblem = () => {
-        switch (currentEmblem.name) {
-            case 'Guld':
-                return { name: 'Guld', value: 'Guld', color:'#FFD700' };
-            default:
-                return { name: 'Sølv', value: 'Sølv', color:'#C0C0C0' };
-        }
-    }
+        return currentEmblem.name === 'Guld'
+            ? { name: 'Guld', value: 'Guld', color: '#FFD700' }
+            : { name: 'Sølv', value: 'Sølv', color: '#C0C0C0' };
+    };
 
     const getSatinColor = () => {
         switch (program?.toLowerCase()) {
-            case 'hhx':
-                return { name: 'Royal blå', value: 'Royal blå', color: '#4169e1' };
-            case 'htx':
-                return { name: 'Navy blå', value: 'Navy blå', color: '#000080' };
-            case 'stx':
-                return { name: 'Bordeaux', value: 'Bordeaux', color: '#800020' };
-            case 'hf':
-                return { name: 'Light blå', value: 'Light blå', color: '#ADD8E6' };
-            case 'eux':
-                return { name: 'Grå', value: 'Grå', color: ' #5d5d66' };
-            case 'eud':
-                return { name: 'Purple', value: 'Purple', color: '#522854' };
-            default:
-                return { name: 'Bordeaux', value: 'Bordeaux', color: '#800020' }
+            case 'hhx': return { name: 'Royal blå', value: 'Royal blå', color: '#4169e1' };
+            case 'htx': return { name: 'Navy blå',  value: 'Navy blå',  color: '#000080' };
+            case 'stx': return { name: 'Bordeaux',  value: 'Bordeaux',  color: '#800020' };
+            case 'hf':  return { name: 'Light blå', value: 'Light blå', color: '#ADD8E6' };
+            case 'eux': return { name: 'Grå',       value: 'Grå',       color: '#5d5d66' };
+            case 'eud': return { name: 'Purple',    value: 'Purple',    color: '#522854' };
+            default:    return { name: 'Bordeaux',  value: 'Bordeaux',  color: '#800020' };
         }
-    }
+    };
 
-    // Color options with descriptive names
     const bowColorOptions = [
-        { name: 'Hvid', value: 'Hvid', color: '#FFFFFF' },
-        { name: 'Sort', value: 'Sort', color: '#000000' },
+        { name: 'Hvid',  value: 'Hvid',  color: '#FFFFFF' },
+        { name: 'Sort',  value: 'Sort',  color: '#000000' },
         getCurrentEmblem()
     ];
 
     const bowMaterialTypes = [
-        { name: 'Hvid', value: 'Hvid', color: '#fafcfd' },
-        { name: 'Brun', value: 'Brun', color: '#a66f5a' },
+        { name: 'Hvid',       value: 'Hvid',       color: '#fafcfd' },
+        { name: 'Brun',       value: 'Brun',       color: '#a66f5a' },
         getSatinColor(),
-        { name: 'Champagne', value: 'Champagne', color:'#F7E7CE' },
+        { name: 'Champagne',  value: 'Champagne',  color: '#F7E7CE' },
     ];
-    
+
     const silkeTypes = [
         { name: 'Hvid', value: 'Hvid', color: '#ffffff' },
         { name: 'Sort', value: 'Sort', color: '#000000' },
         { name: 'Rosa', value: 'Rosa', color: '#FFC0CB' },
     ];
 
-    // Effect hooks to propagate changes to parent component
-    useEffect(() => {
-        // if(selectedFoerMaterial=='Viskose'|| selectedFoerMaterial=='Polyester'){
-        //     setBowMaterialTypes('')
-        //     setSilkeTypes('')
-        //      onOptionChange('SatinType', selectedbowMaterialType)
-        //     onOptionChange('SilkeType', selectedsilkeTypes)
-        // }
-        
-    }, [selectedFoerMaterial]);
-   
+    const foerMaterialTypes = ['Viskose', 'Polyester', 'Satin', 'Silk'];
 
+    // ====================== Helper: Always send message ======================
+    const sendMessage = (message) => {
+        ['preview-iframe', 'preview-iframe2'].forEach(id => {
+            const iframe = document.getElementById(id);
+            if (iframe?.contentWindow) {
+                iframe.contentWindow.postMessage(message, "*");
+            }
+        });
+    };
+
+    // ====================== postMessage Effects (सभी हमेशा भेजेंगे) ======================
+
+    // Svederem
     useEffect(() => {
         onOptionChange('Svederem', selectedKokardeMaterial);
-    }, [selectedKokardeMaterial]);
-    
-    useEffect(() => {
-       const colorMap = {
-            
-        };
-
-        if (!selectedKokardeMaterial) return;
-
-        // lowercase safety
-        const message = `Foer Svederem:${selectedKokardeMaterial.toLowerCase()}`
-        if (!message) return;
-
-        const sendMessageToIframes = (msg) => {
-            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
-                const iframe = document.getElementById(id);
-                if (iframe?.contentWindow) {
-                    console.log("Sending message to iframe:", msg);
-                    iframe.contentWindow.postMessage(msg, "*");
-                } else {
-                    console.log("Iframe not ready or program not available");
-                }
-            });
-        };
-
-        sendMessageToIframes(message);
+        sendMessage(`Foer Svederem:${selectedKokardeMaterial.toLowerCase()}`);
     }, [selectedKokardeMaterial]);
 
-    
-    
-    
-    
-    
-    
-    
+    // Farve
     useEffect(() => {
         onOptionChange('Farve', selectedKokardeColor);
-    }, [selectedKokardeColor]);
-    useEffect(() => {
-        const colorMap = {
-            
-        };
-
-        if (!selectedKokardeColor) return;
-
-        // lowercase safety
-        const message = `Foer Farve:${selectedKokardeColor.toLowerCase()}`
-        if (!message) return;
-
-        const sendMessageToIframes = (msg) => {
-            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
-                const iframe = document.getElementById(id);
-                if (iframe?.contentWindow) {
-                    console.log("Sending message to iframe:", msg);
-                    iframe.contentWindow.postMessage(msg, "*");
-                } else {
-                    console.log("Iframe not ready or program not available");
-                }
-            });
-        };
-
-        sendMessageToIframes(message);
-        
+        sendMessage(`Foer Farve:${selectedKokardeColor.toLowerCase()}`);
     }, [selectedKokardeColor]);
 
+    // Sløjfe
     useEffect(() => {
         onOptionChange('Sløjfe', selectedBowColor);
-    }, [selectedBowColor]);
-    
-    
-    useEffect(() => {
-         const colorMap = {
-            
-        };
-
-        if (!selectedBowColor) return;
-
-        // lowercase safety
-        const message = `Foer Slojfe:${selectedBowColor.toLowerCase()}`
-        if (!message) return;
-
-        const sendMessageToIframes = (msg) => {
-            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
-                const iframe = document.getElementById(id);
-                if (iframe?.contentWindow) {
-                    console.log("Sending message to iframe:", msg);
-                    iframe.contentWindow.postMessage(msg, "*");
-                } else {
-                    console.log("Iframe not ready or program not available");
-                }
-            });
-        };
-
-        sendMessageToIframes(message);
+        sendMessage(`Foer Slojfe:${selectedBowColor.toLowerCase()}`);
     }, [selectedBowColor]);
 
+    // Foring (Foer Material)
     useEffect(() => {
         onOptionChange('Foer', selectedFoerMaterial);
+        sendMessage(`Foer Foring:${selectedFoerMaterial.toLowerCase()}`);
     }, [selectedFoerMaterial]);
-    
+
+    // Satin Type
     useEffect(() => {
-         const colorMap = {
-            
-        };
+        onOptionChange('Satin Type', selectedbowMaterialType);
+        if (selectedbowMaterialType) {
+            setSilkeTypes('');
+            onOptionChange('Silk Type', '');
+            sendMessage(`Foer SatinType:${selectedbowMaterialType.toLowerCase()}`);
+        } else {
+            sendMessage(`Foer SatinType:`);
+        }
+    }, [selectedbowMaterialType]);
 
-        if (!selectedFoerMaterial) return;
+    // Silk Type
+    useEffect(() => {
+        onOptionChange('Silk Type', selectedsilkeTypes);
+        if (selectedsilkeTypes) {
+            setBowMaterialTypes('');
+            onOptionChange('Satin Type', '');
+            sendMessage(`Foer SilkType:${selectedsilkeTypes.toLowerCase()}`);
+        } else {
+            sendMessage(`Foer SilkType:`);
+        }
+    }, [selectedsilkeTypes]);
 
-        // lowercase safety
-        const message = `Foer Foring:${selectedFoerMaterial.toLowerCase()}`
-        if (!message) return;
-
-        const sendMessageToIframes = (msg) => {
-            ['preview-iframe', 'preview-iframe2'].forEach((id) => {
-                const iframe = document.getElementById(id);
-                if (iframe?.contentWindow) {
-                    console.log("Sending message to iframe:", msg);
-                    iframe.contentWindow.postMessage(msg, "*");
-                } else {
-                    console.log("Iframe not ready or program not available");
-                }
-            });
-        };
-
-        sendMessageToIframes(message);
+    // जब Foer Material बदलता है → Satin/Silk को हैंडल करें + मैसेज भेजें
+    useEffect(() => {
+        if (selectedFoerMaterial === 'Satin') {
+            if (!selectedbowMaterialType && bowMaterialTypes.length > 0) {
+                setBowMaterialTypes(bowMaterialTypes[0].value);
+            }
+            setSilkeTypes('');
+            onOptionChange('Silk Type', '');
+        } else if (selectedFoerMaterial === 'Silk') {
+            if (!selectedsilkeTypes && silkeTypes.length > 0) {
+                setSilkeTypes(silkeTypes[0].value);
+            }
+            setBowMaterialTypes('');
+            onOptionChange('Satin Type', '');
+        } else if (selectedFoerMaterial === 'Viskose' || selectedFoerMaterial === 'Polyester') {
+            setBowMaterialTypes('');
+            setSilkeTypes('');
+            onOptionChange('Satin Type', '');
+            onOptionChange('Silk Type', '');
+            sendMessage(`Foer SatinType:`);
+            sendMessage(`Foer SilkType:`);
+        }
     }, [selectedFoerMaterial]);
-    
-   // Handle Satin Type
-useEffect(() => {
-  if (selectedbowMaterialType) {
-    // Clear Silk type if Satin selected
-    setSilkeTypes('');
-    onOptionChange('Silk Type', '');
-    onOptionChange('Satin Type', selectedbowMaterialType);
-  }
-}, [selectedbowMaterialType]);
 
-// Handle Silk Type
-useEffect(() => {
-  if (selectedsilkeTypes) {
-    // Clear Satin type if Silk selected
-    setBowMaterialTypes('');
-    onOptionChange('Satin Type', '');
-    onOptionChange('Silk Type', selectedsilkeTypes);
-  }
-}, [selectedsilkeTypes]);
-
-// Handle Foer Material logic
-useEffect(() => {
-  if (selectedFoerMaterial === 'Satin') {
-    if (!selectedbowMaterialType && bowMaterialTypes.length > 0) {
-      setBowMaterialTypes(bowMaterialTypes[0].value);
-      onOptionChange('Silk Type', '');
-    }
-  } else if (selectedFoerMaterial === 'Silk') {
-    if (!selectedsilkeTypes && silkeTypes.length > 0) {
-      setSilkeTypes(silkeTypes[0].value);
-      onOptionChange('Satin Type', '');
-    }
-  } else if (selectedFoerMaterial === 'Viskose' || selectedFoerMaterial === 'Polyester') {
-    setBowMaterialTypes('');
-    setSilkeTypes('');
-    onOptionChange('Satin Type', '');
-    onOptionChange('Silk Type', '');
-  }
-}, [selectedFoerMaterial]);
-
+    // Kokarde Color options according to material
     const getKokardeColorOptions = (material) => {
         switch (material) {
-            case 'Læder':
-                return [
-                    { name: 'Hvid', value: 'Hvid', color: '#ffffff' },
-                    { name: 'Sort', value: 'Sort', color: '#000000' },
-                ];
-            case 'Kunstlæder':
-                return [
-                    { name: 'Vegansk', value: 'Vegansk', color: '#006644' },
-                ];
-            case 'Ruskin':
-                return [
-                    { name: 'Cognac', value: 'Cognac', color: '#a66f5a' },
-                ];
-            case 'Alcantra':
-                return [
-                    { name: 'Sort', value: 'Sort', color: '#000000' },
-                ];
-            default:
-                return [
-                    { name: 'Black', value: 'black', color: '#000000' },
-                ];
+            case 'Læder':      return [{ name: 'Hvid', value: 'Hvid', color: '#ffffff' }, { name: 'Sort', value: 'Sort', color: '#000000' }];
+            case 'Kunstlæder': return [{ name: 'Vegansk', value: 'Vegansk', color: '#006644' }];
+            case 'Ruskin':     return [{ name: 'Cognac', value: 'Cognac', color: '#a66f5a' }];
+            case 'Alcantra':   return [{ name: 'Sort', value: 'Sort', color: '#000000' }];
+            default:           return [{ name: 'Hvid', value: 'Hvid', color: '#ffffff' }];
         }
     };
 
     const kokardeColorOptions = getKokardeColorOptions(selectedKokardeMaterial);
 
+    // अगर material बदलने से color invalid हो जाए तो पहला valid color चुन लें
     useEffect(() => {
-        if (kokardeColorOptions.length > 0 && !kokardeColorOptions.some(opt => opt.value === selectedKokardeColor)) {
+        if (kokardeColorOptions.length > 0 && 
+            !kokardeColorOptions.some(opt => opt.value === selectedKokardeColor)) {
             setSelectedKokardeColor(kokardeColorOptions[0].value);
         }
-    }, [selectedKokardeMaterial, kokardeColorOptions, selectedKokardeColor]);
+    }, [selectedKokardeMaterial]);
 
-    const foerMaterialTypes = ['Viskose', 'Polyester', 'Satin', 'Silk'];
-
-    // Reusable color selector component
-    const ColorSelector = ({
-        label,
-        currentSelection,
-        onSelectionChange,
-        colorOptions
-    }) => (
+    // ====================== Reusable Components ======================
+    const ColorSelector = ({ label, currentSelection, onSelectionChange, colorOptions }) => (
         <div className="space-y-4 mt-6">
-            <div>
-                <label className="text-sm font-semibold text-slate-700">{label}</label>
-            </div>
+            <label className="text-sm font-semibold text-slate-700">{label}</label>
             <div className="flex space-x-3">
-                {colorOptions.map((colorOption) => (
+                {colorOptions.map(opt => (
                     <button
-                        key={colorOption.value}
-                        onClick={() => onSelectionChange(colorOption.value)}
-                        className={`w-12 h-12 rounded-xl border-2 transition-all duration-200 hover:scale-110 flex items-center justify-center ${
-                            currentSelection === colorOption.value
+                        key={opt.value}
+                        onClick={() => onSelectionChange(opt.value)}
+                        className={`w-12 h-12 rounded-xl border-2 transition-all hover:scale-110 flex items-center justify-center ${
+                            currentSelection === opt.value
                                 ? 'border-slate-800 ring-2 ring-slate-800 ring-offset-2'
                                 : 'border-slate-200 hover:border-slate-400'
                         }`}
-                        style={colorOption.color ? { backgroundColor: colorOption.color || colorOption.value } : {}}
-                        title={colorOption.name}
-                    >
-                        {colorOption.img && (
-                            <img
-                                src={colorOption.img}
-                                alt={colorOption.name}
-                                className="w-8 h-8 object-contain"
-                            />
-                        )}
-                    </button>
+                        style={{ backgroundColor: opt.color }}
+                        title={opt.name}
+                    />
                 ))}
             </div>
-            <p className="text-sm mt-2 text-slate-700">Valgt: {currentSelection}</p>
+            <p className="text-sm mt-2 text-slate-600">Valgt: {currentSelection || 'Ingen'}</p>
         </div>
     );
 
-    // Reusable type selector component
-    const TypeSelector = ({
-        label,
-        currentSelection,
-        onSelectionChange,
-        options
-    }) => (
+    const TypeSelector = ({ label, currentSelection, onSelectionChange, options }) => (
         <div className="space-y-4 mt-6">
             <div>
                 <label className="text-sm font-semibold text-slate-700">{label}</label>
-                <div className="flex items-center gap-2 mt-1">
+                <div className="mt-1">
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                        {currentSelection}
+                        {currentSelection || 'Ingen'}
                     </span>
                 </div>
             </div>
-            <div className="flex space-x-3 flex-wrap">
-                {options.map((type) => (
+
+            <div className="flex flex-wrap gap-3">
+                {options.map(type => (
                     <button
                         key={type}
                         onClick={() => onSelectionChange(type)}
-                        className={`px-6 py-3 rounded-xl text-sm m-4 font-medium transition-all duration-200 ${
+                        className={`px-6 py-3 rounded-xl font-medium transition-all ${
                             currentSelection === type
                                 ? 'bg-blue-600 text-white shadow-md'
-                                : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300 hover:shadow-sm'
+                                : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'
                         }`}
                     >
                         {type}
                     </button>
                 ))}
             </div>
-            
+
             {currentSelection === 'Satin' && (
                 <ColorSelector
                     label="Satin Type"
@@ -415,6 +257,7 @@ useEffect(() => {
                     colorOptions={bowMaterialTypes}
                 />
             )}
+
             {currentSelection === 'Silk' && (
                 <ColorSelector
                     label="Silk Type"
@@ -426,44 +269,42 @@ useEffect(() => {
         </div>
     );
 
+    // ====================== Render ======================
     return (
         <>
-            <div className="space-y-2">
+            <div className="space-y-8">
                 <h3 className="text-2xl font-bold text-slate-900">FOER</h3>
+
+                <TypeSelector
+                    label="Svederem"
+                    currentSelection={selectedKokardeMaterial}
+                    onSelectionChange={setSelectedKokardeMaterial}
+                    options={kokardeMaterialTypes}
+                />
+
+                <ColorSelector
+                    label="Farve"
+                    currentSelection={selectedKokardeColor}
+                    onSelectionChange={setSelectedKokardeColor}
+                    colorOptions={kokardeColorOptions}
+                />
+
+                <TypeSelector
+                    label="Foring"
+                    currentSelection={selectedFoerMaterial}
+                    onSelectionChange={setSelectedFoerMaterial}
+                    options={foerMaterialTypes}
+                />
+
+                <ColorSelector
+                    label="Sløjfe"
+                    currentSelection={selectedBowColor}
+                    onSelectionChange={setSelectedBowColor}
+                    colorOptions={bowColorOptions}
+                />
             </div>
-            {/* Kokarde Material Selection */}
-            <TypeSelector
-                label="Svederem"
-                currentSelection={selectedKokardeMaterial}
-                onSelectionChange={setSelectedKokardeMaterial}
-                options={kokardeMaterialTypes}
-            />
-
-            {/* Kokarde Color Selection */}
-            <ColorSelector
-                label="Farve"
-                currentSelection={selectedKokardeColor}
-                onSelectionChange={setSelectedKokardeColor}
-                colorOptions={kokardeColorOptions}
-            />
-
-            {/* Foer Material Selection */}
-            <TypeSelector
-                label="Foring"
-                currentSelection={selectedFoerMaterial}
-                onSelectionChange={setSelectedFoerMaterial}
-                options={foerMaterialTypes}
-            />
-            
-            {/* Bow Color Selection */}
-            <ColorSelector
-                label="Sløjfe"
-                currentSelection={selectedBowColor}
-                onSelectionChange={setSelectedBowColor}
-                colorOptions={bowColorOptions}
-            />
         </>
     );
-}
+};
 
 export default Foer;

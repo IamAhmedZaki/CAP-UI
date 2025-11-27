@@ -8,7 +8,7 @@ const PAU = {
   UDDANNELSESBÅND: {
     "Broderi farve": "Guld",
     "Broderi foran": "",
-    Hagerem: "Mat",
+    Hagerem: "Guld hagerem med guld knuder",
    
     Huebånd: "PAU",
     "Knap farve": "Guld",

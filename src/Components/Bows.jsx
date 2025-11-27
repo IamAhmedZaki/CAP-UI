@@ -738,18 +738,18 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
       }
 
       // Handle other messages if needed
-      if (typeof event.data === 'object') {
-        console.log("Received object from iframe:", event.data);
-      } else if (typeof event.data === 'string' && event.data.startsWith('{')) {
-        try {
-          const parsedData = JSON.parse(event.data);
-          console.log("Received JSON from iframe:", parsedData);
-        } catch (e) {
-          console.log("Received string from iframe:", event.data);
-        }
-      } else {
-        console.log("Received from iframe:", event.data);
-      }
+    //   if (typeof event.data === 'object') {
+    //     console.log("Received object from iframe:", event.data);
+    //   } else if (typeof event.data === 'string' && event.data.startsWith('{')) {
+    //     try {
+    //       const parsedData = JSON.parse(event.data);
+    //       console.log("Received JSON from iframe:", parsedData);
+    //     } catch (e) {
+    //       console.log("Received string from iframe:", event.data);
+    //     }
+    //   } else {
+    //     console.log("Received from iframe:", event.data);
+    //   }
     };
 
     window.addEventListener('message', handleMessage);
@@ -769,11 +769,11 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
         if (onOptionChange) {
             onOptionChange('Roset farve', selectedColor);
         }
-    }, [selectedColor, onOptionChange]);
+    }, [selectedColor]);
     
     
     useEffect(() => {
-  if (!selectedColor?.name || !isAppReady) return;
+  if (!selectedColor?.name) return;
 
   const colorMap = {
     'Royal blå': 'flowerRoyalBlue',
@@ -791,6 +791,8 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
   const sendMessageToIframes = (msg) => {
     ['preview-iframe', 'preview-iframe2'].forEach((id) => {
       const iframe = document.getElementById(id);
+      console.log('yellow');
+      
       if (iframe?.contentWindow) {
         console.log("Sending message to iframe:", msg);
         iframe.contentWindow.postMessage(msg, "*");
@@ -820,7 +822,7 @@ useEffect(() => {
             if (onOptionChange) {
                 onOptionChange('Kokarde', selectedPrestige);
             }
-        }, [selectedPrestige, onOptionChange]);
+        }, [selectedPrestige]);
 
 
 useEffect(() => {
@@ -863,7 +865,7 @@ useEffect(() => {
         if (onOptionChange) {
             onOptionChange('Emblem', selectedEmblem);
         }
-    }, [selectedEmblem, onOptionChange]);
+    }, [selectedEmblem]);
     
     useEffect(() => {
 
@@ -890,7 +892,7 @@ useEffect(() => {
         if (onOptionChange) {
             onOptionChange('Type', selectedType);
         }
-    }, [selectedType, onOptionChange]);
+    }, [selectedType]);
     
     
     useEffect(() => {
@@ -911,7 +913,7 @@ useEffect(() => {
     });
   };
          sendMessageToIframes(message);
-    }, [selectedType]);
+    }, [selectedType,selectedEmblem]);
 
     // Update local state when props change
     useEffect(() => {
@@ -1116,7 +1118,7 @@ useEffect(() => {
                                     : 'border-slate-200 hover:border-blue-300'
                                 }`}
                         >
-                            <img src={type.icon} className='h-13 w-20 ' alt={type.name} />
+                            <img src={type.icon} className='w-40' alt={type.name} />
                         </button>
                     ))}
                 </div>
