@@ -2,7 +2,7 @@ const EUD = {
   KOKARDE: {
     Emblem: { name: 'Guld', value: 'Guld', color: '#FCD34D' },
     Kokarde: "Signature",
-    "Roset farve": { name: 'Purple', value: '#DC26266', img: '/studentlife/src/assets/rosent/purplegold.png' },
+    "Roset farve": { name: 'Purple', value: '#DC26266', img: '/studentlife/src/assets/rosent/purplegold.webp' },
     Type: "Hjerte Guld"
   },
   UDDANNELSESBÅND: {

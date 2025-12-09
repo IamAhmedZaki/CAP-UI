@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import img1 from '../assets/shadeimages/glimmer.png';
-import img2 from '../assets/shadeimages/none.png';
-import img3 from '../assets/shadeimages/shade.png';
+import img1 from '../assets/shadeimages/glimmer.webp';
+import img2 from '../assets/shadeimages/none.webp';
+import img3 from '../assets/shadeimages/shade.webp';
 
 const Shade = ({ selectedOptions = {}, onOptionChange }) => {
     const getDefaultShadeType = () => 'Blank';

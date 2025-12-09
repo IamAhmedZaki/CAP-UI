@@ -1,14 +1,14 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import img1 from '../assets/menuCapPics/1.png';
-import img2 from '../assets/menuCapPics/2.png';
-import img3 from '../assets/menuCapPics/3.png';
-import img4 from '../assets/menuCapPics/4.png';
-import img5 from '../assets/menuCapPics/5.png';
-import img6 from '../assets/menuCapPics/6.png';
-import img7 from '../assets/menuCapPics/7.png';
-import img8 from '../assets/menuCapPics/8.png';
-import img9 from '../assets/menuCapPics/9.png';
-import img10 from '../assets/logo.jpeg';
+import img1 from '../assets/menuCapPics/1.webp';
+import img2 from '../assets/menuCapPics/2.webp';
+import img3 from '../assets/menuCapPics/3.webp';
+import img4 from '../assets/menuCapPics/4.webp';
+import img5 from '../assets/menuCapPics/5.webp';
+import img6 from '../assets/menuCapPics/6.webp';
+import img7 from '../assets/menuCapPics/7.webp';
+import img8 from '../assets/menuCapPics/8.webp';
+import img9 from '../assets/menuCapPics/9.webp';
+// import img10 from '../assets/logo.jpeg';
 import EducationalTape from '../Components/EducationalTape';
 import Embroidery from '../Components/Embroidery';
 import Cover from '../Components/Cover';
@@ -1454,8 +1454,8 @@ const [selectedOptions, setSelectedOptions] = useState(initialoption());
     // Package base price
     let iniialPrice = 0;
     if (packageName === "standard") iniialPrice = 449;
-    else if (packageName === "luksus") iniialPrice = 599;
-    else if (packageName === "premium") iniialPrice = 995;
+    else if (packageName === "luksus") iniialPrice = 995;
+    else if (packageName === "premium") iniialPrice = 1850;
 
     return total + iniialPrice + 59;
   };
@@ -1616,6 +1616,9 @@ useEffect(() => {
 
       // ===== Default Page =====
       send("Page : 1");
+
+      
+
     }
   };
 
@@ -1631,9 +1634,18 @@ useEffect(() => {
   }, [program, isIframeLoaded, isAppReady]);
   
   useEffect(() => {
-    // console.log(selectedOptions);
+     
+      var iframe_desktop = document.getElementById('preview-iframe');
+      var iframe_mobile = document.getElementById('preview-iframe2');
+    if (window.innerWidth >= 768) {
+      iframe_desktop.src = 'https://playcanv.as/e/p/QIG7fh8C/';
+
+    }else{
+
+      iframe_mobile.src = 'https://playcanv.as/e/p/QIG7fh8C/';
+    }
     
-  }, [activeMenu]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
@@ -1819,20 +1831,20 @@ useEffect(() => {
 
               {/* Scrolling Message */}
               {/* Static Warning Message */}
-              <div className="bg-yellow-100 border-y border-yellow-300 px-4 py-2">
+             {/* <div className="bg-yellow-100 border-y border-yellow-300 px-4 py-2">
                 <p className="text-sm text-yellow-800 font-semibold text-center">
                   Ændringen vises ikke på huen, men bare rolig — det er ikke en fejl 😉 Din hue bliver præcis, som du designer den.
                   Er du i tvivl? Skriv til os på Instagram eller TikTok, så uploader vi en video af en hue, der ligner din 🎥✨
                 </p>
-              </div>
+              </div>*/}
 
 
 
 
               {/* Iframe Preview */}
               <div className="flex-1 rounded-b-2xl overflow-hidden">
-                <iframe id="preview-iframe"  src="https://playcanv.as/e/p/QIG7fh8C/"  className="w-full h-full"  frameBorder="0"  title="3D Student Card Preview"  onLoad={handleIframeLoad}
-                  // <iframe id="preview-iframe"  src="https://playcanv.as/e/b/a3486a33"  className="w-full h-full"  frameBorder="0"  title="3D Student Card Preview"  onLoad={handleIframeLoad}
+                <iframe id="preview-iframe"  src=""  className="w-full h-full"  frameBorder="0"  title="3D Student Card Preview"  onLoad={handleIframeLoad} 
+                  
                  /> 
               </div>
             </div>
@@ -1906,9 +1918,9 @@ useEffect(() => {
     pointerEvents: isConfigOpen ? 'none' : 'auto',
   }}
 >
-                  <iframe id="preview-iframe2"  src="https://playcanv.as/e/p/QIG7fh8C/"  className="w-full h-full"  frameBorder="0"  title="3D Student Card Preview"  onLoad={handleIframeLoad}
-                  // <iframe id="preview-iframe2"  src="https://playcanv.as/e/b/a3486a33 "  className="w-full h-full"  frameBorder="0"  title="3D Student Card Preview"  onLoad={handleIframeLoad}
-                   /> 
+                  <iframe id="preview-iframe2"  src=""  className="w-full h-full"  frameBorder="0"  title="3D Student Card Preview"  onLoad={handleIframeLoad}
+                 
+                   />  
                 </div>
               </div>
             </div>

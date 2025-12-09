@@ -2,7 +2,7 @@ const STX = {
   KOKARDE: {
     Emblem: { name: 'Guld', value: 'Guld', color: '#FCD34D' },
     Kokarde: "Signature",
-    "Roset farve": { name: 'Bordeaux', value: '#7F1D1D', img: '/studentlife/src/assets/rosent/red%20silv.png' },
+    "Roset farve": { name: 'Bordeaux', value: '#7F1D1D', img: '/studentlife/src/assets/rosent/red%20silv.webp' },
     Type: "Hjerte Guld"
   },
   UDDANNELSESBÅND: {

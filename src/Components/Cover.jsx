@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import img1 from '../assets/stars/star.png';
-import img2 from '../assets/stars/2-star.png';
-import img3 from '../assets/stars/3-star.png';
-import img4 from '../assets/stars/4-star.png';
-import img5 from '../assets/stars/5-star.png';
-import img6 from '../assets/stars/6-star.png';
-import whiteGlitter from '../assets/button images/white glitter.png';
-import blackGlitter from '../assets/button images/black glitter.png';
-import coverColorOptionsimg1 from '../assets/cover images/silverahh.png';
-import coverColorOptionsimg2 from '../assets/cover images/none.png';
-import coverColorOptionsimg3 from '../assets/cover images/darkblueahh.png';
+import img1 from '../assets/stars/star.webp';
+import img2 from '../assets/stars/2-star.webp';
+import img3 from '../assets/stars/3-star.webp';
+import img4 from '../assets/stars/4-star.webp';
+import img5 from '../assets/stars/5-star.webp';
+import img6 from '../assets/stars/6-star.webp';
+import whiteGlitter from '../assets/button images/white glitter.webp';
+import blackGlitter from '../assets/button images/black glitter.webp';
+import coverColorOptionsimg1 from '../assets/cover images/silverahh.webp';
+import coverColorOptionsimg2 from '../assets/cover images/none.webp';
+import coverColorOptionsimg3 from '../assets/cover images/darkblueahh.webp';
 
 
-import international from '../assets/flagbandimages/international.jpg';
-import usakinaden from '../assets/flagbandimages/USAKINADEN.png';
-import europe from '../assets/flagbandimages/europe.png';
+import international from '../assets/flagbandimages/international.webp';
+import usakinaden from '../assets/flagbandimages/USAKINADEN.webp';
+import europe from '../assets/flagbandimages/europe.webp';
 
 const Cover = ({ selectedOptions = {}, onOptionChange, program, currentEmblem }) => {
     // Default value functions

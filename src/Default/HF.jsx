@@ -2,7 +2,7 @@ const HF = {
   KOKARDE: {
     Emblem: { name: 'Guld', value: 'Guld', color: '#FCD34D' },
     Kokarde: "Signature",
-    "Roset farve": { name: 'Light blå', value: '#7F1D1D', img: '/studentlife/src/assets/rosent/lightbluegold.png' },
+    "Roset farve": { name: 'Light blå', value: '#7F1D1D', img: '/studentlife/src/assets/rosent/lightbluegold.webp' },
     Type: "Hjerte Guld"
   },
   UDDANNELSESBÅND: {

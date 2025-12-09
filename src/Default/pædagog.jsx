@@ -2,7 +2,7 @@ const Pædagog = {
   KOKARDE: {
     Emblem: { name: 'Guld', value: 'Guld', color: '#FCD34D' },
     Kokarde: "Signature",
-    "Roset farve": { name: 'Sort', value: 'PSort', img: '/studentlife/src/assets/rosent/kaalagold.png' },
+    "Roset farve": { name: 'Sort', value: 'PSort', img: '/studentlife/src/assets/rosent/kaalagold.webp' },
     Type: "Hjerte Guld"
   },
   UDDANNELSESBÅND: {

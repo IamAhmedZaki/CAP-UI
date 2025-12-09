@@ -2,7 +2,7 @@ const EUX = {
   KOKARDE: {
     Emblem: { name: 'Guld', value: 'Guld', color: '#FCD34D' },
     Kokarde: "Signature",
-    "Roset farve": { name: 'Rød', value: 'EudRed', img: '/studentlife/src/assets/rosent/laalgold.png' },
+    "Roset farve": { name: 'Rød', value: 'EudRed', img: '/studentlife/src/assets/rosent/laalgold.webp' },
     Type: "Danmark"
   },
   UDDANNELSESBÅND: {

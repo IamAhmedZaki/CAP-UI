@@ -1,157 +1,153 @@
 import React, { useState, useEffect } from 'react'
 
 // signature
-import Kurdistan from '../assets/Countries/kurdistan.png';
-import Iraq from '../assets/Countries/iraq.png';
-import Iran from '../assets/Countries/iran.png';
-import Somalia from '../assets/Countries/somalia.png';
-import Somaliland from '../assets/Countries/somaliland.png';
-import Palestine from '../assets/Countries/palestine.png';
-import Lebanon from '../assets/Countries/lebanon.png';
-import Afghanistan from '../assets/Countries/afghanistan.png';
-import Albania from '../assets/Countries/albania.png';
-import Serbia from '../assets/Countries/serbia.png';
-import Bosnia from '../assets/Countries/bosnia.png';
-import Denmark from '../assets/Countries/denmark.png';
-import Morocco from '../assets/Countries/morocco.png';
-import Pakistan from '../assets/Countries/pakistan.png';
-import Sweden from '../assets/Countries/sweden.png';
-import Turkey from '../assets/Countries/turkey.png';
-import StxSilver from '../assets/images/stx silv.jpg';
-import StxSilverDiamant from '../assets/images/stx silver diamant.jpg';
-import StxGoldDiamant from '../assets/images/Stx gold diamant.jpg';
-import StxGold from '../assets/images/stx gold.jpg';
-import AtomHtxGold from '../assets/images/Atom htx gold.jpg';
-import HtxGoldDiam from '../assets/images/Htx gold diam.jpg';
-import HtxGold from '../assets/images/Htx gold.jpg';
-import AtomHtxSilver from '../assets/images/atom htx silver.jpg';
-import HtxSilverDiamant from '../assets/images/Htx silver diament.jpg';
-import HtxSilver from '../assets/images/htx silver.jpg';
-import HfGoldDiamant from '../assets/images/hf gold diamant.jpg';
-import HfGold from '../assets/images/hf gold.jpg';
-import HhxGoldDiamant from '../assets/images/hhx gold diamant.jpg';
-import HhxGold from '../assets/images/hhx gold.jpg';
-import HhxSilverDiamant from '../assets/images/hhx silver diamant.jpg';
-import HhxSilver from '../assets/images/hhx silver.jpg';
-import HfSilverDiamant from '../assets/images/hf silver diamant.jpg';
-import HfSilver from '../assets/images/hf silver.jpg';
-import EuxSilverDiamant from '../assets/images/Eux silver diamant.jpg';
-import EuxSilver from '../assets/images/EUX silver.jpg';
-import EuxGoldDiamant from '../assets/images/Eux gold diamant.jpg';
-import EuxGold from '../assets/images/EUX gold.jpg';
-import EudSilver from '../assets/images/Eud silver.jpg';
-import EudGold from '../assets/images/eud gold.jpg';
-import HalvmoneSilver from '../assets/images/halvmane silv.jpg';
-import HalvmoneSilverSimli from '../assets/images/halvmane silver simli.png';
-import HalvmoneGoldSimli from '../assets/images/Halvmane gold simli.png';
-import HalvmoneGold from '../assets/images/Halvmane gold.jpg';
-import MerkurstavSilverDiamant from '../assets/images/merkurstav silv diamant.jpg';
-import MerkurstavSilver from '../assets/images/merkurstav silver.jpg';
-import MerkurstavGoldDiamant from '../assets/images/merkurstav gold diamant.jpg';
-import MerkurstavGold from '../assets/images/merkurstav gold.jpg';
-import HjerteGuld from '../assets/images/hjerte guld.jpg';
-import HjerteSilv from '../assets/images/hjerte silv.jpg';
-import AhornbladGold from '../assets/images/Ahornblad gold.jpg';
-import AhornbladSilver from '../assets/images/ahornblad silver.jpg';
-import AnkerGold from '../assets/images/anker gold.jpg';
-import AnkerSilver from '../assets/images/anker silver.jpg';
-import AtomGold from '../assets/images/atom gold.jpg';
-import AtomSilver from '../assets/images/atom silver.jpg';
-import DnaGold from '../assets/images/dna gold.jpg';
-import DnaSilver from '../assets/images/dna silver.jpg';
-import ItSilver from '../assets/images/It silver.jpg';
-import ItGold from '../assets/images/It gold.jpg';
-import TeaterSilver from '../assets/images/teater silver.jpg';
-import TeaterGold from '../assets/images/Teater gold.jpg';
-import TwinSilver from '../assets/images/twin silver.jpg';
-import TwinGold from '../assets/images/twin gold.jpg';
-import NodeSilver from '../assets/images/Node silv.jpg';
-import NodeGold from '../assets/images/Node gold.jpg';
-import SportGold from '../assets/images/sport gold.jpg';
-import SportSilver from '../assets/images/sport silver.jpg';
-import PiSilver from '../assets/images/pi silver.jpg';
-import PilGold from '../assets/images/pil gold.jpg';
-import GlobusGold from '../assets/images/globus gold.jpg';
-import GlobusSilver from '../assets/images/globus silver.jpg';
-import LotusGold from '../assets/images/lotus gold.jpg';
-import LotusSilver from '../assets/images/lotus silver.jpg';
+import Kurdistan from '../assets/Countries/kurdistan.webp';
+import Iraq from '../assets/Countries/iraq.webp';
+import Iran from '../assets/Countries/iran.webp';
+import Somalia from '../assets/Countries/somalia.webp';
+import Somaliland from '../assets/Countries/somaliland.webp';
+import Palestine from '../assets/Countries/palestine.webp';
+import Lebanon from '../assets/Countries/lebanon.webp';
+import Afghanistan from '../assets/Countries/afghanistan.webp';
+import Albania from '../assets/Countries/albania.webp';
+import Serbia from '../assets/Countries/serbia.webp';
+import Bosnia from '../assets/Countries/bosnia.webp';
+import Denmark from '../assets/Countries/denmark.webp';
+import Morocco from '../assets/Countries/morocco.webp';
+import Pakistan from '../assets/Countries/pakistan.webp';
+import Sweden from '../assets/Countries/sweden.webp';
+import Turkey from '../assets/Countries/turkey.webp';
+import StxSilver from '../assets/images/stx silv.webp';
+import StxSilverDiamant from '../assets/images/stx silver diamant.webp';
+import StxGoldDiamant from '../assets/images/Stx gold diamant.webp';
+import StxGold from '../assets/images/stx gold.webp';
+import AtomHtxGold from '../assets/images/Atom htx gold.webp';
+import HtxGoldDiam from '../assets/images/Htx gold diam.webp';
+import HtxGold from '../assets/images/Htx gold.webp';
+import AtomHtxSilver from '../assets/images/atom htx silver.webp';
+import HtxSilverDiamant from '../assets/images/Htx silver diament.webp';
+import HtxSilver from '../assets/images/htx silver.webp';
+import HfGoldDiamant from '../assets/images/hf gold diamant.webp';
+import HfGold from '../assets/images/hf gold.webp';
+import HhxGoldDiamant from '../assets/images/hhx gold diamant.webp';
+import HhxGold from '../assets/images/hhx gold.webp';
+import HhxSilverDiamant from '../assets/images/hhx silver diamant.webp';
+import HhxSilver from '../assets/images/hhx silver.webp';
+import HfSilverDiamant from '../assets/images/hf silver diamant.webp';
+import HfSilver from '../assets/images/hf silver.webp';
+import EuxSilverDiamant from '../assets/images/Eux silver diamant.webp';
+import EuxSilver from '../assets/images/EUX silver.webp';
+import EuxGoldDiamant from '../assets/images/Eux gold diamant.webp';
+import EuxGold from '../assets/images/EUX gold.webp';
+import EudSilver from '../assets/images/Eud silver.webp';
+import EudGold from '../assets/images/eud gold.webp';
+import HalvmoneSilver from '../assets/images/halvmane silv.webp';
+import HalvmoneSilverSimli from '../assets/images/halvmane silver simli.webp';
+import HalvmoneGoldSimli from '../assets/images/Halvmane gold simli.webp';
+import HalvmoneGold from '../assets/images/Halvmane gold.webp';
+import MerkurstavSilverDiamant from '../assets/images/merkurstav silv diamant.webp';
+import MerkurstavSilver from '../assets/images/merkurstav silver.webp';
+import MerkurstavGoldDiamant from '../assets/images/merkurstav gold diamant.webp';
+import MerkurstavGold from '../assets/images/merkurstav gold.webp';
+import HjerteGuld from '../assets/images/hjerte guld.webp';
+import HjerteSilv from '../assets/images/hjerte silv.webp';
+import AhornbladGold from '../assets/images/Ahornblad gold.webp';
+import AhornbladSilver from '../assets/images/ahornblad silver.webp';
+import AnkerGold from '../assets/images/anker gold.webp';
+import AnkerSilver from '../assets/images/anker silver.webp';
+import AtomGold from '../assets/images/atom gold.webp';
+import AtomSilver from '../assets/images/atom silver.webp';
+import DnaGold from '../assets/images/dna gold.webp';
+import DnaSilver from '../assets/images/dna silver.webp';
+import ItSilver from '../assets/images/It silver.webp';
+import ItGold from '../assets/images/It gold.webp';
+import TeaterSilver from '../assets/images/teater silver.webp';
+import TeaterGold from '../assets/images/Teater gold.webp';
+import TwinSilver from '../assets/images/twin silver.webp';
+import TwinGold from '../assets/images/twin gold.webp';
+import NodeSilver from '../assets/images/Node silv.webp';
+import NodeGold from '../assets/images/Node gold.webp';
+import SportGold from '../assets/images/sport gold.webp';
+import SportSilver from '../assets/images/sport silver.webp';
+import PiSilver from '../assets/images/pi silver.webp';
+import PilGold from '../assets/images/pil gold.webp';
+import GlobusGold from '../assets/images/globus gold.webp';
+import GlobusSilver from '../assets/images/globus silver.webp';
+import LotusGold from '../assets/images/lotus gold.webp';
+import LotusSilver from '../assets/images/lotus silver.webp';
 
-import sosuassistentGold from '../assets/images/sosuassistent gold.png';
-import sosuassistentSilver from '../assets/images/sosuassistent silver.png';
-import sosuhjælperGold from '../assets/images/sosuhjalper gold.png';
-import sosuhjælperSilver from '../assets/images/sosuhjalper silver.png';
-import frisørGold from '../assets/images/frisor gold.png';
-import frisørSilver from '../assets/images/frisor silver.png';
-// import kosmetologGold from '../assets/images/kosmetolog gold.png';
-// import kosmetologSilver from '../assets/images/kosmetolog silver.png';
-import pædagogGold from '../assets/images/padagog gold.png';
-import pædagogSilver from '../assets/images/padagog silver.png';
-import pauGold from '../assets/images/pau gold.png';
-import pauSilver from '../assets/images/pau silver.png';
-import ernæringsassistenGold from '../assets/images/ernaringsassisten gold.png';
-import ernæringsassistenSilver from '../assets/images/ernaringsassisten silver.png';
-
+import sosuassistentGold from '../assets/images/sosuassistent gold.webp';
+import sosuassistentSilver from '../assets/images/sosuassistent silver.webp';
+import sosuhjælperGold from '../assets/images/sosuhjalper gold.webp';
+import sosuhjælperSilver from '../assets/images/sosuhjalper silver.webp';
+import frisørGold from '../assets/images/frisor gold.webp';
+import frisørSilver from '../assets/images/frisor silver.webp';
+import KosmetologGuld from '../assets/images/Kosmetolog Guld.webp';
+import KosmetologSølv from '../assets/images/Kosmetolog Sølv.webp';
+import pædagogGold from '../assets/images/padagog gold.webp';
+import pædagogSilver from '../assets/images/padagog silver.webp';
+import pauGold from '../assets/images/pau gold.webp';
+import pauSilver from '../assets/images/pau silver.webp';
+import ernæringsassistenGold from '../assets/images/ernaringsassisten gold.webp';
+import ernæringsassistenSilver from '../assets/images/ernaringsassisten silver.webp';
 
 // prestige
-
-import JupiterGold from '../assets/images/Jupiter gold.png';
-import JupiterSilver from '../assets/images/Jupiter silv.png';
-import SaturnGold from '../assets/images/Saturn gold.png';
-import SaturnSilver from '../assets/images/saturn solv.png';
-import VenusGold from '../assets/images/venus gold.png';
-import VenusSilver from '../assets/images/venus silv.png';
-import MerkurGold from '../assets/images/merkur gold.png';
-import MerkurSilver from '../assets/images/merkur silv.png';
-import NeptunGold from '../assets/images/neptun gold.png';
-import NeptunSilver from '../assets/images/neptun silv.png';
-// no mars
-
+import JupiterGold from '../assets/images/Jupiter gold.webp';
+import JupiterSilver from '../assets/images/Jupiter silv.webp';
+import SaturnGold from '../assets/images/Saturn gold.webp';
+import SaturnSilver from '../assets/images/saturn solv.webp';
+import VenusGold from '../assets/images/venus gold.webp';
+import VenusSilver from '../assets/images/venus silv.webp';
+import MerkurGold from '../assets/images/merkur gold.webp';
+import MerkurSilver from '../assets/images/merkur silv.webp';
+import NeptunGold from '../assets/images/neptun gold.webp';
+import NeptunSilver from '../assets/images/neptun silv.webp';
 
 // Stjernetegn
-import BullGold from '../assets/images/bull gold.jpg';
-import BullSilver from '../assets/images/bull silver.jpg';
-import IbSilver from '../assets/images/ib silver.jpg';
-import IbGold from '../assets/images/Ib gold.jpg';
-import FKeyGold from '../assets/images/f key gold.jpg';
-import FKeySilver from '../assets/images/f key silver.jpg';
-import FiskenGold from '../assets/images/fisken gold.jpg';
-import FiskenSilver from '../assets/images/fisken silver.jpg';
-import JomfruenGold from '../assets/images/jomfruen gold.jpg';
-import JomfruenSilver from '../assets/images/jomfruen silver.jpg';
-import KrebsenGuld from '../assets/images/krebsen guld.jpg';
-import KrebsenSilver from '../assets/images/krebsen silver.jpg';
-import LionSilver from '../assets/images/lion silver.jpg';
-import LionGold from '../assets/images/lion gold.jpg';
-import ScorpioGold from '../assets/images/scorpio gold.jpg';
-import ScorpioSilver from '../assets/images/scorpio silver.jpg';
-import SkyttenSilver from '../assets/images/skytten silver.jpg';
-import SkyttenGold from '../assets/images/skytten gold.jpg';
-import VandmandGold from '../assets/images/vandmand gold.jpg';
-import VandmandSilv from '../assets/images/vandmand silv.jpg';
-import VadderenGold from '../assets/images/vadderen gold.jpg';
-import VagtenGold from '../assets/images/vagten gold.jpg';
-import StenbukGold from '../assets/images/stenbuk gold.jpg';
-import StenbukSilver from '../assets/images/stenbuk silver.jpg';
-import VadderenSilv from '../assets/images/vadderen silv.jpg';
-import VagtenSilver from '../assets/images/vagten silver.jpg';
-
-
+import BullGold from '../assets/images/bull gold.webp';
+import BullSilver from '../assets/images/bull silver.webp';
+import IbSilver from '../assets/images/ib silver.webp';
+import IbGold from '../assets/images/Ib gold.webp';
+import IbGuldSimli from '../assets/images/IB Guld Simli.webp';
+import IbSølvSimli from '../assets/images/IB Sølv Simli.webp';
+import FKeyGold from '../assets/images/f key gold.webp';
+import FKeySilver from '../assets/images/f key silver.webp';
+import FiskenGold from '../assets/images/fisken gold.webp';
+import FiskenSilver from '../assets/images/fisken silver.webp';
+import JomfruenGold from '../assets/images/jomfruen gold.webp';
+import JomfruenSilver from '../assets/images/jomfruen silver.webp';
+import KrebsenGuld from '../assets/images/krebsen guld.webp';
+import KrebsenSilver from '../assets/images/krebsen silver.webp';
+import LionSilver from '../assets/images/lion silver.webp';
+import LionGold from '../assets/images/lion gold.webp';
+import ScorpioGold from '../assets/images/scorpio gold.webp';
+import ScorpioSilver from '../assets/images/scorpio silver.webp';
+import SkyttenSilver from '../assets/images/skytten silver.webp';
+import SkyttenGold from '../assets/images/skytten gold.webp';
+import VandmandGold from '../assets/images/vandmand gold.webp';
+import VandmandSilv from '../assets/images/vandmand silv.webp';
+import VadderenGold from '../assets/images/vadderen gold.webp';
+import VagtenGold from '../assets/images/vagten gold.webp';
+import StenbukGold from '../assets/images/stenbuk gold.webp';
+import StenbukSilver from '../assets/images/stenbuk silver.webp';
+import VadderenSilv from '../assets/images/vadderen silv.webp';
+import VagtenSilver from '../assets/images/vagten silver.webp';
 
 // rosent
-import blackGold from '../assets/rosent/black gold.png';
-import blueGold from '../assets/rosent/gold blue.png';
-import redGold from '../assets/rosent/red gold.png';
-import blackSilv from '../assets/rosent/black silv.png';
-import blueSilv from '../assets/rosent/blue silv.png';
-import redSilve from '../assets/rosent/red silv.png';
-import kaalagold from '../assets/rosent/kaalagold.png';
-import laalgold from '../assets/rosent/laalgold.png';
-import kaalasilver from '../assets/rosent/kaalasilver.png';
-import laalsilver from '../assets/rosent/laalsilver.png';
-import lightbluesilver from '../assets/rosent/lightbluesilver.png';
-import lightbluegold from '../assets/rosent/lightbluegold.png';
-import purplegold from '../assets/rosent/purplegold.png';
-import purplesilver from '../assets/rosent/purplesilver.png';
+import blackGold from '../assets/rosent/black gold.webp';
+import blueGold from '../assets/rosent/gold blue.webp';
+import redGold from '../assets/rosent/red gold.webp';
+import blackSilv from '../assets/rosent/black silv.webp';
+import blueSilv from '../assets/rosent/blue silv.webp';
+import redSilve from '../assets/rosent/red silv.webp';
+import kaalagold from '../assets/rosent/kaalagold.webp';
+import laalgold from '../assets/rosent/laalgold.webp';
+import kaalasilver from '../assets/rosent/kaalasilver.webp';
+import laalsilver from '../assets/rosent/laalsilver.webp';
+import lightbluesilver from '../assets/rosent/lightbluesilver.webp';
+import lightbluegold from '../assets/rosent/lightbluegold.webp';
+import purplegold from '../assets/rosent/purplegold.webp';
+import purplesilver from '../assets/rosent/purplesilver.webp';
 
 
 
@@ -450,7 +446,9 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
             case 'hhx':
                 return [
                     { name: 'HHX Guld Simli', icon: HhxGoldDiamant },
-                    { name: 'HHX Guld', icon: HhxGold }
+                    { name: 'HHX Guld', icon: HhxGold },
+                    { name: 'IB Guld', icon: IbGold },
+                { name: 'IB Guld Simli', icon: IbGuldSimli },
                 ];
             case 'htx':
                 return [
@@ -461,12 +459,16 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
             case 'stx':
                 return [
                     { name: 'STX Guld Simli', icon: StxGoldDiamant },
-                    { name: 'STX Guld', icon: StxGold }
+                    { name: 'STX Guld', icon: StxGold },
+                    { name: 'IB Guld', icon: IbGold },
+                { name: 'IB Guld Simli', icon: IbGuldSimli },
                 ];
             case 'hf':
                 return [
                     { name: 'HF Guld Simli', icon: HfGoldDiamant },
-                    { name: 'HF Guld', icon: HfGold }
+                    { name: 'HF Guld', icon: HfGold },
+                    { name: 'IB Guld', icon: IbGold },
+                    { name: 'IB Guld Simli', icon: IbGuldSimli },
                 ];
             case 'eud':
                 return [
@@ -490,10 +492,10 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
                 return [
                     { name: 'frisør Guld', icon:frisørGold  }
                 ];
-            // case 'kosmetolog':
-            //     return [
-            //         { name: 'kosmetolog Guld', icon:kosmetologGold  }
-            //     ];
+            case 'kosmetolog':
+                return [
+                   { name: 'Kosmetolog Guld', icon: KosmetologGuld },
+                ];
             case 'pædagog':
                 return [
                     { name: 'pædagog Guld', icon:pædagogGold  }
@@ -516,7 +518,9 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
             case 'hhx':
                 return [
                     { name: 'HHX Sølv Simli', icon: HhxSilverDiamant },
-                    { name: 'HHX Sølv', icon: HhxSilver }
+                    { name: 'HHX Sølv', icon: HhxSilver },
+                     { name: 'IB Sølv', icon: IbSilver },
+                { name: 'IB Sølv Simli', icon: IbSølvSimli },
                 ];
             case 'htx':
                 return [
@@ -528,11 +532,15 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
                 return [
                     { name: 'STX Sølv Simli', icon: StxSilverDiamant },
                     { name: 'STX Sølv', icon: StxSilver },
+                     { name: 'IB Sølv', icon: IbSilver },
+                { name: 'IB Sølv Simli', icon: IbSølvSimli },
                 ];
             case 'hf':
                 return [
                     { name: 'HF Sølv Simli', icon: HfSilverDiamant },
-                    { name: 'HF Sølv', icon: HfSilver }
+                    { name: 'HF Sølv', icon: HfSilver },
+                     { name: 'IB Sølv', icon: IbSilver },
+                { name: 'IB Sølv Simli', icon: IbSølvSimli },
                 ];
             case 'eud':
                 return [
@@ -556,10 +564,10 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
                 return [
                     { name: 'frisør Sølv', icon:frisørSilver  }
                 ];
-            // case 'kosmetolog':
-                // return [
-                //     { name: 'kosmetolog Sølv', icon:kosmetologSilver  }
-                // ];
+            case 'kosmetolog':
+                return [
+                  { name: 'Kosmetolog Sølv', icon: KosmetologSølv },
+                ];
             case 'pædagog':
                 return [
                     { name: 'pædagog Sølv', icon:pædagogSilver  }
@@ -607,7 +615,8 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
                 { name: 'DNA Guld', icon: DnaGold },
                 { name: 'Pi Guld', icon: PilGold },
                 { name: 'IT Guld', icon: ItGold },
-                { name: 'IB Guld', icon: IbGold },
+                // { name: 'IB Guld', icon: IbGold },
+                // { name: 'IB Guld Simli', icon: IbGuldSimli },
                 { name: 'Halvmåne Guld', icon: HalvmoneGold },
                 { name: 'Halvmåne Guld Simli', icon: HalvmoneGoldSimli },
                 { name: 'Merkurstav Guld', icon: MerkurstavGold },
@@ -622,6 +631,7 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
                 { name: 'Node Guld', icon: NodeGold },
                 { name: 'Sport Guld', icon: SportGold },
                 { name: 'Teater Guld', icon: TeaterGold },
+                
 
 
 
@@ -650,7 +660,8 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
                 { name: 'DNA Sølv', icon: DnaSilver },
                 { name: 'Pi Sølv', icon: PiSilver },
                 { name: 'IT Sølv', icon: ItSilver },
-                { name: 'IB Sølv', icon: IbSilver },
+                // { name: 'IB Sølv', icon: IbSilver },
+                // { name: 'IB Sølv Simli', icon: IbSølvSimli },
                 { name: 'Halvmåne Sølv', icon: HalvmoneSilver },
                 { name: 'Halvmåne Sølv Simli', icon: HalvmoneSilverSimli },
                 { name: 'Merkurstav Sølv', icon: MerkurstavSilver },
@@ -665,6 +676,7 @@ const Bows = ({ selectedOptions = {}, onOptionChange, program, changeCurrentEmbl
                 { name: 'Node Sølv', icon: NodeSilver },
                 { name: 'Sport Sølv', icon: SportSilver },
                 { name: 'Teater Sølv', icon: TeaterSilver },
+                
 
 
             ].filter(Boolean)

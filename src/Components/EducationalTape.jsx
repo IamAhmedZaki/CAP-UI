@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import coverColorOptionsimg2 from '../assets/cover images/none.png';
-import matteleather from '../assets/button images/matteleather.png';
-import shinyblack from '../assets/button images/shinyblack.png';
-import goldblack from '../assets/button images/goldblack.png';
-import silverblack from '../assets/button images/silverblack.png';
-import silver from '../assets/button images/silver.png';
-import gold from '../assets/button images/gold.png';
+import coverColorOptionsimg2 from '../assets/cover images/none.webp';
+import matteleather from '../assets/button images/matteleather.webp';
+import shinyblack from '../assets/button images/shinyblack.webp';
+import goldblack from '../assets/button images/goldblack.webp';
+import silverblack from '../assets/button images/silverblack.webp';
+import silver from '../assets/button images/silver.webp';
+import gold from '../assets/button images/gold.webp';
 
 const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke, currentEmblem }) => {
     // State variables with descriptive names

@@ -2,7 +2,7 @@ const Kosmetolog = {
   KOKARDE: {
     Emblem: { name: 'Guld', value: 'Guld', color: '#FCD34D' },
     Kokarde: "Signature",
-    "Roset farve": { name: 'Sort', value: 'SosuSort', img: '/studentlife/src/assets/rosent/kaalagold.png' },
+    "Roset farve": { name: 'Sort', value: 'SosuSort', img: '/studentlife/src/assets/rosent/kaalagold.webp' },
     Type: "Hjerte Guld"
   },
   UDDANNELSESBÅND: {
