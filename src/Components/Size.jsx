@@ -128,7 +128,7 @@ const Size = ({ selectedOptions = {}, onOptionChange, size }) => {
 
     return (
         <>
-            <div className="space-y-2">
+            <div className="space-y-2 mt-8">
                 <h3 className="text-2xl font-bold text-slate-900">STØRRELSE</h3>
             </div>
 

@@ -4,7 +4,9 @@ import coverColorOptionsimg2 from '../assets/cover images/none.webp';
 import matteleather from '../assets/button images/matteleather.webp';
 import shinyblack from '../assets/button images/shinyblack.webp';
 import goldblack from '../assets/button images/goldblack.webp';
+import blackgold from '../assets/button images/blackgold.webp';
 import silverblack from '../assets/button images/silverblack.webp';
+import blacksilver from '../assets/button images/blacksilver.webp';
 import silver from '../assets/button images/silver.webp';
 import gold from '../assets/button images/gold.webp';
 
@@ -20,7 +22,7 @@ const EducationalTape = ({ selectedOptions = {}, onOptionChange, program, pakke,
             case 'stx': return 'STX';
             case 'hf': return 'HF';
             case 'eux': return 'EUX';
-            case 'eud': return 'EUD';
+            case 'eud': return 'EUD'; 
             case 'sosuassistent': return 'Sosuassistent';
             case 'sosuhjælper': return 'Sosuhjælper';
             case 'frisør': return 'Frisør';
@@ -260,8 +262,10 @@ const handleEmbroideryTextChange = async (text) => {
         const colorMap = {
             'sølv hagerem med sølvknuder': 'hagerem:sølv hagerem med sølvknuder',
             'sølv hagerem med sort knuder': 'hagerem:sølv hagerem med sort knuder',
+            'sort hagerem med sølv knuder': 'hagerem:sort hagerem med sølv knuder',
             'guld hagerem med guld knuder': 'hagerem:guld hagerem med guld knuder',
             'sort hagerem med guld knuder': 'hagerem:sort hagerem med guld knuder',
+            'guld hagerem med sort knuder': 'hagerem:guld hagerem med sort knuder',
             'mat': 'hagerem:mat',
             'blank': 'hagerem:blank',
             'sort med sorteknuder': 'hagerem:sort med sorteknuder'
@@ -451,10 +455,14 @@ const generateYearImage = (yearText) => {
             case 'Guld':
                 return [
                     { name: 'Guld hagerem med guld knuder', value: '#f0bd06ff', img: gold },
-                    { name: 'Sort hagerem med guld knuder', value: '#695406ff', img: goldblack },];
+                    { name: 'Sort hagerem med guld knuder', value: '#695406ff', img: goldblack },
+                    { name: 'Guld hagerem med sort knuder', value: '#695406ff', img: blackgold },
+                ];
             default:
                 return [{ name: 'Sølv hagerem med sølvknuder', value: '#C0C0C0', img: silver },
-                { name: 'Sølv hagerem med sort knuder', value: '#71706C', img: silverblack }];
+                { name: 'Sølv hagerem med sort knuder', value: '#71706C', img: silverblack },
+                { name: 'Sort hagerem med sølv knuder', value: '#71706C', img: blacksilver },
+            ];
         }
     }
 
@@ -729,7 +737,7 @@ const generateYearImage = (yearText) => {
 
     return (
         <>
-            <div className="">
+            <div className="mt-8">
                 <h3 className="text-2xl font-bold text-slate-900">UDDANNELSESBÅND</h3>
             </div>
 

@@ -272,7 +272,7 @@ const Foer = ({ selectedOptions = {}, onOptionChange, currentEmblem, program }) 
     // ====================== Render ======================
     return (
         <>
-            <div className="space-y-8">
+            <div className="space-y-8 mt-8">
                 <h3 className="text-2xl font-bold text-slate-900">FOER</h3>
 
                 <TypeSelector

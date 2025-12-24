@@ -34,7 +34,7 @@ const Frisør = {
     "Skyggegravering Line 1": "",
     "Skyggegravering Line 2": "",
     "Skyggegravering Line 3": "",
-    Type: "Blank"
+    Type: "Shiny"
   },
   FOER: {
     Farve: "Hvid",

@@ -1139,32 +1139,50 @@ const renderCustomerDetails = () => {
             </div>
 
             {/* Step Progress Indicator - Only show if not on thank you page */}
-            {!orderComplete && (
-              <div className="flex items-center space-x-3">
-                {steps.map((step, index) => (
-                  <div key={step} className="flex items-center">
-                    <div className={`flex items-center justify-center w-6 h-6 rounded-full border-2 transition-all duration-200 ${index <= currentStep
-                        ? 'bg-green-600 border-green-600 text-white'
-                        : 'border-gray-300 text-gray-400'
-                      }`}>
-                      {index < currentStep ? (
-                        <CheckCircle className="w-4 h-4" />
-                      ) : (
-                        <span className="text-xs font-bold">{index + 1}</span>
-                      )}
-                    </div>
-                    <span className={`ml-1 text-xs font-medium ${index <= currentStep ? 'text-green-700' : 'text-gray-400'
-                      }`}>
-                      {step}
-                    </span>
-                    {index < steps.length - 1 && (
-                      <div className={`w-6 h-0.5 mx-2 ${index < currentStep ? 'bg-green-600' : 'bg-gray-300'
-                        }`} />
-                    )}
-                  </div>
-                ))}
-              </div>
+           {!orderComplete && (
+  <div className="w-full overflow-x-hidden">
+    <div className="flex items-center space-x-3 flex-wrap md:flex-nowrap gap-y-2 md:gap-y-0">
+      {steps.map((step, index) => (
+        <div key={step} className="flex items-center min-w-0">
+          
+          <div
+            className={`flex items-center justify-center w-6 h-6 rounded-full border-2 transition-all duration-200 flex-shrink-0
+              ${index <= currentStep
+                ? 'bg-green-600 border-green-600 text-white'
+                : 'border-gray-300 text-gray-400'
+              }`}
+          >
+            {index < currentStep ? (
+              <CheckCircle className="w-4 h-4" />
+            ) : (
+              <span className="text-xs font-bold">{index + 1}</span>
             )}
+          </div>
+
+          <span
+            className={`ml-1 text-xs font-medium
+              truncate max-w-[80px]
+              md:truncate-none md:max-w-none
+              ${index <= currentStep ? 'text-green-700' : 'text-gray-400'}
+            `}
+            title={step}
+          >
+            {step}
+          </span>
+
+          {index < steps.length - 1 && (
+            <div
+              className={`w-6 h-0.5 mx-2 flex-shrink-0
+                ${index < currentStep ? 'bg-green-600' : 'bg-gray-300'}
+              `}
+            />
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
           </div>
         </div>
 

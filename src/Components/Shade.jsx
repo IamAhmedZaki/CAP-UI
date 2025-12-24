@@ -109,7 +109,7 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
     useEffect(() => { onOptionChange('Skyggebånd', selectedShadowTapeColor); }, [selectedShadowTapeColor]);
 
     useEffect(() => {
-        const colorMap = { 'blank': 'Skygge:Blank', 'shiny': 'Skygge:Shiny', 'glimmer': 'Skygge:Glimmer' };
+        const colorMap = { 'blank': 'Skygge:Shiny', 'shiny': 'Skygge:Blank', 'glimmer': 'Skygge:Glimmer' };
         const message = colorMap[selectedShadeType.toLowerCase()];
         if (message) {
             ['preview-iframe', 'preview-iframe2'].forEach(id => {
@@ -191,8 +191,8 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
     }, [selectedShadeType]);
 
     const shadeTypeOptions = [
-        { name: 'Blank', value: 'Blank', img: img3 },
-        { name: 'Shiny', value: 'Shiny', color: '#2d2d2e' },
+        { name: 'Shiny', value: 'Shiny', img: img3 },
+        { name: 'Blank', value: 'Blank', color: '#2d2d2e' },
         { name: 'Glimmer', value: 'Glimmer', img: img1 },
     ];
 
@@ -258,7 +258,7 @@ const Shade = ({ selectedOptions = {}, onOptionChange }) => {
 
     return (
         <>
-            <div className="space-y-2">
+            <div className="space-y-2 mt-8">
                 <h3 className="text-2xl font-bold text-slate-900">SKYGGE</h3>
             </div>
 
