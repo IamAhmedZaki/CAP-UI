@@ -23,7 +23,6 @@ import QuoteModal from "../Components/Modal";
 import { useParams, useSearchParams } from "react-router-dom";
 import { GraduationCap, ChevronUp, ChevronDown } from "lucide-react";
 
-
 import HHX from "../Default/HHX";
 import HTX from "../Default/HTX";
 import STX from "../Default/STX";
@@ -43,7 +42,17 @@ const StudentDashboard = () => {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [searchParams] = useSearchParams();
   const packageName = searchParams.get("package"); // "standard"
-  const program = searchParams.get("program");
+  const programFixMap = {
+    sosuhjaelper: "sosuhjælper",
+    frisoer: "frisør",
+    ernaeringsassistent: "ernæringsassisten",
+    paedagog: "pædagog",
+  };
+
+  const rawProgram = searchParams.get("program");
+
+  const program = programFixMap[rawProgram] ?? rawProgram;
+
   const [isConfigOpen, setIsConfigOpen] = useState(true);
   const [globalEmblem, setGlobalEmblem] = useState({
     name: "Guld",
@@ -1494,13 +1503,17 @@ const StudentDashboard = () => {
     const iframe = document.getElementById("preview-iframe");
     const iframe2 = document.getElementById("preview-iframe2");
     if (iframe && iframe.contentWindow) {
-      const message = "program:" + program.toLowerCase();
+      const message = "UDDANNELSESBÅNDMateriale:" + program.toLowerCase()+":bomuld";
       console.log("Sending message to iframe:", message);
       iframe.contentWindow.postMessage(message, "*");
       iframe2.contentWindow.postMessage(message, "*");
     } else {
       console.log("Iframe not ready or program not available");
     }
+
+    // setTimeout(() => document.getElementById("preview-iframe")?.contentWindow?.postMessage("UDDANNELSESBÅNDMateriale:sosuhjælper:bomuld", "*"), 10000);
+
+
   };
 
   const handleIframeLoad = () => {
@@ -1565,7 +1578,7 @@ const StudentDashboard = () => {
           sosuhjælper: "Hueband:Sosuhjælper",
           frisør: "Hueband:Frisør",
           kosmetolog: "Hueband:Kosmetolog",
-          pædagog: "Hueband:Pædagog",
+          pædagog: "program:pædagog",
           pau: "Hueband:PAU",
           ernæringsassisten: "Hueband:Ernæringsassisten",
           sort: "Hueband:Sort",
@@ -2002,10 +2015,7 @@ const StudentDashboard = () => {
                     Er du i tvivl? Skriv til os på Instagram eller TikTok, så uploader vi en video af en hue, der ligner din 🎥✨
                   </p>
                 </div> */}
-                <div
-                  className="h-[calc(100%)]  overflow-hidden"
-                  
-                >
+                <div className="h-[calc(100%)]  overflow-hidden">
                   <iframe
                     id="preview-iframe2"
                     src=""
@@ -2208,7 +2218,6 @@ const StudentDashboard = () => {
             </div>
 
             {/* Sidebar - Now inside the scrollable area but above footer */}
-            
           </div>
 
           {/* Fixed Footer - Always visible at bottom */}
